@@ -1,0 +1,10 @@
+/vendor/*
+/config/app.php
+/tmp/*
+/logs/*
+/vendor/
+tmp/*
+.DS_STORE
+/tmp/*
+.idea/*
+.git/*
