@@ -376,6 +376,8 @@ class UsersController extends AppController{
     public function changePhoto()
     {
         $directory = strtolower(str_replace(' ', '-', $this->userID));
+        var_dump($directory);
+        die();
         $rootDir = WWW_ROOT . 'img/profiles';
         $path = $rootDir . '/' . $directory;
         $folder = new Folder();
