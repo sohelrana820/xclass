@@ -3,7 +3,7 @@
 <div class="page-header">
     <h2 class="title pull-left">
         Create New User
-        <p class="sub-title">Provie all valid information to create a new user</p>
+        <p class="sub-title">Provide all valid information to create a new user</p>
     </h2>
     <div class="pull-right btn-areas">
         <?php echo $this->Html->link('Back to List', ['controller' => 'users', 'action' => 'index'], ['class' => 'btn btn-info'])?>
