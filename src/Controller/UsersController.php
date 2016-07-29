@@ -207,7 +207,7 @@ class UsersController extends AppController{
      *
      * This is profile updating area
      */
-    public function update()
+    public function updateProfile()
     {
         $user = $this->Users->get($this->userID, [
             'contain' => ['Profiles']
@@ -230,7 +230,7 @@ class UsersController extends AppController{
      *
      * This is user change password
      */
-    public function changePassword()
+    public function changeProfilePassword()
     {
         $user = $this->Users->get($this->userID);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -258,7 +258,7 @@ class UsersController extends AppController{
      *
      * This us users change photo
      */
-    public function changePhoto()
+    public function changeProfilePicture()
     {
         $isChanged = $this->changeProfilePhoto($this->userID, $this->loggedInUser->uuid);
         if ($isChanged) {

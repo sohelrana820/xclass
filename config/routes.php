@@ -51,11 +51,9 @@ Router::scope('/', function ($routes) {
 
     $routes->connect('/profile', ['controller' => 'users', 'action' => 'profile']);
 
-    $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'update']);
+    $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'updateProfile']);
 
-    $routes->connect('/profile/change_photo', ['controller' => 'users', 'action' => 'update']);
-
-    $routes->connect('/profile/change_password', ['controller' => 'users', 'action' => 'change_password']);
+    $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
 
     /**
      * Connect catchall routes for all controllers.

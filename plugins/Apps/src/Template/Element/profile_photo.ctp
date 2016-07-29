@@ -34,7 +34,7 @@
                 echo $this->Form->create(null,
                     [
                         'controller' => 'users',
-                        'action' => 'change_photo',
+                        'action' => 'change_profile_picture',
                         'enctype' => 'multipart/form-data'
                     ]
                 );

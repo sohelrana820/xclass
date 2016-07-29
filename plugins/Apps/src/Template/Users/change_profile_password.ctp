@@ -7,11 +7,11 @@
         </h2>
         <div class="pull-right btn-areas">
             <?php
-            echo $this->Html->link('My Profile', ['controller' => 'users', 'action' => 'profile'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('My Profile', ['controller' => 'profile', 'action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
 
-            echo $this->Html->link('Update Profile', ['controller' => 'users', 'action' => 'update'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('Update Profile', ['controller' => 'profile', 'action' => 'update'], ['class' => 'btn btn-info', 'escape' => false]);
 
-            echo $this->Html->link('Change Password', ['controller' => 'users', 'action' => 'change_password'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('Change Password', ['controller' => 'profile', 'action' => 'change_password'], ['class' => 'btn btn-info', 'escape' => false]);
             ?>
         </div>
         <div class="clearfix"></div>
@@ -29,7 +29,7 @@
                 echo $this->Form->create($user,
                     [
                         'controller' => 'users',
-                        'action' => 'change_password',
+                        'action' => 'changeProfilePassword',
                         'class' => 'login_form'
                     ]
                 );

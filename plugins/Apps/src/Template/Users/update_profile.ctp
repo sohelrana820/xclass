@@ -7,11 +7,11 @@
         </h2>
         <div class="pull-right btn-areas">
             <?php
-            echo $this->Html->link('My Profile', ['controller' => 'users', 'action' => 'profile'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('My Profile', ['controller' => 'profile', 'action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
 
-            echo $this->Html->link('Update Profile', ['controller' => 'users', 'action' => 'update'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('Update Profile', ['controller' => 'profile', 'action' => 'update'], ['class' => 'btn btn-info', 'escape' => false]);
 
-            echo $this->Html->link('Change Password', ['controller' => 'users', 'action' => 'change_password'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('Change Password', ['controller' => 'profile', 'action' => 'change_password'], ['class' => 'btn btn-info', 'escape' => false]);
             ?>
         </div>
         <div class="clearfix"></div>
@@ -24,7 +24,7 @@
         </div>
         <!-- edit form column -->
         <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
-            <?php echo $this->Form->create($user, array('controller' => 'users', 'action' => 'update'));?>
+            <?php echo $this->Form->create($user, array('controller' => 'profile', 'action' => 'update_profile'));?>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
