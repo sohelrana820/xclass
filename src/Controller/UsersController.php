@@ -192,6 +192,8 @@ class UsersController extends AppController{
 
     /**
      * @return \Cake\Network\Response|void
+     *
+     * This is user profile area
      */
     public function profile()
     {
@@ -202,6 +204,8 @@ class UsersController extends AppController{
 
     /**
      * @return \Cake\Network\Response|void
+     *
+     * This is profile updating area
      */
     public function update()
     {
@@ -221,6 +225,11 @@ class UsersController extends AppController{
         $this->set('_serialize', ['user']);
     }
 
+    /**
+     * @return \Cake\Network\Response|void
+     *
+     * This is user change password
+     */
     public function changePassword()
     {
         $user = $this->Users->get($this->userID);
@@ -244,6 +253,11 @@ class UsersController extends AppController{
         $this->set('_serialize', ['user']);
     }
 
+    /**
+     * @return \Cake\Network\Response|void
+     *
+     * This us users change photo
+     */
     public function changePhoto()
     {
         $isChanged = $this->changeProfilePhoto($this->userID, $this->loggedInUser->uuid);
