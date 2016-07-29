@@ -3,6 +3,7 @@
 /tmp/*
 /logs/*
 /vendor/
+/webroot/img/profile*
 tmp/*
 .DS_STORE
 /tmp/*

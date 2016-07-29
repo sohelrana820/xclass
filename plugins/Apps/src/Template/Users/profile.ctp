@@ -19,11 +19,11 @@
 
     <div class="row">
         <!-- left column -->
-        <div class="col-md-2 col-sm-8 col-xs-12">
+        <div class="col-md-2 col-sm-4 col-xs-12">
             <?php echo $this->element('profile_photo');?>
         </div>
         <!-- edit form column -->
-        <div class="col-md-10 col-sm-4 col-xs-12 personal-info">
+        <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
             <ul class="data-list data-list-stripe">
                 <li><strong>Name: </strong> <?php echo $user->profile->name ? $user->profile->name : 'N/A';?></li>
                 <li><strong>Company Name: </strong> <?php echo $user->profile->company_name ? $user->profile->company_name : 'N/A';?>

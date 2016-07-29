@@ -3,7 +3,7 @@
     if (isset($user->profile->profile_pic) && $user->profile->profile_pic) {
         echo $this->Html->image('profiles/' . $user->profile->profile_pic,
             [
-                'class' => 'avatar img-circle img-thumbnail',
+                'class' => 'avatar img-thumbnail',
                 'alt' => $user->profile->name,
                 'url' =>
                     [
@@ -13,7 +13,7 @@
             ]);
     }
     else{
-        echo $this->Html->image('profiles/profile_avatar.jpg', ['class' => 'avatar img-thumbnail', 'alt' => 'Profile Photo', 'url' => ['controller' => 'users', 'action' => 'profile']]);
+        echo $this->Html->image('profile_avatar.jpg', ['class' => 'avatar img-thumbnail', 'alt' => 'Profile Photo', 'url' => ['controller' => 'users', 'action' => 'profile']]);
     }
     ?>
 
@@ -31,7 +31,7 @@
             </div>
             <div class="modal-body">
                 <?php
-                echo $this->Form->create($user,
+                echo $this->Form->create(null,
                     [
                         'controller' => 'users',
                         'action' => 'change_photo',

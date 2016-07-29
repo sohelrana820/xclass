@@ -191,135 +191,6 @@ class UsersController extends AppController{
     }
 
     /**
-     *
-     */
-    public function index()
-    {
-        $this->loadComponent('Paginator');
-        $this->loadComponent('Utilities');
-
-        $conditions = [
-            'Users.status' => 1
-        ];
-
-        if(isset($this->request->query) && $this->request->query)
-        {
-            $response = $this->Utilities->buildUsesrListConditions($this->request->query);
-            $conditions = array_merge($conditions, $response);
-        }
-
-        $this->paginate = [
-            'conditions' => $conditions,
-            'fields' => ['Users.id', 'Users.uuid',  'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
-            'contain' => [
-                'Profiles' => [
-                    'fields'=> []
-                ]
-            ],
-            'limit' => $this->paginationLimit,
-            'order' => ['Users.id' => 'desc']
-        ];
-
-        $users = $this->paginate($this->Users);
-        $this->set('users', $users);
-        $this->set('_serialize', ['users']);
-    }
-
-    /**
-     * @return \Cake\Network\Response|void
-     */
-    public function add()
-    {
-        $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
-            $data = $this->request->data;
-            $data['uuid'] = Text::uuid();
-            $data['profile']['created_by'] = $this->userID;
-            $verifyCode = substr(Text::uuid(), 0, 32);
-            $data['email_verifying_code'] = $verifyCode;
-
-            if(isset($data['profile']['birthday']) && $data['profile']['birthday'])
-            {
-                $data['profile']['birthday'] = date('Y-m-d', strtotime($data['profile']['birthday']));
-            }
-
-            $user = $this->Users->newEntity(
-                $data,
-                [
-                    'associated' => ['Profiles']
-                ]
-            );
-
-            if ($this->Users->save($user)) {
-                $this->Email->signupConfirmEmail($data, $verifyCode);
-                $this->Flash->success(__('New user has been created successfully'));
-                return $this->redirect(['controller' => 'users', 'action' => 'index']);
-            }
-            else {
-                $this->Flash->error(__('Sorry! something went wrong'));
-            }
-        }
-
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
-    }
-
-    /**
-     * @param $uuid
-     * @return \Cake\Network\Response|void
-     */
-    public function edit($uuid)
-    {
-        if (empty($uuid)) {
-            throw new NotFoundException;
-        }
-
-        if (!is_numeric($uuid)) {
-            $userID = $this->Users->getIDbyUUID($uuid);
-        } else {
-            $userID = $uuid;
-        }
-
-        $user = $this->Users->get($userID, [
-            'contain' => ['Profiles']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('User has been updated successfully'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('Sorry, something went wrong'));
-            }
-        }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
-    }
-
-    /**
-     * @param $uuid
-     * @return \Cake\Network\Response|void
-     */
-    public function view($uuid)
-    {
-        if(empty($uuid))
-        {
-            throw new NotFoundException;
-        }
-
-        if(!is_numeric($uuid)){
-            $userID = $this->Users->getIDbyUUID($uuid);
-        }
-        else{
-            $userID = $uuid;
-        }
-
-        $user = $this->Users->get($userID, ['contain' => ['Profiles']]);
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
-    }
-
-    /**
      * @return \Cake\Network\Response|void
      */
     public function profile()
@@ -373,21 +244,26 @@ class UsersController extends AppController{
         $this->set('_serialize', ['user']);
     }
 
-    public function changePhoto()
+    public function changePhoto($uuid = null)
     {
-        $directory = strtolower(str_replace(' ', '-', $this->userID));
-        var_dump($directory);
-        die();
+        if($uuid == null)
+        {
+            $directory = strtolower(str_replace(' ', '-', $this->loggedInUser->uuid));
+        }
+        else{
+            $directory = $uuid;
+        }
         $rootDir = WWW_ROOT . 'img/profiles';
         $path = $rootDir . '/' . $directory;
+
         $folder = new Folder();
         if (!is_dir($path)) {
             $folder->create($path);
         }
 
-        $profileImg['profile']['profile_pic'] = '';
+        $profileImg['profile']['profile_pic'] = null;
         if (isset($this->request->data['photo']['name']) && $this->request->data['photo']['name']) {
-            $profileImg['profile']['profile_pic'] = $this->userID . '/' . $this->Utilities->uploadProfilePhoto($path, $this->request->data['photo']);
+            $profileImg['profile']['profile_pic'] = $directory . '/' . $this->Utilities->uploadProfilePhoto($path, $this->request->data['photo']);
         }
 
         $user = $this->Users->get($this->userID, [
@@ -404,6 +280,138 @@ class UsersController extends AppController{
 
         return $this->redirect(['users' > 'users', 'action' => 'profile']);
     }
+
+    /**
+     * @return \Cake\Network\Response|void
+     */
+    public function add()
+    {
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $data['uuid'] = Text::uuid();
+            $data['profile']['created_by'] = $this->userID;
+            $verifyCode = substr(Text::uuid(), 0, 32);
+            $data['email_verifying_code'] = $verifyCode;
+
+            if(isset($data['profile']['birthday']) && $data['profile']['birthday'])
+            {
+                $data['profile']['birthday'] = date('Y-m-d', strtotime($data['profile']['birthday']));
+            }
+
+            $user = $this->Users->newEntity(
+                $data,
+                [
+                    'associated' => ['Profiles']
+                ]
+            );
+
+            if ($this->Users->save($user)) {
+                $this->Email->signupConfirmEmail($data, $verifyCode);
+                $this->Flash->success(__('New user has been created successfully'));
+                return $this->redirect(['controller' => 'users', 'action' => 'index']);
+            }
+            else {
+                $this->Flash->error(__('Sorry! something went wrong'));
+            }
+        }
+
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+
+
+    /**
+     *
+     */
+    public function index()
+    {
+        $this->loadComponent('Paginator');
+        $this->loadComponent('Utilities');
+
+        $conditions = [
+            'Users.status' => 1
+        ];
+
+        if(isset($this->request->query) && $this->request->query)
+        {
+            $response = $this->Utilities->buildUsesrListConditions($this->request->query);
+            $conditions = array_merge($conditions, $response);
+        }
+
+        $this->paginate = [
+            'conditions' => $conditions,
+            'fields' => ['Users.id', 'Users.uuid',  'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
+            'contain' => [
+                'Profiles' => [
+                    'fields'=> []
+                ]
+            ],
+            'limit' => $this->paginationLimit,
+            'order' => ['Users.id' => 'desc']
+        ];
+
+        $users = $this->paginate($this->Users);
+        $this->set('users', $users);
+        $this->set('_serialize', ['users']);
+    }
+
+    /**
+     * @param $uuid
+     * @return \Cake\Network\Response|void
+     */
+    public function view($uuid)
+    {
+        if(empty($uuid))
+        {
+            throw new NotFoundException;
+        }
+
+        if(!is_numeric($uuid)){
+            $userID = $this->Users->getIDbyUUID($uuid);
+        }
+        else{
+            $userID = $uuid;
+        }
+
+        $user = $this->Users->get($userID, ['contain' => ['Profiles']]);
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+
+
+    /**
+     * @param $uuid
+     * @return \Cake\Network\Response|void
+     */
+    public function edit($uuid)
+    {
+        if (empty($uuid)) {
+            throw new NotFoundException;
+        }
+
+        if (!is_numeric($uuid)) {
+            $userID = $this->Users->getIDbyUUID($uuid);
+        } else {
+            $userID = $uuid;
+        }
+
+        $user = $this->Users->get($userID, [
+            'contain' => ['Profiles']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('User has been updated successfully'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('Sorry, something went wrong'));
+            }
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
+
 
     /**
      * @param null $id
