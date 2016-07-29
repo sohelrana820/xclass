@@ -14,7 +14,7 @@
 
 <div class="form-group">
     <label class="text-info">Email</label>
-    <?php echo $this->Form->input('username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email Address', 'label' => false, 'required' => false]);?>
+    <?php echo $this->Form->input('username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email address', 'label' => false, 'required' => false]);?>
 </div>
 
 <div class="form-group">

@@ -85,7 +85,7 @@
     <div class="col-lg-4">
         <div class="form-group">
             <label>Country</label>
-            <select id="country" name="profile[country]" class="form-control select2-form-control">
+            <select id="country" name="profile[country]" class="form-control">
                 <option>Choose country</option>
             </select>
         </div>
@@ -93,7 +93,7 @@
     <div class="col-lg-4">
         <div class="form-group">
             <label>State</label>
-            <select name="profile[state]" id="state" class="form-control select2-form-control">
+            <select name="profile[state]" id="state" class="form-control">
                 <option>Choose state</option>
             </select>
         </div>
@@ -109,7 +109,7 @@
     <div class="col-lg-4">
         <div class="form-group">
             <label>Postal Code</label>
-            <?php echo $this->Form->input('profile.postal_code', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Postal Code', 'label' => false, 'required' => false]);?>
+            <?php echo $this->Form->input('profile.postal_code', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Postal code', 'label' => false, 'required' => false]);?>
         </div>
     </div>
     <div class="clearfix"></div>
@@ -136,7 +136,7 @@
 
 <?php
 $this->start('cssTop');
-echo $this->Html->css(array('select2.min', 'datepicker'));
+echo $this->Html->css(array('datepicker'));
 $this->end();
 
 $this->start('jsTop');
@@ -144,7 +144,7 @@ echo $this->Html->script(array('country'));
 $this->end();
 
 $this->start('jsBottom');
-echo $this->Html->script(['select2.full.min', 'datepicker']);
+echo $this->Html->script(['datepicker']);
 ?>
 
 <script language="javascript">

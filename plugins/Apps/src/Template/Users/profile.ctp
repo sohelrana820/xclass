@@ -105,7 +105,7 @@
                     ?>
                 </li>
                 <li>
-                    <strong>Postal Code: </strong>
+                    <strong>Postal code: </strong>
                     <?php
                     if($user->profile->postal_code){
                         echo $user->profile->postal_code;

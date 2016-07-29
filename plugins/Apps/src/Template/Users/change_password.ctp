@@ -19,11 +19,11 @@
 
     <div class="row">
         <!-- left column -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-2 col-sm-4 col-xs-12">
             <?php echo $this->element('profile_photo');?>
         </div>
         <!-- edit form column -->
-        <div class="col-md-9 col-sm-6 col-xs-12 personal-info">
+        <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
             <div class="card-body">
                 <?php
                 echo $this->Form->create($user,
@@ -41,7 +41,7 @@
                         [
                             'type' => 'password',
                             'class' => 'form-control',
-                            'placeholder' => 'Old Password',
+                            'placeholder' => 'Old password',
                             'label' => false,
                             'required' => false
                         ]
@@ -56,7 +56,7 @@
                         [
                             'type' => 'password',
                             'class' => 'form-control',
-                            'placeholder' => 'New Password',
+                            'placeholder' => 'New password',
                             'label' => false,
                             'required' => false,
                         ]
@@ -71,7 +71,7 @@
                         [
                             'type' => 'password',
                             'class' => 'form-control',
-                            'placeholder' => 'New Password Confirm',
+                            'placeholder' => 'New password confirm',
                             'label' => false,
                             'required' => false,
                         ]
