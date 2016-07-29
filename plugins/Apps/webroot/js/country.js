@@ -286,8 +286,15 @@ function populateCountries(countryElementId, stateElementId) {
         countryElement.options[countryElement.length] = new Option(country_arr[i], country_arr[i]);
     }
 
-    // Assigned all countries. Now assign event listener for the states.
+    countryElement.selectedIndex = 0;
+    var selectedCountry = countryElement.getAttribute("country");
+    var selectedCountryIndex = country_arr.indexOf(selectedCountry);
+    if(selectedCountry)
+    {
+        countryElement.selectedIndex = selectedCountryIndex + 1;
+    }
 
+    // Assigned all countries. Now assign event listener for the states.
     if (stateElementId) {
         countryElement.onchange = function () {
             populateStates(countryElementId, stateElementId);
