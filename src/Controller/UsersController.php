@@ -402,6 +402,31 @@ class UsersController extends AppController{
         $this->set('_serialize', ['user']);
     }
 
+    /**
+     * @param $uuid
+     * @return \Cake\Network\Response|void
+     */
+    public function changeUserPhoto($uuid)
+    {
+        if (empty($uuid)) {
+            throw new NotFoundException;
+        }
+
+        if (!is_numeric($uuid)) {
+            $userID = $this->Users->getIDbyUUID($uuid);
+        } else {
+            $userID = $uuid;
+        }
+
+        $isChanged = $this->changeProfilePhoto($userID, $uuid);
+        if ($isChanged) {
+            $this->Flash->success(__('Your profile photo updated successfully'));
+        } else {
+            $this->Flash->error(__('Sorry, something went wrong'));
+        }
+        return $this->redirect($this->referer());
+    }
+
 
     /**
      * @param null $uuid
