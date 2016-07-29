@@ -32,7 +32,7 @@
         <?php foreach ($users as $user): ?>
             <tr>
                 <td>
-                    <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->id]); ?>
+                    <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid]); ?>
                 </td>
                 <td>
                     <?php echo $user->username; ?>
@@ -102,7 +102,7 @@
                     <?php
                     echo $this->Html->link('<i class="fa fa-gear"></i>', ['controller' => 'users', 'action' => 'view', $user->uuid], ['escape' => false, 'class' => 'icons green']);
                     echo $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'users', 'action' => 'edit', $user->uuid], ['escape' => false, 'class' => 'icons']);
-                    echo $this->Html->link('<i class="fa fa-trash"></i>', ['controller' => 'users', 'action' => 'view', $user->uuid], ['escape' => false, 'class' => 'icons red']);
+                    echo $this->Html->link('<i class="fa fa-trash"></i>', ['controller' => 'users', 'action' => 'delete', $user->uuid], ['escape' => false, 'class' => 'icons red']);
                     ?>
                 </td>
             </tr>

@@ -2,16 +2,20 @@
 
     <div class="page-header">
         <h2 class="title pull-left">
-            Update Profile
-            <p class="sub-title"></p>
+            Update <?php echo $user->profile->name;?>
+            <p class="sub-title">Last update:
+                <?php echo $this->Time->format($user->profile->modified, 'dd MMM, Y');?>
+            </p>
         </h2>
         <div class="pull-right btn-areas">
             <?php
-            echo $this->Html->link('My Profile', ['controller' => 'profile', 'action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('New User', ['controller' => 'users', 'action' => 'add'], ['class' => 'btn btn-info']);
 
-            echo $this->Html->link('Update Profile', ['controller' => 'profile', 'action' => 'update'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('View User', ['controller' => 'users', 'action' => 'view', $user->uuid], ['class' => 'btn btn-info']);
 
-            echo $this->Html->link('Change Password', ['controller' => 'profile', 'action' => 'change_password'], ['class' => 'btn btn-info', 'escape' => false]);
+            echo $this->Html->link('Delete User', ['controller' => 'users', 'action' => 'delete', $user->uuid], ['class' => 'btn btn-info']);
+
+            echo $this->Html->link('Users List', ['controller' => 'users', 'action' => 'index'], ['class' => 'btn btn-info']);
             ?>
         </div>
         <div class="clearfix"></div>
@@ -20,11 +24,11 @@
     <div class="row">
         <!-- left column -->
         <div class="col-md-2 col-sm-4 col-xs-12">
-            <?php echo $this->element('profile_photo');?>
+            <?php echo $this->element('user_profile_photo');?>
         </div>
         <!-- edit form column -->
         <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
-            <?php echo $this->Form->create($profile, array('controller' => 'profile', 'action' => 'update_profile'));?>
+            <?php echo $this->Form->create($user, array('controller' => 'users', 'action' => 'edit'));?>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -44,7 +48,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Email address</label>
-                        <input type="text" class="form-control" readonly value="<?php echo $profile->username;?>">
+                        <input type="text" class="form-control" readonly value="<?php echo $user->username;?>">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -60,7 +64,7 @@
                     <div class="form-group">
                         <label>Date of Birth</label>
                         <div class="input-group">
-                            <input name="profile[birthday]" type="text" class="form-control datepicker" value="<?php echo $this->Time->format($profile->profile->birthday, 'dd MMM, Y');?>">
+                            <input name="profile[birthday]" type="text" class="form-control datepicker" value="<?php echo $this->Time->format($user->profile->birthday, 'dd MMM, Y');?>">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -70,12 +74,12 @@
                         <label>Gender</label>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="profile[gender]" value="1" <?php if($profile->profile->gender == 1){echo 'checked';}?> >Male
+                                <input type="radio" name="profile[gender]" value="1" <?php if($user->profile->gender == 1){echo 'checked';}?> >Male
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="profile[gender]" value="2" <?php if($profile->profile->gender == 2){echo 'checked';}?>>Female
+                                <input type="radio" name="profile[gender]" value="2" <?php if($user->profile->gender == 2){echo 'checked';}?>>Female
                             </label>
                         </div>
                     </div>
@@ -116,14 +120,14 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Country</label>
-                        <select id="country" name="profile[country]" class="form-control" country="<?php echo $profile->profile->country;?>" state="<?php echo $profile->profile->state;?>"></select>
+                        <select id="country" name="profile[country]" class="form-control" country="<?php echo $user->profile->country;?>" state="<?php echo $user->profile->state;?>"></select>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>State</label>
                         <select name="profile[state]" id="state" class="form-control select2-form-control">
-                            <option><?php echo $profile->profile->state;?></option>
+                            <option><?php echo $user->profile->state;?></option>
                         </select>
                     </div>
                 </div>

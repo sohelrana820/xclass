@@ -402,12 +402,22 @@ class UsersController extends AppController{
 
 
     /**
-     * @param null $id
+     * @param null $uuid
      * @return \Cake\Network\Response|void
      */
-    public function delete($id = null)
+    public function delete($uuid = null)
     {
-        $user = $this->Users->get($id);
+        if (empty($uuid)) {
+            throw new NotFoundException;
+        }
+
+        if (!is_numeric($uuid)) {
+            $userID = $this->Users->getIDbyUUID($uuid);
+        } else {
+            $userID = $uuid;
+        }
+
+        $user = $this->Users->get($userID);
         if ($this->Users->delete($user)) {
             $this->Flash->error(__('The user has been deleted'));
         } else {
