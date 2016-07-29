@@ -387,11 +387,13 @@ class UsersController extends AppController{
         $user = $this->Users->get($userID, [
             'contain' => ['Profiles']
         ]);
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('User has been updated successfully'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $uuid]);
             } else {
                 $this->Flash->error(__('Sorry, something went wrong'));
             }
