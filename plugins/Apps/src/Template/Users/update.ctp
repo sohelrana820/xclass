@@ -116,9 +116,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Country</label>
-                        <select id="country" name="profile[country]" class="form-control select2-form-control">
-                            <option><?php echo $user->profile->country;?></option>
-                        </select>
+                        <select id="country" name="profile[country]" class="form-control" country="<?php echo $user->profile->country;?>" state="<?php echo $user->profile->state;?>"></select>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -147,7 +145,7 @@ echo $this->Html->script(array('country'));
 $this->end();
 
 $this->start('jsBottom');
-echo $this->Html->script(['select2.full.min', 'datepicker']);
+echo $this->Html->script(['datepicker']);
 ?>
 
 <script language="javascript">

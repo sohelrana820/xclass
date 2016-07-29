@@ -259,7 +259,7 @@ s_a[251] = "Central|Copperbelt|Eastern|Luapula|Lusaka|North-Western|Northern|Sou
 s_a[252] = "Bulawayo|Harare|ManicalandMashonaland Central|Mashonaland East|Mashonaland West|Masvingo|Matabeleland North|Matabeleland South|Midlands";
 
 
-function populateStates(countryElementId, stateElementId) {
+function populateStates(countryElementId, stateElementId, selectedState) {
 
     var selectedCountryIndex = document.getElementById(countryElementId).selectedIndex;
 
@@ -274,6 +274,9 @@ function populateStates(countryElementId, stateElementId) {
     for (var i = 0; i < state_arr.length; i++) {
         stateElement.options[stateElement.length] = new Option(state_arr[i], state_arr[i]);
     }
+
+    var selectedStateIndex = state_arr.indexOf(selectedState);
+    stateElement.selectedIndex = selectedStateIndex + 1;
 }
 
 function populateCountries(countryElementId, stateElementId) {
@@ -292,6 +295,12 @@ function populateCountries(countryElementId, stateElementId) {
     if(selectedCountry)
     {
         countryElement.selectedIndex = selectedCountryIndex + 1;
+    }
+
+    var selectedState = countryElement.getAttribute("state");
+    if(selectedState)
+    {
+        populateStates(countryElementId, stateElementId, selectedState);
     }
 
     // Assigned all countries. Now assign event listener for the states.
