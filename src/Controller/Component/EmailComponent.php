@@ -22,7 +22,7 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Create Account Confirmation - '.$app->appsName;
-        $email = new Email('mandril');
+        $email = new Email('default');
         $link = $app->baseUrl.'/users/verify_email?code='.$code;
 
         $user = array(
@@ -54,7 +54,7 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Forgot Password Link - '.$app->appsName;
-        $email = new Email('mandril');
+        $email = new Email('default');
         $link = $app->baseUrl.'/users/reset_password?code='.$code;
 
         $user = array(
@@ -85,7 +85,7 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Password Changed - '.$app->appsName;
-        $email = new Email('mandril');
+        $email = new Email('default');
 
         $user = array(
             'to' => $data['username'],

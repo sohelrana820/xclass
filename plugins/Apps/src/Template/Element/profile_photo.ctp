@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="">
     <?php
     if (isset($user->profile->profile_pic) && $user->profile->profile_pic) {
         echo $this->Html->image('profiles/' . $user->profile->profile_pic,

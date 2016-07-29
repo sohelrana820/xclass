@@ -1,6 +1,8 @@
 body{
     font-family: 'Roboto Condensed', sans-serif !important;
+    background: #FFF;
 }
+
 
 
 .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
@@ -470,7 +472,7 @@ body{
 }
 
 .avatar{
-    width: 100px;
+    width: 100%;
 }
 
 .modal-title {
