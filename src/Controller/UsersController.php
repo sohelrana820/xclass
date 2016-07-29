@@ -420,7 +420,7 @@ class UsersController extends AppController{
 
         $isChanged = $this->changeProfilePhoto($userID, $uuid);
         if ($isChanged) {
-            $this->Flash->success(__('Your profile photo updated successfully'));
+            $this->Flash->success(__('Profile photo updated successfully'));
         } else {
             $this->Flash->error(__('Sorry, something went wrong'));
         }

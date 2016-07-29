@@ -45,6 +45,7 @@
     <div id="page-wrapper">
 
         <div class="container-fluid">
+            <?php echo $this->Flash->render() ?>
             <?php echo $this->fetch('content'); ?>
         </div>
         <!-- /.container-fluid -->
