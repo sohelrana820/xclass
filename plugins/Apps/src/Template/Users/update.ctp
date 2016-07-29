@@ -44,7 +44,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Email address</label>
-                        <?php echo $this->Form->input('username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email address', 'label' => false, 'required' => false]);?>
+                        <input type="text" class="form-control" readonly value="<?php echo $user->username;?>">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -68,17 +68,14 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label>Gender</label>
-                        <br/>
                         <div class="radio">
-                            <input type="radio" id="radio5" name="profile[gender]" id="optionsRadios2" <?php if($user->profile->gender == 1){echo 'checked';}?> value="1" style="position: absolute; opacity: 0;">
-                            <label for="radio5">
-                                Male
+                            <label>
+                                <input type="radio" name="profile[gender]" value="1" <?php if($user->profile->gender == 1){echo 'checked';}?> >Male
                             </label>
                         </div>
                         <div class="radio">
-                            <input type="radio" id="radio6" name="profile[gender]" id="optionsRadios2" <?php if($user->profile->gender == 2){echo 'checked';}?> value="2" style="position: absolute; opacity: 0;">
-                            <label for="radio6">
-                                Female
+                            <label>
+                                <input type="radio" name="profile[gender]" value="2" <?php if($user->profile->gender == 2){echo 'checked';}?>>Female
                             </label>
                         </div>
                     </div>

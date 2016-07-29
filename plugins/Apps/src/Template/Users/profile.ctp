@@ -26,8 +26,6 @@
         <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
             <ul class="data-list data-list-stripe">
                 <li><strong>Name: </strong> <?php echo $user->profile->name ? $user->profile->name : 'N/A';?></li>
-                <li><strong>Company Name: </strong> <?php echo $user->profile->company_name ? $user->profile->company_name : 'N/A';?>
-                </li>
                 <li><strong>Email: </strong> <?php echo $user->username;?></li>
                 <li>
                     <strong>Phone: </strong>
@@ -44,7 +42,7 @@
                     <strong>Birthday: </strong>
                     <?php
                     if($user->profile->birthday){
-                        echo $this->Time->format($user->profile->birthday, 'dd/MM/Y');
+                        echo $this->Time->format($user->profile->birthday, 'dd MMM, Y');
                     }
                     else{
                         echo 'N/A';
@@ -52,15 +50,14 @@
                     ?>
                 </li>
                 <li>
-                    <strong>Gendar: </strong>
-                    <?php
-                    if($user->profile->gender == 1){
-                        echo '<span class="orange">Male (<i class="fa fa-male"></i>)</span>';
-                    }
-                    else{
-                        echo '<span class="green">Female (<i class="fa fa-female"></i>)</span>';
-                    }
-                    ?>
+                    <strong>Gender: </strong>
+                    <?php if ($user->profile->gender == 1): ?>
+                        <span class="orange">Male (<i class="fa fa-male"></i>)</span>
+                    <?php elseif ($user->gender == 2): ?>
+                        <span class="green">Female (<i class="fa fa-female"></i>)</span>
+                    <?php else: ?>
+                        N/A
+                    <?php endif; ?>
                 </li>
 
                 <li>
@@ -132,6 +129,7 @@
             </ul>
         </div>
     </div>
+
 <?php
 $this->start('cssTop');
 
