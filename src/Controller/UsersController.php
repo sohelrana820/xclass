@@ -244,40 +244,14 @@ class UsersController extends AppController{
         $this->set('_serialize', ['user']);
     }
 
-    public function changePhoto($uuid = null)
+    public function changePhoto()
     {
-        if($uuid == null)
-        {
-            $directory = strtolower(str_replace(' ', '-', $this->loggedInUser->uuid));
+        $isChanged = $this->changeProfilePhoto($this->userID, $this->loggedInUser->uuid);
+        if ($isChanged) {
+            $this->Flash->success(__('Your profile photo updated successfully'));
+        } else {
+            $this->Flash->error(__('Sorry, something went wrong'));
         }
-        else{
-            $directory = $uuid;
-        }
-        $rootDir = WWW_ROOT . 'img/profiles';
-        $path = $rootDir . '/' . $directory;
-
-        $folder = new Folder();
-        if (!is_dir($path)) {
-            $folder->create($path);
-        }
-
-        $profileImg['profile']['profile_pic'] = null;
-        if (isset($this->request->data['photo']['name']) && $this->request->data['photo']['name']) {
-            $profileImg['profile']['profile_pic'] = $directory . '/' . $this->Utilities->uploadProfilePhoto($path, $this->request->data['photo']);
-        }
-
-        $user = $this->Users->get($this->userID, [
-            'contain' => ['Profiles']
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $profileImg);
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('Your profile photo updated successfully'));
-            } else {
-                $this->Flash->error(__('Sorry, something went wrong'));
-            }
-        }
-
         return $this->redirect(['users' > 'users', 'action' => 'profile']);
     }
 
@@ -434,5 +408,35 @@ class UsersController extends AppController{
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
+    }
+
+    private function changeProfilePhoto($userID, $uuid)
+    {
+        $rootDir = WWW_ROOT . 'img/profiles';
+        $path = $rootDir . '/' . $uuid;
+
+        $folder = new Folder();
+        if (!is_dir($path)) {
+            $folder->create($path);
+        }
+
+        $profileImg['profile']['profile_pic'] = null;
+        if (isset($this->request->data['photo']['name']) && $this->request->data['photo']['name']) {
+            $profileImg['profile']['profile_pic'] = $uuid . '/' . $this->Utilities->uploadProfilePhoto($path, $this->request->data['photo']);
+        }
+
+        $user = $this->Users->get($userID, [
+            'contain' => ['Profiles']
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $profileImg);
+            if ($this->Users->save($user)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
     }
 }
