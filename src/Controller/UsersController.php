@@ -197,9 +197,9 @@ class UsersController extends AppController{
      */
     public function profile()
     {
-        $user = $this->Users->get($this->userID, ['contain' => ['Profiles']]);
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $profile = $this->Users->get($this->userID, ['contain' => ['Profiles']]);
+        $this->set(compact('profile'));
+        $this->set('_serialize', ['profile']);
     }
 
     /**
@@ -209,20 +209,20 @@ class UsersController extends AppController{
      */
     public function updateProfile()
     {
-        $user = $this->Users->get($this->userID, [
+        $profile = $this->Users->get($this->userID, [
             'contain' => ['Profiles']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($this->Users->save($user)) {
+            $profile = $this->Users->patchEntity($profile, $this->request->data);
+            if ($this->Users->save($profile)) {
                 $this->Flash->success(__('Your profile is updated'));
                 return $this->redirect(['users' > 'users', 'action' => 'profile']);
             } else {
                 $this->Flash->error(__('Sorry, something went wrong'));
             }
         }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $this->set(compact('profile'));
+        $this->set('_serialize', ['profile']);
     }
 
     /**
@@ -232,25 +232,25 @@ class UsersController extends AppController{
      */
     public function changeProfilePassword()
     {
-        $user = $this->Users->get($this->userID);
+        $profile = $this->Users->get($this->userID);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity(
-                $user,
+            $profile = $this->Users->patchEntity(
+                $profile,
                 $this->request->data,
                 [
                     'validate' => 'ChangePassword'
                 ]
             );
-            $user->password = $this->request->data['new_password'];
-            if ($this->Users->save($user)) {
+            $profile->password = $this->request->data['new_password'];
+            if ($this->Users->save($profile)) {
                 $this->Flash->success(__('Password changes successfully'));
                 return $this->redirect(['users' > 'users', 'action' => 'profile']);
             } else {
                 $this->Flash->error(__('Sorry, something went wrong'));
             }
         }
-        $this->set(compact('user'));
-        $this->set('_serialize', ['user']);
+        $this->set(compact('profile'));
+        $this->set('_serialize', ['profile']);
     }
 
     /**

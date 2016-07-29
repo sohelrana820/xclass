@@ -25,13 +25,13 @@
         <!-- edit form column -->
         <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
             <ul class="data-list data-list-stripe">
-                <li><strong>Name: </strong> <?php echo $user->profile->name ? $user->profile->name : 'N/A';?></li>
-                <li><strong>Email: </strong> <?php echo $user->username;?></li>
+                <li><strong>Name: </strong> <?php echo $profile->profile->name ? $profile->profile->name : 'N/A';?></li>
+                <li><strong>Email: </strong> <?php echo $profile->username;?></li>
                 <li>
                     <strong>Phone: </strong>
                     <?php
-                    if($user->profile->phone){
-                        echo $user->profile->phone;
+                    if($profile->profile->phone){
+                        echo $profile->profile->phone;
                     }
                     else{
                         echo 'N/A';
@@ -41,8 +41,8 @@
                 <li>
                     <strong>Birthday: </strong>
                     <?php
-                    if($user->profile->birthday){
-                        echo $this->Time->format($user->profile->birthday, 'dd MMM, Y');
+                    if($profile->profile->birthday){
+                        echo $this->Time->format($profile->profile->birthday, 'dd MMM, Y');
                     }
                     else{
                         echo 'N/A';
@@ -51,9 +51,9 @@
                 </li>
                 <li>
                     <strong>Gender: </strong>
-                    <?php if ($user->profile->gender == 1): ?>
+                    <?php if ($profile->profile->gender == 1): ?>
                         <span class="orange">Male (<i class="fa fa-male"></i>)</span>
-                    <?php elseif ($user->gender == 2): ?>
+                    <?php elseif ($profile->gender == 2): ?>
                         <span class="green">Female (<i class="fa fa-female"></i>)</span>
                     <?php else: ?>
                         N/A
@@ -63,8 +63,8 @@
                 <li>
                     <strong>Street 1: </strong>
                     <?php
-                    if($user->profile->street_1){
-                        echo $user->profile->street_1;
+                    if($profile->profile->street_1){
+                        echo $profile->profile->street_1;
                     }
                     else{
                         echo 'N/A';
@@ -74,8 +74,8 @@
                 <li>
                     <strong>Street 2: </strong>
                     <?php
-                    if($user->profile->street_2){
-                        echo $user->profile->street_2;
+                    if($profile->profile->street_2){
+                        echo $profile->profile->street_2;
                     }
                     else{
                         echo 'N/A';
@@ -85,8 +85,8 @@
                 <li>
                     <strong>City: </strong>
                     <?php
-                    if($user->profile->city){
-                        echo $user->profile->city;
+                    if($profile->profile->city){
+                        echo $profile->profile->city;
                     }
                     else{
                         echo 'N/A';
@@ -96,8 +96,8 @@
                 <li>
                     <strong>State: </strong>
                     <?php
-                    if($user->profile->state){
-                        echo $user->profile->state;
+                    if($profile->profile->state){
+                        echo $profile->profile->state;
                     }
                     else{
                         echo 'N/A';
@@ -107,8 +107,8 @@
                 <li>
                     <strong>Postal code: </strong>
                     <?php
-                    if($user->profile->postal_code){
-                        echo $user->profile->postal_code;
+                    if($profile->profile->postal_code){
+                        echo $profile->profile->postal_code;
                     }
                     else{
                         echo 'N/A';
@@ -118,8 +118,8 @@
                 <li>
                     <strong>Country: </strong>
                     <?php
-                    if($user->profile->country){
-                        echo $user->profile->country;
+                    if($profile->profile->country){
+                        echo $profile->profile->country;
                     }
                     else{
                         echo 'N/A';

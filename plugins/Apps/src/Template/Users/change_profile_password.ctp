@@ -26,7 +26,7 @@
         <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
             <div class="card-body">
                 <?php
-                echo $this->Form->create($user,
+                echo $this->Form->create($profile,
                     [
                         'controller' => 'users',
                         'action' => 'changeProfilePassword',
@@ -35,7 +35,7 @@
                 );
                 ?>
                 <div class="form-group">
-                    <label>Old Password</label>
+                    <label>Current Password</label>
                     <?php
                     echo $this->Form->input('current_password',
                         [
