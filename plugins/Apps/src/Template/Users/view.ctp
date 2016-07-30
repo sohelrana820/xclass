@@ -55,7 +55,7 @@
                     <strong>Gender: </strong>
                     <?php if ($user->profile->gender == 1): ?>
                         <span class="orange">Male (<i class="fa fa-male"></i>)</span>
-                    <?php elseif ($user->gender == 2): ?>
+                    <?php elseif ($user->profile->gender == 2): ?>
                         <span class="green">Female (<i class="fa fa-female"></i>)</span>
                     <?php else: ?>
                         N/A
