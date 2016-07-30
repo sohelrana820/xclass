@@ -21,10 +21,7 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Gender</th>
-            <th>Street</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Postal Code</th>
+            <th>Status</th>
             <th class="text-right">Action</th>
         </tr>
         </thead>
@@ -57,46 +54,15 @@
                 </td>
 
                 <td>
-                    <?php
-                    if ($user->profile->street_1) {
-                        echo $user->profile->street_1;
-                    } elseif ($user->profile->street_2) {
-                        echo $user->profile->street_2;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
+                    <?php if ($user->status == 1): ?>
+                        <span class="green">Active</span>
+                    <?php elseif ($user->status == 0): ?>
+                        <span class="red">Inactive</span>
+                    <?php else: ?>
+                        N/A
+                    <?php endif; ?>
                 </td>
 
-                <td>
-                    <?php
-                    if ($user->profile->city) {
-                        echo $user->profile->city;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </td>
-
-                <td>
-                    <?php
-                    if ($user->profile->state && $user->profile->state != 'Choose state') {
-                        echo $user->profile->state;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </td>
-
-                <td>
-                    <?php
-                    if ($user->profile->postal_code) {
-                        echo $user->profile->postal_code;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </td>
 
                 <td class="text-right">
                     <?php
@@ -130,82 +96,92 @@
                 'type' => 'get',
                 'url' =>
                     [
-                        'controller' => 'Users',
+                        'controller' => 'users',
                         'action' => 'index',
                     ]
             ]
         );
         ?>
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">×</span></button>
-                <h4 class="modal-title text-center text-uppercase" id="myModalLabel">Search User</h4>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title text-center text-uppercase" id="myModalLabel">Search User</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <div class="input text">
+                            <input type="text" name="name" class="form-control" placeholder="Name" value="<?php echo $this->request->query('name') != '' ? $this->request->query('name') : '' ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input text">
+                            <input type="email" name="email" class="form-control" placeholder="Email address" value="<?php echo $this->request->query('email') != '' ? $this->request->query('email') : '' ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <div class="input text">
+                            <input type="text" name="phone" class="form-control" placeholder="Phone number" value="<?php echo $this->request->query('phone') != '' ? $this->request->query('phone') : '' ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>User Status</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" value="1" <?php if($this->request->query('status') && $this->request->query('status') == 1) {echo 'checked';}?>>Active
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" value="0" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Inactive
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="gender" value="male" <?php if($this->request->query('gender') == 'male') {echo 'checked';}?>>Male
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="gender" value="female" <?php if($this->request->query('gender') == 'female') {echo 'checked';}?>>Female
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="gender" value="none" <?php if($this->request->query('gender') == 'none') {echo 'checked';}?>>N/A
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Verified</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="email_verify" value="1" <?php if($this->request->query('email_verify') == '1') {echo 'checked';}?>> Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="email_verify" value="0" <?php if($this->request->query('email_verify') == '0') {echo 'checked';}?>> No
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="search">
+                    <?php echo $this->Html->link('Reset', ['controller' => 'users' , 'action' => 'index'], ['class' => 'btn btn-danger']);?>
+                </div>
             </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <div class="input text">
-                        <input type="text"
-                               name="email"
-                               class="form-control"
-                               placeholder="E-mail address"
-                               value="<?php echo $this->request->query('email') != '' ? $this->request->query('email') : '' ?>">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input text">
-                        <input type="text"
-                               name="name"
-                               class="form-control"
-                               placeholder="Name"
-                               value="<?php echo $this->request->query('name') != '' ? $this->request->query('name') : '' ?>">
-
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">User Status</label>
-                    <br>
-                    <div class="radio3 radio-check radio-success radio-inline">
-                        <input type="radio" id="radio5" name="status" id="optionsRadios2" value="1" style="position: absolute; opacity: 0;">
-                        <label for="radio5">
-                            Active
-                        </label>
-                    </div>
-                    <div class="radio3 radio-check radio-success radio-inline">
-                        <input type="radio" id="radio6" name="status" id="optionsRadios2" value="0"
-                               style="position: absolute; opacity: 0;">
-                        <label for="radio6">
-                            Inactive
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Email Verified</label>
-                    <br>
-
-                    <div class="radio3 radio-check radio-success radio-inline">
-                        <input type="radio" id="verify1" name="email_verify" id="optionsRadios2" value="1"
-                               style="position: absolute; opacity: 0;">
-                        <label for="verify1">
-                            Yes
-                        </label>
-                    </div>
-                    <div class="radio3 radio-check radio-success radio-inline">
-                        <input type="radio" id="verify0" name="email_verify" id="optionsRadios2" value="0"
-                               style="position: absolute; opacity: 0;">
-                        <label for="verify0">
-                            No
-                        </label>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" value="search">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-        </form>
+        <?php echo $this->Form->end();?>
     </div>
 </div>

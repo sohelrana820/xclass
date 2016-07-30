@@ -22,13 +22,43 @@ class UtilitiesComponent extends Component
     {
         $conditions = [];
 
-        if(isset($query['gender']) && $query['gender']){
-            if($query['gender'] == 'male'){
+        if (isset($query['name']) && $query['name']) {
+            $conditions = array_merge(
+                $conditions,
+                [
+                    'OR' =>
+                        [
+                            'Profiles.first_name LIKE' => '%' . $query['name'] . '%',
+                            'Profiles.last_name LIKE' => '%' . $query['name'] . '%'
+                        ]
+                ]
+            );
+        }
+
+        if (isset($query['email']) && $query['email']) {
+            $conditions = array_merge($conditions, ['Users.username' => $query['email']]);
+        }
+
+        if (isset($query['phone']) && $query['phone']) {
+            $conditions = array_merge($conditions, ['Profiles.phone LIKE' => '%' . $query['phone'] . '%',]);
+        }
+
+        if (isset($query['gender']) && $query['gender']) {
+            if ($query['gender'] == 'male') {
                 $conditions = array_merge($conditions, ['Profiles.gender' => 1]);
-            }
-            else{
+            } elseif ($query['gender'] == 'female') {
                 $conditions = array_merge($conditions, ['Profiles.gender' => 2]);
+            } else {
+                $conditions = array_merge($conditions, ['Profiles.gender' => null]);
             }
+        }
+
+        if (isset($query['status'])) {
+            $conditions = array_merge($conditions, ['Users.status' => $query['status']]);
+        }
+
+        if (isset($query['email_verify'])) {
+            $conditions = array_merge($conditions, ['Users.email_verify' => $query['email_verify']]);
         }
 
         return $conditions;

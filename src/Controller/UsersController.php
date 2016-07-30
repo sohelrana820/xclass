@@ -318,8 +318,7 @@ class UsersController extends AppController{
         $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
         $conditions = [
-            'Users.role !=' => 1,
-            'Users.status' => 1
+            'Users.role !=' => 1
         ];
 
         if(isset($this->request->query) && $this->request->query)
