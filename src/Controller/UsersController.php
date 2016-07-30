@@ -274,6 +274,7 @@ class UsersController extends AppController{
      */
     public function add()
     {
+        $this->checkPermission($this->isAdmin());
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->data;
@@ -314,9 +315,8 @@ class UsersController extends AppController{
      */
     public function index()
     {
+        $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
-        $this->loadComponent('Utilities');
-
         $conditions = [
             'Users.status' => 1
         ];
@@ -350,6 +350,7 @@ class UsersController extends AppController{
      */
     public function view($uuid)
     {
+        $this->checkPermission($this->isAdmin());
         if(empty($uuid))
         {
             throw new NotFoundException;
@@ -374,6 +375,7 @@ class UsersController extends AppController{
      */
     public function edit($uuid)
     {
+        $this->checkPermission($this->isAdmin());
         if (empty($uuid)) {
             throw new NotFoundException;
         }
@@ -408,6 +410,7 @@ class UsersController extends AppController{
      */
     public function changeUserPhoto($uuid)
     {
+        $this->checkPermission($this->isAdmin());
         if (empty($uuid)) {
             throw new NotFoundException;
         }

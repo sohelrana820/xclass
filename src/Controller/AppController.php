@@ -111,4 +111,21 @@ class AppController extends Controller
             return $this->redirect($this->referer());
         }
     }
+
+    protected function isAdmin()
+    {
+        if($this->Auth->user('role') == 1){
+            return true;
+        }
+        return false;
+    }
+
+    protected function checkPermission($permission)
+    {
+        if(!$permission)
+        {
+            $this->Flash->error(_('Sorry, you are not authorised to access this page'));
+            $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
+        }
+    }
 }
