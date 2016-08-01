@@ -50,7 +50,7 @@ class AppController extends Controller
 
     public $currentTheme = 'Apps';
 
-    public $paginationLimit = 10;
+    public $paginationLimit = 50;
 
     public function initialize()
     {
