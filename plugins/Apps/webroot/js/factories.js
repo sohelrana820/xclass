@@ -1,5 +1,5 @@
 app.factory('LabelResources', function ($resource) {
-    var endpoint = '/labels';
+    var endpoint = '/labels.json';
 
     return $resource(endpoint+'/:id', { uuid: '@uuid' }, {
         get:    { method:'GET'},

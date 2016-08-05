@@ -10,6 +10,11 @@ use App\Controller\AppController;
  */
 class LabelsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
 
     /**
      * Index method
