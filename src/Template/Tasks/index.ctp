@@ -87,8 +87,8 @@
 echo $this->start('cssTop');
 echo $this->end();
 
-echo $this->start('jsTop');
-echo $this->Html->script(['angular.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js']);
-echo $this->Html->script(['application']);
+echo $this->start('jsBottom');
+echo $this->Html->script(['angular.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'angular-resource.min']);
+echo $this->Html->script(['application', 'factories']);
 echo $this->end();
 ?>
