@@ -20,7 +20,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body ng-app="Application">
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -54,7 +54,7 @@
 </div>
 <!-- /#wrapper -->
 
-<?php echo $this->Html->script(array('jquery', 'bootstrap.min', 'plugins/morris/raphael.min', 'plugins/morris/morris.min', 'plugins/morris/morris-data', 'custom'));?>
+<?php echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));?>
 <?php echo $this->fetch('jsBottom'); ?>
 </body>
 </html>
