@@ -13,21 +13,25 @@
 <div ng-controller="TaskCtrl">
     <div class="row">
         <div class="col-lg-6">
-            <form>
-                <div class="form-group">
-                    <label>Title</label>
-                    <div class="input text">
-                        <input type="text" name="profile" class="form-control" placeholder="Title">
+            <div class="well">
+                <form>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <div class="input text">
+                            <input type="text" ng-model="task.task" class="form-control" placeholder="Title">
+                        </div>
                     </div>
-                </div>
-                {{task}}
-                <div class="form-group">
-                    <label>Title</label>
-                    <div class="input text">
-                        <trix-editor angular-trix ng-model="foo"></trix-editor>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="input text">
+                            <text-angular ng-model="task.description" ng-model="htmlVariable"></text-angular>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <div class="form-group">
+                        <a class="btn btn-success" ng-click="saveTask()">SAVE</a>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="col-lg-4"></div>
     </div>
@@ -39,6 +43,12 @@ echo $this->Html->css(['trix']);
 echo $this->end();
 
 echo $this->start('jsTop');
-echo $this->Html->script(['angular.min', 'trix', 'application']);
+echo $this->Html->script(['angular.min']);
+?>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-sanitize.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js'></script>
+<?php
+echo $this->Html->script(['application']);
 echo $this->end();
 ?>

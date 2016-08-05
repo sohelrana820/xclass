@@ -1,5 +1,8 @@
-var app = angular.module('Application', []);
+var app = angular.module('Application', ['textAngular']);
 
 app.controller('TaskCtrl', function($scope){
-    $scope.task = 'This is sample task'
+
+    $scope.saveTask = function(){
+        console.log($scope.task);
+    }
 });

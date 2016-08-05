@@ -482,3 +482,8 @@ body{
 .btn{
     margin-left: 5px;
 }
+
+.ta-editor,
+.ta-editor > .ta-bind {
+    min-height: 300px;
+}
