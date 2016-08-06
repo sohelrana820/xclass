@@ -4,6 +4,10 @@ body{
 }
 
 
+a{
+    cursor: pointer;
+}
+
 
 .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
     top: -7px;

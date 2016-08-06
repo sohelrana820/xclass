@@ -28,5 +28,19 @@ app.controller('LabelsCtrl', function($scope, LabelResources){
                 }
             });
         }
+    };
+
+    $scope.deleteLabel = function(id){
+        var deletedLabel = LabelResources.delete({id: id}).$promise;
+        deletedLabel.then(function (res) {
+            if(res.result.success)
+            {
+                $scope.labels = $scope.labels.filter(function(label){
+                    console.log(labels.id);
+                    console.log(id);
+                    return label.id !== id
+                })
+            }
+        });
     }
 });

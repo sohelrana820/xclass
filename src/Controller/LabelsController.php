@@ -62,7 +62,7 @@ class LabelsController extends AppController
             if ($this->Labels->save($label)) {
                 $response = [
                     'success' => true,
-                    'message' => 'New label has been created succesfully',
+                    'message' => 'New label has been created successfully',
                     'data' => $label,
                 ];
             } else {
@@ -112,13 +112,23 @@ class LabelsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->RequestHandler->renderAs($this, 'json');
         $this->request->allowMethod(['post', 'delete']);
         $label = $this->Labels->get($id);
         if ($this->Labels->delete($label)) {
-            $this->Flash->success(__('The label has been deleted.'));
+            $response = [
+                'success' => true,
+                'message' => 'New label has been deleted successfully',
+                'data' => $label,
+            ];
         } else {
-            $this->Flash->error(__('The label could not be deleted. Please, try again.'));
+            $response = [
+                'success' => true,
+                'message' => 'Label could \t create',
+                'data' => $label,
+            ];
         }
-        return $this->redirect(['action' => 'index']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 }

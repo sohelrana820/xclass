@@ -62,7 +62,7 @@ Router::scope('/', function ($routes) {
 
 Router::scope('/labels', function ($routes) {
     $routes->extensions(['json']);
-    $routes->resources('Labels');
+    $routes->resources('labels');
 });
 
 /**
