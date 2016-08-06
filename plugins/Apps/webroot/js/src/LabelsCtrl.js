@@ -1,7 +1,4 @@
-var app = angular.module('Application', ['ngResource', 'textAngular']);
-
 app.controller('TaskCtrl', function($scope, LabelResources){
-
     $scope.TaskObj = {};
     $scope.saveTask = function(){
         console.log($scope.TaskObj);

@@ -10,7 +10,7 @@
     <div class="clearfix"></div>
 </div>
 
-<div ng-controller="TaskCtrl">
+<div ng-controller="TasksCtrl">
     <div class="row">
         <div class="col-lg-6 col-md-8">
             <div class="">
@@ -95,6 +95,6 @@ echo $this->end();
 
 echo $this->start('jsBottom');
 echo $this->Html->script(['angular.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'angular-resource.min']);
-echo $this->Html->script(['application', 'factories']);
+echo $this->Html->script(['src/app', 'src/TasksCtrl', 'src/factories']);
 echo $this->end();
 ?>
