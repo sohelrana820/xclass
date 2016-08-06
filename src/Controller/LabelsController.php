@@ -28,8 +28,15 @@ class LabelsController extends AppController
             'order' => ['Labels.created' => 'DESC']
         ];
         $labels = $this->paginate($this->Labels);
-        $this->set('labels', $labels);
-        $this->set('_serialize', ['labels']);
+
+        $response = [
+            'success' => true,
+            'message' => 'New label has been created successfully',
+            'data' => $labels,
+        ];
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
@@ -44,8 +51,15 @@ class LabelsController extends AppController
         $label = $this->Labels->get($id, [
             'contain' => ['Tasks']
         ]);
-        $this->set('label', $label);
-        $this->set('_serialize', ['label']);
+
+        $response = [
+            'success' => true,
+            'message' => 'Details of Label',
+            'data' => $label,
+        ];
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**

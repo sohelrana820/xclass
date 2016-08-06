@@ -3,7 +3,9 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
     $scope.labels = [];
     var labels = LabelResources.query().$promise;
     labels.then(function (res) {
-        $scope.labels = res.labels
+        if(res.result.success){
+            return $scope.labels = res.result.data;
+        }
     });
 
     $scope.isLabelFormSubmitted = false;
@@ -45,8 +47,10 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
         });
     };
 
-    var getdLabel = LabelResources.get({id: 36}).$promise;
-    getdLabel.then(function (res) {
-        console.log(res)
-    });
+    $scope.openEditLabel = function(id){
+        var getdLabel = LabelResources.get({id: id}).$promise;
+        getdLabel.then(function (res) {
+            $scope.LabelObj = res.result.data;
+        });
+    };
 });

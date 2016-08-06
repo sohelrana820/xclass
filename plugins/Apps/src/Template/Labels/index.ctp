@@ -68,7 +68,7 @@
                             </td>
                             <td class="text-center">{{label.modified | date}}</td>
                             <td class="text-right">
-                                <a href="/users/edit/2" class="icons"><i class="fa fa-pencil"></i></a>
+                                <a ng-click="openEditLabel(label.id)" class="icons"><i class="fa fa-pencil"></i></a>
                                 <a ng-click="deleteLabel(label.id)" class="icons red"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
