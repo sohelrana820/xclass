@@ -14,21 +14,24 @@
     <div class="row">
         <div class="col-lg-4 col-md-4">
             <div class="">
-                <form>
+                <form name="create_label_form" ng-submit="saveLabel()" novalidate>
                     <div class="form-group">
-                        <label>Name</label>
+                        <label>Label Name</label>
                         <div class="input text">
-                            <input type="text" ng-model="LabelObj.name" class="form-control" placeholder="Name">
+                            <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Label name" required="required">
+                            <div ng-show="create_label_form.label_name.$touched || isLabelFormSubmitted">
+                                <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Color Code</label>
+                        <label>Label Color</label>
                         <div class="input text">
                             <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
                         </div>
                     </div>
                     <div class="form-group">
-                        <a class="btn btn-success" ng-click="saveLabel()">SAVE</a>
+                        <button class="btn btn-success">SAVE</button>
                     </div>
                 </form>
             </div>
