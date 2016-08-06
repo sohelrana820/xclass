@@ -68,8 +68,8 @@ class LabelsController extends AppController
                 ];
             }
         }
-        $this->set('response', $response);
-        $this->set('_serialize', ['response']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
