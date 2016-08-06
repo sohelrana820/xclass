@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="Application">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +8,12 @@
     <meta name="author" content="">
 
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
-    <?php echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'style.css'));?>
-    <?php echo $this->fetch('cssTop'); ?>
-    <?php echo $this->fetch('jsTop'); ?>
+
+    <?php
+    echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'style.css'));
+    echo $this->fetch('cssTop');
+    echo $this->fetch('jsTop');
+    ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,7 +23,7 @@
     <![endif]-->
 </head>
 
-<body ng-app="Application">
+<body ng-controller="MainsCtrl">
 
 <div id="wrapper">
     <!-- Navigation -->
@@ -28,7 +31,9 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only">
+                    <?php echo $this->Html->link($appsName, ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']);?>
+                </span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -54,7 +59,11 @@
 </div>
 <!-- /#wrapper -->
 
-<?php echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));?>
-<?php echo $this->fetch('jsBottom'); ?>
+<?php
+echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));
+echo $this->Html->script(['angular.min', 'angular-resource.min']);
+echo $this->Html->script(['src/app', 'src/factories']);
+echo $this->fetch('jsBottom');
+?>
 </body>
 </html>
