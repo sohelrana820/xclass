@@ -36,15 +36,18 @@
         <div class="col-lg-2 col-md-4">
             <div class="task_sidebar" style="margin-top: 25px">
                 <div class="dropdown">
-                    <h2 class="dropdown-toggle" id="label"data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
                         Labels
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <ul class="dropdown-menu task_label_list" id="label" aria-labelledby="label">
-                        <li ng-repeat="(key, label) in labels">
-                            <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
-                        </li>
-                    </ul>
+                    <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <h2>Apply label <a class="close_dropdown">X</a></h2>
+                        <ul class="task_label_list nav nav-list">
+                            <li ng-repeat="(key, label) in labels">
+                                <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                            </li>
+                        </ul>
+                    </div>
                     <div>
                         <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
                         <ul class="task_labels" ng-show="taskLabels.length > 0">
@@ -52,18 +55,22 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="dropdown">
-                    <h2 class="dropdown-toggle" id="users"data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
                         Users
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <ul class="dropdown-menu" id="users" aria-labelledby="label">
-                        <li><a href="#">Action <a</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
+                    <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <h2>Assign to user <a class="close_dropdown">X</a></h2>
+                        <ul class="task_label_list nav nav-list">
+                            <li><a href="#">Action <a</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
                     <div>
                         <small class="red">User not assigned yet!</small>
                     </div>

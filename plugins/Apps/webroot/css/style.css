@@ -573,12 +573,39 @@ body{
     border-radius: 3px;
 }
 
-.task_label_list {
+.custom-dropdown{
     width: 240px;
+}
+
+.custom-dropdown h2 {
+    margin: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.custom-dropdown .close_dropdown, .custom-dropdown .close_dropdown:hover {
+    position: absolute;
+    right: 10px;
+    color: #777;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.task_label_list {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+.task_label_list li a {
+    list-style: none;
 }
 
 .task_label_list li a {
     font-size: 11px;
     padding: 8px 15px;
     border-bottom: 1px dotted #EEE;
+    cursor: pointer;
 }
