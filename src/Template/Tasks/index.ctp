@@ -64,7 +64,7 @@
                         Users
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
+                    <small class="red">User not assigned yet!</small>
                     <div class="dropdown">
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
