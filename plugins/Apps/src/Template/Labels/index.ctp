@@ -14,12 +14,12 @@
     <div class="row">
         <div class="col-lg-4 col-md-4">
             <div class="">
-                <form name="create_label_form" ng-submit="saveLabel()" novalidate>
+                <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>
                     <div class="form-group">
                         <label>Label Name</label>
                         <div class="input text">
-                            <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Label name" required="required">
-                            <div ng-show="create_label_form.label_name.$touched || isLabelFormSubmitted">
+                            <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
+                            <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
                                 <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
                             </div>
                         </div>

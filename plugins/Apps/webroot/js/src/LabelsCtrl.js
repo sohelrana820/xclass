@@ -6,21 +6,23 @@ app.controller('LabelsCtrl', function($scope, LabelResources){
         $scope.labels = res.labels
     });
 
+    $scope.isLabelFormSubmitted = false;
     $scope.LabelObj = {
         color_code: '#C00C00'
     };
 
-    $scope.isLabelFormSubmitted = false;
-    $scope.saveLabel = function(){
+    $scope.saveLabel = function($isValid){
         $scope.isLabelFormSubmitted = true;
-        if($scope.LabelObj.name != undefined)
+
+        if($isValid && $scope.LabelObj.name != undefined)
         {
+            $scope.isLabelFormSubmitted = false;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
-                    $scope.isLabelFormSubmitted = false;
+
                     $scope.LabelObj = {
-                        color_code: '#C00C00'
+
                     };
                     $scope.labels.unshift(res.result.data);
                 }
