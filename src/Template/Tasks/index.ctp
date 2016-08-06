@@ -42,7 +42,7 @@
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
                     <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
-                    <div class="dropdown open">
+                    <div class="dropdown">
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
                             <ul class="task_label_list nav nav-list">
