@@ -1,4 +1,4 @@
-app.controller('LabelsCtrl', function($scope, LabelResources){
+app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
 
     $scope.labels = [];
     var labels = LabelResources.query().$promise;
@@ -13,18 +13,18 @@ app.controller('LabelsCtrl', function($scope, LabelResources){
 
     $scope.saveLabel = function($isValid){
         $scope.isLabelFormSubmitted = true;
-
         if($isValid && $scope.LabelObj.name != undefined)
         {
             $scope.isLabelFormSubmitted = false;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
-
-                    $scope.LabelObj = {
-
-                    };
+                    $scope.LabelObj = {};
                     $scope.labels.unshift(res.result.data);
+                    Flash.create('success', 'Label has been created successfully');
+                }
+                else{
+                    Flash.create('error', 'Sorry, label could not created');
                 }
             });
         }
@@ -36,10 +36,12 @@ app.controller('LabelsCtrl', function($scope, LabelResources){
             if(res.result.success)
             {
                 $scope.labels = $scope.labels.filter(function(label){
-                    console.log(labels.id);
-                    console.log(id);
                     return label.id !== id
-                })
+                });
+                Flash.create('info', 'Label has been deleted successfully');
+            }
+            else{
+                Flash.create('error', 'Sorry, label could not deleted');
             }
         });
     }

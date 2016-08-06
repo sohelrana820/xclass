@@ -51,6 +51,7 @@
 
         <div class="container-fluid">
             <?php echo $this->Flash->render() ?>
+            <flash-message></flash-message>
             <?php echo $this->fetch('content'); ?>
         </div>
         <!-- /.container-fluid -->
@@ -61,7 +62,7 @@
 
 <?php
 echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));
-echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'tinycolor-min.js', 'angularjs-color-picker.min.js']);
+echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'tinycolor-min.js', 'angularjs-color-picker.min.js', 'angular-flash.min']);
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>
