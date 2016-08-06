@@ -35,51 +35,53 @@
         </div>
         <div class="col-lg-2 col-md-4">
             <div class="task_sidebar" style="margin-top: 25px">
-                <div class="dropdown">
+
+                <div class="single_block">
                     <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
                         Labels
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
-                        <h2>Apply label <a class="close_dropdown">X</a></h2>
-                        <ul class="task_label_list nav nav-list">
-                            <li ng-repeat="(key, label) in labels">
-                                <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
-                            </li>
-                        </ul>
+                    <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Apply label <a class="close_dropdown">X</a></h2>
+                            <ul class="task_label_list nav nav-list">
+                                <li ng-repeat="(key, label) in labels">
+                                    <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div>
-                        <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
                         <ul class="task_labels" ng-show="taskLabels.length > 0">
                             <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel)">X</span></li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="dropdown">
+                <div class="single_block">
                     <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
                         Users
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
-                        <h2>Assign to user <a class="close_dropdown">X</a></h2>
-                        <ul class="task_label_list nav nav-list">
-                            <li><a href="#">Action <a</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
+                    <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Assign task to user <a class="close_dropdown">X</a></h2>
+                            <ul class="task_label_list nav nav-list">
+                                <li><a href="#">Action </a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
                     </div>
                     <div>
-                        <small class="red">User not assigned yet!</small>
-                    </div>
-                    <div>
-                        <ul class="task_users">
+                        <!--<ul class="task_users">
                             <li><img src="img/profile_avatar.jpg">@Sohel Rana</li>
                             <li><img src="img/profile_avatar.jpg">@Shaharia Azam</li>
                             <li><img src="img/profile_avatar.jpg">@Shaharia Azam</li>
-                        </ul>
+                        </ul>-->
                     </div>
                 </div>
             </div>

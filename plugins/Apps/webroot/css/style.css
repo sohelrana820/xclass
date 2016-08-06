@@ -494,16 +494,16 @@ body{
 }
 
 
-.task_sidebar .dropdown {
+.task_sidebar .single_block {
     margin-bottom: 20px;
     border-bottom: 1px solid #EEE;
-    padding-bottom: 12px;
+    padding-bottom: 15px;
 }
 
 
 
 
-.task_sidebar .dropdown:last-child {
+.task_sidebar .single_block:last-child {
     border-bottom: none;
 }
 
