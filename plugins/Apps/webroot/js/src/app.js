@@ -1,4 +1,4 @@
-var app = angular.module('Application', ['ngResource', 'textAngular']);
+var app = angular.module('Application', ['ngResource', 'textAngular', 'color.picker']);
 
 app.controller('MainsCtrl', function($scope, LabelResources){
 

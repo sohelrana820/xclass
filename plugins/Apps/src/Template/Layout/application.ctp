@@ -10,7 +10,7 @@
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <?php
-    echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'style.css'));
+    echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'style.css'));
     echo $this->fetch('cssTop');
     echo $this->fetch('jsTop');
     ?>
@@ -61,7 +61,7 @@
 
 <?php
 echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));
-echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js']);
+echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'tinycolor-min.js', 'angularjs-color-picker.min.js']);
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>

@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label>Color Code</label>
                         <div class="input text">
-                            <input type="color" ng-model="LabelObj.color_code" placeholder="Name">
+                            <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
                         </div>
                     </div>
                     <div class="form-group">
