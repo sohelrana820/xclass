@@ -91,7 +91,6 @@
 
 <?php
 echo $this->start('jsBottom');
-echo $this->Html->script(['textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js']);
 echo $this->Html->script(['src/TasksCtrl']);
 echo $this->end();
 ?>

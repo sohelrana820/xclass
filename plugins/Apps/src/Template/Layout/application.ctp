@@ -61,7 +61,7 @@
 
 <?php
 echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));
-echo $this->Html->script(['angular.min', 'angular-resource.min']);
+echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js']);
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>
