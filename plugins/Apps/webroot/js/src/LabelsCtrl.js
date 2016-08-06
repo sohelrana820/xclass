@@ -7,9 +7,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
     });
 
     $scope.isLabelFormSubmitted = false;
-    $scope.LabelObj = {
-        color_code: '#C00C00'
-    };
+    $scope.LabelObj = {color_code: '#C00C00'};
 
     $scope.saveLabel = function($isValid){
         $scope.isLabelFormSubmitted = true;
@@ -19,7 +17,8 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
-                    $scope.LabelObj = {};
+                    $scope.isLabelFormSubmitted = false;
+                    $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.labels.unshift(res.result.data);
                     Flash.create('success', 'Label has been created successfully');
                 }

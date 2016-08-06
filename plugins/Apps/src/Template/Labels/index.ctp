@@ -38,10 +38,10 @@
         </div>
         <div class="col-lg-6 col-md-6">
             <div style="margin-top: 25px">
-                <!--<div class="not-found">
+                <div class="not-found" ng-show="labels.length < 1">
                     <h4 class="not-found text-center">Sorry, you don't have any label yet!</h4>
-                </div>-->
-                <div>
+                </div>
+                <div ng-show="labels.length > 0">
                     <h2 class="md-title">
                         List of Label <br/>
                         <span>50 result found</span>
