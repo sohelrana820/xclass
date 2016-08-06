@@ -55,14 +55,21 @@ class LabelsController extends AppController
         if ($this->request->is('post')) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
             if ($this->Labels->save($label)) {
-                var_dump('saved');
+                $response = [
+                    'success' => true,
+                    'message' => 'New label has been created succesfully',
+                    'data' => $label,
+                ];
             } else {
-                var_dump('not saved');
+                $response = [
+                    'success' => true,
+                    'message' => 'Label could \t create',
+                    'data' => $label,
+                ];
             }
         }
-        var_dump(111);
-        $this->autoRender(false);
-        $this->set('_serialize', ['label']);
+        $this->set('response', $response);
+        $this->set('_serialize', ['response']);
     }
 
     /**
