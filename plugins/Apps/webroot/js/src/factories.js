@@ -1,10 +1,9 @@
 app.factory('LabelResources', function ($resource) {
-    var endpoint = '/labels.json';
 
-    return $resource(endpoint+'/:id', { uuid: '@uuid' }, {
+    return $resource(':id', { uuid: '@uuid' }, {
         get:    { method:'GET'},
-        save:   {method:'POST'},
-        query:  {method:'GET', isArray:false},
+        save:   {method:'POST', 'url': '/labels/create'},
+        query:  {method:'GET', isArray:false, 'url': '/labels.json'},
         remove: {method:'DELETE'},
         delete: {method:'DELETE'},
         update: {method:'PUT'}

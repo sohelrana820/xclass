@@ -48,20 +48,20 @@ class LabelsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function create()
     {
+        $this->request->data['created_by'] = $this->userID;
         $label = $this->Labels->newEntity();
         if ($this->request->is('post')) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
             if ($this->Labels->save($label)) {
-                $this->Flash->success(__('The label has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                var_dump('saved');
             } else {
-                $this->Flash->error(__('The label could not be saved. Please, try again.'));
+                var_dump('not saved');
             }
         }
-        $tasks = $this->Labels->Tasks->find('list', ['limit' => 200]);
-        $this->set(compact('label', 'tasks'));
+        var_dump(111);
+        $this->autoRender(false);
         $this->set('_serialize', ['label']);
     }
 

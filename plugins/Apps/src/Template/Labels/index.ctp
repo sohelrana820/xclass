@@ -1,4 +1,4 @@
-<?php echo $this->assign('title', 'Manage Task');?>
+<?php echo $this->assign('title', 'Manage Label');?>
 
 <div class="page-header">
     <h2 class="title pull-left">
