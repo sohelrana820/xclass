@@ -4,7 +4,8 @@ app.controller('TaskCtrl', function($scope, LabelResources){
 
     $scope.TaskObj = {};
     $scope.saveTask = function(){
-        console.log($scope.task);
+        console.log($scope.TaskObj);
+        console.log($scope.taskLabels);
     };
 
     // Getting all active labels.
@@ -15,7 +16,7 @@ app.controller('TaskCtrl', function($scope, LabelResources){
 
     $scope.taskLabels = [];
     $scope.chooseTaskLabels = function(label, key, isChecked){
-        if(isChecked == undefined)
+        if(isChecked == undefined || isChecked == false)
         {
             $scope.labels[key].checked = true;
             $scope.taskLabels.push(label);

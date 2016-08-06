@@ -18,13 +18,13 @@
                     <div class="form-group">
                         <label>Title</label>
                         <div class="input text">
-                            <input type="text" ng-model="task.task" class="form-control" placeholder="Title">
+                            <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Description</label>
                         <div class="input text">
-                            <text-angular ng-model="task.description" ng-model="htmlVariable"></text-angular>
+                            <text-angular ng-model="TaskObj.description" ng-model="htmlVariable"></text-angular>
                         </div>
                     </div>
                     <div class="form-group">
@@ -46,7 +46,8 @@
                         </li>
                     </ul>
                     <div>
-                        <ul class="task_labels">
+                        <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
+                        <ul class="task_labels" ng-show="taskLabels.length > 0">
                             <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel)">X</span></li>
                         </ul>
                     </div>
@@ -64,7 +65,7 @@
                         <li><a href="#">Separated link</a></li>
                     </ul>
                     <div>
-                        <small class="red">Not set yet!</small>
+                        <small class="red">User not assigned yet!</small>
                     </div>
                     <div>
                         <ul class="task_users">
