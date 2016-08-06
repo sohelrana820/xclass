@@ -23,7 +23,12 @@ class LabelsController extends AppController
      */
     public function index()
     {
-        $this->set('labels', $this->paginate($this->Labels));
+        $this->paginate = [
+            'limit' => 50,
+            'order' => ['Labels.created' => 'DESC']
+        ];
+        $labels = $this->paginate($this->Labels);
+        $this->set('labels', $labels);
         $this->set('_serialize', ['labels']);
     }
 
