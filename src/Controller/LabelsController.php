@@ -53,7 +53,7 @@ class LabelsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function create()
+    public function add()
     {
         $this->request->data['created_by'] = $this->userID;
         $label = $this->Labels->newEntity();
@@ -112,7 +112,6 @@ class LabelsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->RequestHandler->renderAs($this, 'json');
         $this->request->allowMethod(['post', 'delete']);
         $label = $this->Labels->get($id);
         if ($this->Labels->delete($label)) {

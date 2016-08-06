@@ -43,5 +43,10 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
                 Flash.create('error', 'Sorry, label could not deleted');
             }
         });
-    }
+    };
+
+    var getdLabel = LabelResources.get({id: 36}).$promise;
+    getdLabel.then(function (res) {
+        console.log(res)
+    });
 });
