@@ -1,12 +1,18 @@
 app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
 
+    $scope.create_form = true;
+    $scope.edit_form = false;
     $scope.labels = [];
-    var labels = LabelResources.query().$promise;
-    labels.then(function (res) {
-        if(res.result.success){
-            return $scope.labels = res.result.data;
-        }
-    });
+
+   $scope.fetchLabelLists = function(){
+       var labels = LabelResources.query().$promise;
+       labels.then(function (res) {
+           if(res.result.success){
+               return $scope.labels = res.result.data;
+           }
+       });
+   };
+    $scope.fetchLabelLists();
 
     $scope.isLabelFormSubmitted = false;
     $scope.LabelObj = {color_code: '#C00C00'};
@@ -22,10 +28,32 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
                     $scope.isLabelFormSubmitted = false;
                     $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.labels.unshift(res.result.data);
-                    Flash.create('success', 'Label has been created successfully');
+                    Flash.create('success', res.result.message);
                 }
                 else{
-                    Flash.create('error', 'Sorry, label could not created');
+                    Flash.create('error', res.result.message);
+                }
+            });
+        }
+    };
+
+    $scope.updateLabel = function($isValid){
+        $scope.isLabelFormSubmitted = true;
+        if($isValid && $scope.LabelObj.name != undefined)
+        {
+            $scope.isLabelFormSubmitted = false;
+            var labels = LabelResources.update($scope.LabelObj).$promise;
+            labels.then(function (res) {
+                if(res.result.success){
+                    $scope.fetchLabelLists();
+                    $scope.isLabelFormSubmitted = false;
+                    $scope.LabelObj = {color_code: '#C00C00'};
+                    $scope.create_form = true;
+                    $scope.edit_form = false;
+                    Flash.create('success', res.result.message);
+                }
+                else{
+                    Flash.create('error', res.result.message);
                 }
             });
         }
@@ -39,15 +67,17 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
                 $scope.labels = $scope.labels.filter(function(label){
                     return label.id !== id
                 });
-                Flash.create('info', 'Label has been deleted successfully');
+                Flash.create('info', res.result.message);
             }
             else{
-                Flash.create('error', 'Sorry, label could not deleted');
+                Flash.create('error', res.result.message);
             }
         });
     };
 
     $scope.openEditLabel = function(id){
+        $scope.create_form = false;
+        $scope.edit_form = true;
         var getdLabel = LabelResources.get({id: id}).$promise;
         getdLabel.then(function (res) {
             $scope.LabelObj = res.result.data;

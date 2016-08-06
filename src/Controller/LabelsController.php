@@ -31,7 +31,7 @@ class LabelsController extends AppController
 
         $response = [
             'success' => true,
-            'message' => 'New label has been created successfully',
+            'message' => 'List of labels',
             'data' => $labels,
         ];
 
@@ -54,7 +54,7 @@ class LabelsController extends AppController
 
         $response = [
             'success' => true,
-            'message' => 'Details of Label',
+            'message' => 'Details of label',
             'data' => $label,
         ];
 
@@ -82,7 +82,7 @@ class LabelsController extends AppController
             } else {
                 $response = [
                     'success' => true,
-                    'message' => 'Label could \t create',
+                    'message' => 'Label could not created',
                     'data' => $label,
                 ];
             }
@@ -106,15 +106,23 @@ class LabelsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
             if ($this->Labels->save($label)) {
-                $this->Flash->success(__('The label has been saved.'));
-                return $this->redirect(['action' => 'index']);
+
+                $response = [
+                    'success' => true,
+                    'message' => 'Label has been updated successfully',
+                    'data' => $label,
+                ];
+
             } else {
-                $this->Flash->error(__('The label could not be saved. Please, try again.'));
+                $response = [
+                    'success' => true,
+                    'message' => 'Label could not updated',
+                    'data' => $label,
+                ];
             }
         }
-        $tasks = $this->Labels->Tasks->find('list', ['limit' => 200]);
-        $this->set(compact('label', 'tasks'));
-        $this->set('_serialize', ['label']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
