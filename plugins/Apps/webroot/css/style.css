@@ -517,7 +517,6 @@ body{
 }
 
 
-
 .task_sidebar h2 i {
     font-size: 15px;
 }
@@ -608,4 +607,44 @@ body{
     padding: 8px 15px;
     border-bottom: 1px dotted #EEE;
     cursor: pointer;
+}
+
+
+
+.label_List{
+
+}
+
+.label_List th{
+    font-size: 11px;
+    text-transform: uppercase;
+}
+
+.label_List td{
+    font-size: 12px;
+}
+
+.label_List td label {
+    padding: 5px 10px 3px 10px;
+    border-radius: 3px;
+    color: #FFF;
+}
+
+.md-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0px;
+    margin-bottom: 10px;
+    background: #f8f8f8;
+    padding: 15px 15px 5px 10px;
+    border-left: 5px solid #222;
+}
+
+.md-title span{
+    font-size: 10px;
+    text-transform: lowercase;
+    font-weight: 300;
+    color: #555 !important;
+    line-height: 21px;
 }
