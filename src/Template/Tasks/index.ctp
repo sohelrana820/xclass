@@ -40,18 +40,14 @@
                         Labels
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <ul class="dropdown-menu" id="label" aria-labelledby="label">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                    <ul class="dropdown-menu task_label_list" id="label" aria-labelledby="label">
+                        <li ng-repeat="(key, label) in labels">
+                            <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                        </li>
                     </ul>
                     <div>
                         <ul class="task_labels">
-                            <li style="background: red;">Bug <span ng-click="remove()">X</span></li>
-                            <li style="background: yellowgreen">Duplicate <span ng-click="remove()">X</span></li>
-                            <li style="background: #000;">Duplicate <span ng-click="remove()">X</span></li>
+                            <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel)">X</span></li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +57,7 @@
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
                     <ul class="dropdown-menu" id="users" aria-labelledby="label">
-                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Action <a</a></li>
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>

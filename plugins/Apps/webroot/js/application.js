@@ -2,22 +2,42 @@ var app = angular.module('Application', ['ngResource', 'textAngular']);
 
 app.controller('TaskCtrl', function($scope, LabelResources){
 
+    $scope.TaskObj = {};
     $scope.saveTask = function(){
         console.log($scope.task);
     };
 
-    // Getting companies list.
-    this.getCompanies = function (params) {
-        if(!params){
-            params = {};
-        }
+    // Getting all active labels.
+    var labels = LabelResources.query().$promise;
+    labels.then(function (res) {
+        $scope.labels = res.labels
+    });
 
-        return CompaniesResources.query(params).$promise;
+    $scope.taskLabels = [];
+    $scope.chooseTaskLabels = function(label, key, isChecked){
+        if(isChecked == undefined)
+        {
+            $scope.labels[key].checked = true;
+            $scope.taskLabels.push(label);
+        }
+        else{
+            $scope.labels[key].checked = false;
+            $scope.taskLabels = $scope.taskLabels.filter(function(oldLabel){
+                return oldLabel.id !== label.id;
+            });
+        }
     };
 
-    var labels = LabelResources.query().$promise;
-    labels.then(function (labels) {
-        console.log(labels);
-    });
+    $scope.removeTaskLabels = function(label){
+        $scope.taskLabels = $scope.taskLabels.filter(function(oldLabel){
+            return oldLabel.id !== label.id;
+        });
+
+        $scope.labels.forEach(function(orgLabel, key){
+            if(orgLabel.id == label.id){
+                $scope.labels[key].checked = false;
+            }
+        });
+    }
 });
 

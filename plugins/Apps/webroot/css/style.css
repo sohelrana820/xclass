@@ -572,3 +572,13 @@ body{
     margin-right: 5px;
     border-radius: 3px;
 }
+
+.task_label_list {
+    width: 240px;
+}
+
+.task_label_list li a {
+    font-size: 11px;
+    padding: 8px 15px;
+    border-bottom: 1px dotted #EEE;
+}
