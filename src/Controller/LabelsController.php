@@ -10,6 +10,11 @@ use App\Controller\AppController;
  */
 class LabelsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('RequestHandler');
+    }
 
     /**
      * Index method
@@ -18,8 +23,20 @@ class LabelsController extends AppController
      */
     public function index()
     {
-        $this->set('labels', $this->paginate($this->Labels));
-        $this->set('_serialize', ['labels']);
+        $this->paginate = [
+            'limit' => 50,
+            'order' => ['Labels.created' => 'DESC']
+        ];
+        $labels = $this->paginate($this->Labels);
+
+        $response = [
+            'success' => true,
+            'message' => 'List of labels',
+            'data' => $labels,
+        ];
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
@@ -34,8 +51,15 @@ class LabelsController extends AppController
         $label = $this->Labels->get($id, [
             'contain' => ['Tasks']
         ]);
-        $this->set('label', $label);
-        $this->set('_serialize', ['label']);
+
+        $response = [
+            'success' => true,
+            'message' => 'Details of label',
+            'data' => $label,
+        ];
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
@@ -45,19 +69,26 @@ class LabelsController extends AppController
      */
     public function add()
     {
+        $this->request->data['created_by'] = $this->userID;
         $label = $this->Labels->newEntity();
         if ($this->request->is('post')) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
             if ($this->Labels->save($label)) {
-                $this->Flash->success(__('The label has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $response = [
+                    'success' => true,
+                    'message' => 'New label has been created successfully',
+                    'data' => $label,
+                ];
             } else {
-                $this->Flash->error(__('The label could not be saved. Please, try again.'));
+                $response = [
+                    'success' => true,
+                    'message' => 'Label could not created',
+                    'data' => $label,
+                ];
             }
         }
-        $tasks = $this->Labels->Tasks->find('list', ['limit' => 200]);
-        $this->set(compact('label', 'tasks'));
-        $this->set('_serialize', ['label']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
@@ -75,15 +106,23 @@ class LabelsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
             if ($this->Labels->save($label)) {
-                $this->Flash->success(__('The label has been saved.'));
-                return $this->redirect(['action' => 'index']);
+
+                $response = [
+                    'success' => true,
+                    'message' => 'Label has been updated successfully',
+                    'data' => $label,
+                ];
+
             } else {
-                $this->Flash->error(__('The label could not be saved. Please, try again.'));
+                $response = [
+                    'success' => true,
+                    'message' => 'Label could not updated',
+                    'data' => $label,
+                ];
             }
         }
-        $tasks = $this->Labels->Tasks->find('list', ['limit' => 200]);
-        $this->set(compact('label', 'tasks'));
-        $this->set('_serialize', ['label']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
@@ -98,10 +137,19 @@ class LabelsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $label = $this->Labels->get($id);
         if ($this->Labels->delete($label)) {
-            $this->Flash->success(__('The label has been deleted.'));
+            $response = [
+                'success' => true,
+                'message' => 'New label has been deleted successfully',
+                'data' => $label,
+            ];
         } else {
-            $this->Flash->error(__('The label could not be deleted. Please, try again.'));
+            $response = [
+                'success' => true,
+                'message' => 'Label could \t create',
+                'data' => $label,
+            ];
         }
-        return $this->redirect(['action' => 'index']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 }
