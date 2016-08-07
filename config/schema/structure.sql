@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 02, 2016 at 05:27 AM
+-- Generation Time: Aug 08, 2016 at 05:36 AM
 -- Server version: 5.5.49-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.17
 
@@ -43,15 +43,30 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(32) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `task_id` int(11) NOT NULL,
   `comment` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active, 2 = Inactive',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `identifier_id` (`task_id`)
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `labels`
+--
+
+CREATE TABLE IF NOT EXISTS `labels` (
+  `id` int(3) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `color_code` varchar(24) DEFAULT 'eeeeee',
+  `created_by` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active,  = Inactive',
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 -- --------------------------------------------------------
 
@@ -93,15 +108,48 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(32) NOT NULL,
   `created_by` int(11) NOT NULL,
-  `assigned_to` int(11) NOT NULL,
   `task` text NOT NULL,
   `description` text,
   `status` int(1) NOT NULL DEFAULT '1',
   `modified` datetime NOT NULL,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `created_by` (`created_by`),
-  KEY `assigned_to` (`assigned_to`)
+  KEY `created_by` (`created_by`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks_comments`
+--
+
+CREATE TABLE IF NOT EXISTS `tasks_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) NOT NULL,
+  `comment_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`task_id`,`comment_id`),
+  KEY `comment_id` (`comment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tasks_labels`
+--
+
+CREATE TABLE IF NOT EXISTS `tasks_labels` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `task_id` int(11) NOT NULL,
+  `label_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `task_id` (`task_id`),
+  KEY `label_id` (`label_id`),
+  KEY `label_id_2` (`label_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -125,6 +173,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1520 ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_tasks`
+--
+
+CREATE TABLE IF NOT EXISTS `users_tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`task_id`),
+  KEY `task_id` (`task_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 --
 -- Constraints for dumped tables
 --
@@ -133,14 +198,13 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Constraints for table `attachments`
 --
 ALTER TABLE `attachments`
-  ADD CONSTRAINT `attachments_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `attachments_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `attachments_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
@@ -154,5 +218,25 @@ ALTER TABLE `profiles`
 -- Constraints for table `tasks`
 --
 ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_2` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `tasks_comments`
+--
+ALTER TABLE `tasks_comments`
+  ADD CONSTRAINT `tasks_comments_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`),
+  ADD CONSTRAINT `tasks_comments_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`);
+
+--
+-- Constraints for table `tasks_labels`
+--
+ALTER TABLE `tasks_labels`
+  ADD CONSTRAINT `tasks_labels_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`),
+  ADD CONSTRAINT `tasks_labels_ibfk_2` FOREIGN KEY (`label_id`) REFERENCES `labels` (`id`);
+
+--
+-- Constraints for table `users_tasks`
+--
+ALTER TABLE `users_tasks`
+  ADD CONSTRAINT `users_tasks_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`),
+  ADD CONSTRAINT `users_tasks_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);

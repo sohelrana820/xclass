@@ -25,7 +25,7 @@ class LabelsController extends AppController
     {
         $this->paginate = [
             'limit' => 50,
-            'order' => ['Labels.created' => 'DESC']
+            'order' => ['Labels.created' => 'DESC'],
         ];
         $labels = $this->paginate($this->Labels);
 
@@ -52,11 +52,20 @@ class LabelsController extends AppController
             'contain' => ['Tasks']
         ]);
 
-        $response = [
-            'success' => true,
-            'message' => 'Details of label',
-            'data' => $label,
-        ];
+        if($label)
+        {
+            $response = [
+                'success' => true,
+                'message' => 'Details of label',
+                'data' => $label,
+            ];
+        }
+        else{
+            $response = [
+                'success' => false,
+                'message' => 'Record not found',
+            ];
+        }
 
         $this->set('result', $response);
         $this->set('_serialize', ['result']);
@@ -81,9 +90,9 @@ class LabelsController extends AppController
                 ];
             } else {
                 $response = [
-                    'success' => true,
+                    'success' => false,
                     'message' => 'Label could not created',
-                    'data' => $label,
+                    'data' => null,
                 ];
             }
         }
@@ -115,9 +124,9 @@ class LabelsController extends AppController
 
             } else {
                 $response = [
-                    'success' => true,
+                    'success' => false,
                     'message' => 'Label could not updated',
-                    'data' => $label,
+                    'data' => null,
                 ];
             }
         }
@@ -139,14 +148,14 @@ class LabelsController extends AppController
         if ($this->Labels->delete($label)) {
             $response = [
                 'success' => true,
-                'message' => 'New label has been deleted successfully',
+                'message' => 'Label has been deleted successfully',
                 'data' => $label,
             ];
         } else {
             $response = [
-                'success' => true,
+                'success' => false,
                 'message' => 'Label could \t create',
-                'data' => $label,
+                'data' => null,
             ];
         }
         $this->set('result', $response);

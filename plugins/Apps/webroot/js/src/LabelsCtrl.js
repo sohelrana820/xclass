@@ -12,16 +12,19 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
            }
        });
    };
+
     $scope.fetchLabelLists();
-
     $scope.isLabelFormSubmitted = false;
-    $scope.LabelObj = {color_code: '#C00C00'};
+    $scope.LabelObj = {color_code: '#C00C00', status: 1};
 
+    /**
+     *
+     * @param $isValid
+     */
     $scope.saveLabel = function($isValid){
         $scope.isLabelFormSubmitted = true;
         if($isValid && $scope.LabelObj.name != undefined)
         {
-            $scope.isLabelFormSubmitted = false;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
@@ -37,6 +40,10 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
         }
     };
 
+    /**
+     *
+     * @param $isValid
+     */
     $scope.updateLabel = function($isValid){
         $scope.isLabelFormSubmitted = true;
         if($isValid && $scope.LabelObj.name != undefined)
@@ -45,9 +52,9 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
             var labels = LabelResources.update($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
-                    $scope.fetchLabelLists();
                     $scope.isLabelFormSubmitted = false;
-                    $scope.LabelObj = {color_code: '#C00C00'};
+                    $scope.fetchLabelLists();
+                    $scope.LabelObj = {color_code: '#C00C00', status: 1};
                     $scope.create_form = true;
                     $scope.edit_form = false;
                     Flash.create('success', res.result.message);
@@ -59,6 +66,10 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
         }
     };
 
+    /**
+     *
+     * @param id
+     */
     $scope.deleteLabel = function(id){
         var deletedLabel = LabelResources.delete({id: id}).$promise;
         deletedLabel.then(function (res) {
@@ -75,12 +86,19 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
         });
     };
 
+    /**
+     *
+     * @param id
+     */
     $scope.openEditLabel = function(id){
         $scope.create_form = false;
         $scope.edit_form = true;
-        var getdLabel = LabelResources.get({id: id}).$promise;
-        getdLabel.then(function (res) {
-            $scope.LabelObj = res.result.data;
+        var getLabel = LabelResources.get({id: id}).$promise;
+        getLabel.then(function (res) {
+            if(res)
+            {
+                $scope.LabelObj = res.result.data;
+            }
         });
     };
 });
