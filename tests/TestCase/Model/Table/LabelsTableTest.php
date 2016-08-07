@@ -23,6 +23,7 @@ class LabelsTableTest extends TestCase
         'app.comments',
         'app.users',
         'app.profiles',
+        'app.tasks_comments',
         'app.tasks_labels'
     ];
 

@@ -11,7 +11,9 @@ use Cake\Validation\Validator;
  * Tasks Model
  *
  * @property \Cake\ORM\Association\HasMany $Attachments
- * @property \Cake\ORM\Association\HasMany $Comments
+ * @property \Cake\ORM\Association\BelongsToMany $Comments
+ * @property \Cake\ORM\Association\BelongsToMany $Labels
+ * @property \Cake\ORM\Association\BelongsToMany $Users
  */
 class TasksTable extends Table
 {
@@ -35,8 +37,20 @@ class TasksTable extends Table
         $this->hasMany('Attachments', [
             'foreignKey' => 'task_id'
         ]);
-        $this->hasMany('Comments', [
-            'foreignKey' => 'task_id'
+        $this->belongsToMany('Comments', [
+            'foreignKey' => 'task_id',
+            'targetForeignKey' => 'comment_id',
+            'joinTable' => 'tasks_comments'
+        ]);
+        $this->belongsToMany('Labels', [
+            'foreignKey' => 'task_id',
+            'targetForeignKey' => 'label_id',
+            'joinTable' => 'tasks_labels'
+        ]);
+        $this->belongsToMany('Users', [
+            'foreignKey' => 'task_id',
+            'targetForeignKey' => 'user_id',
+            'joinTable' => 'users_tasks'
         ]);
     }
 
@@ -60,11 +74,6 @@ class TasksTable extends Table
             ->add('created_by', 'valid', ['rule' => 'numeric'])
             ->requirePresence('created_by', 'create')
             ->notEmpty('created_by');
-
-        $validator
-            ->add('assigned_to', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('assigned_to', 'create')
-            ->notEmpty('assigned_to');
 
         $validator
             ->requirePresence('task', 'create')

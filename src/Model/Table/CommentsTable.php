@@ -11,8 +11,8 @@ use Cake\Validation\Validator;
  * Comments Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Tasks
  * @property \Cake\ORM\Association\HasMany $Attachments
+ * @property \Cake\ORM\Association\BelongsToMany $Tasks
  */
 class CommentsTable extends Table
 {
@@ -37,12 +37,13 @@ class CommentsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Tasks', [
-            'foreignKey' => 'task_id',
-            'joinType' => 'INNER'
-        ]);
         $this->hasMany('Attachments', [
             'foreignKey' => 'comment_id'
+        ]);
+        $this->belongsToMany('Tasks', [
+            'foreignKey' => 'comment_id',
+            'targetForeignKey' => 'task_id',
+            'joinTable' => 'tasks_comments'
         ]);
     }
 
@@ -84,7 +85,6 @@ class CommentsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['task_id'], 'Tasks'));
         return $rules;
     }
 }

@@ -22,6 +22,7 @@ class LabelsControllerTest extends IntegrationTestCase
         'app.comments',
         'app.users',
         'app.profiles',
+        'app.tasks_comments',
         'app.tasks_labels'
     ];
 

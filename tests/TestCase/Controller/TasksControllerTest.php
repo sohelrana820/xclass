@@ -20,7 +20,8 @@ class TasksControllerTest extends IntegrationTestCase
         'app.attachments',
         'app.comments',
         'app.users',
-        'app.profiles'
+        'app.profiles',
+        'app.tasks_comments'
     ];
 
     /**

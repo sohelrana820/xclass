@@ -21,7 +21,8 @@ class TasksTableTest extends TestCase
         'app.attachments',
         'app.comments',
         'app.users',
-        'app.profiles'
+        'app.profiles',
+        'app.tasks_comments'
     ];
 
     /**
