@@ -12,9 +12,9 @@
 
 <div ng-controller="LabelsCtrl">
     <div class="row">
-        <div class="col-lg-4 col-md-4">
+        <div class="col-lg-5 col-md-5">
             <!-- Create label form -->
-            <div ng-show="create_form">
+            <div ng-show="create_form" class="widget">
                 <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>
                     <div class="form-group">
                         <label>Label Name</label>
@@ -63,8 +63,8 @@
             </div>
             <!-- /Edit label form -->
         </div>
-        <div class="col-lg-8 col-md-8">
-            <div style="margin-top: 25px">
+        <div class="col-lg-7 col-md-7">
+            <div>
                 <div class="not-found" ng-show="labels.length < 1">
                     <h4 class="not-found text-center">Sorry, you don't have any label yet!</h4>
                 </div>
