@@ -29,7 +29,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
             labels.then(function (res) {
                 if(res.result.success){
                     $scope.isLabelFormSubmitted = false;
-                    $scope.LabelObj = {color_code: '#C00C00'};
+                    $scope.LabelObj = {color_code: '#C00C00', status: 1};
                     $scope.labels.unshift(res.result.data);
                     Flash.create('success', res.result.message);
                 }
@@ -49,6 +49,9 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
         if($isValid && $scope.LabelObj.name != undefined)
         {
             $scope.isLabelFormSubmitted = false;
+            delete $scope.LabelObj.created;
+            delete $scope.LabelObj.modified;
+            delete $scope.LabelObj.tasks;
             var labels = LabelResources.update($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
