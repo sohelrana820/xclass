@@ -63,7 +63,7 @@
             </div>
             <!-- /Edit label form -->
         </div>
-        <div class="col-lg-6 col-md-6">
+        <div class="col-lg-8 col-md-8">
             <div style="margin-top: 25px">
                 <div class="not-found" ng-show="labels.length < 1">
                     <h4 class="not-found text-center">Sorry, you don't have any label yet!</h4>
@@ -86,7 +86,7 @@
                         <tbody>
                         <tr ng-repeat="label in labels">
                             <td>
-                                <label style="background: {{label.color_code}}">{{label.name}}</label>
+                                <label class="task-label" style="background: {{label.color_code}}">{{label.name}}</label>
                             </td>
                             <td>{{label.color_code}}</td>
                             <td>
