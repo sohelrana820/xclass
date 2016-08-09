@@ -327,21 +327,38 @@ class UsersController extends AppController{
             $conditions = array_merge($conditions, $response);
         }
 
-        $this->paginate = [
-            'conditions' => $conditions,
-            'fields' => ['Users.id', 'Users.uuid',  'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
-            'contain' => [
-                'Profiles' => [
-                    'fields'=> []
-                ]
-            ],
-            'limit' => $this->paginationLimit,
-            'order' => ['Users.id' => 'desc']
-        ];
+        if($this->request->params['_ext'] != 'json'){
+            $this->paginate = [
+                'conditions' => $conditions,
+                'fields' => ['Users.id', 'Users.uuid',  'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
+                'contain' => [
+                    'Profiles' => [
+                        'fields'=> []
+                    ]
+                ],
+                'limit' => $this->paginationLimit,
+                'order' => ['Users.id' => 'desc']
+            ];
+            $users = $this->paginate($this->Users);
+            $this->set('users', $users);
+            $this->set('_serialize', ['users']);
+        }
+        else {
+            $users = $this->Users->find('list', [
+                'keyField' => 'id',
+                'valueField' => function ($e) {
+                    return $e->profile->name. '('. $e->username. ')';
+                }
+            ])->contain(['Profiles']);
 
-        $users = $this->paginate($this->Users);
-        $this->set('users', $users);
-        $this->set('_serialize', ['users']);
+            $response = [
+                'success' => true,
+                'message' => 'List of users',
+                'data' => $users,
+            ];
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
     }
 
     /**

@@ -12,8 +12,8 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
            }
        });
    };
-
     $scope.fetchLabelLists();
+
     $scope.isLabelFormSubmitted = false;
     $scope.LabelObj = {color_code: '#C00C00', status: 1};
 

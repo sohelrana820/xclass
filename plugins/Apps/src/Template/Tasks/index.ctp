@@ -69,19 +69,18 @@
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
                             <ul class="task_label_list nav nav-list">
-                                <li><a href="#">Action </a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li><a href="#">Separated link</a></li>
+                                <li ng-repeat="(key, user) in users">
+                                    <a ng-click="chooseTaskUsers({id: key, name: user}, key, user.checked)"">
+                                        {{user}}
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div>
-                        <!--<ul class="task_users">
-                            <li><img src="img/profile_avatar.jpg">@Sohel Rana</li>
-                            <li><img src="img/profile_avatar.jpg">@Shaharia Azam</li>
-                            <li><img src="img/profile_avatar.jpg">@Shaharia Azam</li>
-                        </ul>-->
+                        <ul class="task_users">
+                            <li ng-repeat="user in taskUsers"><img src="img/profile_avatar.jpg">{{user.name}}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
