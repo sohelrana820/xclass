@@ -24,7 +24,8 @@ class LabelsTableTest extends TestCase
         'app.users',
         'app.profiles',
         'app.tasks_comments',
-        'app.tasks_labels'
+        'app.tasks_labels',
+        'app.users_tasks'
     ];
 
     /**

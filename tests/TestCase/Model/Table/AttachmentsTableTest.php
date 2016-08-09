@@ -1,14 +1,14 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\TasksTable;
+use App\Model\Table\AttachmentsTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\TasksTable Test Case
+ * App\Model\Table\AttachmentsTable Test Case
  */
-class TasksTableTest extends TestCase
+class AttachmentsTableTest extends TestCase
 {
 
     /**
@@ -17,8 +17,8 @@ class TasksTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.tasks',
         'app.attachments',
+        'app.tasks',
         'app.comments',
         'app.users',
         'app.profiles',
@@ -36,8 +36,8 @@ class TasksTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Tasks') ? [] : ['className' => 'App\Model\Table\TasksTable'];
-        $this->Tasks = TableRegistry::get('Tasks', $config);
+        $config = TableRegistry::exists('Attachments') ? [] : ['className' => 'App\Model\Table\AttachmentsTable'];
+        $this->Attachments = TableRegistry::get('Attachments', $config);
     }
 
     /**
@@ -47,7 +47,7 @@ class TasksTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Tasks);
+        unset($this->Attachments);
 
         parent::tearDown();
     }
@@ -68,6 +68,16 @@ class TasksTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }

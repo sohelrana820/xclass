@@ -11,7 +11,7 @@ use Cake\Validation\Validator;
  * Tasks Model
  *
  * @property \Cake\ORM\Association\HasMany $Attachments
- * @property \Cake\ORM\Association\BelongsToMany $Comments
+ * @property \Cake\ORM\Association\HasMany $Comments
  * @property \Cake\ORM\Association\BelongsToMany $Labels
  * @property \Cake\ORM\Association\BelongsToMany $Users
  */
@@ -37,10 +37,8 @@ class TasksTable extends Table
         $this->hasMany('Attachments', [
             'foreignKey' => 'task_id'
         ]);
-        $this->belongsToMany('Comments', [
-            'foreignKey' => 'task_id',
-            'targetForeignKey' => 'comment_id',
-            'joinTable' => 'tasks_comments'
+        $this->hasMany('Comments', [
+            'foreignKey' => 'task_id'
         ]);
         $this->belongsToMany('Labels', [
             'foreignKey' => 'task_id',

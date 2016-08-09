@@ -1,20 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Comment;
+use App\Model\Entity\TasksLabel;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Comments Model
+ * TasksLabels Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Tasks
- * @property \Cake\ORM\Association\HasMany $Attachments
+ * @property \Cake\ORM\Association\BelongsTo $Labels
  */
-class CommentsTable extends Table
+class TasksLabelsTable extends Table
 {
 
     /**
@@ -27,22 +26,19 @@ class CommentsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('comments');
+        $this->table('tasks_labels');
         $this->displayField('id');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Tasks', [
             'foreignKey' => 'task_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Attachments', [
-            'foreignKey' => 'comment_id'
+        $this->belongsTo('Labels', [
+            'foreignKey' => 'label_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -57,14 +53,6 @@ class CommentsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('uuid', 'create')
-            ->notEmpty('uuid');
-
-        $validator
-            ->requirePresence('comment', 'create')
-            ->notEmpty('comment');
 
         $validator
             ->add('status', 'valid', ['rule' => 'numeric'])
@@ -83,8 +71,8 @@ class CommentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['task_id'], 'Tasks'));
+        $rules->add($rules->existsIn(['label_id'], 'Labels'));
         return $rules;
     }
 }

@@ -20,8 +20,12 @@ class CommentsTableTest extends TestCase
         'app.comments',
         'app.users',
         'app.profiles',
+        'app.attachments',
         'app.tasks',
-        'app.attachments'
+        'app.tasks_comments',
+        'app.labels',
+        'app.tasks_labels',
+        'app.users_tasks'
     ];
 
     /**

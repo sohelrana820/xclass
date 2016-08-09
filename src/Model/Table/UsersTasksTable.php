@@ -1,20 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Comment;
+use App\Model\Entity\UsersTask;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Comments Model
+ * UsersTasks Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Tasks
- * @property \Cake\ORM\Association\HasMany $Attachments
  */
-class CommentsTable extends Table
+class UsersTasksTable extends Table
 {
 
     /**
@@ -27,7 +26,7 @@ class CommentsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('comments');
+        $this->table('users_tasks');
         $this->displayField('id');
         $this->primaryKey('id');
 
@@ -40,9 +39,6 @@ class CommentsTable extends Table
         $this->belongsTo('Tasks', [
             'foreignKey' => 'task_id',
             'joinType' => 'INNER'
-        ]);
-        $this->hasMany('Attachments', [
-            'foreignKey' => 'comment_id'
         ]);
     }
 
@@ -57,19 +53,6 @@ class CommentsTable extends Table
         $validator
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
-
-        $validator
-            ->requirePresence('uuid', 'create')
-            ->notEmpty('uuid');
-
-        $validator
-            ->requirePresence('comment', 'create')
-            ->notEmpty('comment');
-
-        $validator
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
 
         return $validator;
     }

@@ -24,8 +24,12 @@ class LabelsFixture extends TestFixture
         'status' => ['type' => 'integer', 'length' => 1, 'unsigned' => false, 'null' => false, 'default' => '1', 'comment' => 'status: 1 = active,  = Inactive', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
+        '_indexes' => [
+            'created_by' => ['type' => 'index', 'columns' => ['created_by'], 'length' => []],
+        ],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'labels_ibfk_1' => ['type' => 'foreign', 'columns' => ['created_by'], 'references' => ['users', 'id'], 'update' => 'restrict', 'delete' => 'restrict', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -46,8 +50,8 @@ class LabelsFixture extends TestFixture
             'color_code' => 'Lorem ipsum dolor sit ',
             'created_by' => 1,
             'status' => 1,
-            'created' => '2016-08-07 23:28:11',
-            'modified' => '2016-08-07 23:28:11'
+            'created' => '2016-08-09 12:12:59',
+            'modified' => '2016-08-09 12:12:59'
         ],
     ];
 }

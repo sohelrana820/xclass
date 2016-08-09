@@ -57,6 +57,16 @@ class LabelsTable extends Table
         $validator
             ->allowEmpty('color_code');
 
+        $validator
+            ->add('created_by', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('created_by', 'create')
+            ->notEmpty('created_by');
+
+        $validator
+            ->add('status', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('status', 'create')
+            ->notEmpty('status');
+
         return $validator;
     }
 }

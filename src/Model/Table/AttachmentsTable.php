@@ -1,20 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Comment;
+use App\Model\Entity\Attachment;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Comments Model
+ * Attachments Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\BelongsTo $Tasks
- * @property \Cake\ORM\Association\HasMany $Attachments
+ * @property \Cake\ORM\Association\BelongsTo $Comments
  */
-class CommentsTable extends Table
+class AttachmentsTable extends Table
 {
 
     /**
@@ -27,21 +26,16 @@ class CommentsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('comments');
-        $this->displayField('id');
+        $this->table('attachments');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Tasks', [
-            'foreignKey' => 'task_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'task_id'
         ]);
-        $this->hasMany('Attachments', [
+        $this->belongsTo('Comments', [
             'foreignKey' => 'comment_id'
         ]);
     }
@@ -63,13 +57,12 @@ class CommentsTable extends Table
             ->notEmpty('uuid');
 
         $validator
-            ->requirePresence('comment', 'create')
-            ->notEmpty('comment');
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->requirePresence('path', 'create')
+            ->notEmpty('path');
 
         return $validator;
     }
@@ -83,8 +76,8 @@ class CommentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['task_id'], 'Tasks'));
+        $rules->add($rules->existsIn(['comment_id'], 'Comments'));
         return $rules;
     }
 }
