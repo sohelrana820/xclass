@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2016 at 05:36 AM
--- Server version: 5.5.49-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.17
+-- Generation Time: Aug 09, 2016 at 06:21 PM
+-- Server version: 5.5.50-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -43,12 +43,14 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uuid` varchar(32) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
   `comment` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active, 2 = Inactive',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  KEY `user_id` (`user_id`),
+  KEY `comment_id` (`task_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -65,8 +67,9 @@ CREATE TABLE IF NOT EXISTS `labels` (
   `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active,  = Inactive',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
+  PRIMARY KEY (`id`),
+  KEY `created_by` (`created_by`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -96,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `profiles` (
   KEY `user_id` (`user_id`),
   KEY `created_by` (`created_by`),
   KEY `user_id_2` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1520 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -115,24 +118,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `created_by` (`created_by`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tasks_comments`
---
-
-CREATE TABLE IF NOT EXISTS `tasks_comments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `task_id` int(11) NOT NULL,
-  `comment_id` int(11) NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `task_id` (`task_id`,`comment_id`),
-  KEY `comment_id` (`comment_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -150,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `tasks_labels` (
   KEY `task_id` (`task_id`),
   KEY `label_id` (`label_id`),
   KEY `label_id_2` (`label_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -171,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1520 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -188,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `users_tasks` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`,`task_id`),
   KEY `task_id` (`task_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
 -- Constraints for dumped tables
@@ -205,7 +191,14 @@ ALTER TABLE `attachments`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`),
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `labels`
+--
+ALTER TABLE `labels`
+  ADD CONSTRAINT `labels_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `profiles`
@@ -219,13 +212,6 @@ ALTER TABLE `profiles`
 --
 ALTER TABLE `tasks`
   ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `tasks_comments`
---
-ALTER TABLE `tasks_comments`
-  ADD CONSTRAINT `tasks_comments_ibfk_2` FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`),
-  ADD CONSTRAINT `tasks_comments_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tasks` (`id`);
 
 --
 -- Constraints for table `tasks_labels`
