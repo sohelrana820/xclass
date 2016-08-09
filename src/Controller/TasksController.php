@@ -45,6 +45,25 @@ class TasksController extends AppController
      */
     public function add()
     {
+        $data = [
+            'uuid' => rand(1, 99999),
+            'created_by' => 1520,
+            'task' => 'This is task',
+            'description' => 'This is task descrioption',
+            'status' => 1,
+            'labels' => [
+                '_ids' => [51, 52, 53]
+            ],
+            'users' => [
+                '_ids' => [1529, 1528, 1524]
+            ],
+        ];
+
+        $task = $this->Tasks->newEntity();
+        $task = $this->Tasks->patchEntity($task, $data);
+        var_dump($this->Tasks->save($task));
+        die();
+
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
