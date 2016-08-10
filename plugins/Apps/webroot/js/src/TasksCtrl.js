@@ -1,5 +1,4 @@
-
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources ,Flash){
     $scope.TaskObj = {};
     $scope.saveTask = function(){
         console.log($scope.TaskObj);
@@ -22,10 +21,14 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
         var task = TasksResources.save($scope.TaskObj).$promise;
         task.then(function (res) {
-            console.log(res);
+            if(res.result.success){
+                $scope.TaskObj = {};
+                Flash.create('success', res.result.message);
+            }
+            else{
+                Flash.create('error', res.result.message);
+            }
         });
-
-        console.log($scope.TaskObj);
     };
 
 

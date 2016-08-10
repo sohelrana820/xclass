@@ -5,7 +5,7 @@
         Manage Task
     </h2>
     <div class="pull-right btn-areas">
-
+        <?php echo $this->Html->link('New Task', ['controller' => 'tasks', 'action' => 'add'], ['class' => 'btn btn-info'])?>
     </div>
     <div class="clearfix"></div>
 </div>
@@ -16,7 +16,7 @@
 
         </div>
         <div class="col-lg-9">
-            <table class="table label_List">
+            <table class="table task_list_table">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -33,6 +33,7 @@
                             <label ng-repeat="label in task.labels" class="task-label" style="background: {{label.color_code}}">{{label.name}}</label>
                         </strong>
                         <p>{{task.description}}</p>
+                        <small>Opened by {{task.user.profile.first_name}} {{task.user.profile.first_name}} at {{task.created | date}}</small>
                     </td>
                     <td>
                         <span ng-repeat="user in task.users">
