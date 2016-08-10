@@ -43,6 +43,21 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
     $scope.fetchUserLists();
 
+
+    /**
+     * Getting application active users.
+     */
+    $scope.fetchTaskLists = function(){
+        var tasks = TasksResources.query().$promise;
+        tasks.then(function (res) {
+            console.log(res);
+            if(res.result.success){
+                $scope.tasks = res.result.data;
+            }
+        });
+    };
+    $scope.fetchTaskLists();
+
     /**
      * Getting application active label list.
      */

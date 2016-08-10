@@ -18,8 +18,43 @@ class TasksController extends AppController
      */
     public function index()
     {
-        $this->set('tasks', $this->paginate($this->Tasks));
-        $this->set('_serialize', ['tasks']);
+        $this->checkPermission($this->isAdmin());
+        $this->loadComponent('Paginator');
+        $conditions = [
+
+        ];
+
+        if($this->request->params['_ext'] != 'json'){
+            $this->set('tasks', $this->paginate($this->Tasks));
+            $this->set('_serialize', ['tasks']);
+        }
+        else {
+            $tasks = $this->Tasks->find('all', [
+                'conditions' => $conditions,
+                'fields' => [],
+                'contain' => [
+                    'Labels' => [
+                        'fields'=> []
+                    ],
+                    'Users' => [
+                        'fields'=> []
+                    ],
+                    'Users.Profiles' => [
+                        'fields'=> []
+                    ]
+                ],
+                'limit' => $this->paginationLimit,
+                'order' => ['Tasks.id' => 'desc']
+            ]);
+
+            $response = [
+                'success' => true,
+                'message' => 'List of users',
+                'data' => $tasks,
+            ];
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
     }
 
     /**
@@ -66,7 +101,6 @@ class TasksController extends AppController
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
-            var_dump($task->errors());
             if ($this->Tasks->save($task)) {
                 $response = [
                     'success' => true,
