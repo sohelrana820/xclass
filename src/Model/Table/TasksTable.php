@@ -80,10 +80,6 @@ class TasksTable extends Table
         $validator
             ->allowEmpty('description');
 
-        $validator
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
 
         return $validator;
     }

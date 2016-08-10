@@ -47,35 +47,42 @@ class TasksController extends AppController
     {
         $data = [
             'uuid' => rand(1, 99999),
-            'created_by' => 1520,
+            'created_by' => $this->userID,
             'task' => 'This is task',
             'description' => 'This is task descrioption',
             'status' => 1,
             'labels' => [
-                '_ids' => [51, 52, 53]
+                '_ids' => [1, 2, 3]
             ],
             'users' => [
-                '_ids' => [1529, 1528, 1524]
+                '_ids' => [2, 3, 4]
             ],
         ];
 
-        $task = $this->Tasks->newEntity();
-        $task = $this->Tasks->patchEntity($task, $data);
-        var_dump($this->Tasks->save($task));
-        die();
+        $this->request->data['uuid'] = 'l';
+        $this->request->data['created_by'] = $this->userID;
+
 
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
+            var_dump($task->errors());
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $response = [
+                    'success' => true,
+                    'message' => 'New task has been created successfully',
+                    'data' => $task,
+                ];
             } else {
-                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+                $response = [
+                    'success' => false,
+                    'message' => 'Task could not created',
+                    'data' => null,
+                ];
             }
         }
-        $this->set(compact('task'));
-        $this->set('_serialize', ['task']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**

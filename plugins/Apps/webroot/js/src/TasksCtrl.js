@@ -1,5 +1,5 @@
 
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources){
     $scope.TaskObj = {};
     $scope.saveTask = function(){
         console.log($scope.TaskObj);
@@ -17,8 +17,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources){
             labelsIDs.push(label.id);
         });
         $scope.TaskObj.labels = {
-            '_ids': usersIDs
+            '_ids': labelsIDs
         };
+
+        var task = TasksResources.save($scope.TaskObj).$promise;
+        task.then(function (res) {
+            console.log(res);
+        });
 
         console.log($scope.TaskObj);
     };
