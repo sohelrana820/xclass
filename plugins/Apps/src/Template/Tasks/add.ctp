@@ -5,7 +5,7 @@
         Manage Task
     </h2>
     <div class="pull-right btn-areas">
-
+        <?php echo $this->Html->link('Tasks List', ['controller' => 'tasks', 'action' => 'index'], ['class' => 'btn btn-info'])?>
     </div>
     <div class="clearfix"></div>
 </div>
