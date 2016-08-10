@@ -80,26 +80,10 @@ class TasksController extends AppController
      */
     public function add()
     {
-        $data = [
-            'uuid' => rand(1, 99999),
-            'created_by' => $this->userID,
-            'task' => 'This is task',
-            'description' => 'This is task descrioption',
-            'status' => 1,
-            'labels' => [
-                '_ids' => [1, 2, 3]
-            ],
-            'users' => [
-                '_ids' => [2, 3, 4]
-            ],
-        ];
-
-        $this->request->data['uuid'] = 'l';
-        $this->request->data['created_by'] = $this->userID;
-
-
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['uuid'] = 'l';
+            $this->request->data['created_by'] = $this->userID;
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
                 $response = [
@@ -114,9 +98,9 @@ class TasksController extends AppController
                     'data' => null,
                 ];
             }
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
         }
-        $this->set('result', $response);
-        $this->set('_serialize', ['result']);
     }
 
     /**
