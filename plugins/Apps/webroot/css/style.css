@@ -522,6 +522,7 @@ a{
     color: #FFF;
     font-weight: 600;
     font-size: 10px;
+    margin-right: 5px;
 }
 
 .md-title {
@@ -558,4 +559,12 @@ a{
 .widget{
     background: #f7f7f7;
     padding: 15px;
+}
+
+.task_assigned_user_avater {
+    width: 24px;
+    height: 24px;
+    border-radius: 50px;
+    border: 1px solid #DDD;
+    padding: 2px;
 }
