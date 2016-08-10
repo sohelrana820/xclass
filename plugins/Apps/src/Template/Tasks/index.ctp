@@ -70,8 +70,11 @@
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
                             <ul class="task_label_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
-                                    <a ng-click="chooseTaskUsers({id: key, name: user}, key, user.checked)"">
-                                        {{user}}
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">
+                                        <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                        <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                        {{user.profile.first_name}} {{user.profile.last_name}}
+                                        <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -79,7 +82,13 @@
                     </div>
                     <div>
                         <ul class="task_users">
-                            <li ng-repeat="user in taskUsers"><img src="img/profile_avatar.jpg">{{user.name}}</li>
+                            <li ng-repeat="user in taskUsers">
+                                <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                {{user.profile.first_name}} {{user.profile.last_name}}
+
+                                <span class="pull-right red" ng-click="removeTaskUsers(user)">X</span>
+                            </li>
                         </ul>
                     </div>
                 </div>

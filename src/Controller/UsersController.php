@@ -344,12 +344,17 @@ class UsersController extends AppController{
             $this->set('_serialize', ['users']);
         }
         else {
-            $users = $this->Users->find('list', [
-                'keyField' => 'id',
-                'valueField' => function ($e) {
-                    return $e->profile->name. '('. $e->username. ')';
-                }
-            ])->contain(['Profiles']);
+            $users = $this->Users->find('all', [
+                'conditions' => $conditions,
+                'fields' => ['Users.id', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'],
+                'contain' => [
+                    'Profiles' => [
+                        'fields'=> []
+                    ]
+                ],
+                'limit' => $this->paginationLimit,
+                'order' => ['Users.id' => 'desc']
+            ]);
 
             $response = [
                 'success' => true,

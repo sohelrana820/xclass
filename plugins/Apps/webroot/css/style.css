@@ -455,10 +455,11 @@ a{
 
 
 .task_sidebar .task_users img{
-    width: 20px;
+    width: 24px;
+    height: 24px;
     border: 1px solid #DDD;
     margin-right: 5px;
-    border-radius: 3px;
+    padding: 2px;
 }
 
 .custom-dropdown{
@@ -489,6 +490,14 @@ a{
 
 .task_label_list li a {
     list-style: none;
+}
+
+.task_label_list li img {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ddd;
+    padding: 2px;
+    margin-right: 8px;
 }
 
 .task_label_list li a {

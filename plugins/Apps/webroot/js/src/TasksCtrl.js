@@ -74,7 +74,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources){
                 return oldUser.id !== user.id;
             });
         }
-
-        console.log($scope.taskUsers);
     };
+
+    $scope.removeTaskUsers = function(user){
+        $scope.taskUsers = $scope.taskUsers.filter(function(oldUser){
+            return oldUser.id !== user.id;
+        });
+
+        $scope.users.forEach(function(oldUser, key){
+            if(oldUser.id == label.id){
+                $scope.users[key].checked = false;
+            }
+        });
+    }
 });
