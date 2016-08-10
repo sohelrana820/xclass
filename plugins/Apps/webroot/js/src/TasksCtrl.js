@@ -3,7 +3,24 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources){
     $scope.TaskObj = {};
     $scope.saveTask = function(){
         console.log($scope.TaskObj);
-        console.log($scope.taskLabels);
+
+        var usersIDs = [];
+        $scope.taskUsers.forEach(function(user){
+            usersIDs.push(user.id);
+        });
+        $scope.TaskObj.users = {
+            '_ids': usersIDs
+        };
+
+        var labelsIDs = [];
+        $scope.taskLabels.forEach(function(label){
+            labelsIDs.push(label.id);
+        });
+        $scope.TaskObj.labels = {
+            '_ids': usersIDs
+        };
+
+        console.log($scope.TaskObj);
     };
 
 
