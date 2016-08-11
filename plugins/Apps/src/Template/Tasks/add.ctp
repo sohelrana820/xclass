@@ -12,7 +12,7 @@
 
 <div ng-controller="TasksCtrl">
     <div class="row">
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-8 col-md-8">
             <div class="">
                 <form>
                     <div class="form-group">
@@ -64,17 +64,17 @@
                         Users
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
-                    <small class="red">User not assigned yet!</small>
+                    <small class="red" ng-show="taskUsers.length < 1">User not assigned yet!</small>
                     <div class="dropdown">
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseTaskUsers(user, key, user.checked)"">
-                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
-                                    {{user.profile.first_name}} {{user.profile.last_name}}
-                                    <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                        <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                        <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                        {{user.profile.first_name}} {{user.profile.last_name}}
+                                        <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -86,7 +86,6 @@
                                 <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
                                 <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
                                 {{user.profile.first_name}} {{user.profile.last_name}}
-
                                 <span class="pull-right red" ng-click="removeTaskUsers(user)">X</span>
                             </li>
                         </ul>
