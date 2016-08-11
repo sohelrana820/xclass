@@ -45,7 +45,7 @@
                     <div class="dropdown">
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
-                            <ul class="task_label_list nav nav-list">
+                            <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
                                     <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
                                 </li>
@@ -68,7 +68,7 @@
                     <div class="dropdown">
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
-                            <ul class="task_label_list nav nav-list">
+                            <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseTaskUsers(user, key, user.checked)"">
                                     <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">

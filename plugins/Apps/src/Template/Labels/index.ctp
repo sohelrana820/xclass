@@ -69,7 +69,7 @@
                     <h4 class="not-found text-center">Sorry, you don't have any label yet!</h4>
                 </div>
                 <div ng-show="labels.length > 0">
-                    <h2 class="md-title">
+                    <h2 class="md-header">
                         List of Label <br/>
                         <span>50 result found</span>
                     </h2>
@@ -86,7 +86,7 @@
                         <tbody>
                         <tr ng-repeat="label in labels">
                             <td>
-                                <label class="task-label" style="background: {{label.color_code}}">{{label.name}}</label>
+                                <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                             </td>
                             <td>{{label.color_code}}</td>
                             <td>
