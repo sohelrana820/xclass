@@ -45,21 +45,17 @@
                                 </label>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <button class="btn btn-success">Save</button>
                         </div>
-
-
                     </form>
                 </div>
             </div>
             <!-- /Create label form -->
-
             <!-- Edit label form -->
             <div ng-show="edit_form" class="widget">
                 <div class="widget-header">
-                    <h2 class="title">UPdate Label</h2>
+                    <h2 class="title">Update Label</h2>
                 </div>
                 <div class="widget-body">
                     <form name="create_label_form" ng-submit="updateLabel(create_label_form.$valid)" novalidate>
@@ -97,44 +93,39 @@
             <!-- /Edit label form -->
         </div>
         <div class="col-lg-7 col-md-7">
-            <div>
-                <div class="not-found" ng-show="labels.length < 1">
-                    <h4 class="not-found text-center">Sorry, you don't have any label yet!</h4>
-                </div>
-                <div ng-show="labels.length > 0">
-                    <h2 class="md-header">
-                        List of Label <br/>
-                        <span>50 result found</span>
-                    </h2>
-                    <table class="table label_List">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Color</th>
-                            <th>Status</th>
-                            <th class="text-center">Last Modified</th>
-                            <th class="text-right">Action</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr ng-repeat="label in labels">
-                            <td>
-                                <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
-                            </td>
-                            <td>{{label.color_code}}</td>
-                            <td>
-                                <span class="green" ng-show="label.status == 1">Active</span>
-                                <span class="red" ng-show="label.status == 2">Inactive</span>
-                            </td>
-                            <td class="text-center">{{label.modified | date}}</td>
-                            <td class="text-right">
-                                <a ng-click="openEditLabel(label.id)" class="icons"><i class="fa fa-pencil"></i></a>
-                                <a ng-click="deleteLabel(label.id)" class="icons red"><i class="fa fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div ng-show="labels.length > 0">
+                <h2 class="md-header">
+                    List of Label <br/>
+                    <span>50 result found</span>
+                </h2>
+                <table class="table label_List">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Color</th>
+                        <th>Status</th>
+                        <th class="text-center">Last Modified</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="label in labels">
+                        <td>
+                            <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
+                        </td>
+                        <td>{{label.color_code}}</td>
+                        <td>
+                            <span class="green" ng-show="label.status == 1">Active</span>
+                            <span class="red" ng-show="label.status == 2">Inactive</span>
+                        </td>
+                        <td class="text-center">{{label.modified | date}}</td>
+                        <td class="text-right">
+                            <a ng-click="openEditLabel(label.id)" class="icons"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="deleteLabel(label.id)" class="icons red"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@
         </li>
         <?php endif; ?>
         <li>
-            <?php echo $this->Html->link('<i class="fa fa-fw fa-tags"></i> Label', ['controller' => 'labels', 'action' => 'index'], ['escape' => false]); ?>
+            <?php echo $this->Html->link('<i class="fa fa-fw fa-tags"></i> Task Label', ['controller' => 'labels', 'action' => 'index'], ['escape' => false]); ?>
         </li>
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#task"><i class="fa fa-fw fa-signal"></i> Tasks <i class="fa fa-fw fa-caret-down"></i></a>
