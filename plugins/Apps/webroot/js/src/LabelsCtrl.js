@@ -15,7 +15,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
     $scope.fetchLabelLists();
 
     $scope.isLabelFormSubmitted = false;
-    $scope.LabelObj = {color_code: '#C00C00', status: 2};
+    $scope.LabelObj = {color_code: '#C00C00'};
 
     /**
      *
@@ -57,7 +57,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
                 if(res.result.success){
                     $scope.isLabelFormSubmitted = false;
                     $scope.fetchLabelLists();
-                    $scope.LabelObj = {color_code: '#C00C00', status: 1};
+                    $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.create_form = true;
                     $scope.edit_form = false;
                     Flash.create('success', res.result.message);
