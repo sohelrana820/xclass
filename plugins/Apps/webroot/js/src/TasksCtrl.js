@@ -1,7 +1,6 @@
 app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources ,Flash){
     $scope.TaskObj = {};
     $scope.saveTask = function(){
-        console.log($scope.TaskObj);
 
         var usersIDs = [];
         $scope.taskUsers.forEach(function(user){
@@ -127,5 +126,56 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.users[key].checked = false;
             }
         });
+    };
+
+    // Task edit and comments area
+    var url = window.location.href.split("edit/");
+    var id = url[1];
+    if(id != undefined)
+    {
+        var task = TasksResources.get({id: id}).$promise;
+        task.then(function (res) {
+            $scope.TaskObj.id = res.result.data.id;
+            $scope.TaskObj.task = res.result.data.task;
+            $scope.TaskObj.description = res.result.data.description;
+            $scope.taskUsers = res.result.data.users;
+            $scope.taskLabels = res.result.data.labels;
+
+        });
     }
+
+    $scope.updateTask = function(){
+
+        var usersIDs = [];
+        $scope.taskUsers.forEach(function(user){
+            usersIDs.push(user.id);
+        });
+        $scope.TaskObj.users = {
+            '_ids': usersIDs
+        };
+
+        var labelsIDs = [];
+        $scope.taskLabels.forEach(function(label){
+            labelsIDs.push(label.id);
+        });
+        $scope.TaskObj.labels = {
+            '_ids': labelsIDs
+        };
+
+        var task = TasksResources.update($scope.TaskObj).$promise;
+        task.then(function (res) {
+            if(res.result.success){
+                $scope.TaskObj = {};
+                Flash.create('success', res.result.message);
+            }
+            else{
+                Flash.create('error', res.result.message);
+            }
+        });
+
+        console.log($scope.TaskObj);
+        console.log($scope.taskUsers);
+        console.log($scope.taskLabels);
+    };
+
 });

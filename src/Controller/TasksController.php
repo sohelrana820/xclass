@@ -69,10 +69,17 @@ class TasksController extends AppController
     public function view($id = null)
     {
         $task = $this->Tasks->get($id, [
-            'contain' => ['Attachments', 'Comments']
+            'contain' => ['Attachments', 'Comments', 'Labels', 'Users', 'Users.Profiles']
         ]);
-        $this->set('task', $task);
-        $this->set('_serialize', ['task']);
+
+        $response = [
+            'success' => true,
+            'message' => 'Task details',
+            'data' => $task,
+        ];
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 
     /**
@@ -120,14 +127,21 @@ class TasksController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
-                $this->Flash->success(__('The task has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $response = [
+                    'success' => true,
+                    'message' => 'New task has been updated successfully',
+                    'data' => $task,
+                ];
             } else {
-                $this->Flash->error(__('The task could not be saved. Please, try again.'));
+                $response = [
+                    'success' => false,
+                    'message' => 'Task could not updated',
+                    'data' => null,
+                ];
             }
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
         }
-        $this->set(compact('task'));
-        $this->set('_serialize', ['task']);
     }
 
     /**

@@ -23,7 +23,7 @@ app.factory('TasksResources', function ($resource) {
         get: {method: 'GET', url: '/tasks/:id.json'},
         save: {method: 'POST', 'url': '/tasks.json'},
         query: {method: 'GET', 'url': '/tasks.json', isArray: false},
-        update: {method: 'PUT', url: 'tasks/:id.json'},
+        update: {method: 'PUT', url: '/tasks/:id.json'},
         delete: {method: 'DELETE', url: '/tasks/:id.json'}
     });
 });
