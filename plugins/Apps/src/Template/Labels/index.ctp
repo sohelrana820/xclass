@@ -29,15 +29,28 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label>Label Color</label>
                             <div class="input text">
                                 <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="checkbox checkbox-theme checkbox-circle">
+                                <input id="checkbox8" type="checkbox" ng-model="LabelObj.status" ng-true-value="1" ng-false-value="2">
+                                <label for="checkbox8">
+                                    Is Active?
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <button class="btn btn-success">Save</button>
                         </div>
+
+
                     </form>
                 </div>
             </div>
@@ -65,6 +78,16 @@
                                 <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
                             </div>
                         </div>
+
+                        <div class="form-group">
+                            <div class="checkbox checkbox-theme checkbox-circle">
+                                <input id="checkbox8" type="checkbox" ng-model="LabelObj.status" ng-true-value="1" ng-false-value="2">
+                                <label for="checkbox8">
+                                    Is Active?
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <button class="btn btn-success">Update</button>
                         </div>
