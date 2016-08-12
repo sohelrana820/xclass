@@ -507,8 +507,31 @@ a{
     text-align: center;
 }
 
+.empty_block h2 {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 29px 0px;
+    color: #525252;
+}
+
+.empty_block .lead{
+    font-size: 20px;
+}
+
 .empty_block .btn{
     padding: 15px 24px;
     font-weight: 600;
     font-size: 17px;
+}
+
+.empty_block .icon {
+    border: 2px solid #CCC;
+    padding: 40px 22px 28px 26px;
+    border-radius: 50px;
+    color: #CCC;
+}
+
+.empty_block .icon i{
+    font-size: 32px;
 }
