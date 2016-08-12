@@ -464,7 +464,18 @@ a{
 }
 
 .task_list_table{
-    background: #f8f8f8;
+    border-left: 1px solid #DDD !important;
+    border-right: 1px solid #DDD !important;
+    border-bottom: 1px solid #DDD !important;
+}
+
+.task_list_table>thead>tr>th {
+    background: #f8f8f8 !important;
+    padding: 15px;
+    border-top: 1px solid #DDD !important;
+    border-bottom: 1px solid #DDD !important;
+    font-size: 11px;
+    text-transform: uppercase;
 }
 
 /** Label pages classes */

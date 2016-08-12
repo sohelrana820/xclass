@@ -47,10 +47,12 @@ class TasksController extends AppController
                 'order' => ['Tasks.id' => 'desc']
             ]);
 
+            $count = $this->Tasks->find('all', ['conditions' => $conditions])->count();
             $response = [
                 'success' => true,
                 'message' => 'List of users',
                 'data' => $tasks,
+                'count' => $count,
             ];
             $this->set('result', $response);
             $this->set('_serialize', ['result']);
