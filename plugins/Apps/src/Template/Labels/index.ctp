@@ -1,18 +1,16 @@
 <?php echo $this->assign('title', 'Manage Label');?>
-
-<div class="page-header">
-    <h2 class="title pull-left">
-        Manage Application Labels
-    </h2>
-    <div class="pull-right btn-areas">
-
-    </div>
-    <div class="clearfix"></div>
-</div>
-
 <div ng-controller="LabelsCtrl">
+    <div class="page-header" ng-show="labels.length > 0  || show_crate_form">
+        <h2 class="title pull-left">
+            Manage Application Labels
+        </h2>
+        <div class="pull-right btn-areas">
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
     <div class="row">
-        <div class="col-lg-5 col-md-5">
+        <div class="col-lg-5 col-md-5" ng-show="labels.length > 0 || show_crate_form">
             <!-- Create label form -->
             <div ng-show="create_form" class="widget">
                 <div class="widget-header">
@@ -92,11 +90,11 @@
             </div>
             <!-- /Edit label form -->
         </div>
-        <div class="col-lg-7 col-md-7">
+        <div class="col-lg-7 col-md-7" ng-show="labels.length > 0">
             <div ng-show="labels.length > 0">
                 <h2 class="md-header">
                     List of Label <br/>
-                    <span>50 result found</span>
+                    <span>{{labels.length}} result found</span>
                 </h2>
                 <table class="table label_List">
                     <thead>
@@ -128,9 +126,21 @@
                 </table>
             </div>
         </div>
+
+        <div class="col-lg-8 col-lg-offset-2" ng-show="labels.length < 1 && !show_crate_form">
+            <div class="empty_block">
+                    <span class="icon">
+                        <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                    </span>
+                <br/>
+                <br/>
+                <h2>Welcome to Issues!</h2>
+                <p class="lead">Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear here in a searchable and filterable list. To get started, you should create an issue.</p>
+                <a class="btn btn-success" ng-click="show_crate_form = true">Create first label</a>
+            </div>
+        </div>
     </div>
 </div>
-
 <?php
 echo $this->start('jsBottom');
 echo $this->Html->script(['src/LabelsCtrl']);
