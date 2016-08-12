@@ -358,8 +358,33 @@ a{
 
 /** Formatting elements classes */
 .widget{
-    background: #f7f7f7;
+    border: 1px solid #DDD;
+}
+
+.widget-header{
     padding: 15px;
+    background: #eee;
+    border-bottom: 1px solid #DDD;
+}
+
+
+.widget-body{
+    padding: 15px;
+    background: #fff;
+}
+
+
+.widget .title {
+    margin: 0px;
+    padding: 0px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+.widget .sm-title{
+
 }
 
 .md-header {

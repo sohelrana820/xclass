@@ -2,7 +2,7 @@
 
 <div class="page-header">
     <h2 class="title pull-left">
-        Manage Task
+        Manage Application Labels
     </h2>
     <div class="pull-right btn-areas">
 
@@ -15,51 +15,61 @@
         <div class="col-lg-5 col-md-5">
             <!-- Create label form -->
             <div ng-show="create_form" class="widget">
-                <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>
-                    <div class="form-group">
-                        <label>Label Name</label>
-                        <div class="input text">
-                            <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
-                            <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
-                                <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                <div class="widget-header">
+                    <h2 class="title">New Label</h2>
+                </div>
+                <div class="widget-body">
+                    <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>
+                        <div class="form-group">
+                            <label>Label Name</label>
+                            <div class="input text">
+                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
+                                <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
+                                    <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Label Color</label>
-                        <div class="input text">
-                            <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                        <div class="form-group">
+                            <label>Label Color</label>
+                            <div class="input text">
+                                <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success">Save</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <button class="btn btn-success">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- /Create label form -->
 
             <!-- Edit label form -->
-            <div ng-show="edit_form">
-                <form name="create_label_form" ng-submit="updateLabel(create_label_form.$valid)" novalidate>
-                    <div class="form-group">
-                        <label>Label Name</label>
-                        <div class="input text">
-                            <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
-                            <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
-                                <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+            <div ng-show="edit_form" class="widget">
+                <div class="widget-header">
+                    <h2 class="title">UPdate Label</h2>
+                </div>
+                <div class="widget-body">
+                    <form name="create_label_form" ng-submit="updateLabel(create_label_form.$valid)" novalidate>
+                        <div class="form-group">
+                            <label>Label Name</label>
+                            <div class="input text">
+                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
+                                <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
+                                    <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Label Color</label>
-                        <div class="input text">
-                            <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                        <div class="form-group">
+                            <label>Label Color</label>
+                            <div class="input text">
+                                <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-success">Update</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <button class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <!-- /Edit label form -->
         </div>
