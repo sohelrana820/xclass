@@ -72,7 +72,7 @@
                 </div><!-- /col-sm-5 -->
                 <div class="comment_widget well">
                     <form ng-submit="doComment()">
-                        <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7"></textarea>
+                        <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
                         <br/>
                         <div class="pull-right">
                             <button type="submit" class="btn btn-success" ></i> Comment</button>
