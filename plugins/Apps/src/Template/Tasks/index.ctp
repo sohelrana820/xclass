@@ -42,10 +42,12 @@
                     <tr ng-repeat="task in tasks">
                         <td>#{{task.id}}</td>
                         <td>
+                            <a href="/tasks/view/{{task.id}}">
                             <strong>
                                 {{task.task}}
                                 <label ng-repeat="label in task.labels" class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                             </strong>
+                            </a>
                             <br>
                             <small class="author">Opened by {{task.user.profile.first_name}} {{task.user.profile.first_name}} at {{task.created | date}}</small>
                         </td>
@@ -57,12 +59,11 @@
                         </td>
                         <td>
                         <span>
-                            <i class="fa fa-comments"></i> 2
+                            <i class="fa fa-comments"></i> {{task.comments.length}}
                         </span>
                         </td>
                         <td class="text-right">
-                            <a ng-click="deleteLabel(task.id)" class="icons green"><i class="fa fa-gear"></i></a>
-                            <a ng-click="openEditLabel(task.id)" class="icons"><i class="fa fa-pencil"></i></a>
+                            <a href="/tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
                             <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>

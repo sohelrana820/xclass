@@ -33,6 +33,9 @@ class TasksController extends AppController
                 'conditions' => $conditions,
                 'fields' => [],
                 'contain' => [
+                    'Comments' => [
+                        'fields'=> []
+                    ],
                     'Labels' => [
                         'fields'=> []
                     ],
@@ -50,7 +53,7 @@ class TasksController extends AppController
             $count = $this->Tasks->find('all', ['conditions' => $conditions])->count();
             $response = [
                 'success' => true,
-                'message' => 'List of users',
+                'message' => 'List of tasks',
                 'data' => $tasks,
                 'count' => $count,
             ];
