@@ -18,9 +18,7 @@
 
                 <div class="task_details" ng-init="view_task = true" ng-show="view_task">
                     <h2>{{TaskObj.task}}</h2>
-                    <div>
-                        {{TaskObj.description}}
-                    </div>
+                    <div ng-bind-html="TaskObj.description"></div>
                 </div>
 
                 <div class="task_details" ng-show="edit_task_form">
