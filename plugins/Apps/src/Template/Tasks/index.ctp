@@ -61,8 +61,9 @@
                         </span>
                         </td>
                         <td class="text-right">
-                            <a ng-click="deleteLabel(label.id)" class="icons green"><i class="fa fa-gear"></i></a>
-                            <a ng-click="openEditLabel(label.id)" class="icons"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="deleteLabel(task.id)" class="icons green"><i class="fa fa-gear"></i></a>
+                            <a ng-click="openEditLabel(task.id)" class="icons"><i class="fa fa-pencil"></i></a>
+                            <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
                     </tbody>

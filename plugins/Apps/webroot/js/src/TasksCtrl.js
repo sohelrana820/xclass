@@ -204,4 +204,24 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
+
+    /**
+     *
+     * @param id
+     */
+    $scope.deleteTask = function(id){
+        var deletedTask = TasksResources.delete({id: id}).$promise;
+        deletedTask.then(function (res) {
+            if(res.result.success)
+            {
+                $scope.tasks = $scope.tasks.filter(function(task){
+                    return task.id !== id
+                });
+                Flash.create('info', res.result.message);
+            }
+            else{
+                Flash.create('error', res.result.message);
+            }
+        });
+    };
 });

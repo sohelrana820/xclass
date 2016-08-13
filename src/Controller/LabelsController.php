@@ -154,7 +154,7 @@ class LabelsController extends AppController
         } else {
             $response = [
                 'success' => false,
-                'message' => 'Label could \t create',
+                'message' => 'Label could not deleted',
                 'data' => null,
             ];
         }

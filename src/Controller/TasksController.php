@@ -156,10 +156,22 @@ class TasksController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $task = $this->Tasks->get($id);
         if ($this->Tasks->delete($task)) {
-            $this->Flash->success(__('The task has been deleted.'));
+            $response = [
+                'success' => true,
+                'message' => 'Task has been deleted successfully',
+                'data' => $task,
+            ];
         } else {
-            $this->Flash->error(__('The task could not be deleted. Please, try again.'));
+            $response = [
+                'success' => false,
+                'message' => 'Task could not deleted',
+                'data' => null,
+            ];
         }
-        return $this->redirect(['action' => 'index']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
+
+
+
 }
