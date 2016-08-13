@@ -15,12 +15,34 @@
         <div class="col-lg-8 col-md-8">
             <div class="">
 
-                <h2>{{TaskObj.task}}</h2>
-                <div>
-                    {{TaskObj.description}}
+                <div class="task_details" ng-init="view_task = true" ng-show="view_task">
+                    <h2>{{TaskObj.task}}</h2>
+                    <div>
+                        {{TaskObj.description}}
+                    </div>
                 </div>
-                <br/>
-                <br/>
+
+                <div class="task_details" ng-show="edit_task_form">
+                    <div class="well">
+                        <form ng-submit="updateTask()">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <div class="input text">
+                                    <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <div class="input text">
+                                    <text-angular ng-model="TaskObj.description" ng-model="htmlVariable"></text-angular>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success">Update Task</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
 
                 <div class="row" ng-repeat="comment in taskComments">
                     <div class="col-lg-1">
@@ -60,6 +82,9 @@
             </div>
         </div>
         <div class="col-lg-2 col-md-4">
+            <a class="btn btn-success" ng-show="!edit_task_form" ng-click="edit_task_form = true; view_task = false">Edit Task</a>
+            <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel Task</a>
+            <a class="btn btn-danger">Delete Task</a>
             <div class="task_sidebar" style="margin-top: 25px">
 
                 <div class="single_block">

@@ -643,7 +643,6 @@ a{
 }
 
 .btn {
-    margin-left: 5px;
     border-radius: 2px;
     padding: 11px 15px 8px 15px;
     text-transform: uppercase;
@@ -882,10 +881,17 @@ a{
     color: #777;
 }
 
+.task_details{
+    margin-bottom: 40px;
+}
 
 
-
-
+.task_details h2 {
+    font-size: 32px;
+    line-height: 36px;
+    margin-top: 0px;
+    padding-right: 25px;
+}
 
 
 
