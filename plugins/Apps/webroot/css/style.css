@@ -8,6 +8,10 @@ a{
     cursor: pointer;
 }
 
+.alert{
+    text-align: center;
+    text-transform: uppercase;
+}
 
 /** Form elements classes **/
 .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
