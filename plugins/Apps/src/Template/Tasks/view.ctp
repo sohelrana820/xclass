@@ -124,6 +124,6 @@
 
 <?php
 echo $this->start('jsBottom');
-echo $this->Html->script(['src/TasksCtrl']);
+echo $this->Html->script(['src/TasksCtrl', 'src/Comments']);
 echo $this->end();
 ?>

@@ -53,6 +53,7 @@ class CommentsController extends AppController
         if ($this->request->is('post')) {
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
             if ($this->Comments->save($comment)) {
+                $comment->user = $this->loggedInUser;
                 $response = [
                     'success' => true,
                     'message' => 'Comments has been saved successfully',

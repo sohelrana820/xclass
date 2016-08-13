@@ -190,18 +190,18 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-    $scope.commentsObj = {
-        task_id: id
-    };
+    $scope.commentsObj = {task_id: id};
     $scope.doComment = function(){
-        console.log('nned to do comments');
         var comments = CommentsResources.save($scope.commentsObj).$promise;
-        task.then(function (responseed) {
-            console.log('1111111111111111111111111111111111');
-            console.log(responseed.result.message);
-            console.log(responseed);
-            console.log('1111111111111111111111111111111111');
-            $scope.taskComments.unshift(responseed.result.data);
+        comments.then(function (res) {
+            if(res.result.success){
+                $scope.commentsObj = {task_id: id};
+                $scope.taskComments.push(res.result.data);
+                Flash.create('success', res.result.message);
+            }
+            else{
+                Flash.create('error', res.result.message);
+            }
         });
     };
 });
