@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources ,Flash){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash){
     $scope.TaskObj = {};
     $scope.saveTask = function(){
 
@@ -37,7 +37,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.fetchUserLists = function(){
         var users = UsersResources.query().$promise;
         users.then(function (res) {
-            console.log(res);
             if(res.result.success){
                 $scope.users = res.result.data;
             }
@@ -52,7 +51,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.fetchTaskLists = function(){
         var tasks = TasksResources.query().$promise;
         tasks.then(function (res) {
-            console.log(res);
             if(res.result.success){
                 $scope.tasks = res.result.data;
                 $scope.totalTasks = res.result.count;
@@ -138,7 +136,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var url = window.location.href.split("view/");
         var id = url[1];
     }
-    console.log(id);
 
 
     if(id != undefined)
@@ -150,6 +147,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             $scope.TaskObj.description = res.result.data.description;
             $scope.taskUsers = res.result.data.users;
             $scope.taskLabels = res.result.data.labels;
+            $scope.taskComments = res.result.data.comments;
         });
     }
 
@@ -192,4 +190,18 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
+    $scope.commentsObj = {
+        task_id: id
+    };
+    $scope.doComment = function(){
+        console.log('nned to do comments');
+        var comments = CommentsResources.save($scope.commentsObj).$promise;
+        task.then(function (responseed) {
+            console.log('1111111111111111111111111111111111');
+            console.log(responseed.result.message);
+            console.log(responseed);
+            console.log('1111111111111111111111111111111111');
+            $scope.taskComments.unshift(responseed.result.data);
+        });
+    };
 });

@@ -22,39 +22,22 @@
                 <br/>
                 <br/>
 
-                <div class="row">
+                <div class="row" ng-repeat="comment in taskComments">
                     <div class="col-lg-1">
                         <div class="thumbnail">
-                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                            <img class="img-responsive user-photo"  ng-if="comment.user.profile.profile_pic != null" src="/img/profiles/{{comment.user.profile.profile_pic}}">
+                            <img class="img-responsive user-photo"  ng-if="!comment.user.profile.profile_pic" src="/img/profile_avatar.jpg">
                         </div><!-- /thumbnail -->
                     </div><!-- /col-sm-1 -->
 
                     <div class="col-lg-11">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                                <strong>{{comment.user.profile.first_name}} {{comment.user.profile.last_name}}</strong>
+                                <span class="text-muted">commented {{comment.created | date}}</span>
                             </div>
                             <div class="panel-body">
-                                Panel content
-                            </div><!-- /panel-body -->
-                        </div><!-- /panel panel-default -->
-                    </div><!-- /col-sm-5 -->
-                </div><!-- /col-sm-5 -->
-
-                <div class="row">
-                    <div class="col-lg-1">
-                        <div class="thumbnail">
-                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-                        </div><!-- /thumbnail -->
-                    </div><!-- /col-sm-1 -->
-
-                    <div class="col-lg-11">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
-                            </div>
-                            <div class="panel-body">
-                                Panel content
+                                {{comment.comment}}
                             </div><!-- /panel-body -->
                         </div><!-- /panel panel-default -->
                     </div><!-- /col-sm-5 -->
@@ -62,8 +45,8 @@
 
                 <div class="widget-area no-padding blank">
                     <div class="status-upload">
-                        <form>
-                            <textarea placeholder="What are you doing right now?" ></textarea>
+                        <form ng-submit="doComment()">
+                            <textarea placeholder="Write your comment?" ng-model="commentsObj.comment"></textarea>
                             <ul>
                                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
                                 <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>

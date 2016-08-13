@@ -49,19 +49,25 @@ class CommentsController extends AppController
     public function add()
     {
         $comment = $this->Comments->newEntity();
+        $this->request->data['user_id'] = $this->userID;
         if ($this->request->is('post')) {
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
             if ($this->Comments->save($comment)) {
-                $this->Flash->success(__('The comment has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $response = [
+                    'success' => true,
+                    'message' => 'Comments has been saved successfully',
+                    'data' => $comment,
+                ];
             } else {
-                $this->Flash->error(__('The comment could not be saved. Please, try again.'));
+                $response = [
+                    'success' => false,
+                    'message' => 'Comment could not saved',
+                    'data' => null,
+                ];
             }
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
         }
-        $users = $this->Comments->Users->find('list', ['limit' => 200]);
-        $tasks = $this->Comments->Tasks->find('list', ['limit' => 200]);
-        $this->set(compact('comment', 'users', 'tasks'));
-        $this->set('_serialize', ['comment']);
     }
 
     /**

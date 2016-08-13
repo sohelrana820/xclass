@@ -27,3 +27,13 @@ app.factory('TasksResources', function ($resource) {
         delete: {method: 'DELETE', url: '/tasks/:id.json'}
     });
 });
+
+app.factory('CommentsResources', function ($resource) {
+    return $resource(':id', {id: '@id'}, {
+        get: {method: 'GET', url: '/comments/:id.json'},
+        save: {method: 'POST', 'url': '/comments.json'},
+        query: {method: 'GET', 'url': '/comments.json', isArray: false},
+        update: {method: 'PUT', url: '/comments/:id.json'},
+        delete: {method: 'DELETE', url: '/comments/:id.json'}
+    });
+});

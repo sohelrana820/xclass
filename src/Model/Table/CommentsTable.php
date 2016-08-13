@@ -59,17 +59,8 @@ class CommentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('uuid', 'create')
-            ->notEmpty('uuid');
-
-        $validator
             ->requirePresence('comment', 'create')
             ->notEmpty('comment');
-
-        $validator
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
 
         return $validator;
     }

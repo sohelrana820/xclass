@@ -69,7 +69,7 @@ class TasksController extends AppController
     public function view($id = null)
     {
         $task = $this->Tasks->get($id, [
-            'contain' => ['Attachments', 'Comments', 'Labels', 'Users', 'Users.Profiles']
+            'contain' => ['Attachments', 'Comments', 'Comments.Users', 'Comments.Users.Profiles', 'Labels', 'Users', 'Users.Profiles']
         ]);
 
         $response = [
