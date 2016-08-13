@@ -130,7 +130,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     // Task edit and comments area
     var url = window.location.href.split("edit/");
-    var id = url[1];
+    if(url.length == 2)
+    {
+        var id = url[1];
+    }
+    else{
+        var url = window.location.href.split("view/");
+        var id = url[1];
+    }
+    console.log(id);
+
+
     if(id != undefined)
     {
         var task = TasksResources.get({id: id}).$promise;
@@ -140,12 +150,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             $scope.TaskObj.description = res.result.data.description;
             $scope.taskUsers = res.result.data.users;
             $scope.taskLabels = res.result.data.labels;
-
         });
     }
 
     $scope.updateTask = function(){
-
         var usersIDs = [];
         $scope.taskUsers.forEach(function(user){
             usersIDs.push(user.id);
@@ -172,10 +180,16 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 Flash.create('error', res.result.message);
             }
         });
+    };
 
-        console.log($scope.TaskObj);
-        console.log($scope.taskUsers);
-        console.log($scope.taskLabels);
+    $scope.quickUpdate = function(data){
+        var task = TasksResources.update(data).$promise;
+        task.then(function (res) {
+            if(res.result.success){
+                return true;
+            }
+            return false;
+        });
     };
 
 });

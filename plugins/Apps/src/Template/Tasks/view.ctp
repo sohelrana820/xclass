@@ -1,128 +1,104 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Task'), ['action' => 'edit', $task->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Task'), ['action' => 'delete', $task->id], ['confirm' => __('Are you sure you want to delete # {0}?', $task->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Tasks'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Task'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Attachments'), ['controller' => 'Attachments', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Attachment'), ['controller' => 'Attachments', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Comments'), ['controller' => 'Comments', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Comment'), ['controller' => 'Comments', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="tasks view large-9 medium-8 columns content">
-    <h3><?= h($task->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th><?= __('Uuid') ?></th>
-            <td><?= h($task->uuid) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Id') ?></th>
-            <td><?= $this->Number->format($task->id) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Created By') ?></th>
-            <td><?= $this->Number->format($task->created_by) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Assigned To') ?></th>
-            <td><?= $this->Number->format($task->assigned_to) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Status') ?></th>
-            <td><?= $this->Number->format($task->status) ?></td>
-        </tr>
-        <tr>
-            <th><?= __('Modified') ?></th>
-            <td><?= h($task->modified) ?></tr>
-        </tr>
-        <tr>
-            <th><?= __('Created') ?></th>
-            <td><?= h($task->created) ?></tr>
-        </tr>
-    </table>
+<?php echo $this->assign('title', 'Manage Task');?>
+
+<div class="page-header">
+    <h2 class="title pull-left">
+        Manage Task
+    </h2>
+    <div class="pull-right btn-areas">
+        <?php echo $this->Html->link('Tasks List', ['controller' => 'tasks', 'action' => 'index'], ['class' => 'btn btn-info'])?>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div ng-controller="TasksCtrl">
     <div class="row">
-        <h4><?= __('Task') ?></h4>
-        <?= $this->Text->autoParagraph(h($task->task)); ?>
-    </div>
-    <div class="row">
-        <h4><?= __('Description') ?></h4>
-        <?= $this->Text->autoParagraph(h($task->description)); ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Attachments') ?></h4>
-        <?php if (!empty($task->attachments)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Uuid') ?></th>
-                <th><?= __('Task Id') ?></th>
-                <th><?= __('Comment Id') ?></th>
-                <th><?= __('Name') ?></th>
-                <th><?= __('Path') ?></th>
-                <th><?= __('Created') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($task->attachments as $attachments): ?>
-            <tr>
-                <td><?= h($attachments->id) ?></td>
-                <td><?= h($attachments->uuid) ?></td>
-                <td><?= h($attachments->task_id) ?></td>
-                <td><?= h($attachments->comment_id) ?></td>
-                <td><?= h($attachments->name) ?></td>
-                <td><?= h($attachments->path) ?></td>
-                <td><?= h($attachments->created) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Attachments', 'action' => 'view', $attachments->id]) ?>
+        <div class="col-lg-8 col-md-8">
+            <div class="">
 
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Attachments', 'action' => 'edit', $attachments->id]) ?>
+                <h2>{{TaskObj.task}}</h2>
+                <div>
+                    {{TaskObj.description}}
+                </div>
+                <br/>
+                <br/>
+                <form>
+                    <div class="form-group">
+                        <div class="input text">
+                            <textarea rows="6" class="form-control" ng-model="TaskObj.comment""></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-success" ng-click="saveTask()">Comment</a>
+                        <a class="btn btn-danger" ng-click="saveTask()">Comment & Close</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-4">
+            <div class="task_sidebar" style="margin-top: 25px">
 
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Attachments', 'action' => 'delete', $attachments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $attachments->id)]) ?>
+                <div class="single_block">
+                    <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                        Labels
+                        <i class="fa fa-gear pull-right"></i>
+                    </h2>
+                    <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Apply label <a class="close_dropdown">X</a></h2>
+                            <ul class="custom_dropdown_list nav nav-list">
+                                <li ng-repeat="(key, label) in labels">
+                                    <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="task_labels" ng-show="taskLabels.length > 0">
+                            <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel)">X</span></li>
+                        </ul>
+                    </div>
+                </div>
 
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Comments') ?></h4>
-        <?php if (!empty($task->comments)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Uuid') ?></th>
-                <th><?= __('User Id') ?></th>
-                <th><?= __('Task Id') ?></th>
-                <th><?= __('Comment') ?></th>
-                <th><?= __('Status') ?></th>
-                <th><?= __('Created') ?></th>
-                <th><?= __('Modified') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($task->comments as $comments): ?>
-            <tr>
-                <td><?= h($comments->id) ?></td>
-                <td><?= h($comments->uuid) ?></td>
-                <td><?= h($comments->user_id) ?></td>
-                <td><?= h($comments->task_id) ?></td>
-                <td><?= h($comments->comment) ?></td>
-                <td><?= h($comments->status) ?></td>
-                <td><?= h($comments->created) ?></td>
-                <td><?= h($comments->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Comments', 'action' => 'view', $comments->id]) ?>
-
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Comments', 'action' => 'edit', $comments->id]) ?>
-
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comments', 'action' => 'delete', $comments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comments->id)]) ?>
-
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-    <?php endif; ?>
+                <div class="single_block">
+                    <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                        Users
+                        <i class="fa fa-gear pull-right"></i>
+                    </h2>
+                    <small class="red" ng-show="taskUsers.length < 1">User not assigned yet!</small>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Assign task to user <a class="close_dropdown">X</a></h2>
+                            <ul class="custom_dropdown_list nav nav-list">
+                                <li ng-repeat="(key, user) in users">
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">
+                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                    {{user.profile.first_name}} {{user.profile.last_name}}
+                                    <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="task_users">
+                            <li ng-repeat="user in taskUsers">
+                                <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                {{user.profile.first_name}} {{user.profile.last_name}}
+                                <span class="pull-right red" ng-click="removeTaskUsers(user)">X</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<?php
+echo $this->start('jsBottom');
+echo $this->Html->script(['src/TasksCtrl']);
+echo $this->end();
+?>
