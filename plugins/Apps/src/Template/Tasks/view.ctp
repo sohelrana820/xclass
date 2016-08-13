@@ -61,6 +61,11 @@
                             </div>
                             <div class="panel-body">
                                 {{comment.comment}}
+                                <div ng-show="comment.changing_status">
+                                    - Task marked as
+                                    <label class="task_label_close" ng-show="comment.changing_status == 'closed'">Closed</label>
+                                    <label class="task_label_reopened" ng-show="comment.changing_status == 'reopened'">Reopened</label>
+                                </div>
                             </div><!-- /panel-body -->
                         </div><!-- /panel panel-default -->
                     </div><!-- /col-sm-5 -->

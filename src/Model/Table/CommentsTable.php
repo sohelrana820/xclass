@@ -58,10 +58,6 @@ class CommentsTable extends Table
             ->add('id', 'valid', ['rule' => 'numeric'])
             ->allowEmpty('id', 'create');
 
-        $validator
-            ->requirePresence('comment', 'create')
-            ->notEmpty('comment');
-
         return $validator;
     }
 

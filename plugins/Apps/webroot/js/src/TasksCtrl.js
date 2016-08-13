@@ -28,7 +28,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 Flash.create('success', res.result.message);
             }
             else{
-                Flash.create('error', res.result.message);
+                Flash.create('info', res.result.message);
             }
         });
     };
@@ -170,7 +170,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 Flash.create('success', res.result.message);
             }
             else{
-                Flash.create('error', res.result.message);
+                Flash.create('info', res.result.message);
             }
         });
     };
@@ -201,10 +201,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 else if(event == 'change_status'){
                     if(value == 2)
                     {
-                        Flash.success('success', 'Task has been marked as closed');
+                        Flash.create('success', 'Task has been marked as closed');
                     }
                     else if(value == 3){
-                        Flash.danger('success', 'Task has been reopened');
+                        Flash.create('danger', 'Task has been reopened');
                     }
                 }
             }
@@ -213,6 +213,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.commentsObj = {task_id: id};
     $scope.doComment = function(flsMsg){
+        console.log($scope.commentsObj);
         var comments = CommentsResources.save($scope.commentsObj).$promise;
         comments.then(function (res) {
             if(res.result.success){
@@ -223,7 +224,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 }
             }
             else{
-                Flash.create('error', res.result.message);
+                Flash.create('info', res.result.message);
             }
         });
     };
@@ -231,10 +232,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.changeStatus = function(status){
         $scope.TaskObj.status = status;
         $scope.quickUpdate('change_status', status);
-        if($scope.commentsObj.comment)
-        {
-            $scope.doComment(false);
+        if(status == 2){
+            $scope.commentsObj.changing_status = 'closed'
         }
+        else if(status == 3){
+            $scope.commentsObj.changing_status = 'reopened'
+        }
+        $scope.doComment(false);
     };
 
     /**
@@ -249,10 +253,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.tasks = $scope.tasks.filter(function(task){
                     return task.id !== id
                 });
-                Flash.create('info', res.result.message);
+                Flash.create('success', res.result.message);
             }
             else{
-                Flash.create('error', res.result.message);
+                Flash.create('danger', res.result.message);
             }
         });
     };
