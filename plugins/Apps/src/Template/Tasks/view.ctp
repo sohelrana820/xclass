@@ -99,14 +99,14 @@
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
-                                    <a ng-click="chooseTaskLabels(label, key, label.checked); quickUpdate('add_label')"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                    <a ng-click="chooseTaskLabels(label, key, label.checked); quickUpdate('label_event', label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div>
                         <ul class="task_labels" ng-show="taskLabels.length > 0">
-                            <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel); quickUpdate('remove_label')">X</span></li>
+                            <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel); quickUpdate('label_event', false)">X</span></li>
                         </ul>
                     </div>
                 </div>
@@ -122,10 +122,10 @@
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
-                                    <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('add_user')"">
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('user_event', user.checked)"">
                                     <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
                                     <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
-                                    {{user.profile.first_name}} {{user.profile.last_name}}
+                                    {{user.profile.first_name}} {{user.profile.last_name}} {{user.checked}}
                                     <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
                                 </li>
@@ -138,7 +138,7 @@
                                 <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
                                 <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
                                 {{user.profile.first_name}} {{user.profile.last_name}}
-                                <span class="pull-right red" ng-click="removeTaskUsers(user); quickUpdate('remove_user')">X</span>
+                                <span class="pull-right red" ng-click="removeTaskUsers(user); quickUpdate('user_event', false)">X</span>
                             </li>
                         </ul>
                     </div>

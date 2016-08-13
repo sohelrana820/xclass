@@ -175,22 +175,28 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-    $scope.quickUpdate = function(event){
+    $scope.quickUpdate = function(event, value){
         $scope.getTaskRelObj();
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
-                if(event == 'add_label'){
-                    toastr.success('New label has been added successfully!');
+                if(event == 'user_event'){
+                    if(value)
+                    {
+                        toastr.success('New user has been assigned successfully!');
+                    }
+                    else{
+                        toastr.error('User has been removed successfully!');
+                    }
                 }
-                else if(event == 'remove_label'){
-                    toastr.info('Label has been removed successfully!');
-                }
-                else if(event == 'add_user'){
-                    toastr.success('New user has been added successfully!');
-                }
-                else if(event == 'remove_user'){
-                    toastr.success('User has been removed successfully!');
+                else if(event == 'label_event'){
+                    if(value)
+                    {
+                        toastr.success('New label has been added successfully!');
+                    }
+                    else{
+                        toastr.error('Label has been removed successfully!');
+                    }
                 }
             }
         });
