@@ -40,7 +40,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="task in tasks">
-                        <td>#{{task.id}}</td>
+                        <td><a class="sl" href="/tasks/view/{{task.id}}">#{{task.id}}</a></td>
                         <td>
                             <a href="/tasks/view/{{task.id}}">
                             <strong>
