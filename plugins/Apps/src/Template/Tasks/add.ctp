@@ -2,7 +2,7 @@
 
 <div class="page-header">
     <h2 class="title pull-left">
-        Manage Task
+        New Task
     </h2>
     <div class="pull-right btn-areas">
         <?php echo $this->Html->link('Tasks List', ['controller' => 'tasks', 'action' => 'index'], ['class' => 'btn btn-info'])?>
@@ -13,7 +13,7 @@
 <div ng-controller="TasksCtrl">
     <div class="row">
         <div class="col-lg-8 col-md-8">
-            <div class="">
+            <div class="well">
                 <form>
                     <div class="form-group">
                         <label>Title</label>
