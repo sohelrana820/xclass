@@ -215,21 +215,24 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
     $scope.commentsObj = {task_id: id};
-    $scope.doComment = function(flsMsg){
-        console.log($scope.commentsObj);
-        var comments = CommentsResources.save($scope.commentsObj).$promise;
-        comments.then(function (res) {
-            if(res.result.success){
-                $scope.commentsObj = {task_id: id};
-                $scope.taskComments.push(res.result.data);
-                if(flsMsg == undefined){
+    $scope.doComment = function(){
+        if($scope.commentsObj.comment)
+        {
+            var comments = CommentsResources.save($scope.commentsObj).$promise;
+            comments.then(function (res) {
+                if(res.result.success){
+                    $scope.commentsObj = {task_id: id};
+                    $scope.taskComments.push(res.result.data);
                     Flash.create('success', res.result.message);
                 }
-            }
-            else{
-                Flash.create('info', res.result.message);
-            }
-        });
+                else{
+                    Flash.create('danger', res.result.message);
+                }
+            });
+        }
+        else{
+            Flash.create('danger', 'Write something in comments');
+        }
     };
 
     $scope.changeStatus = function(status){
@@ -241,7 +244,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         else if(status == 3){
             $scope.commentsObj.changing_status = 'reopened'
         }
-        $scope.doComment(false);
+
+        var comments = CommentsResources.save($scope.commentsObj).$promise;
+        comments.then(function (res) {
+            if(res.result.success){
+                $scope.commentsObj = {task_id: id};
+                $scope.taskComments.push(res.result.data);
+            }
+            else{
+                Flash.create('info', res.result.message);
+            }
+        });
     };
 
     /**
