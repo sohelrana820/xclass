@@ -1,7 +1,7 @@
 app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash){
     $scope.TaskObj = {};
-    $scope.saveTask = function(){
 
+    $scope.getTaskRelObj = function(){
         var usersIDs = [];
         $scope.taskUsers.forEach(function(user){
             usersIDs.push(user.id);
@@ -17,7 +17,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.TaskObj.labels = {
             '_ids': labelsIDs
         };
+    };
 
+    $scope.saveTask = function(){
+        $scope.getTaskRelObj();
         var task = TasksResources.save($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
@@ -157,22 +160,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.updateTask = function(){
-        var usersIDs = [];
-        $scope.taskUsers.forEach(function(user){
-            usersIDs.push(user.id);
-        });
-        $scope.TaskObj.users = {
-            '_ids': usersIDs
-        };
-
-        var labelsIDs = [];
-        $scope.taskLabels.forEach(function(label){
-            labelsIDs.push(label.id);
-        });
-        $scope.TaskObj.labels = {
-            '_ids': labelsIDs
-        };
-
+        $scope.getTaskRelObj();
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
@@ -187,13 +175,24 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-    $scope.quickUpdate = function(data){
-        var task = TasksResources.update(data).$promise;
+    $scope.quickUpdate = function(event){
+        $scope.getTaskRelObj();
+        var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
-                return true;
+                if(event == 'add_label'){
+                    Flash.create('success', 'New label has been added successfully');
+                }
+                else if(event == 'remove_label'){
+                    Flash.create('info', 'Label has been removed successfully');
+                }
+                else if(event == 'add_user'){
+                    Flash.create('success', 'New user has been added successfully');
+                }
+                else if(event == 'remove_user'){
+                    Flash.create('info', 'User has been removed successfully');
+                }
             }
-            return false;
         });
     };
 
