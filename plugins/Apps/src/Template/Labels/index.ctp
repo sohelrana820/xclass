@@ -129,13 +129,12 @@
 
         <div class="col-lg-8 col-lg-offset-2" ng-show="labels.length < 1 && !show_crate_form">
             <div class="empty_block">
-                    <span class="icon">
-                        <i class="fa fa-bullhorn" aria-hidden="true"></i>
-                    </span>
+                <span class="icon">
+                    <i class="fa fa-bullhorn" aria-hidden="true"></i></span>
                 <br/>
                 <br/>
-                <h2>Welcome to Issues!</h2>
-                <p class="lead">Issues are used to track todos, bugs, feature requests, and more. As issues are created, they’ll appear here in a searchable and filterable list. To get started, you should create an issue.</p>
+                <h2>Welcome to Task Label!</h2>
+                <p class="lead">Task labels are used to categorized the your tasks list. With the task label you can labelling your task and assign them based on your needs. And also it's helpful to search your task list.</p>
                 <a class="btn btn-success" ng-click="show_crate_form = true">Create first label</a>
             </div>
         </div>

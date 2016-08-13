@@ -1,7 +1,7 @@
 <?php echo $this->assign('title', 'Manage Task');?>
 
 <div ng-controller="TasksCtrl">
-    <div class="page-header">
+    <div class="page-header" ng-show="tasks.length > 0">
         <h2 class="title pull-left">
             Manage Task
             <p class="sub-title">
@@ -14,7 +14,7 @@
         <div class="clearfix"></div>
     </div>
 
-    <div>
+    <div class="col-lg-12 col-md-12" ng-show="tasks.length > 0">
         <div class="row">
             <div class="col-lg-3">
                 <div class="widget">
@@ -69,6 +69,19 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-lg-offset-2" ng-show="tasks.length < 1">
+        <div class="empty_block">
+            <span class="icon">
+                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+            </span>
+            <br/>
+            <br/>
+            <h2>Welcome to Task!</h2>
+            <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labelling and then assign into user. After completing each task you can marked them as closed/reopened. It also allowed to comments on task</p>
+            <a class="btn btn-success" href="/tasks/add">Create first task</a>
         </div>
     </div>
 </div>
