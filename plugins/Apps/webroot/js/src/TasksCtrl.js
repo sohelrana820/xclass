@@ -126,6 +126,19 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
+
+    $scope.prepareTaskObject = function(id){
+        var task = TasksResources.get({id: id}).$promise;
+        task.then(function (res) {
+            $scope.TaskObj.id = res.result.data.id;
+            $scope.TaskObj.task = res.result.data.task;
+            $scope.TaskObj.description = res.result.data.description;
+            $scope.taskUsers = res.result.data.users;
+            $scope.taskLabels = res.result.data.labels;
+            $scope.taskComments = res.result.data.comments;
+        });
+    };
+
     // Task edit and comments area
     var url = window.location.href.split("edit/");
     if(url.length == 2)
@@ -136,20 +149,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var url = window.location.href.split("view/");
         var id = url[1];
     }
-
-
     if(id != undefined)
     {
-        var task = TasksResources.get({id: id}).$promise;
-        task.then(function (res) {
-            $scope.TaskObj.id = res.result.data.id;
-            $scope.TaskObj.task = res.result.data.task;
-            $scope.TaskObj.description = res.result.data.description;
-            $scope.taskUsers = res.result.data.users;
-            $scope.taskLabels = res.result.data.labels;
-            $scope.taskComments = res.result.data.comments;
-        });
+        $scope.prepareTaskObject(id);
     }
+
+
 
     $scope.updateTask = function(){
         var usersIDs = [];
@@ -171,7 +176,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
-                $scope.TaskObj = {};
+                $scope.prepareTaskObject(id);
+                $scope.view_task = true;
+                $scope.edit_task_form = false;
                 Flash.create('success', res.result.message);
             }
             else{

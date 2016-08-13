@@ -42,12 +42,10 @@
                     <tr ng-repeat="task in tasks">
                         <td><a class="sl" href="/tasks/view/{{task.id}}">#{{task.id}}</a></td>
                         <td>
-                            <a href="/tasks/view/{{task.id}}">
                             <strong>
-                                {{task.task}}
+                                <a href="/tasks/view/{{task.id}}">{{task.task}}</a>
                                 <label ng-repeat="label in task.labels" class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                             </strong>
-                            </a>
                             <br>
                             <small class="author">Opened by {{task.user.profile.first_name}} {{task.user.profile.first_name}} at {{task.created | date}}</small>
                         </td>
