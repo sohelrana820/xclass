@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash, toastr){
     $scope.TaskObj = {};
 
     $scope.getTaskRelObj = function(){
@@ -181,16 +181,16 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         task.then(function (res) {
             if(res.result.success){
                 if(event == 'add_label'){
-                    Flash.create('success', 'New label has been added successfully');
+                    toastr.success('New label has been added successfully!');
                 }
                 else if(event == 'remove_label'){
-                    Flash.create('info', 'Label has been removed successfully');
+                    toastr.info('Label has been removed successfully!');
                 }
                 else if(event == 'add_user'){
-                    Flash.create('success', 'New user has been added successfully');
+                    toastr.success('New user has been added successfully!');
                 }
                 else if(event == 'remove_user'){
-                    Flash.create('info', 'User has been removed successfully');
+                    toastr.success('User has been removed successfully!');
                 }
             }
         });

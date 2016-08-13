@@ -1,4 +1,4 @@
-var app = angular.module('Application', ['ngResource', 'textAngular', 'color.picker', 'ngFlash']);
+var app = angular.module('Application', ['ngResource', 'textAngular', 'color.picker', 'ngFlash', 'toastr']);
 
 app.config(function($provide) {
     $provide.decorator('ColorPickerOptions', function($delegate) {
