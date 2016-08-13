@@ -21,17 +21,59 @@
                 </div>
                 <br/>
                 <br/>
-                <form>
-                    <div class="form-group">
-                        <div class="input text">
-                            <textarea rows="6" class="form-control" ng-model="TaskObj.comment""></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <a class="btn btn-success" ng-click="saveTask()">Comment</a>
-                        <a class="btn btn-danger" ng-click="saveTask()">Comment & Close</a>
-                    </div>
-                </form>
+
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="thumbnail">
+                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                        </div><!-- /thumbnail -->
+                    </div><!-- /col-sm-1 -->
+
+                    <div class="col-lg-11">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div><!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                    </div><!-- /col-sm-5 -->
+                </div><!-- /col-sm-5 -->
+
+                <div class="row">
+                    <div class="col-lg-1">
+                        <div class="thumbnail">
+                            <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
+                        </div><!-- /thumbnail -->
+                    </div><!-- /col-sm-1 -->
+
+                    <div class="col-lg-11">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <strong>myusername</strong> <span class="text-muted">commented 5 days ago</span>
+                            </div>
+                            <div class="panel-body">
+                                Panel content
+                            </div><!-- /panel-body -->
+                        </div><!-- /panel panel-default -->
+                    </div><!-- /col-sm-5 -->
+                </div><!-- /col-sm-5 -->
+
+                <div class="widget-area no-padding blank">
+                    <div class="status-upload">
+                        <form>
+                            <textarea placeholder="What are you doing right now?" ></textarea>
+                            <ul>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
+                            </ul>
+                            <button type="submit" class="btn btn-success"></i> Share</button>
+                        </form>
+                    </div><!-- Status Upload  -->
+                </div><!-- Widget Area -->
             </div>
         </div>
         <div class="col-lg-2 col-md-4">
