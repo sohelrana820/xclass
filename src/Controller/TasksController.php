@@ -132,7 +132,7 @@ class TasksController extends AppController
             if ($this->Tasks->save($task)) {
                 $response = [
                     'success' => true,
-                    'message' => 'New task has been updated successfully',
+                    'message' => 'Task has been updated successfully',
                     'data' => $task,
                 ];
             } else {

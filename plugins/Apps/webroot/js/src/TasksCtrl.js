@@ -253,7 +253,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.tasks = $scope.tasks.filter(function(task){
                     return task.id !== id
                 });
-                Flash.create('success', res.result.message);
+                Flash.create('danger', res.result.message);
             }
             else{
                 Flash.create('danger', res.result.message);

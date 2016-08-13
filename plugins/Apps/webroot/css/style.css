@@ -11,6 +11,13 @@ a{
 .alert{
     text-align: center;
     text-transform: uppercase;
+    font-size: 10px
+}
+
+.toast{
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 600;
 }
 
 /** Form elements classes **/
