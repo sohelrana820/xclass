@@ -54,7 +54,10 @@
                         <div class="panel panel-default comments_panel">
                             <div class="panel-heading">
                                 <strong>{{comment.user.profile.first_name}} {{comment.user.profile.last_name}}</strong>
-                                <span class="text-muted">commented {{comment.created | date}}</span>
+                                <span class="text-muted">
+                                    commented {{comment.created | date}} at
+                                    ({{comment.created | date : 'HH:m a'}})
+                                </span>
                             </div>
                             <div class="panel-body">
                                 {{comment.comment}}
