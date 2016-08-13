@@ -135,6 +135,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             $scope.TaskObj.id = res.result.data.id;
             $scope.TaskObj.task = res.result.data.task;
             $scope.TaskObj.description = res.result.data.description;
+            $scope.TaskObj.status = res.result.data.status;
             $scope.taskUsers = res.result.data.users;
             $scope.taskLabels = res.result.data.labels;
             $scope.taskComments = res.result.data.comments;
@@ -197,23 +198,43 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                         toastr.error('Label has been removed successfully!');
                     }
                 }
+                else if(event == 'change_status'){
+                    if(value == 2)
+                    {
+                        Flash.success('success', 'Task has been marked as closed');
+                    }
+                    else if(value == 3){
+                        Flash.danger('success', 'Task has been reopened');
+                    }
+                }
             }
         });
     };
 
     $scope.commentsObj = {task_id: id};
-    $scope.doComment = function(){
+    $scope.doComment = function(flsMsg){
         var comments = CommentsResources.save($scope.commentsObj).$promise;
         comments.then(function (res) {
             if(res.result.success){
                 $scope.commentsObj = {task_id: id};
                 $scope.taskComments.push(res.result.data);
-                Flash.create('success', res.result.message);
+                if(flsMsg == undefined){
+                    Flash.create('success', res.result.message);
+                }
             }
             else{
                 Flash.create('error', res.result.message);
             }
         });
+    };
+
+    $scope.changeStatus = function(status){
+        $scope.TaskObj.status = status;
+        $scope.quickUpdate('change_status', status);
+        if($scope.commentsObj.comment)
+        {
+            $scope.doComment(false);
+        }
     };
 
     /**

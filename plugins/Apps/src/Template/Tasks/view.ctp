@@ -65,27 +65,24 @@
                         </div><!-- /panel panel-default -->
                     </div><!-- /col-sm-5 -->
                 </div><!-- /col-sm-5 -->
-
-                <div class="widget-area no-padding blank">
-                    <div class="status-upload">
-                        <form ng-submit="doComment()">
-                            <textarea placeholder="Write your comment?" ng-model="commentsObj.comment"></textarea>
-                            <ul>
-                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
-                                <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
-                            </ul>
-                            <button type="submit" class="btn btn-success"></i> Share</button>
-                        </form>
-                    </div><!-- Status Upload  -->
+                <div class="comment_widget well">
+                    <form ng-submit="doComment()">
+                        <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7"></textarea>
+                        <br/>
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-success" ></i> Comment</button>
+                            <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Close Task</a>
+                            <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)"></i> Reopen Task</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
                 </div><!-- Widget Area -->
             </div>
         </div>
         <div class="col-lg-2 col-md-4">
             <a class="btn btn-success" ng-show="!edit_task_form" ng-click="edit_task_form = true; view_task = false">Edit Task</a>
             <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel Task</a>
-            <a class="btn btn-danger">Delete Task</a>
+            <a class="btn btn-danger" ng-click="deleteTask(TaskObj.id)">Delete Task</a>
             <div class="task_sidebar" style="margin-top: 25px">
 
                 <div class="single_block">
