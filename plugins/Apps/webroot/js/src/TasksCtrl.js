@@ -129,8 +129,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-
-    $scope.prepareTaskObject = function(id){
+    $scope.buildTaskObjForShow = function(id){
         var task = TasksResources.get({id: id}).$promise;
         task.then(function (res) {
             $scope.TaskObj.id = res.result.data.id;
@@ -154,7 +153,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     }
     if(id != undefined)
     {
-        $scope.prepareTaskObject(id);
+        $scope.buildTaskObjForShow(id);
     }
 
 
@@ -164,7 +163,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
-                $scope.prepareTaskObject(id);
+                $scope.buildTaskObjForShow(id);
                 $scope.view_task = true;
                 $scope.edit_task_form = false;
                 Flash.create('success', res.result.message);

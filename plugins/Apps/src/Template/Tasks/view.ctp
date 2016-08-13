@@ -46,15 +46,12 @@
                 </div>
 
                 <div class="row" ng-repeat="comment in taskComments">
-                    <div class="col-lg-1">
-                        <div class="thumbnail">
-                            <img class="img-responsive user-photo"  ng-if="comment.user.profile.profile_pic != null" src="/img/profiles/{{comment.user.profile.profile_pic}}">
-                            <img class="img-responsive user-photo"  ng-if="!comment.user.profile.profile_pic" src="/img/profile_avatar.jpg">
-                        </div><!-- /thumbnail -->
-                    </div><!-- /col-sm-1 -->
-
-                    <div class="col-lg-11">
-                        <div class="panel panel-default">
+                    <div class="col-lg-11 col-lg-offset-1">
+                        <div class="user_comments_avatar">
+                            <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" src="/img/profiles/{{comment.user.profile.profile_pic}}">
+                            <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                        </div>
+                        <div class="panel panel-default comments_panel">
                             <div class="panel-heading">
                                 <strong>{{comment.user.profile.first_name}} {{comment.user.profile.last_name}}</strong>
                                 <span class="text-muted">commented {{comment.created | date}}</span>

@@ -750,7 +750,6 @@ a{
     border-radius: 4px 4px 0 0;
     color: #777777;
     float: left;
-    font-family: Lato;
     font-size: 14px;
     height: 142px;
     letter-spacing: 0.3px;
@@ -797,20 +796,10 @@ a{
     color: #fff;
 }
 .status-upload form button {
-    border: medium none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    border-radius: 4px;
-    color: #fff;
     float: right;
-    font-family: Lato;
-    font-size: 14px;
     letter-spacing: 0.3px;
     margin-right: 9px;
     margin-top: 9px;
-    padding: 6px 15px;
 }
 .dropdown > a > span.green:before {
     border-left-color: #2dcb73;
@@ -819,9 +808,12 @@ a{
     margin-right: 7px;
 }
 
-
-
-
+.user-photo{
+    width: 50px;
+    height: 50px !important;
+    border: 1px solid #eee;
+    padding: 3px;
+}
 
 .thumbnail {
     padding:0px;
@@ -852,7 +844,19 @@ a{
     border-width:8px;
 }
 
+.comments_panel .panel-heading{
 
+}
+
+.comments_panel .panel-body {
+    font-size: 14px;
+    color: #666;
+    line-height: 25px;
+}
+.user_comments_avatar {
+    position: absolute;
+    left: -43px;
+}
 
 
 
