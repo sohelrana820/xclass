@@ -11,26 +11,25 @@
 </div>
 
 <div ng-controller="TasksCtrl">
+    <form ng-submit="saveTask()">
     <div class="row">
         <div class="col-lg-8 col-md-8">
             <div class="well">
-                <form>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <div class="input text">
-                            <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
-                        </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="input text">
+                        <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <div class="input text">
-                            <text-angular ng-model="TaskObj.description" ng-model="htmlVariable"></text-angular>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <div class="input text">
+                        <text-angular ng-model="TaskObj.description" ng-model="htmlVariable"></text-angular>
                     </div>
-                    <div class="form-group">
-                        <a class="btn btn-success" ng-click="saveTask()">SAVE</a>
-                    </div>
-                </form>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">SAVE</button>
+                </div>
             </div>
         </div>
         <div class="col-lg-2 col-md-4">
@@ -94,6 +93,7 @@
             </div>
         </div>
     </div>
+    </form>
 </div>
 
 <?php
