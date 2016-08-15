@@ -16,6 +16,10 @@
         <div class="col-lg-8 col-md-8">
             <div class="">
 
+                <span ng-show="TaskObj.status != 2" class="status-button status-success">Status: Open</span>
+                <span ng-show="TaskObj.status == 2" class="status-button status-danger">Status: Closed</span>
+                <br/>
+                <br/>
                 <div class="task_details" ng-init="view_task = true" ng-show="view_task">
                     <h2>{{TaskObj.task}}</h2>
                     <div ng-bind-html="TaskObj.description"></div>
@@ -61,8 +65,8 @@
                                 {{comment.comment}}
                                 <div ng-show="comment.changing_status">
                                     - Task marked as
-                                    <label class="task_label_close" ng-show="comment.changing_status == 'closed'">Closed</label>
-                                    <label class="task_label_reopened" ng-show="comment.changing_status == 'reopened'">Reopened</label>
+                                    <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
+                                    <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
                                 </div>
                             </div><!-- /panel-body -->
                         </div><!-- /panel panel-default -->

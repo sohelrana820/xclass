@@ -18,13 +18,13 @@
         <div class="filter_bar">
 
             <a class="close_task" ng-click="doFilter(filterQuery.status = 'closed')">
-                <i class="fa fa-check"></i>
-                Closed(8)
+                <i class="fa fa-bell-slash-o red" aria-hidden="true"></i>
+                Closed
             </a>
 
             <a class="open_task" ng-click="doFilter(filterQuery.status = 'open')">
-                <i class="fa fa-check"></i>
-                Open(78)
+                <i class="fa fa-bell-o green" aria-hidden="true"></i>
+                Open
             </a>
 
             <div class="pull-right">
@@ -115,19 +115,14 @@
 
         </div>
         <table class="table task_list_table">
-            <!--<thead>
-            <tr>
-                <th>ID</th>
-                <th style="width: 70%">Task</th>
-                <th>Assigned</th>
-                <th>Comments</th>
-                <th class="text-right">Action</th>
-            </tr>
-            </thead>-->
             <tbody>
             <tr ng-repeat="task in tasks">
-                <td>
+                <td style="width: 50px;">
                     <a class="sl" href="/tasks/view/{{task.id}}">#{{task.id}}</a>
+                </td>
+                <td style="width: 15px; padding-right: 0px;">
+                    <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
+                    <i ng-show="task.status != 2"  class="fa fa-bell-o green" aria-hidden="true"></i>
                 </td>
                 <td>
                     <strong>
@@ -138,7 +133,7 @@
                     <small class="author">Opened by {{task.createdUserProfile.first_name}}
                         {{task.createdUserProfile.first_name}} at
                         {{task.created | date}}.
-                        ({{comment.created | date : 'HH:m a'}})
+                        ({{task.created | date : 'HH:m a'}})
                     </small>
                 </td>
                 <td>
