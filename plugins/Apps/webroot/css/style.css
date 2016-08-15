@@ -736,11 +736,9 @@ a{
     font-size: 32px;
 }
 
-
 .well{
     border-radius: 0px;
 }
-
 
 .user-photo{
     width: 50px;
@@ -792,22 +790,6 @@ a{
     left: -43px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .sl{
     font-size: 16px;
     font-weight: 700;
@@ -831,8 +813,29 @@ a{
     padding-right: 25px;
 }
 
+.filter_bar{
+    background: #f8f8f8;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 5px solid #525252;
+}
+
+.filter_bar .filter_block{
+    float: left;
+    margin-right: 25px;
+}
+
+.filter_bar .filter_block:last-child{
+    margin-right: 0px;
+}
 
 
+.filter_bar > a{
+    color: #777;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 15px;
+}
 
 
 

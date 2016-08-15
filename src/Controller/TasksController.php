@@ -20,17 +20,15 @@ class TasksController extends AppController
     {
         $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
-        $conditions = [
-            'Tasks.status'  => 1
-        ];
+        $conditions = [];
 
-        if($this->request->params['_ext'] != 'json'){
+        if( $this->request->params['_ext'] != 'json'){
             $this->set('tasks', $this->paginate($this->Tasks));
             $this->set('_serialize', ['tasks']);
         }
         else {
             if (isset($this->request->query['status'])) {
-                $conditions = array_merge($conditions, ['Tasks.status' => $this->request->query['status']]);
+                $conditions = array_merge($conditions, ['Tasks.status IN' => $this->request->query['status']]);
             }
 
             $tasks = $this->Tasks->find();

@@ -15,8 +15,107 @@
     </div>
 
     <div class="col-lg-12 col-md-12" ng-show="tasks.length > 0">
+        <div class="filter_bar">
+
+            <a class="close_task" ng-click="doFilter(filterQuery.status = 'closed')">
+                <i class="fa fa-check"></i>
+                Closed(8)
+            </a>
+
+            <a class="open_task" ng-click="doFilter(filterQuery.status = 'open')">
+                <i class="fa fa-check"></i>
+                Open(78)
+            </a>
+
+            <div class="pull-right">
+
+                <div class="filter_block">
+                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                        Author
+                        <b class="caret"></b>
+                    </span>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Filter by author <a class="close_dropdown">X</a></h2>
+                            <ul class="custom_dropdown_list nav nav-list">
+                                <li ng-repeat="(key, user) in users">
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">
+                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                    {{user.profile.first_name}} {{user.profile.last_name}}
+                                    <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter_block">
+                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                    Labels
+                    <b class="caret"></b>
+                    </span>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Filter by label <a class="close_dropdown">X</a></h2>
+                            <ul class="custom_dropdown_list nav nav-list">
+                                <li ng-repeat="(key, label) in labels">
+                                    <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="filter_block">
+                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                        Assigned
+                        <b class="caret"></b>
+                    </span>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Filter by who’s assigned <a class="close_dropdown">X</a></h2>
+                            <ul class="custom_dropdown_list nav nav-list">
+                                <li ng-repeat="(key, user) in users">
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">
+                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                    {{user.profile.first_name}} {{user.profile.last_name}}
+                                    <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter_block">
+                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                        Sort
+                        <b class="caret"></b>
+                    </span>
+                    <div class="dropdown">
+                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                            <h2>Sort by <a class="close_dropdown">X</a></h2>
+                            <ul class="custom_dropdown_list nav nav-list">
+                                <li>
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">Newest</a>
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">Oldest</a>
+                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">Recently updated</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+        </div>
         <table class="table task_list_table">
-            <thead>
+            <!--<thead>
             <tr>
                 <th>ID</th>
                 <th style="width: 70%">Task</th>
@@ -24,7 +123,7 @@
                 <th>Comments</th>
                 <th class="text-right">Action</th>
             </tr>
-            </thead>
+            </thead>-->
             <tbody>
             <tr ng-repeat="task in tasks">
                 <td>

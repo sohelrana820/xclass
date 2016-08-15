@@ -37,10 +37,32 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
 
-    $scope.queryFilter = {
+    /*$scope.queryFilter = {
         'status': 1,
-        /*'labels[]': [1, 2, 3, 4],*/
+        'labels[]': [1, 2, 3, 4],
         'users[]': [12, 3, 3, 4]
+    };*/
+
+    $scope.queryString = {};
+    $scope.doFilter = function(){
+        var status = [];
+        var labels = [];
+        var users = [];
+        if($scope.filterQuery.status == 'closed'){
+            status = [2];
+        }
+        else if($scope.filterQuery.status == 'open'){
+            status = [1, 3];
+        }
+
+        $scope.queryString = {
+            'status[]': status,
+            'labels[]': labels,
+            'users[]': users
+        };
+
+        $scope.fetchTaskLists($scope.queryString);
+        console.log($scope.queryString);
     };
 
     /**
@@ -61,8 +83,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     /**
      * Getting application active users.
      */
-    $scope.fetchTaskLists = function(){
-        var tasks = TasksResources.query($scope.queryFilter).$promise;
+    $scope.fetchTaskLists = function(data){
+        var tasks = TasksResources.query(data).$promise;
         tasks.then(function (res) {
             if(res.result.success){
                 $scope.tasks = res.result.data;
