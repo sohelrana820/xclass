@@ -366,6 +366,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.users[key].checked = false;
             }
         });
+        $scope.doFilter();
     };
 
 
@@ -396,6 +397,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.users[key].checked = false;
             }
         });
+        $scope.doFilter();
     };
 
     $scope.filterLabels = [];
@@ -424,5 +426,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.labels[key].checked = false;
             }
         });
+        $scope.doFilter();
     }
 });

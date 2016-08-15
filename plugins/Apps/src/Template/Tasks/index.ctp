@@ -120,6 +120,17 @@
             <div class="clearfix"></div>
 
         </div>
+        <div class="filter_options">
+            <ul class="filter_user">
+                Author:
+                <li ng-repeat="user in filtterAuthor">
+                    {{user.profile.first_name}} {{user.profile.last_name}}
+                    <span class="red" ng-click="removeAuthor(user)">X</span>
+                </li>
+            </ul>
+
+        </div>
+
         <table class="table task_list_table" ng-show="tasks.length > 0">
             <tbody>
             <tr ng-repeat="task in tasks">
