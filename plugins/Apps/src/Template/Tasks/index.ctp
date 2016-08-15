@@ -39,7 +39,7 @@
                             <h2>Filter by author <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
-                                    <a ng-click="chooseAssignee(user, key, user.checked)"">
+                                    <a ng-click="chooseAuthor(user, key, user.checked)"">
                                     <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
                                     <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
                                     {{user.profile.first_name}} {{user.profile.last_name}}

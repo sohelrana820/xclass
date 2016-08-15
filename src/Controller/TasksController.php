@@ -31,6 +31,10 @@ class TasksController extends AppController
                 $conditions = array_merge($conditions, ['Tasks.status IN' => $this->request->query['status']]);
             }
 
+            if (isset($this->request->query['authors'])) {
+                $conditions = array_merge($conditions, ['Tasks.created_by IN' => $this->request->query['authors']]);
+            }
+
             $tasks = $this->Tasks->find();
             $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
             $tasks->where($conditions);

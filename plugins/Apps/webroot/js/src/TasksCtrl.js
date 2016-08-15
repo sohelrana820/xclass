@@ -294,6 +294,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var status = [];
         var labels = [];
         var users = [];
+        var authors = [];
 
         if($scope.filterQuery){
             if($scope.filterQuery.status == 'closed'){
@@ -309,6 +310,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             users.push(user.id);
         });
 
+        var authors = [];
+        $scope.filtterAuthor.forEach(function(user){
+            authors.push(user.id);
+        });
+
         var labels = [];
         $scope.filterLabels.forEach(function(label){
             labels.push(label.id);
@@ -317,13 +323,15 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.queryString = {
             'status[]': status,
             'labels[]': labels,
-            'users[]': users
+            'users[]': users,
+            'authors[]': authors
         };
 
         $scope.fetchTaskLists($scope.queryString);
         console.log(status);
         console.log(status);
         console.log(labels);
+        console.log(authors);
         console.log($scope.queryString);
     };
 
@@ -356,6 +364,35 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
+
+    $scope.filtterAuthor = [];
+    $scope.chooseAuthor = function(user, key, isChecked){
+        if(isChecked == undefined || isChecked == false)
+        {
+            $scope.users[key].checked = true;
+            $scope.filtterAuthor.push(user);
+        }
+        else{
+            $scope.users[key].checked = false;
+            $scope.filtterAuthor = $scope.filtterAuthor.filter(function(oldUser){
+                return oldUser.id !== user.id;
+            });
+        }
+        console.log($scope.filtterAuthor);
+        $scope.doFilter();
+    };
+
+    $scope.removeAuthor = function(user){
+        $scope.filtterAuthor = $scope.filtterAuthor.filter(function(oldUser){
+            return oldUser.id !== user.id;
+        });
+
+        $scope.users.forEach(function(oldUser, key){
+            if(oldUser.id == label.id){
+                $scope.users[key].checked = false;
+            }
+        });
+    };
 
     $scope.filterLabels = [];
     $scope.chooseFilterLabel = function(label, key, isChecked){
