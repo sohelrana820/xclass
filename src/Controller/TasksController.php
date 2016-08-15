@@ -31,20 +31,32 @@ class TasksController extends AppController
         else {
             $tasks = $this->Tasks->find('all', [
                 'conditions' => $conditions,
-                'fields' => [],
+                'fields' => ['Tasks.id', 'Tasks.task', 'Tasks.status', 'Tasks.created', 'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic'],
                 'contain' => [
                     'Comments' => [
-                        'fields'=> []
+                        'fields'=> ['Comments.task_id'],
                     ],
                     'Labels' => [
-                        'fields'=> []
+                        'fields'=> ['TasksLabels.task_id', 'name', 'color_code'],
                     ],
                     'Users' => [
-                        'fields'=> []
+                        'fields'=> ['UsersTasks.task_id', 'id', 'username'],
                     ],
                     'Users.Profiles' => [
-                        'fields'=> []
+                        'fields'=> ['UsersTasks.task_id', 'id', 'first_name', 'last_name', 'profile_pic'],
                     ]
+                ],
+                'join' => [
+                    'createdUser' => [
+                        'table' => 'users',
+                        'type' => 'LEFT',
+                        'conditions' => 'createdUser.id = Tasks.created_by'
+                    ],
+                    'createdUserProfile' => [
+                        'table' => 'profiles',
+                        'type' => 'LEFT',
+                        'conditions' => 'createdUserProfile.id = Tasks.created_by'
+                    ],
                 ],
                 'limit' => $this->paginationLimit,
                 'order' => ['Tasks.id' => 'desc']

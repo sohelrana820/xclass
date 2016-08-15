@@ -34,7 +34,10 @@
                         <label ng-repeat="label in task.labels" class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                     </strong>
                     <br>
-                    <small class="author">Opened by {{task.user.profile.first_name}} {{task.user.profile.first_name}} at {{task.created | date}}</small>
+                    <small class="author">Opened by {{task.createdUserProfile.first_name}} {{task.createdUserProfile.first_name}} at
+                        {{task.created | date}}.
+                        ({{comment.created | date : 'HH:m a'}})
+                    </small>
                 </td>
                 <td>
                         <span ng-repeat="user in task.users">
