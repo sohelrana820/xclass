@@ -37,33 +37,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
 
-    /*$scope.queryFilter = {
-        'status': 1,
-        'labels[]': [1, 2, 3, 4],
-        'users[]': [12, 3, 3, 4]
-    };*/
-
-    $scope.queryString = {};
-    $scope.doFilter = function(){
-        var status = [];
-        var labels = [];
-        var users = [];
-        if($scope.filterQuery.status == 'closed'){
-            status = [2];
-        }
-        else if($scope.filterQuery.status == 'open'){
-            status = [1, 3];
-        }
-
-        $scope.queryString = {
-            'status[]': status,
-            'labels[]': labels,
-            'users[]': users
-        };
-
-        $scope.fetchTaskLists($scope.queryString);
-        console.log($scope.queryString);
-    };
 
     /**
      * Getting application active users.
@@ -305,6 +278,80 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
             else{
                 Flash.create('danger', res.result.message);
+            }
+        });
+    };
+
+
+    /*$scope.queryFilter = {
+     'status': 1,
+     'labels[]': [1, 2, 3, 4],
+     'users[]': [12, 3, 3, 4]
+     };*/
+
+    $scope.queryString = {};
+    $scope.doFilter = function(){
+        var status = [];
+        var labels = [];
+        var users = [];
+
+        if($scope.filterQuery){
+            if($scope.filterQuery.status == 'closed'){
+                status = [2];
+            }
+            else if($scope.filterQuery.status == 'open'){
+                status = [1, 3];
+            }
+        }
+
+        var users = [];
+        $scope.filtterAssignee.forEach(function(user){
+            users.push(user.id);
+        });
+
+        var labelsIDs = [];
+        $scope.taskLabels.forEach(function(label){
+            labelsIDs.push(label.id);
+        });
+        $scope.TaskObj.labels = {
+            '_ids': labelsIDs
+        };
+
+        $scope.queryString = {
+            'status[]': status,
+            'labels[]': labels,
+            'users[]': users
+        };
+
+        $scope.fetchTaskLists($scope.queryString);
+        console.log($scope.queryString);
+    };
+
+    $scope.filtterAssignee = [];
+    $scope.chooseAssignee = function(user, key, isChecked){
+        if(isChecked == undefined || isChecked == false)
+        {
+            $scope.users[key].checked = true;
+            $scope.filtterAssignee.push(user);
+        }
+        else{
+            $scope.users[key].checked = false;
+            $scope.filtterAssignee = $scope.filtterAssignee.filter(function(oldUser){
+                return oldUser.id !== user.id;
+            });
+        }
+        console.log($scope.filtterAssignee);
+        $scope.doFilter();
+    };
+
+    $scope.removeAssignee = function(user){
+        $scope.filtterAssignee = $scope.filtterAssignee.filter(function(oldUser){
+            return oldUser.id !== user.id;
+        });
+
+        $scope.users.forEach(function(oldUser, key){
+            if(oldUser.id == label.id){
+                $scope.users[key].checked = false;
             }
         });
     };
