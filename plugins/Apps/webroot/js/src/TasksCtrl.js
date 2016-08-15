@@ -304,6 +304,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             else if($scope.filterQuery.status == 'open'){
                 status = [1, 3];
             }
+            else if($scope.filterQuery.status == 'all'){
+                status = [1, 2, 3];
+            }
         }
 
         var users = [];

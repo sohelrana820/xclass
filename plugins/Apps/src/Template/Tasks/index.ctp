@@ -18,6 +18,11 @@
     <div class="col-lg-12 col-md-12">
         <div class="filter_bar">
 
+            <a class="close_task" ng-click="doFilter(filterQuery.status = 'all')">
+                <i class="fa fa-signal" aria-hidden="true"></i>
+                All
+            </a>
+
             <a class="close_task" ng-click="doFilter(filterQuery.status = 'closed')">
                 <i class="fa fa-bell-slash-o red" aria-hidden="true"></i>
                 Closed
