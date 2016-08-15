@@ -61,7 +61,7 @@
                             <h2>Filter by label <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
-                                    <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                    <a ng-click="chooseFilterLabel(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
                                 </li>
                             </ul>
                         </div>

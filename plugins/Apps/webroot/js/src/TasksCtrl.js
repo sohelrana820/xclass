@@ -309,13 +309,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             users.push(user.id);
         });
 
-        var labelsIDs = [];
-        $scope.taskLabels.forEach(function(label){
-            labelsIDs.push(label.id);
+        var labels = [];
+        $scope.filterLabels.forEach(function(label){
+            labels.push(label.id);
         });
-        $scope.TaskObj.labels = {
-            '_ids': labelsIDs
-        };
 
         $scope.queryString = {
             'status[]': status,
@@ -324,6 +321,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         };
 
         $scope.fetchTaskLists($scope.queryString);
+        console.log(status);
+        console.log(status);
+        console.log(labels);
         console.log($scope.queryString);
     };
 
@@ -355,4 +355,33 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
+
+
+    $scope.filterLabels = [];
+    $scope.chooseFilterLabel = function(label, key, isChecked){
+        if(isChecked == undefined || isChecked == false)
+        {
+            $scope.labels[key].checked = true;
+            $scope.filterLabels.push(label);
+        }
+        else{
+            $scope.labels[key].checked = false;
+            $scope.filterLabels = $scope.filterLabels.filter(function(oldLabel){
+                return oldLabel.id !== label.id;
+            });
+        }
+        $scope.doFilter();
+    };
+
+    $scope.removeFilterLabel = function(label){
+        $scope.filterLabels = $scope.filterLabels.filter(function(oldLabel){
+            return oldLabel.id !== label.id;
+        });
+
+        $scope.labels.forEach(function(orgLabel, key){
+            if(orgLabel.id == label.id){
+                $scope.labels[key].checked = false;
+            }
+        });
+    }
 });
