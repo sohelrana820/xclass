@@ -62,6 +62,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             if(res.result.success){
                 $scope.tasks = res.result.data;
                 $scope.totalTasks = res.result.count;
+                $scope.count_all = res.result.count_all;
             }
         });
     };

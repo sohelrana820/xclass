@@ -1,7 +1,8 @@
 <?php echo $this->assign('title', 'Manage Task'); ?>
 
 <div ng-controller="TasksCtrl">
-    <div class="page-header" ng-show="tasks.length > 0">
+
+    <div class="page-header" ng-show="count_all > 0">
         <h2 class="title pull-left">
             Manage Task
             <p class="sub-title">
@@ -14,7 +15,7 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="col-lg-12 col-md-12" ng-show="tasks.length > 0">
+    <div class="col-lg-12 col-md-12">
         <div class="filter_bar">
 
             <a class="close_task" ng-click="doFilter(filterQuery.status = 'closed')">
@@ -114,7 +115,7 @@
             <div class="clearfix"></div>
 
         </div>
-        <table class="table task_list_table">
+        <table class="table task_list_table" ng-show="tasks.length > 0">
             <tbody>
             <tr ng-repeat="task in tasks">
                 <td style="width: 50px;">
@@ -156,7 +157,7 @@
         </table>
     </div>
 
-    <div class="col-lg-8 col-lg-offset-2" ng-show="tasks.length < 1">
+    <div class="col-lg-8 col-lg-offset-2" ng-show="count_all < 1">
         <div class="empty_block">
             <span class="icon">
                 <i class="fa fa-bullhorn" aria-hidden="true"></i>

@@ -91,12 +91,14 @@ class TasksController extends AppController
             }
 
             $tasks->all();
+            $countAll = $this->Tasks->find('all')->count();
 
             $response = [
                 'success' => true,
                 'message' => 'List of tasks',
                 'count' => $tasks->count(),
                 'data' => $tasks,
+                'count_all' => $countAll,
             ];
             $this->set('result', $response);
             $this->set('_serialize', ['result']);
