@@ -121,16 +121,39 @@
 
         </div>
         <div class="filter_options">
-            <ul class="filter_user">
-                Author:
-                <li ng-repeat="user in filtterAuthor">
-                    {{user.profile.first_name}} {{user.profile.last_name}}
-                    <span class="red" ng-click="removeAuthor(user)">X</span>
-                </li>
-            </ul>
 
+            <div class="filter_option_bar" ng-show="filterLabels.length > 0">
+                <h2>Label:</h2>
+                <ul class="filter_user">
+                    <li ng-repeat="label in filterLabels">
+                        {{label.name}}
+                        <span class="red" ng-click="removeTaskLabels(taskLabel)">X</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="filter_option_bar"  ng-show="filtterAuthor.length > 0">
+                <h2>Author:</h2>
+                <ul class="filter_user">
+                    <li ng-repeat="user in filtterAuthor">
+                        {{user.profile.first_name}} {{user.profile.last_name}}
+                        <span class="red" ng-click="removeAuthor(user)">X</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="filter_option_bar" ng-show="filtterAssignee.length > 0">
+                <h2>Assignee:</h2>
+                <ul class="filter_user">
+                    <li ng-repeat="user in filtterAssignee">
+                        {{user.profile.first_name}} {{user.profile.last_name}}
+                        <span class="red" ng-click="removeAssignee(user)">X</span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
+        <div class="clearfix"></div>
         <table class="table task_list_table" ng-show="tasks.length > 0">
             <tbody>
             <tr ng-repeat="task in tasks">
