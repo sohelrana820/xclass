@@ -37,10 +37,16 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
 
+    $scope.queryFilter = {
+        'status': 1,
+        'labels[]': [1, 2, 3, 4]
+    };
+
     /**
      * Getting application active users.
      */
     $scope.fetchUserLists = function(){
+
         var users = UsersResources.query().$promise;
         users.then(function (res) {
             if(res.result.success){
@@ -55,7 +61,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active users.
      */
     $scope.fetchTaskLists = function(){
-        var tasks = TasksResources.query().$promise;
+        var tasks = TasksResources.query($scope.queryFilter).$promise;
         tasks.then(function (res) {
             if(res.result.success){
                 $scope.tasks = res.result.data;

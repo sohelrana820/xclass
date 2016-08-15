@@ -21,79 +21,48 @@ class TasksController extends AppController
         $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
         $conditions = [
-
+            'Tasks.status'  => 1
         ];
-
-        if(isset($this->request->query) && $this->request->query)
-        {
-            $response = $this->Utilities->buildTaskListConditions($this->request->query);
-            $conditions = array_merge($conditions, $response);
-        }
-
-        var_dump($conditions);
-
-        $tasks = $this->Tasks->find('all', [
-            'conditions' => $conditions,
-            'fields' => ['Tasks.id', 'Tasks.task', 'Tasks.status', 'Tasks.created', 'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic'],
-            'contain' => [
-                'Comments' => [
-                    'fields'=> ['Comments.task_id'],
-                ],
-                'Labels' => [
-                    'fields'=> ['TasksLabels.task_id', 'name', 'color_code'],
-                ],
-                'Users' => [
-                    'fields'=> ['UsersTasks.task_id', 'id', 'username'],
-                ],
-                'Users.Profiles' => [
-                    'fields'=> ['UsersTasks.task_id', 'id', 'first_name', 'last_name', 'profile_pic'],
-                ]
-            ],
-            'join' => [
-                'createdUser' => [
-                    'table' => 'users',
-                    'type' => 'LEFT',
-                    'conditions' => 'createdUser.id = Tasks.created_by'
-                ],
-                'createdUserProfile' => [
-                    'table' => 'profiles',
-                    'type' => 'LEFT',
-                    'conditions' => 'createdUserProfile.id = Tasks.created_by'
-                ],
-            ],
-            'limit' => $this->paginationLimit,
-            'order' => ['Tasks.id' => 'desc']
-        ]);
-
-        $result = $tasks->toArray();
-        $count = $this->Tasks->find('all', ['conditions' => $conditions])->count();
-        var_dump($count);
-        var_dump($result);
-        die();
 
         if($this->request->params['_ext'] != 'json'){
             $this->set('tasks', $this->paginate($this->Tasks));
             $this->set('_serialize', ['tasks']);
         }
         else {
-            $tasks = $this->Tasks->find('all', [
-                'conditions' => $conditions,
-                'fields' => ['Tasks.id', 'Tasks.task', 'Tasks.status', 'Tasks.created', 'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic'],
-                'contain' => [
-                    'Comments' => [
-                        'fields'=> ['Comments.task_id'],
-                    ],
-                    'Labels' => [
-                        'fields'=> ['TasksLabels.task_id', 'name', 'color_code'],
-                    ],
-                    'Users' => [
-                        'fields'=> ['UsersTasks.task_id', 'id', 'username'],
-                    ],
-                    'Users.Profiles' => [
-                        'fields'=> ['UsersTasks.task_id', 'id', 'first_name', 'last_name', 'profile_pic'],
-                    ]
-                ],
-                'join' => [
+            if (isset($this->request->query['status'])) {
+                $conditions = array_merge($conditions, ['Tasks.status' => $this->request->query['status']]);
+            }
+
+            $tasks = $this->Tasks->find();
+            $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+            $tasks->where($conditions);
+            $tasks->contain(
+                [
+                    'Users' => function($q){
+                        $q->select(['uuid', 'username']);
+                        $q->autoFields(false);
+                        return $q;
+                    },
+                    'Users.Profiles' => function($q){
+                        $q->select(['first_name', 'last_name', 'profile_pic']);
+                        $q->autoFields(false);
+                        return $q;
+                    },
+                    'Labels' => function($q){
+                        $q->select(['name', 'color_code']);
+                        $q->autoFields(false);
+                        return $q;
+                    },
+                    'Comments' => function($q){
+                        $q->select(['id']);
+                        $q->autoFields(false);
+                        return $q;
+                    }
+                ]
+            );
+
+            $tasks->join(
+                [
                     'createdUser' => [
                         'table' => 'users',
                         'type' => 'LEFT',
@@ -104,17 +73,22 @@ class TasksController extends AppController
                         'type' => 'LEFT',
                         'conditions' => 'createdUserProfile.id = Tasks.created_by'
                     ],
-                ],
-                'limit' => $this->paginationLimit,
-                'order' => ['Tasks.id' => 'desc']
-            ]);
+                ]
+            );
 
-            $count = $this->Tasks->find('all', ['conditions' => $conditions])->count();
+            if (isset($this->request->query['labels'])) {
+                $tasks->matching('TasksLabels', function ($q) {
+                    return $q->where(['TasksLabels.label_id IN' => $this->request->query['labels']]);
+                });
+            }
+
+            $tasks->all();
+
             $response = [
                 'success' => true,
                 'message' => 'List of tasks',
+                'count' => $tasks->count(),
                 'data' => $tasks,
-                'count' => $count,
             ];
             $this->set('result', $response);
             $this->set('_serialize', ['result']);

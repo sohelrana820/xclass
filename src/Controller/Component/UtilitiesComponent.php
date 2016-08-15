@@ -69,16 +69,6 @@ class UtilitiesComponent extends Component
      * @param null $query
      * @return array
      */
-    public function buildTaskListConditions($query = null)
-    {
-        $conditions = [];
-
-        if (isset($query['status'])) {
-            $conditions = array_merge($conditions, ['Tasks.status' => $query['status']]);
-        }
-
-        return $conditions;
-    }
 
     public function uploadProfilePhoto($path, $documents)
     {

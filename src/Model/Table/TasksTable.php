@@ -50,6 +50,10 @@ class TasksTable extends Table
             'targetForeignKey' => 'user_id',
             'joinTable' => 'users_tasks'
         ]);
+
+        $this->hasMany('TasksLabels', [
+            'foreignKey' => 'task_id'
+        ]);
     }
 
     /**
