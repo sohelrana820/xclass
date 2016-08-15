@@ -155,6 +155,15 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="empty_block" ng-show="tasks.length < 1">
+            <span class="icon">
+                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+            </span>
+            <br/>
+            <br/>
+            <h2>Sorry! no result found</h2>
+        </div>
     </div>
 
     <div class="col-lg-8 col-lg-offset-2" ng-show="count_all < 1">
