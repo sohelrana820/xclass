@@ -54,6 +54,10 @@ class TasksTable extends Table
         $this->hasMany('TasksLabels', [
             'foreignKey' => 'task_id'
         ]);
+
+        $this->hasMany('UsersTasks', [
+            'foreignKey' => 'task_id'
+        ]);
     }
 
     /**

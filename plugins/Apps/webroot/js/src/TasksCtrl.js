@@ -39,7 +39,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.queryFilter = {
         'status': 1,
-        'labels[]': [1, 2, 3, 4]
+        /*'labels[]': [1, 2, 3, 4],*/
+        'users[]': [12, 3, 3, 4]
     };
 
     /**

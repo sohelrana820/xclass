@@ -76,9 +76,15 @@ class TasksController extends AppController
                 ]
             );
 
-            if (isset($this->request->query['labels'])) {
+            if (isset($this->request->query['labels']) && is_array($this->request->query['labels'])) {
                 $tasks->matching('TasksLabels', function ($q) {
                     return $q->where(['TasksLabels.label_id IN' => $this->request->query['labels']]);
+                });
+            }
+
+            if (isset($this->request->query['users']) && is_array($this->request->query['users'])) {
+                $tasks->matching('UsersTasks', function ($q) {
+                    return $q->where(['UsersTasks.user_id IN' => $this->request->query['users']]);
                 });
             }
 
