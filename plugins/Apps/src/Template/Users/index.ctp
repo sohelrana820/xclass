@@ -21,6 +21,7 @@
             <th>Email</th>
             <th>Phone</th>
             <th>Gender</th>
+            <th>User Type</th>
             <th>Status</th>
             <th class="text-right">Action</th>
         </tr>
@@ -48,6 +49,16 @@
                         <span class="orange">Male (<i class="fa fa-male"></i>)</span>
                     <?php elseif ($user->profile->gender == 2): ?>
                         <span class="green">Female (<i class="fa fa-female"></i>)</span>
+                    <?php else: ?>
+                        N/A
+                    <?php endif; ?>
+                </td>
+
+                <td>
+                    <?php if ($user->role == 1): ?>
+                        <strong class="text-muted">Admin</strong>
+                    <?php elseif ($user->role == 2): ?>
+                        <span class="text-muted"">General</span>
                     <?php else: ?>
                         N/A
                     <?php endif; ?>
