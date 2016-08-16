@@ -43,16 +43,75 @@ class InstallationController extends AppController{
             'database' => 'task_manager3',
         ];
         try {
-            $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database'].'';
+            /*$dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database'].'';
             ConnectionManager::config('application_database', ['url' => $dsn]);
             $connection = ConnectionManager::get('application_database');
             $structureSql = new File(CONFIG.'schema/structure.sql');
-            $connection->query($structureSql->read());
+            $connection->query($structureSql->read());*/
+
+
+            $iniConf = parse_ini_file(CONFIG.'config.ini');
+            var_dump($iniConf);
+
+            $iniData = InstallationController::readIni(CONFIG . 'config.ini');
+            //$iniData['DATABASE_HOST'] = $dbConf['host'];
+           // $iniData['DATABASE_NAME'] = $dbConf['database'];
+           // $iniData['DATABASE_USERNAME'] = $dbConf['username'];
+            $iniData['HELLO'] = $dbConf['password'];
+
+            var_dump(InstallationController::writeToIni($iniData, CONFIG . 'config.ini'));
         }
+
         catch(Exception $e){
             var_dump($e->getMessage());
         }
     }
+
+    public static function readIni($fileName)
+    {
+        return parse_ini_file($fileName);
+    }
+
+    public static function writeToIni($array, $file)
+    {
+        $res = array();
+        foreach ($array as $key => $val) {
+            if (is_array($val)) {
+                $res[] = "[$key]";
+                foreach ($val as $skey => $sval) {
+                    $res[] = "$skey = " . (is_numeric($sval) ? $sval : '"' . $sval . '"');
+                }
+            } else {
+                $res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
+            }
+        }
+        if (InstallationController::safeFilereWrite($file, implode("\r\n", $res))) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function safeFilereWrite($fileName, $dataToSave)
+    {
+        if ($fp = fopen($fileName, 'w')) {
+            $startTime = microtime();
+            do {
+                $canWrite = flock($fp, LOCK_EX);
+                if (!$canWrite) {
+                    usleep(round(rand(0, 100) * 1000));
+                }
+            } while ((!$canWrite)and((microtime() - $startTime) < 1000));
+            if ($canWrite) {
+                fwrite($fp, $dataToSave);
+                flock($fp, LOCK_UN);
+            }
+            fclose($fp);
+            return true;
+        }
+        return false;
+    }
+
 
     public function general()
     {
