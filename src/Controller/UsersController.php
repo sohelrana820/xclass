@@ -57,7 +57,7 @@ class UsersController extends AppController{
             );
 
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('Signup successful! Please check your email to verify your email'));
+                $this->Flash->success(__('Signup successful! Please check your email to verify your email address'));
                 $this->Email->signupConfirmEmail($data, $verifyCode);
                 return $this->redirect($this->Auth->redirectUrl());
             }
@@ -118,7 +118,7 @@ class UsersController extends AppController{
 
             if(!$this->request->data['username'])
             {
-                $this->Flash->error(__('Please enter email address'));
+                $this->Flash->error(__('Please enter valid email address'));
                 return $this->redirect(['controller' => 'users', 'action' => 'forgot-password']);
             }
 
@@ -215,7 +215,7 @@ class UsersController extends AppController{
         if ($this->request->is(['patch', 'post', 'put'])) {
             $profile = $this->Users->patchEntity($profile, $this->request->data);
             if ($this->Users->save($profile)) {
-                $this->Flash->success(__('Your profile is updated'));
+                $this->Flash->success(__('Your profile has been updated successfully'));
                 return $this->redirect(['users' > 'users', 'action' => 'profile']);
             } else {
                 $this->Flash->error(__('Sorry, something went wrong'));
@@ -243,7 +243,7 @@ class UsersController extends AppController{
             );
             $profile->password = $this->request->data['new_password'];
             if ($this->Users->save($profile)) {
-                $this->Flash->success(__('Password changes successfully'));
+                $this->Flash->success(__('Password has been changed successfully'));
                 return $this->redirect(['users' > 'users', 'action' => 'profile']);
             } else {
                 $this->Flash->error(__('Sorry, something went wrong'));
@@ -262,7 +262,7 @@ class UsersController extends AppController{
     {
         $isChanged = $this->changeProfilePhoto($this->userID, $this->loggedInUser->uuid);
         if ($isChanged) {
-            $this->Flash->success(__('Your profile photo updated successfully'));
+            $this->Flash->success(__('Your profile photo has been updated successfully'));
         } else {
             $this->Flash->error(__('Sorry, something went wrong'));
         }
@@ -443,7 +443,7 @@ class UsersController extends AppController{
 
         $isChanged = $this->changeProfilePhoto($userID, $uuid);
         if ($isChanged) {
-            $this->Flash->success(__('Profile photo updated successfully'));
+            $this->Flash->success(__('Profile photo has been updated successfully'));
         } else {
             $this->Flash->error(__('Sorry, something went wrong'));
         }
@@ -469,9 +469,9 @@ class UsersController extends AppController{
 
         $user = $this->Users->get($userID);
         if ($this->Users->delete($user)) {
-            $this->Flash->error(__('The user has been deleted'));
+            $this->Flash->error(__('User has been deleted successfully'));
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again'));
+            $this->Flash->error(__('User could not be deleted. Please, try again'));
         }
         return $this->redirect(['action' => 'index']);
     }
