@@ -34,7 +34,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
                     Flash.create('success', res.result.message);
                 }
                 else{
-                    Flash.create('error', res.result.message);
+                    Flash.create('danger', res.result.message);
                 }
             });
         }
@@ -81,7 +81,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
                 $scope.labels = $scope.labels.filter(function(label){
                     return label.id !== id
                 });
-                Flash.create('info', res.result.message);
+                Flash.create('danger', res.result.message);
             }
             else{
                 Flash.create('error', res.result.message);

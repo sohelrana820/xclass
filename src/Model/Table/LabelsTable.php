@@ -62,11 +62,6 @@ class LabelsTable extends Table
             ->requirePresence('created_by', 'create')
             ->notEmpty('created_by');
 
-        $validator
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
-
         return $validator;
     }
 }
