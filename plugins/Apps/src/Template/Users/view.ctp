@@ -26,6 +26,13 @@
         </div>
         <!-- edit form column -->
         <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
+            <?php  if($user->role == 2):?>
+                <span class="status-button status-gray">Type: General User</span>
+            <?php elseif($user->role == 1):?>
+                <span class="status-button status-success">Type: Admin User</span>
+            <?php endif;?>
+            <br/>
+            <br/>
             <ul class="data-list data-list-stripe">
                 <li><strong>Name: </strong> <?php echo $user->profile->name ? $user->profile->name : 'N/A';?></li>
                 <li><strong>Email: </strong> <?php echo $user->username;?></li>

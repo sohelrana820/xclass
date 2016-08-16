@@ -134,6 +134,25 @@
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>User Type</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="role" value="1" <?php if($user->role == 1){echo 'checked';}?>>Admin User
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="role" value="2" <?php if($user->role == 2){echo 'checked';}?>>General User
+                            </label>
+                        </div>
+                        <?php echo $this->Form->error('role')?>
+                    </div>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-success">Update Profile</button>
             <?php echo $this->Form->end();?>
         </div>

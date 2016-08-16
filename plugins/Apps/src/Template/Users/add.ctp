@@ -66,6 +66,7 @@
             </div>
         </div>
     </div>
+
     <div class="clearfix"></div>
 
     <div class="col-lg-4">
@@ -110,6 +111,24 @@
         <div class="form-group">
             <label>Postal Code</label>
             <?php echo $this->Form->input('profile.postal_code', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Postal code', 'label' => false, 'required' => false]);?>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label>User Type</label>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="role" value="1">Admin User
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="role" value="2">General User
+                </label>
+            </div>
+            <?php echo $this->Form->error('role')?>
         </div>
     </div>
     <div class="clearfix"></div>

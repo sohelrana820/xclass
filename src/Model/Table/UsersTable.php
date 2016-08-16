@@ -96,6 +96,12 @@ class UsersTable extends Table
             );
 
 
+        $validator
+            ->requirePresence('role', 'create', 'User role must be required!')
+            ->notEmpty('role', 'User role must be required!');
+
+
+
         return $validator;
     }
 
