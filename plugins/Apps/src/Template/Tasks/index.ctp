@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="col-lg-12 col-md-12">
+    <div class="col-lg-12 col-md-12" ng-show="count_all > 0">
         <div class="filter_bar">
 
             <a class="close_task" ng-click="doFilter(filterQuery.status = 'all')">
