@@ -23,7 +23,13 @@ class LabelsController extends AppController
      */
     public function index()
     {
+        $conditions = [];
+
+        if (isset($this->request->query['status'])) {
+            $conditions = array_merge($conditions, ['Labels.status' => $this->request->query['status']]);
+        }
         $this->paginate = [
+            'conditions' => $conditions,
             'limit' => 50,
             'order' => ['Labels.created' => 'DESC'],
         ];

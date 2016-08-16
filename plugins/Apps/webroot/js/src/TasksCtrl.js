@@ -72,7 +72,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active label list.
      */
     $scope.fetchLabelLists = function(){
-        var labels = LabelResources.query().$promise;
+        var labels = LabelResources.query({status: 1}).$promise;
         labels.then(function (res) {
             if(res.result.success){
                 $scope.labels = res.result.data;
