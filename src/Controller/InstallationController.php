@@ -43,15 +43,9 @@ class InstallationController extends AppController{
             'database' => 'task_manager3',
         ];
         try {
-            $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/';
-            ConnectionManager::config('create_database', ['url' => $dsn]);
-            $connection = ConnectionManager::get('create_database');
-            $connection->query('CREATE DATABASE IF NOT EXISTS '.$dbConf['database']);
-
             $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database'].'';
             ConnectionManager::config('application_database', ['url' => $dsn]);
             $connection = ConnectionManager::get('application_database');
-
             $structureSql = new File(CONFIG.'schema/structure.sql');
             $connection->query($structureSql->read());
         }
