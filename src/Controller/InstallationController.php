@@ -14,6 +14,7 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
 use Cake\Filesystem\File;
 use Cake\Filesystem\Folder;
+use Cake\Network\Http\Request;
 use Phinx\Config\Config;
 
 class InstallationController extends AppController{
@@ -22,6 +23,7 @@ class InstallationController extends AppController{
 
     public $requirementAnalysis = true;
 
+    public $iniFile;
 
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
@@ -50,9 +52,8 @@ class InstallationController extends AppController{
 
         $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
         $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
-        InstallationController::writeToIni($iniData, ROOT.'/Conf/config.ini');
+        InstallationController::writeToIni($iniData);
     }
-
 
     protected function checkPermission($path){
         if(is_writable($path)){
@@ -74,6 +75,12 @@ class InstallationController extends AppController{
 
     public function database()
     {
+        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        if(!$iniData['REQUIREMENT_ANALYSIS_RESULT'] == 1){
+            $this->Flash->error(__('Sorry, Requirement analysis failed'));
+            return $this->redirect(['action' => 'requirements']);
+        }
+
         $dbConf = [
             'host' => 'localhost',
             'username' => 'root',
@@ -87,17 +94,11 @@ class InstallationController extends AppController{
             $structureSql = new File(CONFIG.'schema/structure.sql');
             $connection->query($structureSql->read());*/
 
-
-            $iniConf = parse_ini_file(CONFIG.'config.ini');
-            var_dump($iniConf);
-
-            $iniData = InstallationController::readIni(CONFIG . 'config.ini');
-            //$iniData['DATABASE_HOST'] = $dbConf['host'];
-           // $iniData['DATABASE_NAME'] = $dbConf['database'];
-           // $iniData['DATABASE_USERNAME'] = $dbConf['username'];
+            $iniData['DATABASE_HOST'] = $dbConf['host'];
+            $iniData['DATABASE_NAME'] = $dbConf['database'];
+            $iniData['DATABASE_USERNAME'] = $dbConf['username'];
             $iniData['HELLO'] = $dbConf['password'];
-
-            var_dump(InstallationController::writeToIni($iniData, CONFIG . 'config.ini'));
+            InstallationController::writeToIni($iniData);
         }
 
         catch(Exception $e){
@@ -110,7 +111,7 @@ class InstallationController extends AppController{
         return parse_ini_file($fileName);
     }
 
-    public static function writeToIni($array, $file)
+    public static function writeToIni($array)
     {
         $res = array();
         foreach ($array as $key => $val) {
@@ -123,7 +124,7 @@ class InstallationController extends AppController{
                 $res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
             }
         }
-        if (InstallationController::safeFilereWrite($file, implode("\r\n", $res))) {
+        if (InstallationController::safeFilereWrite(ROOT.'/Conf/config.ini', implode("\r\n", $res))) {
             return true;
         }
         return false;

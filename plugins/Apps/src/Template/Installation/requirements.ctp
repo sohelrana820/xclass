@@ -1,5 +1,5 @@
 <div class="text-left" >
-    <h2 class="text-center">Checking Requirements!</h2>
+    <h2 class="text-center">Requirements Analysis</h2>
     <br/>
 
     <ul class="nav-list requirement_list">
