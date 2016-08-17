@@ -10,7 +10,7 @@
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <!-- Bootstrap core CSS -->
-    <?php echo $this->Html->css(array('bootstrap'));?>
+    <?php echo $this->Html->css(array('bootstrap', 'font-awesome/css/font-awesome',));?>
     <!--external css-->
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 

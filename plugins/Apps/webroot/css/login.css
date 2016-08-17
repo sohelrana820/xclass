@@ -84,3 +84,41 @@ body{
     color: #d9534f;
     text-decoration: none;
 }
+
+.requirement_list{
+    margin: 0px;
+    padding: 10px;
+}
+
+.requirement_list li{
+    margin-bottom: 25px;
+    list-style: none;
+}
+
+
+
+.requirement_list img{
+    width: 30px;
+}
+
+
+.install_ok, .install_ok:hover {
+    padding: 4px 5px;
+    color: yellowgreen;
+    background: transparent;
+    font-size: 12px;
+    border-radius: 50px;
+    border: 2px solid yellowgreen;
+    margin-right: 4px;
+}
+
+
+.install_error, .install_error:hover {
+    padding: 4px 7px;
+    color: #d9534f;
+    background: transparent;
+    font-size: 12px;
+    border-radius: 50px;
+    border: 2px solid #d9534f;
+    margin-right: 4px;
+}
