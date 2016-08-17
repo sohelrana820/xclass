@@ -59,7 +59,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Utilities');
         $this->loadComponent('Email');
-        /*$this->loadComponent('Auth', [
+        $this->loadComponent('Auth', [
                 'loginRedirect' => [
                     'controller' => 'Dashboard',
                     'action' => 'index'
@@ -69,14 +69,14 @@ class AppController extends Controller
                     'action' => 'login',
                 ]
             ]
-        );*/
+        );
         $this->loadModel('Users');
     }
 
     public function beforeFilter(Event $event)
     {
-        //$this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'resetPassword', 'Installation']);
-        //$this->userID = $this->Auth->user('id');
+        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'resetPassword', 'Installation']);
+        $this->userID = $this->Auth->user('id');
         $this->loggedInUser = $this->Users->getUserByID($this->userID);
 
         $this->set('title', $this->appsName);
