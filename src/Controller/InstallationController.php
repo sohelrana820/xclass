@@ -13,6 +13,8 @@ use Cake\Core\Exception\Exception;
 use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
 use Cake\Filesystem\File;
+use Cake\Filesystem\Folder;
+use Phinx\Config\Config;
 
 class InstallationController extends AppController{
 
@@ -32,6 +34,15 @@ class InstallationController extends AppController{
     public function requirements()
     {
 
+
+
+        $dir = new Folder(CONFIG.'config.ini', true, 0755);
+        $requirements = [
+            'config_file_exiest' => false,
+            'config_file_writable' => false,
+            'profile_dir_exiest' => false,
+            'profile_dir_writeble' => false,
+        ];
     }
 
     public function database()

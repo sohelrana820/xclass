@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  ng-app="Application">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,9 +45,11 @@
     </div>
 </div>
 
-<!-- js placed at the end of the document so the pages load faster -->
-<?php echo $this->Html->script(array('jquery', 'bootstrap.min'));?>
-
-<?php echo $this->fetch('jsBottom'); ?>
+<?php
+echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));
+echo $this->Html->script(['angular.min', 'angular-flash.min', 'angular-toastr.tpls.js']);
+echo $this->Html->script(['src/installation']);
+echo $this->fetch('jsBottom');
+?>
 </body>
 </html>
