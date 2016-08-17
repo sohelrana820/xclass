@@ -54,6 +54,7 @@ class InstallationController extends AppController{
         $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
         $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
         $iniData['DATABASE_CONFIGURATION_RESULT'] = false;
+        $iniData['EMAIL_CONFIGURATION_RESULT'] = false;
         InstallationController::writeToIni($iniData);
     }
 
@@ -214,6 +215,22 @@ class InstallationController extends AppController{
 
     public function emailConfig()
     {
+        if($this->request->is('post')){
+            $emilConf = $this->request->data['email'];
+            $iniData['EMAIL_HOST'] = $emilConf['host'];
+            $iniData['EMAIL_PORT'] = $emilConf['port'];
+            $iniData['EMAIL_USERNAME'] = $emilConf['username'];
+            $iniData['EMAIL_PASSWORD'] = $emilConf['password'];
+            $iniData['EMAIL_CONFIGURATION_RESULT'] = true;
 
+            $iniData['DATABASE_CONFIGURATION_RESULT'] = true;;
+            if(InstallationController::writeToIni($iniData)){
+                $this->Flash->success(__('Installation has been completed successfully'));
+                return $this->redirect(['controller' => 'users', 'action' => 'login']);
+            }
+            else{
+                $this->Flash->error(__('Sorry! something went wrong'));
+            }
+        }
     }
 } 
