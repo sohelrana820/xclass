@@ -15,6 +15,7 @@ use Cake\Event\Event;
 use Cake\Filesystem\File;
 use Cake\Filesystem\Folder;
 use Cake\Network\Http\Request;
+use Cake\Utility\Text;
 use Phinx\Config\Config;
 
 class InstallationController extends AppController{
@@ -174,15 +175,41 @@ class InstallationController extends AppController{
              */
             $iniData['APPLICATION_NAME'] = $general['application_name'];
             $iniData['APPLICATION_LOGO'] = $general['application_logo'];
-            InstallationController::writeToIni($iniData);
-            $this->Flash->success(__('General configuration completed successfully'));
-            return $this->redirect(['action' => 'administrator']);
+            if(InstallationController::writeToIni($iniData)){
+                $this->Flash->success(__('General configuration completed successfully'));
+                return $this->redirect(['action' => 'administrator']);
+            }
+            else {
+                $this->Flash->error(__('Sorry! something went wrong'));
+            }
         }
     }
 
     public function administrator()
     {
+        $user = $this->Users->newEntity();
+        if ($this->request->is('post')) {
+            $data = $this->request->data;
+            $data['uuid'] = Text::uuid();
+            $data['role'] = 1;
 
+            $user = $this->Users->newEntity(
+                $data,
+                [
+                    'associated' => ['Profiles']
+                ]
+            );
+
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Administrator setup completed successfully'));
+                return $this->redirect(['action' => 'email_config']);
+            }
+            else {
+                $this->Flash->error(__('Sorry! something went wrong'));
+            }
+        }
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
     }
 
     public function emailConfig()
