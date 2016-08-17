@@ -156,7 +156,28 @@ class InstallationController extends AppController{
 
     public function general()
     {
+        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        if(!$iniData['DATABASE_CONFIGURATION_RESULT'] == 1){
+            $this->Flash->error(__('Sorry, database configuration invalid'));
+            return $this->redirect(['action' => 'requirements']);
+        }
 
+        if($this->request->is('post')){
+            $data = $this->request->data['application'];
+            $general = [
+                'application_name' => $data['name'],
+                'application_logo' => base64_encode(file_get_contents($data['logo']['tmp_name']))
+            ];
+
+            /**
+             * Need to write data into database.
+             */
+            $iniData['APPLICATION_NAME'] = $general['application_name'];
+            $iniData['APPLICATION_LOGO'] = $general['application_logo'];
+            InstallationController::writeToIni($iniData);
+            $this->Flash->success(__('General configuration completed successfully'));
+            return $this->redirect(['action' => 'administrator']);
+        }
     }
 
     public function administrator()
