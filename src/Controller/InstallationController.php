@@ -33,10 +33,7 @@ class InstallationController extends AppController{
 
     public function requirements()
     {
-
-
-
-        $dir = new Folder(CONFIG.'config.ini', true, 0755);
+        $dir = new File(ROOT.'/Conf/config.ini', true, 0755);
         $requirements = [
             'config_file_exiest' => false,
             'config_file_writable' => false,
