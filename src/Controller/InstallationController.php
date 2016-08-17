@@ -215,15 +215,15 @@ class InstallationController extends AppController{
 
     public function emailConfig()
     {
+
         if($this->request->is('post')){
+            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
             $emilConf = $this->request->data['email'];
             $iniData['EMAIL_HOST'] = $emilConf['host'];
             $iniData['EMAIL_PORT'] = $emilConf['port'];
             $iniData['EMAIL_USERNAME'] = $emilConf['username'];
             $iniData['EMAIL_PASSWORD'] = $emilConf['password'];
             $iniData['EMAIL_CONFIGURATION_RESULT'] = true;
-
-            $iniData['DATABASE_CONFIGURATION_RESULT'] = true;;
             if(InstallationController::writeToIni($iniData)){
                 $this->Flash->success(__('Installation has been completed successfully'));
                 return $this->redirect(['controller' => 'users', 'action' => 'login']);
