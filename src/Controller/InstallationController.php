@@ -20,6 +20,9 @@ class InstallationController extends AppController{
 
     public $name = 'Installation';
 
+    public $requirementAnalysis = true;
+
+
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
         $this->viewBuilder()
@@ -33,13 +36,40 @@ class InstallationController extends AppController{
 
     public function requirements()
     {
-        $dir = new File(ROOT.'/Conf/config.ini', true, 0755);
-        $requirements = [
-            'config_file_exiest' => false,
-            'config_file_writable' => false,
-            'profile_dir_exiest' => false,
-            'profile_dir_writeble' => false,
+        $data = [
+            $this->checkPermission(ROOT.'/Conf'),
+            $this->checkPermission(ROOT.'/tmp'),
+            $this->checkPermission(ROOT.'/logs'),
         ];
+
+        $requirements = [
+            'success' => $this->requirementAnalysis,
+            'data' => $data
+        ];
+        $this->set('requirements', $requirements);
+
+        $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
+        $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
+        InstallationController::writeToIni($iniData, ROOT.'/Conf/config.ini');
+    }
+
+
+    protected function checkPermission($path){
+        if(is_writable($path)){
+            $result = [
+                'mgs' => $path. ' directory is writable',
+                'result' => true
+            ];
+        }
+        else{
+            $this->requirementAnalysis = false;
+            $result = [
+                'mgs' => $path. ' directory isn\'t writable',
+                'result' => false
+            ];
+        }
+
+        return $result;
     }
 
     public function database()

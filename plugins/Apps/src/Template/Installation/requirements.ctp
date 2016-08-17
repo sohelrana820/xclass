@@ -1,40 +1,23 @@
-<div class="text-center" >
-    <h2>Checking Requirements!</h2> {{test}}
+<div class="text-left" >
+    <h2 class="text-center">Checking Requirements!</h2>
     <br/>
 
-    <ul class="nav-list text-left requirement_list">
+    <ul class="nav-list requirement_list">
+        <?php foreach($requirements['data'] as $requirement):?>
         <li>
-            <a ng-show="creating_config_file" class="install_ok"><i class="fa fa-check"></i></a>
-            <img ng-show="!creating_config_file" src="/img/default.gif" class="loader"/>
-            Config.ini file created (/var/www/condif/config.ini)
+            <?php if($requirement['result']):?>
+                <a class="install_ok"><i class="fa fa-check"></i></a>
+            <?php else:?>
+                <a class="install_error"><i class="fa fa-times"></i></a>
+            <?php endif;?>
+            <?php echo $requirement['mgs']?>
         </li>
-
-        <li>
-            <a ng-show="set_perm_config_file" class="install_ok"><i class="fa fa-check"></i></a>
-            <img ng-show="!set_perm_config_file" src="/img/default.gif" class="loader"/>
-            Set write permission (755) to config.ini
-        </li>
-        <li>
-            <a ng-show="creating_profile_dir" class="install_ok"><i class="fa fa-check"></i></a>
-            <img ng-show="!creating_profile_dir" src="/img/default.gif" class="loader"/>
-            profiles directory created (/var/www/webroot)
-        </li>
-        <li>
-            <a ng-show="ser_perm_profile_dir" class="install_ok"><i class="fa fa-check"></i></a>
-            <img ng-show="!ser_perm_profile_dir" src="/img/default.gif" class="loader"/>
-            Set write permission (755) to profiles directory
-        </li>
-        <li>
-            <a ng-show="ser_perm_log_dir" class="install_error"><i class="fa fa-times"></i></a>
-            <img ng-show="!ser_perm_log_dir" src="/img/default.gif" class="loader"/>
-            Set write permission (755) to logs directory directory
-        </li>
-        <li>
-            <a ng-show="ser_perm_tmp_dir" class="install_ok"><i class="fa fa-check"></i></a>
-            <img ng-show="!ser_perm_tmp_dir" src="/img/default.gif" class="loader"/>
-            Set write permission (755) to temp directory directory
-        </li>
+        <?php endforeach;?>
     </ul>
 
-    <a class="btn btn-success btn-lg" href="/installation/database">Next</a>
+    <a class="btn btn-success btn-lg" href="/installation/requirements">Check Again!</a>
+
+    <?php if($requirements['success']):?>
+        <a class="btn btn-success btn-lg" href="/installation/database">Next Process</a>
+    <?php endif;?>
 </div>
