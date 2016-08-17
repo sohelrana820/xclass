@@ -52,6 +52,7 @@ class InstallationController extends AppController{
 
         $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
         $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
+        $iniData['DATABASE_CONFIGURATION_RESULT'] = false;
         InstallationController::writeToIni($iniData);
     }
 
@@ -81,28 +82,29 @@ class InstallationController extends AppController{
             return $this->redirect(['action' => 'requirements']);
         }
 
-        $dbConf = [
-            'host' => 'localhost',
-            'username' => 'root',
-            'password' => 'ltqpsmr7',
-            'database' => 'task_manager3',
-        ];
-        try {
-            /*$dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database'].'';
-            ConnectionManager::config('application_database', ['url' => $dsn]);
-            $connection = ConnectionManager::get('application_database');
-            $structureSql = new File(CONFIG.'schema/structure.sql');
-            $connection->query($structureSql->read());*/
+        if($this->request->is('post')){
+            $dbConf = $this->request->data['database'];
+            try {
+                $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'].'';
+                ConnectionManager::config('application_database', ['url' => $dsn]);
+                $connection = ConnectionManager::get('application_database');
+                $connection->connect();
+                $structureSql = new File(CONFIG.'schema/structure.sql');
+                $connection->query($structureSql->read());
 
-            $iniData['DATABASE_HOST'] = $dbConf['host'];
-            $iniData['DATABASE_NAME'] = $dbConf['database'];
-            $iniData['DATABASE_USERNAME'] = $dbConf['username'];
-            $iniData['HELLO'] = $dbConf['password'];
-            InstallationController::writeToIni($iniData);
-        }
-
-        catch(Exception $e){
-            var_dump($e->getMessage());
+                $iniData['DATABASE_HOST'] = $dbConf['host'];
+                $iniData['DATABASE_USERNAME'] = $dbConf['username'];
+                $iniData['DATABASE_PASSWORD'] = $dbConf['password'];
+                $iniData['DATABASE_NAME'] = $dbConf['database_name'];
+                $iniData['DATABASE_CONFIGURATION_RESULT'] = true;;
+                InstallationController::writeToIni($iniData);
+                $this->Flash->success(__('Database configuration completed successfully'));
+                return $this->redirect(['action' => 'general']);
+            }
+            catch(Exception $e){
+                $this->Flash->error(__('Sorry, Invalid database configuration'));
+                return $this->redirect(['action' => 'database']);
+            }
         }
     }
 

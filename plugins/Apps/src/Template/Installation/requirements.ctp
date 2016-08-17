@@ -1,3 +1,5 @@
+<?php echo $this->assign('title', 'Requirements Analysis'); ?>
+
 <div class="text-left" >
     <h2 class="text-center">Requirements Analysis</h2>
     <br/>
