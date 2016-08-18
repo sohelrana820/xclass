@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use Cake\Event\Event;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
@@ -30,6 +31,10 @@ class UsersController extends AppController{
             }
             $this->Flash->error(__('Invalid username or password, Please try again'));
         }
+    }
+
+    public function beforeFilter(Event $event){
+        parent::beforeFilter($event);
     }
 
     /**

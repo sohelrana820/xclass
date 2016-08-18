@@ -202,3 +202,24 @@ DispatcherFactory::add('ControllerFactory');
 Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
 Plugin::loadAll();
+
+
+$iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+ConnectionManager::drop('application');
+
+if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIGURATION_RESULT']){
+    ConnectionManager::config('application', [
+        'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => $iniData['DATABASE_HOST'],
+        'username' => $iniData['DATABASE_USERNAME'],
+        'password' => $iniData['DATABASE_PASSWORD'],
+        'database' => $iniData['DATABASE_NAME'],
+        'encoding' => 'utf8',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,
+    ]);
+    $conn = ConnectionManager::get('application');
+    ConnectionManager::alias('application', 'default');
+}

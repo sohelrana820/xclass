@@ -54,6 +54,10 @@ class InstallationController extends AppController{
         $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
         $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
         $iniData['DATABASE_CONFIGURATION_RESULT'] = false;
+        $iniData['DATABASE_HOST'] = false;
+        $iniData['DATABASE_USERNAME'] = false;
+        $iniData['DATABASE_PASSWORD'] = false;
+        $iniData['DATABASE_NAME'] = false;
         $iniData['EMAIL_CONFIGURATION_RESULT'] = false;
         InstallationController::writeToIni($iniData);
     }
@@ -87,6 +91,7 @@ class InstallationController extends AppController{
         if($this->request->is('post')){
             $dbConf = $this->request->data['database'];
             try {
+
                 $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'].'';
                 ConnectionManager::config('application_database', ['url' => $dsn]);
                 $connection = ConnectionManager::get('application_database');
