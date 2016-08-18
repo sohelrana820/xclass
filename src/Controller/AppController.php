@@ -90,8 +90,8 @@ class AppController extends Controller
             }
         }
 
-        $this->set('title', $this->appsName);
-        $this->set('appsName', $this->appsName);
+        $this->set('title', $iniData['APPLICATION_NAME']);
+        $this->set('appsName', $iniData['APPLICATION_NAME']);
         $this->set('userInfo', $this->loggedInUser);
 
         $this->viewBuilder()
