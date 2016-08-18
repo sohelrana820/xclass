@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Controller\Controller;
+use Cake\Core\Configure;
 use Cake\Event\Event;
 
 /**
@@ -59,7 +60,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
         $this->loadComponent('Utilities');
         $this->loadComponent('Email');
-        /*$this->loadComponent('Auth', [
+        $this->loadComponent('Auth', [
                 'loginRedirect' => [
                     'controller' => 'Dashboard',
                     'action' => 'index'
@@ -69,16 +70,25 @@ class AppController extends Controller
                     'action' => 'login',
                 ]
             ]
-        );*/
+        );
         $this->loadModel('Users');
     }
 
     public function beforeFilter(Event $event)
     {
 
-        //$this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'resetPassword', 'Installation']);
-        //$this->userID = $this->Auth->user('id');
-        $this->loggedInUser = $this->Users->getUserByID($this->userID);
+        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
+        $this->userID = $this->Auth->user('id');
+
+        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
+            $this->loggedInUser = $this->Users->getUserByID($this->userID);
+        }
+        else {
+            if($this->request->param('controller') != 'Installation'){
+                return $this->redirect(['controller' => 'installation', 'action' => 'requirements']);
+            }
+        }
 
         $this->set('title', $this->appsName);
         $this->set('appsName', $this->appsName);

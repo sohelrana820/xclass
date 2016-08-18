@@ -92,10 +92,17 @@ class InstallationController extends AppController{
             $dbConf = $this->request->data['database'];
             try {
 
+                $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/';
+                ConnectionManager::config('create_database', ['url' => $dsn]);
+                $createDB = ConnectionManager::get('create_database');
+                $createDB->connect();
+                $createDB->query('CREATE DATABASE IF NOT EXISTS '.$dbConf['database_name']);
+
                 $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'].'';
-                ConnectionManager::config('application_database', ['url' => $dsn]);
-                $connection = ConnectionManager::get('application_database');
+                ConnectionManager::config('execute_tables', ['url' => $dsn]);
+                $connection = ConnectionManager::get('execute_tables');
                 $connection->connect();
+
                 $structureSql = new File(CONFIG.'schema/structure.sql');
                 $connection->query($structureSql->read());
 
@@ -229,6 +236,7 @@ class InstallationController extends AppController{
             $iniData['EMAIL_USERNAME'] = $emilConf['username'];
             $iniData['EMAIL_PASSWORD'] = $emilConf['password'];
             $iniData['EMAIL_CONFIGURATION_RESULT'] = true;
+            $iniData['INSTALLATION_RESULT'] = true;
             if(InstallationController::writeToIni($iniData)){
                 $this->Flash->success(__('Installation has been completed successfully'));
                 return $this->redirect(['controller' => 'users', 'action' => 'login']);

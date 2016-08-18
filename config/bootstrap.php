@@ -223,3 +223,4 @@ if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIG
     $conn = ConnectionManager::get('application');
     ConnectionManager::alias('application', 'default');
 }
+Configure::write('Security.salt', 'gfbdfgdfg2695965gf6d2gv6df5g9565fs6df5sd6f5s6df5s6df596');
