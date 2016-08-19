@@ -1,5 +1,6 @@
 body{
     font-family: 'Roboto Condensed', sans-serif;
+    background: #2f4050;
 }
 
 .margin-top-25{
@@ -17,11 +18,13 @@ body{
 }
 
 .login-widget{
-    background: #f8f8f8;
     padding: 20px 50px 50px 50px;
-    border: 1px solid #EEE;
-    border-radius: 2px;
-    box-shadow: 2px 4px 1px lightgray;
+    color: #FFF;
+}
+
+
+.login-widget img{
+    height: 50px;
 }
 
 .vertical-align {
@@ -121,4 +124,13 @@ body{
     border-radius: 50px;
     border: 2px solid #d9534f;
     margin-right: 4px;
+}
+
+.btn-lg-theme, .btn-lg-theme:hover  {
+    background: #1ab394;
+    color: #FFF;
+    padding: 10px 29px;
+    font-weight: 500;
+    font-size: 19px;
+    border-radius: 3px;
 }
