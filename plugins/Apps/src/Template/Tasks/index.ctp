@@ -46,8 +46,8 @@
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseAuthor(user, key, user.checked)"">
-                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                    <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                     {{user.profile.first_name}} {{user.profile.last_name}}
                                     <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
@@ -86,8 +86,8 @@
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseAssignee(user, key, user.checked)"">
-                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                    <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                     {{user.profile.first_name}} {{user.profile.last_name}}
                                     <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
@@ -178,8 +178,8 @@
                 </td>
                 <td>
                     <span ng-repeat="user in task.users">
-                        <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}" />
-                        <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg" />
+                        <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}" />
+                        <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg" />
                     </span>
                 </td>
                 <td>

@@ -18,7 +18,7 @@ class TasksController extends AppController
      */
     public function index()
     {
-        $this->checkPermission($this->isAdmin());
+        //$this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
         $conditions = [];
 

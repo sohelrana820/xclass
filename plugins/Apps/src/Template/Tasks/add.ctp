@@ -70,8 +70,8 @@
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseTaskUsers(user, key, user.checked)"">
-                                        <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                        <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                         {{user.profile.first_name}} {{user.profile.last_name}}
                                         <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
@@ -82,8 +82,8 @@
                     <div>
                         <ul class="task_users">
                             <li ng-repeat="user in taskUsers">
-                                <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                 {{user.profile.first_name}} {{user.profile.last_name}}
                                 <span class="pull-right red" ng-click="removeTaskUsers(user)">X</span>
                             </li>

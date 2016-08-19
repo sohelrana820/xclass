@@ -50,8 +50,8 @@
                 <div class="row" ng-repeat="comment in taskComments">
                     <div class="col-lg-11 col-lg-offset-1">
                         <div class="user_comments_avatar">
-                            <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" src="/img/profiles/{{comment.user.profile.profile_pic}}">
-                            <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                            <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
+                            <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                         </div>
                         <div class="panel panel-default comments_panel">
                             <div class="panel-heading">
@@ -127,8 +127,8 @@
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('user_event', user.checked)"">
-                                    <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                    <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                    <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                     {{user.profile.first_name}} {{user.profile.last_name}} {{user.checked}}
                                     <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                     </a>
@@ -139,8 +139,8 @@
                     <div>
                         <ul class="task_users">
                             <li ng-repeat="user in taskUsers">
-                                <img ng-if="user.profile.profile_pic != null" src="/img/profiles/{{user.profile.profile_pic}}">
-                                <img ng-if="!user.profile.profile_pic" src="/img/profile_avatar.jpg">
+                                <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                 {{user.profile.first_name}} {{user.profile.last_name}}
                                 <span class="pull-right red" ng-click="removeTaskUsers(user); quickUpdate('user_event', false)">X</span>
                             </li>
