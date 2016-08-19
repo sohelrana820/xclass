@@ -115,6 +115,11 @@ class InstallationController extends AppController{
         if($this->request->is('post')){
             $dbConf = $this->request->data['database'];
 
+            if (strpos($dbConf['database_name'], '-') !== false) {
+                $this->Flash->error(__('Sorry, Invalid database name. (-) not allow in database name'));
+                return $this->redirect(['action' => 'database']);
+            }
+
             try{
                 $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'].'';
                 ConnectionManager::config('is_db_exiest', ['url' => $dsn]);
@@ -125,8 +130,10 @@ class InstallationController extends AppController{
                 }
             }
             catch(Exception $e){
-
+                var_dump(111);
             }
+
+
 
             try {
 
