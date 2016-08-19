@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash, toastr, $timeout){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash, toastr, $timeout, BASE_URL){
     $scope.TaskObj = {};
 
     $scope.getTaskRelObj = function(){
@@ -27,7 +27,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.TaskObj = {};
                 Flash.create('success', res.result.message);
                 $timeout(function() {
-                    window.location.href = "/tasks";
+                    window.location.href = BASE_URL + "tasks";
                 }, 1000);
             }
             else{
@@ -274,7 +274,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 });
                 Flash.create('danger', res.result.message);
                 $timeout(function() {
-                    window.location.href = "/tasks";
+                    window.location.href = BASE_URL + "tasks";
                 }, 1000);
             }
             else{

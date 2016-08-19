@@ -1,5 +1,7 @@
 var app = angular.module('Application', ['ngResource', 'textAngular', 'color.picker', 'ngFlash', 'toastr']);
 
+app.constant('BASE_URL', localStorage.getItem('BASE_URL'));
+
 app.config(function($provide) {
     $provide.decorator('ColorPickerOptions', function($delegate) {
         var options = angular.copy($delegate);
@@ -9,8 +11,8 @@ app.config(function($provide) {
     });
 });
 
-app.controller('MainsCtrl', function($scope, LabelResources){
-
+app.controller('MainsCtrl', function($scope, LabelResources, BASE_URL){
+    $scope.BASE_URL = BASE_URL;
 /*    // Getting all active labels.
     $scope.fetchLabelsLists = function(){
         $scope.labels = [];

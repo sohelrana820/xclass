@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use Cake\Routing\Router;
 
 /**
  * Application Controller
@@ -45,7 +46,7 @@ class AppController extends Controller
 
     public $appsName = 'Task Manager';
 
-    public $baseUrl = 'http://localhost/task-manager';
+    public $baseUrl = null;
 
     public $emailFrom = 'info@task-manager.com';
 
@@ -79,6 +80,7 @@ class AppController extends Controller
 
         $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
         $this->userID = $this->Auth->user('id');
+        $this->baseUrl = Router::url('/', true);
 
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
         if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
@@ -93,10 +95,13 @@ class AppController extends Controller
         $this->set('title', $iniData['APPLICATION_NAME']);
         $this->set('appsName', $iniData['APPLICATION_NAME']);
         $this->set('userInfo', $this->loggedInUser);
+        $this->set('baseUrl', $this->baseUrl);
 
         $this->viewBuilder()
             ->layout('application')
             ->theme($this->currentTheme);
+
+
     }
 
     /**

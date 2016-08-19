@@ -158,7 +158,7 @@
             <tbody>
             <tr ng-repeat="task in tasks">
                 <td style="width: 50px;">
-                    <a class="sl" href="/tasks/view/{{task.id}}">#{{task.id}}</a>
+                    <a class="sl" href="{{BASE_URL}}tasks/view/{{task.id}}">#{{task.id}}</a>
                 </td>
                 <td style="width: 15px; padding-right: 0px;">
                     <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
@@ -166,7 +166,7 @@
                 </td>
                 <td>
                     <strong>
-                        <a href="/tasks/view/{{task.id}}">{{task.task}}</a>
+                        <a href="{{BASE_URL}}tasks/view/{{task.id}}">{{task.task}}</a>
                         <label ng-repeat="label in task.labels" class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                     </strong>
                     <br>
@@ -188,7 +188,7 @@
                     </span>
                 </td>
                 <td class="text-right">
-                    <a href="/tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
+                    <a href="{{BASE_URL}}tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
                     <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
                 </td>
             </tr>
@@ -216,7 +216,7 @@
             <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labelling
                 and then assign into user. After completing each task you can marked them as closed/reopened. It also
                 allowed to comments on task</p>
-            <a class="btn btn-success" href="/tasks/add">Create first task</a>
+            <a class="btn btn-success" href="{{BASE_URL}}tasks/add">Create first task</a>
         </div>
     </div>
 </div>

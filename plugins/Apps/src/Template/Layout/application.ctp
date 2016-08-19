@@ -66,5 +66,10 @@ echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-ra
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>
+
+<script>
+    localStorage.setItem("BASE_URL", '<?php echo $baseUrl;?>');
+</script>
+<?php ?>
 </body>
 </html>

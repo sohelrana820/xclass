@@ -1,39 +1,39 @@
-app.factory('LabelResources', function ($resource) {
+app.factory('LabelResources', function ($resource, BASE_URL) {
     return $resource(':id', {id: '@id'}, {
-        get: {method: 'GET', url: '/labels/:id.json'},
-        save: {method: 'POST', 'url': 'labels.json'},
-        query: {method: 'GET', 'url': '/labels.json', isArray: false,},
-        update: {method: 'PUT', url: 'labels/:id.json'},
-        delete: {method: 'DELETE', url: '/labels/:id.json'}
+        get: {method: 'GET', url: BASE_URL +  'labels/:id.json'},
+        save: {method: 'POST', url: BASE_URL +  'labels.json'},
+        query: {method: 'GET', url: BASE_URL +  'labels.json', isArray: false,},
+        update: {method: 'PUT', url: BASE_URL +  'labels/:id.json'},
+        delete: {method: 'DELETE', url: BASE_URL +  'labels/:id.json'}
     });
 });
 
-app.factory('UsersResources', function ($resource) {
+app.factory('UsersResources', function ($resource, BASE_URL) {
     return $resource(':id', {id: '@id'}, {
-        get: {method: 'GET', url: '/users/:id.json'},
-        save: {method: 'POST', 'url': 'users.json'},
-        query: {method: 'GET', 'url': '/users.json', isArray: false},
-        update: {method: 'PUT', url: 'users/:id.json'},
-        delete: {method: 'DELETE', url: '/users/:id.json'}
+        get: {method: 'GET', url: BASE_URL +  'users/:id.json'},
+        save: {method: 'POST', url: BASE_URL +  'users.json'},
+        query: {method: 'GET', url: BASE_URL +  'users.json', isArray: false},
+        update: {method: 'PUT', url: BASE_URL +  'users/:id.json'},
+        delete: {method: 'DELETE', url: BASE_URL +  'users/:id.json'}
     });
 });
 
-app.factory('TasksResources', function ($resource) {
+app.factory('TasksResources', function ($resource, BASE_URL) {
     return $resource(':id', {id: '@id'}, {
-        get: {method: 'GET', url: '/tasks/:id.json'},
-        save: {method: 'POST', 'url': '/tasks.json'},
-        query: {method: 'GET', 'url': '/tasks.json', isArray: false},
-        update: {method: 'PUT', url: '/tasks/:id.json'},
-        delete: {method: 'DELETE', url: '/tasks/:id.json'}
+        get: {method: 'GET', url: BASE_URL +  'tasks/:id.json'},
+        save: {method: 'POST', url: BASE_URL +  'tasks.json'},
+        query: {method: 'GET', url: BASE_URL +  'tasks.json', isArray: false},
+        update: {method: 'PUT', url: BASE_URL +  'tasks/:id.json'},
+        delete: {method: 'DELETE', url: BASE_URL +  'tasks/:id.json'}
     });
 });
 
-app.factory('CommentsResources', function ($resource) {
+app.factory('CommentsResources', function ($resource, BASE_URL) {
     return $resource(':id', {id: '@id'}, {
-        get: {method: 'GET', url: '/comments/:id.json'},
-        save: {method: 'POST', 'url': '/comments.json'},
-        query: {method: 'GET', 'url': '/comments.json', isArray: false},
-        update: {method: 'PUT', url: '/comments/:id.json'},
-        delete: {method: 'DELETE', url: '/comments/:id.json'}
+        get: {method: 'GET', url: BASE_URL +  'comments/:id.json'},
+        save: {method: 'POST', url: BASE_URL +  'comments.json'},
+        query: {method: 'GET', url: BASE_URL +  'comments.json', isArray: false},
+        update: {method: 'PUT', url: BASE_URL +  'comments/:id.json'},
+        delete: {method: 'DELETE', url: BASE_URL +  'comments/:id.json'}
     });
 });
