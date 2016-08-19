@@ -31,6 +31,13 @@ class InstallationController extends AppController{
         $this->viewBuilder()
             ->layout('installation')
             ->theme($this->currentTheme);
+
+        if(file_exists(ROOT.'/Conf/config.ini')){
+            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+            if($iniData['INSTALLATION_RESULT']){
+                $this->redirect($this->referer());
+            }
+        }
     }
 
     public function index(){
