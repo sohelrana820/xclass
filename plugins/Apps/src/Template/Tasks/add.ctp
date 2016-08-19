@@ -27,6 +27,18 @@
                         <text-angular ng-model="TaskObj.description" ng-model="htmlVariable"></text-angular>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>Attachments</label>
+                            <div class="input text" ng-repeat="key in countAttachments">
+                                <input type="file" class="form-control attachment_field">
+                            </div>
+                            <br/>
+                            <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <button class="btn btn-success">SAVE</button>
                 </div>

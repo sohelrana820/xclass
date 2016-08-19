@@ -37,6 +37,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
 
+    $scope.countAttachments = [0];
+    $scope.addMoreAttachment = function()
+    {
+        console.log($scope.countAttachments);
+        $scope.countAttachments.push($scope.countAttachments.length);
+        console.log($scope.countAttachments);
+    };
 
     /**
      * Getting application active users.

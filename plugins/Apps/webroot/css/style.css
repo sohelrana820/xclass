@@ -931,8 +931,21 @@ a{
     text-align: left !important;
 }
 
+.attachment_field {
+    margin-bottom: 11px;
+    padding: 4px;
+    height: 32px;
+}
 
-
+.btn-theme-xs-rev {
+    border: 1px solid #2f4050;
+    padding: 5px 5px 3px 6px;
+    font-size: 10px;
+    color: #2f4050 !important;
+    text-transform: uppercase;
+    border-radius: 2px;
+    text-decoration: none !important;
+}
 
 
 
