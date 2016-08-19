@@ -26,6 +26,6 @@
         <?php echo $this->Form->input('database.database_name', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Database name', 'label' => false, 'required' => false]);?>
     </div>
 
-    <button type="submit" class="btn btn-success btn-lg">Next Process</button>
+    <button type="submit" class="btn btn-lg-theme">Next Process</button>
     <?php echo $this->Form->end();?>
 </div>

@@ -17,11 +17,11 @@ body{
     transform: translateY(20%)
 }
 
-.login-widget{
+.login-widget {
     padding: 20px 50px 50px 50px;
-    color: #FFF;
+    background: #fff;
+    border-radius: 3px;
 }
-
 
 .login-widget img{
     height: 50px;
@@ -90,7 +90,7 @@ body{
 
 .requirement_list{
     margin: 0px;
-    padding: 10px;
+    padding: 0px;
 }
 
 .requirement_list li{
@@ -107,11 +107,11 @@ body{
 
 .install_ok, .install_ok:hover {
     padding: 4px 5px;
-    color: yellowgreen;
+    color: #1ab394;
     background: transparent;
     font-size: 12px;
     border-radius: 50px;
-    border: 2px solid yellowgreen;
+    border: 2px solid #1ab394;
     margin-right: 4px;
 }
 
@@ -133,4 +133,12 @@ body{
     font-weight: 500;
     font-size: 19px;
     border-radius: 3px;
+}
+
+.text-theme{
+    color: #1ab394;
+}
+
+.login-widget h2 {
+    margin-bottom: 25px;
 }

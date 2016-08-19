@@ -19,12 +19,12 @@
 
     <?php
     if(!$requirements['success']){
-        echo $this->Html->link('Check Again!', ['controller' => 'installation', 'action' => 'requirements'], ['class' => 'btn btn-success btn-lg']);
+        echo $this->Html->link('Check Again!', ['controller' => 'installation', 'action' => 'requirements'], ['class' => 'btn btn-lg-theme']);
     }
     ?>
 
     <?php if($requirements['success']):?>
-        <p class="text-success">Congratulation!. Your system meets all the requirements and your system is now ready for the installation!</p>
-        <?php echo $this->Html->link('Next Process', ['controller' => 'installation', 'action' => 'database'], ['class' => 'btn btn-success btn-lg']);?>
+        <p class="lead">Congratulation!. Your system meets all the requirements and your system is now ready for the installation!</p>
+        <?php echo $this->Html->link('Next Process', ['controller' => 'installation', 'action' => 'database'], ['class' => 'btn btn-lg-theme']);?>
     <?php endif;?>
 </div>
