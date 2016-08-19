@@ -4,5 +4,5 @@
         With the task manager you can easily task list. It allowed to labelling task list, assign task to user and mark them as closed/open
     </p>
     <br/>
-    <a class="btn btn-success btn-lg" href="/installation/requirements">Getting Start</a>
+    <?php echo $this->Html->link('Getting Started', ['controller' => 'installation', 'action' => 'requirements'], ['class' => 'btn btn-success btn-lg']);?>
 </div>

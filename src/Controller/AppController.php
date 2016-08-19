@@ -78,19 +78,20 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
 
-        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
+        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'index', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
 
         if(file_exists(ROOT.'/Conf/config.ini')){
             $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
         }
+
         if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
             $this->loggedInUser = $this->Users->getUserByID($this->userID);
         }
         else {
             if($this->request->param('controller') != 'Installation'){
-                return $this->redirect(['controller' => 'installation', 'action' => 'requirements']);
+                return $this->redirect(['controller' => 'installation', 'action' => 'index']);
             }
         }
 

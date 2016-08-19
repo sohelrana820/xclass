@@ -20,6 +20,6 @@
     <a class="btn btn-success btn-lg" href="/installation/requirements">Check Again!</a>
 
     <?php if($requirements['success']):?>
-        <a class="btn btn-success btn-lg" href="/installation/database">Next Process</a>
+        <?php echo $this->Html->link('Next Process', ['controller' => 'installation', 'action' => 'database'], ['class' => 'btn btn-success btn-lg']);?>
     <?php endif;?>
 </div>
