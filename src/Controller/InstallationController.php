@@ -104,42 +104,6 @@ class InstallationController extends AppController{
         }
     }
 
-    protected function checkRequireDir($path, $dir){
-        if(file_exists($path)){
-            $result = [
-                'mgs' => $path. ' directory is exists',
-                'result' => 'success'
-            ];
-        }
-        else{
-            $this->requirementAnalysis = false;
-            $result = [
-                'mgs' => $dir. ' directory does not exists. Please create '. $dir . ' directory inside ' .str_replace($dir, '', $path),
-                'result' => 'failed'
-            ];
-        }
-
-        return $result;
-    }
-
-    protected function checkPermission($path){
-        if(is_writable($path)){
-            $result = [
-                'mgs' => $path. ' directory is writable',
-                'result' => 'success'
-            ];
-        }
-        else{
-            $this->requirementAnalysis = false;
-            $result = [
-                'mgs' => $path. ' directory isn\'t writable',
-                'result' => 'failed'
-            ];
-        }
-
-        return $result;
-    }
-
     public function database()
     {
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
@@ -180,51 +144,6 @@ class InstallationController extends AppController{
                 return $this->redirect(['action' => 'database']);
             }
         }
-    }
-
-    public static function readIni($fileName)
-    {
-        return parse_ini_file($fileName);
-    }
-
-    public static function writeToIni($array)
-    {
-        $res = array();
-        foreach ($array as $key => $val) {
-            if (is_array($val)) {
-                $res[] = "[$key]";
-                foreach ($val as $skey => $sval) {
-                    $res[] = "$skey = " . (is_numeric($sval) ? $sval : '"' . $sval . '"');
-                }
-            } else {
-                $res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
-            }
-        }
-        if (InstallationController::safeFilereWrite(ROOT.'/Conf/config.ini', implode("\r\n", $res))) {
-            return true;
-        }
-        return false;
-    }
-
-
-    public static function safeFilereWrite($fileName, $dataToSave)
-    {
-        if ($fp = fopen($fileName, 'w')) {
-            $startTime = microtime();
-            do {
-                $canWrite = flock($fp, LOCK_EX);
-                if (!$canWrite) {
-                    usleep(round(rand(0, 100) * 1000));
-                }
-            } while ((!$canWrite)and((microtime() - $startTime) < 1000));
-            if ($canWrite) {
-                fwrite($fp, $dataToSave);
-                flock($fp, LOCK_UN);
-            }
-            fclose($fp);
-            return true;
-        }
-        return false;
     }
 
 
@@ -305,5 +224,87 @@ class InstallationController extends AppController{
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
+    }
+
+
+    protected function checkRequireDir($path, $dir){
+        if(file_exists($path)){
+            $result = [
+                'mgs' => $path. ' directory is exists',
+                'result' => 'success'
+            ];
+        }
+        else{
+            $this->requirementAnalysis = false;
+            $result = [
+                'mgs' => $dir. ' directory does not exists. Please create '. $dir . ' directory inside ' .str_replace($dir, '', $path),
+                'result' => 'failed'
+            ];
+        }
+
+        return $result;
+    }
+
+    protected function checkPermission($path){
+        if(is_writable($path)){
+            $result = [
+                'mgs' => $path. ' directory is writable',
+                'result' => 'success'
+            ];
+        }
+        else{
+            $this->requirementAnalysis = false;
+            $result = [
+                'mgs' => $path. ' directory isn\'t writable',
+                'result' => 'failed'
+            ];
+        }
+
+        return $result;
+    }
+
+    public static function readIni($fileName)
+    {
+        return parse_ini_file($fileName);
+    }
+
+    public static function writeToIni($array)
+    {
+        $res = array();
+        foreach ($array as $key => $val) {
+            if (is_array($val)) {
+                $res[] = "[$key]";
+                foreach ($val as $skey => $sval) {
+                    $res[] = "$skey = " . (is_numeric($sval) ? $sval : '"' . $sval . '"');
+                }
+            } else {
+                $res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
+            }
+        }
+        if (InstallationController::safeFilereWrite(ROOT.'/Conf/config.ini', implode("\r\n", $res))) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static function safeFilereWrite($fileName, $dataToSave)
+    {
+        if ($fp = fopen($fileName, 'w')) {
+            $startTime = microtime();
+            do {
+                $canWrite = flock($fp, LOCK_EX);
+                if (!$canWrite) {
+                    usleep(round(rand(0, 100) * 1000));
+                }
+            } while ((!$canWrite)and((microtime() - $startTime) < 1000));
+            if ($canWrite) {
+                fwrite($fp, $dataToSave);
+                flock($fp, LOCK_UN);
+            }
+            fclose($fp);
+            return true;
+        }
+        return false;
     }
 } 
