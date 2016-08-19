@@ -46,6 +46,8 @@ class AppController extends Controller
 
     public $appsName = 'Task Manager';
 
+    public $appsLogo = 'default_logo.png';
+
     public $baseUrl = null;
 
     public $emailFrom = 'info@task-manager.com';
@@ -103,13 +105,13 @@ class AppController extends Controller
             ->theme($this->currentTheme);
 
         if(isset($iniData['APPLICATION_NAME'])){
-            $this->set('title', $iniData['APPLICATION_NAME']);
-            $this->set('appsName', $iniData['APPLICATION_NAME']);
+            $this->appsName = $iniData['APPLICATION_NAME'];
+            $this->appsLogo = $iniData['APPLICATION_LOGO'];
         }
-        else{
-            $this->set('title', 'Task Manager');
-            $this->set('appsName', 'Task Manager');
-        }
+
+        $this->set('title', $this->appsName);
+        $this->set('appsName', $this->appsName);
+        $this->set('appsLogo', $this->appsLogo);
     }
 
     /**

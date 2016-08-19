@@ -173,12 +173,12 @@ class InstallationController extends AppController{
 
             $general = [
                 'application_name' => $this->appsName,
-                'application_logo' => 'img/default_logo.png'
+                'application_logo' => $this->appsLogo
             ];
 
             if($this->request->data['application']['logo']['name']){
                 $logo = $this->Utilities->uploadFile(WWW_ROOT.'img', $this->request->data['application']['logo'], 'logo');
-                $general['application_logo'] = 'img/'.$logo;
+                $general['application_logo'] = $logo;
             }
 
             if($this->request->data['application']['name']){

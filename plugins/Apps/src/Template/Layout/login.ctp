@@ -34,7 +34,7 @@
                     <?php echo $this->Flash->render() ?>
                     <div class="login-widget">
                         <div style="text-align: center; ">
-                            <?php echo $this->Html->link($appsName, ['controller' => 'users', 'action' => 'login'], ['class' => 'title']);;?>
+                            <?php echo $this->Html->image($appsLogo, ['controller' => 'users', 'action' => 'login'], ['class' => 'title']);;?>
                         </div>
                         <br>
                         <?php echo $this->fetch('content'); ?>
