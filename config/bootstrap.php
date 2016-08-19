@@ -204,8 +204,10 @@ Type::build('datetime')->useLocaleParser();
 Plugin::loadAll();
 
 
-$iniData = parse_ini_file(ROOT.'/Conf/config.ini');
 ConnectionManager::drop('application');
+if(file_exists(ROOT.'/Conf/config.ini')){
+    $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+}
 
 if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIGURATION_RESULT']){
     ConnectionManager::config('application', [

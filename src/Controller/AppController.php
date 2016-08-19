@@ -82,7 +82,9 @@ class AppController extends Controller
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
 
-        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        if(file_exists(ROOT.'/Conf/config.ini')){
+            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        }
         if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
             $this->loggedInUser = $this->Users->getUserByID($this->userID);
         }
@@ -92,8 +94,6 @@ class AppController extends Controller
             }
         }
 
-        $this->set('title', $iniData['APPLICATION_NAME']);
-        $this->set('appsName', $iniData['APPLICATION_NAME']);
         $this->set('userInfo', $this->loggedInUser);
         $this->set('baseUrl', $this->baseUrl);
 
@@ -101,7 +101,14 @@ class AppController extends Controller
             ->layout('application')
             ->theme($this->currentTheme);
 
-
+        if(isset($iniData['APPLICATION_NAME'])){
+            $this->set('title', $iniData['APPLICATION_NAME']);
+            $this->set('appsName', $iniData['APPLICATION_NAME']);
+        }
+        else{
+            $this->set('title', 'Task Manager');
+            $this->set('appsName', 'Task Manager');
+        }
     }
 
     /**
