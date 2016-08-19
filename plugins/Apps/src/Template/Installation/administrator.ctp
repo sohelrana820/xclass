@@ -29,6 +29,6 @@
     <?php echo $this->Form->input('cPassword', ['type' => 'password', 'class' => 'form-control', 'placeholder' => 'Confirm password', 'label' => false, 'required' => false]);?>
 </div>
 
-<button type="submit" class="btn btn-success btn-lg">Create Account</button>
+<button type="submit" class="btn btn-lg-theme">Create Administrator</button>
 
 <?php echo $this->Form->end();?>

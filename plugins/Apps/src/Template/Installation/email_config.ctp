@@ -26,6 +26,6 @@
         <?php echo $this->Form->input('email.password', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false]);?>
     </div>
 
-    <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+    <button type="submit" class="btn btn-lg-theme">Submit</button>
     <?php echo $this->Form->end();?>
 </div>

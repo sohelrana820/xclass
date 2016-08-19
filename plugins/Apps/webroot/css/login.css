@@ -45,9 +45,17 @@ body{
     font-size: 12px;
 }
 
-.login-button{
-    background: #d9534f;
-    border: 2px solid #d9534f;
+
+.login_form label {
+    /* text-transform: uppercase; */
+    font-family: "Arial";
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.login-button, .login-button:hover{
+    background: #1ab394;
+    border: 2px solid #1ab394;
     color: #FFF;
     font-size: 16px;
     padding: 7px 25px;
@@ -142,3 +150,8 @@ body{
 .login-widget h2 {
     margin-bottom: 25px;
 }
+
+.login-widget .text-info {
+    color: #2f4050;
+}
+
