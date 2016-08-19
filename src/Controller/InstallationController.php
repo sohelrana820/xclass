@@ -114,6 +114,20 @@ class InstallationController extends AppController{
 
         if($this->request->is('post')){
             $dbConf = $this->request->data['database'];
+
+            try{
+                $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'].'';
+                ConnectionManager::config('is_db_exiest', ['url' => $dsn]);
+                $connection = ConnectionManager::get('is_db_exiest');
+                if($connection->connect()){
+                    $this->Flash->error(__('Sorry, '.$dbConf['database_name'].' database is already exiest. Please choose other database name'));
+                    return $this->redirect(['action' => 'database']);
+                }
+            }
+            catch(Exception $e){
+
+            }
+
             try {
 
                 $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/';
