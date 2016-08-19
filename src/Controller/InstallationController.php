@@ -39,11 +39,51 @@ class InstallationController extends AppController{
 
     public function requirements()
     {
-        $data = [
-            $this->checkPermission(ROOT.'/Conf'),
-            $this->checkPermission(ROOT.'/tmp'),
-            $this->checkPermission(ROOT.'/logs'),
-        ];
+        $data = [];
+
+        $isConfExists = $this->checkRequireDir(ROOT.'/Conf', 'Conf');
+        $data[] = $isConfExists;
+        if($isConfExists['result'] == 'success'){
+            $data[] = $this->checkPermission(ROOT.'/Conf');
+        }
+
+        $isTmpExists = $this->checkRequireDir(ROOT.'/tmp', 'tmp');
+        $data[] = $isTmpExists;
+        if($isTmpExists['result'] == 'success'){
+            $data[] = $this->checkPermission(ROOT.'/tmp');
+        }
+
+        $isLogsExists = $this->checkRequireDir(ROOT.'/logs', 'logs');
+        $data[] = $isLogsExists;
+        if($isLogsExists['result'] == 'success'){
+            $data[] = $this->checkPermission(ROOT.'/logs');
+        }
+
+        $isProfilesExists = $this->checkRequireDir(ROOT.'/webroot/img/profiles', 'profiles');
+        $data[] = $isProfilesExists;
+        if($isProfilesExists['result'] == 'success'){
+            $data[] = $this->checkPermission(ROOT.'/webroot/img/profiles');
+        }
+
+        $isAttachmentsExists = $this->checkRequireDir(ROOT.'/webroot/img/attachments', 'attachments');
+        $data[] = $isAttachmentsExists;
+        if($isAttachmentsExists['result'] == 'success'){
+            $data[] = $this->checkPermission(ROOT.'/webroot/img/attachments');
+        }
+
+        if(extension_loaded('intl')){
+            $result = [
+                'mgs' => 'PHP INTL EXTENSION is enabled',
+                'result' => 'success'
+            ];
+        }
+        else{
+            $result = [
+                'mgs' => 'PHP INTL EXTENSION is disabled or missing',
+                'result' => 'success'
+            ];
+        }
+        $data[] = $result;
 
         $requirements = [
             'success' => $this->requirementAnalysis,
@@ -51,29 +91,49 @@ class InstallationController extends AppController{
         ];
         $this->set('requirements', $requirements);
 
-        $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
-        $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
-        $iniData['DATABASE_CONFIGURATION_RESULT'] = false;
-        $iniData['DATABASE_HOST'] = false;
-        $iniData['DATABASE_USERNAME'] = false;
-        $iniData['DATABASE_PASSWORD'] = false;
-        $iniData['DATABASE_NAME'] = false;
-        $iniData['EMAIL_CONFIGURATION_RESULT'] = false;
-        InstallationController::writeToIni($iniData);
+        if($this->requirementAnalysis){
+            $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
+            $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
+            $iniData['DATABASE_CONFIGURATION_RESULT'] = false;
+            $iniData['DATABASE_HOST'] = false;
+            $iniData['DATABASE_USERNAME'] = false;
+            $iniData['DATABASE_PASSWORD'] = false;
+            $iniData['DATABASE_NAME'] = false;
+            $iniData['EMAIL_CONFIGURATION_RESULT'] = false;
+            InstallationController::writeToIni($iniData);
+        }
+    }
+
+    protected function checkRequireDir($path, $dir){
+        if(file_exists($path)){
+            $result = [
+                'mgs' => $path. ' directory is exists',
+                'result' => 'success'
+            ];
+        }
+        else{
+            $this->requirementAnalysis = false;
+            $result = [
+                'mgs' => $dir. ' directory does not exists. Please create '. $dir . ' directory inside ' .str_replace($dir, '', $path),
+                'result' => 'failed'
+            ];
+        }
+
+        return $result;
     }
 
     protected function checkPermission($path){
         if(is_writable($path)){
             $result = [
                 'mgs' => $path. ' directory is writable',
-                'result' => true
+                'result' => 'success'
             ];
         }
         else{
             $this->requirementAnalysis = false;
             $result = [
                 'mgs' => $path. ' directory isn\'t writable',
-                'result' => false
+                'result' => 'failed'
             ];
         }
 

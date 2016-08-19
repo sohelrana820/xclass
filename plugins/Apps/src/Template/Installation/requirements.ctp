@@ -7,19 +7,24 @@
     <ul class="nav-list requirement_list">
         <?php foreach($requirements['data'] as $requirement):?>
         <li>
-            <?php if($requirement['result']):?>
+            <?php if ($requirement['result'] == 'success'): ?>
                 <a class="install_ok"><i class="fa fa-check"></i></a>
-            <?php else:?>
+                <?php elseif($requirement['result'] == 'failed'): ?>
                 <a class="install_error"><i class="fa fa-times"></i></a>
-            <?php endif;?>
+            <?php endif; ?>
             <?php echo $requirement['mgs']?>
         </li>
         <?php endforeach;?>
     </ul>
 
-    <a class="btn btn-success btn-lg" href="/installation/requirements">Check Again!</a>
+    <?php
+    if(!$requirements['success']){
+        echo $this->Html->link('Check Again!', ['controller' => 'installation', 'action' => 'requirements'], ['class' => 'btn btn-success btn-lg']);
+    }
+    ?>
 
     <?php if($requirements['success']):?>
+        <p class="text-success">Congratulation!. Your system meets all the requirements and your system is now ready for the installation!</p>
         <?php echo $this->Html->link('Next Process', ['controller' => 'installation', 'action' => 'database'], ['class' => 'btn btn-success btn-lg']);?>
     <?php endif;?>
 </div>

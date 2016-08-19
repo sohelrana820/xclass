@@ -4,6 +4,8 @@
 /logs/*
 /vendor/
 /webroot/img/profiles/*
+/webroot/img/attachments/*
+/Conf/*
 tmp/*
 .DS_STORE
 /tmp/*
