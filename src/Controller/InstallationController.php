@@ -34,7 +34,7 @@ class InstallationController extends AppController{
 
         if(file_exists(ROOT.'/Conf/config.ini')){
             $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-            if($iniData['INSTALLATION_RESULT']){
+            if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
                 $this->redirect($this->referer());
             }
         }
