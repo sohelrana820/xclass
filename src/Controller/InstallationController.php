@@ -170,11 +170,21 @@ class InstallationController extends AppController{
         }
 
         if($this->request->is('post')){
-            $data = $this->request->data['application'];
+
             $general = [
-                'application_name' => $data['name'],
-                'application_logo' => base64_encode(file_get_contents($data['logo']['tmp_name']))
+                'application_name' => $this->appsName,
+                'application_logo' => 'img/default_logo.png'
             ];
+
+            if($this->request->data['application']['logo']['name']){
+                $logo = $this->Utilities->uploadFile(WWW_ROOT.'img', $this->request->data['application']['logo'], 'logo');
+                $general['application_logo'] = 'img/'.$logo;
+            }
+
+            if($this->request->data['application']['name']){
+                $name = $this->request->data['application']['name'];
+                $general['application_name'] = $name;
+            }
 
             /**
              * Need to write data into database.

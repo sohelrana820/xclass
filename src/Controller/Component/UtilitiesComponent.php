@@ -66,16 +66,26 @@ class UtilitiesComponent extends Component
 
 
     /**
-     * @param null $query
-     * @return array
+     * @param $path
+     * @param $documents
+     * @return bool
      */
-
     public function uploadProfilePhoto($path, $documents)
     {
         $uploadFile = $path . '/' . $documents['name'];
         $fileName = $documents['name'];
         if (move_uploaded_file($documents['tmp_name'], $uploadFile)) {
             return $fileName;
+        }
+        return false;
+    }
+
+    public function uploadFile($path, $documents, $customName)
+    {
+        $temp = explode(".", $documents["name"]);
+        $newName = $customName . '.' . end($temp);
+        if (move_uploaded_file($documents["tmp_name"], $path.'/' . $newName)) {
+            return $newName;
         }
         return false;
     }
