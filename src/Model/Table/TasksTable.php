@@ -91,4 +91,12 @@ class TasksTable extends Table
 
         return $validator;
     }
+
+    public function countTotalTasks()
+    {
+        $result = $this->find()
+            ->count();
+
+        return $result;
+    }
 }

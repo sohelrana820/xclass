@@ -64,4 +64,12 @@ class LabelsTable extends Table
 
         return $validator;
     }
+
+    public function countTotalLabel()
+    {
+        $result = $this->find()
+            ->count();
+
+        return $result;
+    }
 }

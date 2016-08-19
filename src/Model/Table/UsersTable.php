@@ -282,4 +282,12 @@ class UsersTable extends Table
         return null;
     }
 
+    public function countTotalUser()
+    {
+        $result = $this->find()
+            ->count();
+
+        return $result;
+    }
+
 }

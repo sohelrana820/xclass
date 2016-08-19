@@ -927,7 +927,9 @@ a{
     border-color: #2f4050;
 }
 
-
+.static_message{
+    text-align: left !important;
+}
 
 
 

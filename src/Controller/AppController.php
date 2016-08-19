@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use Cake\Network\Session;
 use Cake\Routing\Router;
 
 /**
@@ -75,11 +76,12 @@ class AppController extends Controller
             ]
         );
         $this->loadModel('Users');
+        $this->loadModel('Labels');
+        $this->loadModel('Tasks');
     }
 
     public function beforeFilter(Event $event)
     {
-
         $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'index', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
@@ -97,9 +99,6 @@ class AppController extends Controller
             }
         }
 
-        $this->set('userInfo', $this->loggedInUser);
-        $this->set('baseUrl', $this->baseUrl);
-
         $this->viewBuilder()
             ->layout('application')
             ->theme($this->currentTheme);
@@ -109,9 +108,6 @@ class AppController extends Controller
             $this->appsLogo = $iniData['APPLICATION_LOGO'];
         }
 
-        $this->set('title', $this->appsName);
-        $this->set('appsName', $this->appsName);
-        $this->set('appsLogo', $this->appsLogo);
     }
 
     /**
@@ -126,8 +122,13 @@ class AppController extends Controller
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
-
         }
+
+        $this->set('userInfo', $this->loggedInUser);
+        $this->set('baseUrl', $this->baseUrl);
+        $this->set('title', $this->appsName);
+        $this->set('appsName', $this->appsName);
+        $this->set('appsLogo', $this->appsLogo);
     }
 
     public function checkAuthentication()
