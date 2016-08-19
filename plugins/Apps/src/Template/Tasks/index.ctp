@@ -216,7 +216,8 @@
             <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labelling
                 and then assign into user. After completing each task you can marked them as closed/reopened. It also
                 allowed to comments on task</p>
-            <a class="btn btn-success" href="{{BASE_URL}}tasks/add">Create first task</a>
+            <br/>
+            <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create first task</a>
         </div>
     </div>
 </div>

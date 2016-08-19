@@ -20,15 +20,7 @@
             <?php echo $this->Html->link('<i class="fa fa-fw fa-tags"></i> Task Label', ['controller' => 'labels', 'action' => 'index'], ['escape' => false]); ?>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#task"><i class="fa fa-fw fa-signal"></i> Tasks <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="task" class="collapse">
-                <li>
-                    <?php echo $this->Html->link('Add', ['controller' => 'tasks', 'action' => 'add'], ['escape' => false]); ?>
-                </li>
-                <li>
-                    <?php echo $this->Html->link('List', ['controller' => 'tasks', 'action' => 'index'], ['escape' => false]); ?>
-                </li>
-            </ul>
+            <?php echo $this->Html->link('<i class="fa fa-fw fa-signal"></i> Task', ['controller' => 'tasks', 'action' => 'index'], ['escape' => false]); ?>
         </li>
     </ul>
 </div>
