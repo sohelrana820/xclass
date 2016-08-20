@@ -166,7 +166,8 @@
                 </td>
                 <td>
                     <strong>
-                        <a href="{{BASE_URL}}tasks/view/{{task.id}}">{{task.task}}</a>
+                        <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">{{task.task}}</a>
+                        <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="!task.task">-</a>
                         <label ng-repeat="label in task.labels" class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                     </strong>
                     <br>
