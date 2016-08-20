@@ -104,9 +104,21 @@ class TasksController extends AppController
                 });
             }
 
+            if (isset($this->request->query['unlabeled'])) {
+                $tasks->notMatching('TasksLabels', function ($q) {
+                    return $q;
+                });
+            }
+
             if (isset($this->request->query['users']) && is_array($this->request->query['users'])) {
                 $tasks->matching('UsersTasks', function ($q) {
                     return $q->where(['UsersTasks.user_id IN' => $this->request->query['users']]);
+                });
+            }
+
+            if (isset($this->request->query['unassigned'])) {
+                $tasks->notMatching('UsersTasks', function ($q) {
+                    return $q;
                 });
             }
 

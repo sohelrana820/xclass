@@ -361,6 +361,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             'authors[]': authors,
             'sort_by': $scope.filterQuery.sort_by,
             'order_by': $scope.filterQuery.order_by,
+            'unlabeled': $scope.filterQuery.unlabeled,
+            'unassigned': $scope.filterQuery.unassigned,
         };
 
         $scope.fetchTaskLists($scope.queryString);

@@ -997,9 +997,42 @@ a{
     font-size: 10px;
 }
 
+.search_item{
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 5px 5px 2px 4px;
+    border-radius: 2px;
+}
+
+.search_item_theme{
+    border: 1px solid #1ab394;
+    color: #1ab394 !important;
+}
+
+.search_item_red{
+    border: 1px solid #f75353;
+    color: #f75353 !important;
+}
+
+
+.search_item_info{
+    border: 1px solid #5bc0de;
+    color: #5bc0de !important;
+}
+
+
+.search_item_orange{
+    border: 1px solid orange;
+    color: orange !important;
+}
 
 
 
+.search_item_gray{
+    border: 1px solid lightslategray;
+    color: lightslategray !important;
+}
 
 
 

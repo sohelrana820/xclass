@@ -18,19 +18,29 @@
     <div class="col-lg-12 col-md-12" ng-show="count_all > 0">
         <div class="filter_bar">
 
-            <a class="close_task" ng-click="doFilter(filterQuery.status = 'all')">
+            <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'all')">
                 <i class="fa fa-signal" aria-hidden="true"></i>
                 All
             </a>
 
-            <a class="close_task" ng-click="doFilter(filterQuery.status = 'closed')">
-                <i class="fa fa-bell-slash-o red" aria-hidden="true"></i>
+            <a class="search_item search_item_red"  ng-click="doFilter(filterQuery.status = 'closed')">
+                <i class="fa fa-bell-slash-o" aria-hidden="true"></i>
                 Closed
             </a>
 
-            <a class="open_task" ng-click="doFilter(filterQuery.status = 'open')">
-                <i class="fa fa-bell-o green" aria-hidden="true"></i>
+            <a class="search_item search_item_theme" ng-click="doFilter(filterQuery.status = 'open')">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
                 Open
+            </a>
+
+            <a class="search_item search_item_info" ng-click="doFilter(filterQuery.unlabeled = true)">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                Unlabeled
+            </a>
+
+            <a class="search_item search_item_orange" ng-click="doFilter(filterQuery.unassigned = true)">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                Unassigned
             </a>
 
             <div class="pull-right">
