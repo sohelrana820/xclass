@@ -922,13 +922,23 @@ a{
 
 
 
-.btn-success, .btn-success:hover{
+.btn-success,
+.btn-success:hover,
+.btn-success:active,
+.btn-success:visited,
+.btn-success:focus
+{
     background: #1ab394;
     border-color: #1ab394;
 }
 
 
-.btn-info , .btn-info:hover{
+.btn-info,
+.btn-info:hover,
+.btn-info:active,
+.btn-info:visited,
+.btn-info:focus
+{
     color: #fff;
     background-color: #2f4050;
     border-color: #2f4050;

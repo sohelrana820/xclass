@@ -82,10 +82,6 @@ class TasksTable extends Table
             ->notEmpty('created_by');
 
         $validator
-            ->requirePresence('task', 'create')
-            ->notEmpty('task');
-
-        $validator
             ->allowEmpty('description');
 
 
