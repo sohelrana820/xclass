@@ -18,7 +18,7 @@
     <div class="col-lg-12 col-md-12" ng-show="count_all > 0">
         <div class="filter_bar">
 
-            <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'all'); filterQuery.unlabeled = false;  filterQuery.unassigned = false; ">
+            <a class="search_item search_item_gray"  ng-click="clearQueryString(); doFilter(filterQuery.status = 'all')">
                 <i class="fa fa-signal" aria-hidden="true"></i>
                 All
             </a>

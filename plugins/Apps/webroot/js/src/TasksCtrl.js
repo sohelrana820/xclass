@@ -321,6 +321,18 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      };*/
 
     $scope.queryString = {};
+
+    $scope.clearQueryString = function(){
+        $scope.filterQuery.unlabeled = false;
+        $scope.filterQuery.unassigned = false;
+        $scope.filtterAssignee = [];
+        $scope.filtterAuthor = [];
+        $scope.filterLabels = [];
+        $scope.sort_by = false;
+        $scope.order_by = false;
+        $scope.filterQuery.status = 'all';
+    };
+
     $scope.doFilter = function(){
         var status = [];
         var labels = [];
@@ -337,7 +349,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             else if($scope.filterQuery.status == 'all'){
                 status = [1, 2, 3];
             }
-        }
+        };
+
 
         var users = [];
         $scope.filtterAssignee.forEach(function(user){
