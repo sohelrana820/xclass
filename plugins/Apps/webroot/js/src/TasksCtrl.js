@@ -156,6 +156,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             $scope.taskUsers = res.result.data.users;
             $scope.taskLabels = res.result.data.labels;
             $scope.taskComments = res.result.data.comments;
+            $scope.taskAttachments = res.result.data.attachments;
         });
     };
 

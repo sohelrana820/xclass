@@ -24,6 +24,12 @@
                     <h2>{{TaskObj.task}}</h2>
                     <div ng-bind-html="TaskObj.description"></div>
                 </div>
+                <h4>Attachments</h4>
+                <p ng-repeat="attachment in taskAttachments">
+                    <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                </p>
+                <br/>
+                <br/>
 
                 <div class="task_details" ng-show="edit_task_form">
                     <div class="well">
@@ -114,6 +120,7 @@
                         </ul>
                     </div>
                 </div>
+
 
                 <div class="single_block">
                     <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
