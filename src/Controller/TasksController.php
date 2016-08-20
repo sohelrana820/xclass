@@ -242,5 +242,16 @@ class TasksController extends AppController
     }
 
 
-
+    public function downloadAttachment($uuid)
+    {
+        $this->autoRender = false;
+        $this->loadModel('Attachments');
+        $attachments = $this->Attachments->getAttachmentByUUID($uuid);
+        $path = WWW_ROOT.'img/attachments/'.$attachments->path;
+        $this->response->file($path, array(
+            'download' => true,
+            'name' => $attachments->name
+        ));
+        return $this->response;
+    }
 }

@@ -27,7 +27,7 @@
                 <div class="show_attachments" ng-show="taskAttachments.length > 0">
                     <h4>Attachments</h4>
                     <p ng-repeat="attachment in taskAttachments">
-                        <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                        <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
                     </p>
                 </div>
                 <br/>
@@ -82,7 +82,7 @@
                                 <div class="show_attachments" ng-show="comment.attachments.length > 0">
                                     <h4>Attachments</h4>
                                     <p ng-repeat="attachment in comment.attachments">
-                                        <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                        <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
                                     </p>
                                 </div>
                             </div><!-- /panel-body -->

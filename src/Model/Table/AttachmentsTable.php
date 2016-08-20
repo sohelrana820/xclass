@@ -80,4 +80,21 @@ class AttachmentsTable extends Table
         $rules->add($rules->existsIn(['comment_id'], 'Comments'));
         return $rules;
     }
+
+    /**
+     * @param $uuid
+     * @return mixed|null
+     */
+    public function getAttachmentByUUID($uuid)
+    {
+        $result = $this->find()
+            ->where(['Attachments.uuid' => $uuid])
+            ->first();
+
+        if($result)
+        {
+            return $result;
+        }
+        return null;
+    }
 }
