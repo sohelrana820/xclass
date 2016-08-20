@@ -1,4 +1,4 @@
-var app = angular.module('Application', ['ngResource', 'textAngular', 'color.picker', 'ngFlash', 'toastr']);
+var app = angular.module('Application', ['ngResource', 'textAngular', 'ngFileUpload', 'color.picker', 'ngFlash', 'toastr']);
 
 app.constant('BASE_URL', localStorage.getItem('BASE_URL'));
 

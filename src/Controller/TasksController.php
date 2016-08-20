@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Utility\Text;
 
 /**
  * Tasks Controller
@@ -137,8 +138,21 @@ class TasksController extends AppController
     {
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
-            $this->request->data['uuid'] = 'l';
+
+            $allAttachments = [];
+            $attachments = $this->request->data['file'];
+            foreach($attachments as $attachment){
+                $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
+                $allAttachments[] = [
+                    'uuid' => Text::uuid(),
+                    'name' => $attachment['name'],
+                    'path' => $result,
+                ];
+            }
+
+            $this->request->data['uuid'] =  Text::uuid();
             $this->request->data['created_by'] = $this->userID;
+            $this->request->data['attachments'] = $allAttachments;
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
                 $response = [

@@ -32,7 +32,12 @@
                         <div class="form-group">
                             <label>Attachments</label>
                             <div class="input text" ng-repeat="key in countAttachments">
-                                <input type="file" class="form-control attachment_field">
+                                <input type="file" class="form-control attachment_field"
+                                       ngf-select ng-model="TaskObj.file[key]"
+                                       name="task_attachments"
+                                       ngf-pattern="'image/*,application/pdf'"
+                                       ngf-max-size="20MB"
+                                    />
                             </div>
                             <br/>
                             <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
