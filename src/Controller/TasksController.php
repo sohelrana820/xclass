@@ -140,14 +140,18 @@ class TasksController extends AppController
         if ($this->request->is('post')) {
 
             $allAttachments = [];
-            $attachments = $this->request->data['file'];
-            foreach($attachments as $attachment){
-                $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
-                $allAttachments[] = [
-                    'uuid' => Text::uuid(),
-                    'name' => $attachment['name'],
-                    'path' => $result,
-                ];
+            if(isset($this->request->data['file'])){
+                $attachments = $this->request->data['file'];
+                foreach($attachments as $attachment){
+                    if(isset($attachment['name']) && $attachment['name']){
+                        $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
+                        $allAttachments[] = [
+                            'uuid' => Text::uuid(),
+                            'name' => $attachment['name'],
+                            'path' => $result,
+                        ];
+                    }
+                }
             }
 
             $this->request->data['uuid'] =  Text::uuid();

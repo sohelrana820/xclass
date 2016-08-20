@@ -21,12 +21,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.saveTask = function(){
         $scope.getTaskRelObj();
+        console.log($scope.TaskObj);
         Upload.upload({
             url: BASE_URL + 'tasks/add.json',
             data: $scope.TaskObj
         }).then(function (response) {
-            console.log(response);
-
+            console.log(response.data);
             if(response.data.result.success){
                 $scope.TaskObj = {};
                 Flash.create('success', response.data.result.message);
@@ -37,23 +37,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             else{
                 Flash.create('info', response.data.result.message);
             }
-
-
         });
-
-        /*var task = TasksResources.save($scope.TaskObj).$promise;
-        task.then(function (res) {
-            if(res.result.success){
-                $scope.TaskObj = {};
-                Flash.create('success', res.result.message);
-                $timeout(function() {
-                    window.location.href = BASE_URL + "tasks";
-                }, 1000);
-            }
-            else{
-                Flash.create('info', res.result.message);
-            }
-        });*/
     };
 
 
