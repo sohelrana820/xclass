@@ -857,13 +857,13 @@ a{
     float: left;
     clear: both;
     width: 100%;
-    margin-bottom: 7px;
+    margin-bottom: 5px;
 }
 
 .filter_option_bar h2 {
     font-size: 10px;
     float: left;
-    width: 58px;
+    width: 70px;
     color: #777;
     text-transform: uppercase;
     font-weight: 600;
@@ -872,7 +872,7 @@ a{
     line-height: 28px;
 }
 .filter_options {
-    min-height: 52px;
+    min-height: 30px;
 }
 
 .filter_user {

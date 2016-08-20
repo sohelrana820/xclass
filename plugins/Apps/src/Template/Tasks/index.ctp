@@ -121,32 +121,21 @@
 
         </div>
         <div class="filter_options">
-
-            <div class="filter_option_bar" ng-show="filterLabels.length > 0">
-                <h2>Label:</h2>
+            <div class="filter_option_bar">
+                <h2 ng-show="filterLabels.length > 0 || filtterAuthor.length > 0 || filtterAssignee.length > 0">Filtered By:</h2>
                 <ul class="filter_user">
                     <li ng-repeat="label in filterLabels">
-                        {{label.name}}
+                        Label: {{label.name}}
                         <span class="red" ng-click="removeTaskLabels(taskLabel)">X</span>
                     </li>
-                </ul>
-            </div>
 
-            <div class="filter_option_bar"  ng-show="filtterAuthor.length > 0">
-                <h2>Author:</h2>
-                <ul class="filter_user">
                     <li ng-repeat="user in filtterAuthor">
-                        {{user.profile.first_name}} {{user.profile.last_name}}
+                        Author: {{user.profile.first_name}} {{user.profile.last_name}}
                         <span class="red" ng-click="removeAuthor(user)">X</span>
                     </li>
-                </ul>
-            </div>
 
-            <div class="filter_option_bar" ng-show="filtterAssignee.length > 0">
-                <h2>Assignee:</h2>
-                <ul class="filter_user">
                     <li ng-repeat="user in filtterAssignee">
-                        {{user.profile.first_name}} {{user.profile.last_name}}
+                        Assignee: {{user.profile.first_name}} {{user.profile.last_name}}
                         <span class="red" ng-click="removeAssignee(user)">X</span>
                     </li>
                 </ul>
