@@ -96,6 +96,7 @@ class TasksController extends AppController
                 });
             }
 
+            $tasks->group(['Tasks.id']);
             $tasks->all();
             $countAll = $this->Tasks->find('all')->count();
 
