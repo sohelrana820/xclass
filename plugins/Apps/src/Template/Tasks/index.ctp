@@ -131,8 +131,25 @@
         </div>
         <div class="filter_options">
             <div class="filter_option_bar">
-                <h2 ng-show="filterLabels.length > 0 || filtterAuthor.length > 0 || filtterAssignee.length > 0">Filtered By:</h2>
+                <h2 ng-show="filterLabels.length > 0 || filtterAuthor.length > 0 || filtterAssignee.length > 0 || filterQuery.status == 'closed' || filterQuery.status == 'open' || filterQuery.unlabeled || filterQuery.unassigned">Filtered By:</h2>
+
                 <ul class="filter_user">
+                    <li ng-show="filterQuery.status == 'closed'">
+                        Closed
+                        <span class="red" ng-click="doFilter(filterQuery.status = 'all')">X</span>
+                    </li>
+                    <li ng-show="filterQuery.status == 'open'">
+                        Open
+                        <span class="red" ng-click="doFilter(filterQuery.status = 'all')">X</span>
+                    </li>
+                    <li ng-show="filterQuery.unlabeled">
+                        Unlabeled
+                        <span class="red" ng-click="doFilter(filterQuery.unlabeled = false)">X</span>
+                    </li>
+                    <li ng-show="filterQuery.unassigned">
+                        Unassigned
+                        <span class="red" ng-click="doFilter(filterQuery.unassigned = false)">X</span>
+                    </li>
                     <li ng-repeat="label in filterLabels">
                         Label: {{label.name}}
                         <span class="red" ng-click="removeFilterLabel(label)">X</span>

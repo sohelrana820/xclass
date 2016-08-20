@@ -104,7 +104,7 @@ class TasksController extends AppController
                 });
             }
 
-            if (isset($this->request->query['unlabeled'])) {
+            if (isset($this->request->query['unlabeled']) && $this->request->query['unlabeled'] != 'false') {
                 $tasks->notMatching('TasksLabels', function ($q) {
                     return $q;
                 });
@@ -116,7 +116,7 @@ class TasksController extends AppController
                 });
             }
 
-            if (isset($this->request->query['unassigned'])) {
+            if (isset($this->request->query['unassigned']) && $this->request->query['unassigned'] != 'false') {
                 $tasks->notMatching('UsersTasks', function ($q) {
                     return $q;
                 });
