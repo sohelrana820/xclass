@@ -35,7 +35,6 @@
                                 <input type="file" class="form-control attachment_field"
                                        ngf-select ng-model="TaskObj.file[key]"
                                        name="task_attachments"
-                                       ngf-pattern="'image/*,application/pdf'"
                                        ngf-max-size="20MB"
                                     />
                             </div>
