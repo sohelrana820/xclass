@@ -38,7 +38,6 @@
                                        ngf-max-size="20MB"
                                     />
                             </div>
-                            <br/>
                             <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
                         </div>
                     </div>

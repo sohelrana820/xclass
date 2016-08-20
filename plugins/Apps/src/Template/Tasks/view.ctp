@@ -24,11 +24,12 @@
                     <h2>{{TaskObj.task}}</h2>
                     <div ng-bind-html="TaskObj.description"></div>
                 </div>
-                <h4>Attachments</h4>
-                <p ng-repeat="attachment in taskAttachments">
-                    <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                </p>
-                <br/>
+                <div class="show_attachments" ng-show="taskAttachments.length > 0">
+                    <h4>Attachments</h4>
+                    <p ng-repeat="attachment in taskAttachments">
+                        <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                    </p>
+                </div>
                 <br/>
 
                 <div class="task_details" ng-show="edit_task_form">
@@ -61,7 +62,11 @@
                         </div>
                         <div class="panel panel-default comments_panel">
                             <div class="panel-heading">
-                                <strong>{{comment.user.profile.first_name}} {{comment.user.profile.last_name}}</strong>
+                                <strong>
+                                    <a href="{{BASE_URL}}users/view/{{comment.user.uuid}}">
+                                        {{comment.user.profile.first_name}} {{comment.user.profile.last_name}}
+                                    </a>
+                                </strong>
                                 <span class="text-muted">
                                     commented {{comment.created | date}} at
                                     ({{comment.created | date : 'HH:m a'}})
@@ -74,10 +79,12 @@
                                     <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
                                     <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
                                 </div>
-                                <h4>Attachments</h4>
-                                <p ng-repeat="attachment in comment.attachments">
-                                    <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                                </p>
+                                <div class="show_attachments" ng-show="comment.attachments.length > 0">
+                                    <h4>Attachments</h4>
+                                    <p ng-repeat="attachment in comment.attachments">
+                                        <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                    </p>
+                                </div>
                             </div><!-- /panel-body -->
                         </div><!-- /panel panel-default -->
                     </div><!-- /col-sm-5 -->
@@ -98,13 +105,12 @@
                                                ngf-max-size="20MB"
                                             />
                                     </div>
-                                    <br/>
                                     <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="pull-right">
+                        <br/>
+                        <div class="pull-left">
                             <button type="submit" class="btn btn-success" ></i> Comment</button>
                             <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Close Task</a>
                             <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)"></i> Reopen Task</a>
