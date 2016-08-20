@@ -74,6 +74,10 @@
                                     <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
                                     <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
                                 </div>
+                                <h4>Attachments</h4>
+                                <p ng-repeat="attachment in comment.attachments">
+                                    <a href=""><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                </p>
                             </div><!-- /panel-body -->
                         </div><!-- /panel panel-default -->
                     </div><!-- /col-sm-5 -->
@@ -82,6 +86,25 @@
                     <form ng-submit="doComment()">
                         <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
                         <br/>
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Attachments</label>
+                                    <div class="input text" ng-repeat="key in countAttachments">
+                                        <input type="file" class="form-control attachment_field"
+                                               ngf-select ng-model="commentsObj.file[key]"
+                                               name="task_attachments"
+                                               ngf-pattern="'image/*,application/pdf'"
+                                               ngf-max-size="20MB"
+                                            />
+                                    </div>
+                                    <br/>
+                                    <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="pull-right">
                             <button type="submit" class="btn btn-success" ></i> Comment</button>
                             <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Close Task</a>

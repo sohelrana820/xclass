@@ -233,7 +233,25 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.doComment = function(){
         if($scope.commentsObj.comment)
         {
-            var comments = CommentsResources.save($scope.commentsObj).$promise;
+
+            Upload.upload({
+                url: BASE_URL + 'comments/add.json',
+                data: $scope.commentsObj
+            }).then(function (response) {
+                console.log(response);
+                if(response.data.result.success){
+                    $scope.commentsObj = {task_id: id};
+                    $scope.taskComments.push(response.data.result.data);
+                    Flash.create('success', response.data.result.message);
+                    $scope.countAttachments = [0];
+                }
+                else{
+                    Flash.create('info', response.data.result.message);
+                }
+            });
+
+
+            /*var comments = CommentsResources.save($scope.commentsObj).$promise;
             comments.then(function (res) {
                 if(res.result.success){
                     $scope.commentsObj = {task_id: id};
@@ -243,7 +261,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 else{
                     Flash.create('danger', res.result.message);
                 }
-            });
+            });*/
         }
         else{
             Flash.create('danger', 'Write something in comments');

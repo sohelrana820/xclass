@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Utility\Text;
 
 /**
  * Comments Controller
@@ -51,6 +52,24 @@ class CommentsController extends AppController
         $comment = $this->Comments->newEntity();
         $this->request->data['user_id'] = $this->userID;
         if ($this->request->is('post')) {
+
+
+            $allAttachments = [];
+            if(isset($this->request->data['file'])){
+                $attachments = $this->request->data['file'];
+                foreach($attachments as $attachment){
+                    if(isset($attachment['name']) && $attachment['name']){
+                        $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
+                        $allAttachments[] = [
+                            'uuid' => Text::uuid(),
+                            'name' => $attachment['name'],
+                            'path' => $result,
+                        ];
+                    }
+                }
+            }
+
+            $this->request->data['attachments'] = $allAttachments;
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
             if ($this->Comments->save($comment)) {
                 $comment->user = $this->loggedInUser;
