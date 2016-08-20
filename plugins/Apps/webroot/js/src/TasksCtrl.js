@@ -370,7 +370,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
     $scope.filtterAssignee = [];
-    $scope.chooseAssignee = function(user, key, isChecked){
+    $scope.chooseFilterAssignee = function(user, key, isChecked){
         if(isChecked == undefined || isChecked == false)
         {
             $scope.users[key].checked = true;
@@ -386,7 +386,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.doFilter();
     };
 
-    $scope.removeAssignee = function(user){
+    $scope.removeFilterAssignee = function(user){
         $scope.filtterAssignee = $scope.filtterAssignee.filter(function(oldUser){
             return oldUser.id !== user.id;
         });
@@ -401,7 +401,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.filtterAuthor = [];
-    $scope.chooseAuthor = function(user, key, isChecked){
+    $scope.chooseFilterAuthor = function(user, key, isChecked){
         if(isChecked == undefined || isChecked == false)
         {
             $scope.users[key].checked = true;
@@ -417,7 +417,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.doFilter();
     };
 
-    $scope.removeAuthor = function(user){
+    $scope.removeFilterAuthor = function(user){
         $scope.filtterAuthor = $scope.filtterAuthor.filter(function(oldUser){
             return oldUser.id !== user.id;
         });

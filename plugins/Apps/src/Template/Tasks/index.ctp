@@ -45,7 +45,7 @@
                             <h2>Filter by author <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
-                                    <a ng-click="chooseAuthor(user, key, user.checked)"">
+                                    <a ng-click="chooseFilterAuthor(user, key, user.checked)"">
                                     <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
                                     <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                     {{user.profile.first_name}} {{user.profile.last_name}}
@@ -85,7 +85,7 @@
                             <h2>Filter by who’s assigned <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
-                                    <a ng-click="chooseAssignee(user, key, user.checked)"">
+                                    <a ng-click="chooseFilterAssignee(user, key, user.checked)"">
                                     <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
                                     <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                     {{user.profile.first_name}} {{user.profile.last_name}}
@@ -126,17 +126,17 @@
                 <ul class="filter_user">
                     <li ng-repeat="label in filterLabels">
                         Label: {{label.name}}
-                        <span class="red" ng-click="removeTaskLabels(taskLabel)">X</span>
+                        <span class="red" ng-click="removeFilterLabel(label)">X</span>
                     </li>
 
                     <li ng-repeat="user in filtterAuthor">
                         Author: {{user.profile.first_name}} {{user.profile.last_name}}
-                        <span class="red" ng-click="removeAuthor(user)">X</span>
+                        <span class="red" ng-click="removeFilterAuthor(user)">X</span>
                     </li>
 
                     <li ng-repeat="user in filtterAssignee">
                         Assignee: {{user.profile.first_name}} {{user.profile.last_name}}
-                        <span class="red" ng-click="removeAssignee(user)">X</span>
+                        <span class="red" ng-click="removeFilterAssignee(user)">X</span>
                     </li>
                 </ul>
             </div>
