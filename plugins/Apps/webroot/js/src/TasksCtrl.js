@@ -358,7 +358,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             'status[]': status,
             'labels[]': labels,
             'users[]': users,
-            'authors[]': authors
+            'authors[]': authors,
+            'sort_by': $scope.filterQuery.sort_by,
+            'order_by': $scope.filterQuery.order_by,
         };
 
         $scope.fetchTaskLists($scope.queryString);

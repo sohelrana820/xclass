@@ -107,9 +107,8 @@
                             <h2>Sort by <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li>
-                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">Newest</a>
-                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">Oldest</a>
-                                    <a ng-click="chooseTaskUsers(user, key, user.checked)"">Recently updated</a>
+                                    <a ng-click="doFilter(filterQuery.sort_by = 'id', filterQuery.order_by = 'DESC')">Newest</a>
+                                    <a ng-click="doFilter(filterQuery.sort_by = 'id', filterQuery.order_by = 'ASC')">Oldest</a>
                                 </li>
                             </ul>
                         </div>

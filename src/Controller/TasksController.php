@@ -22,12 +22,25 @@ class TasksController extends AppController
         //$this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
         $conditions = [];
+        $sortBy = 'Tasks.id';
+        $orderBy = 'DESC';
 
         if( $this->request->params['_ext'] != 'json'){
             $this->set('tasks', $this->paginate($this->Tasks));
             $this->set('_serialize', ['tasks']);
         }
         else {
+
+            if (isset($this->request->query['sort_by'])) {
+                if($this->request->query['sort_by'] == 'id'){
+                    $sortBy = 'Tasks.id';
+                }
+            }
+
+            if (isset($this->request->query['order_by'])) {
+                $orderBy = $this->request->query['order_by'];
+            }
+
             if (isset($this->request->query['status'])) {
                 $conditions = array_merge($conditions, ['Tasks.status IN' => $this->request->query['status']]);
             }
@@ -39,6 +52,7 @@ class TasksController extends AppController
             $tasks = $this->Tasks->find();
             $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
             $tasks->where($conditions);
+            $tasks->order([$sortBy => $orderBy]);
             $tasks->contain(
                 [
                     'Users' => function($q){
