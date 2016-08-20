@@ -18,7 +18,7 @@
     <div class="col-lg-12 col-md-12" ng-show="count_all > 0">
         <div class="filter_bar">
 
-            <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'all')">
+            <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'all'); filterQuery.unlabeled = false;  filterQuery.unassigned = false; ">
                 <i class="fa fa-signal" aria-hidden="true"></i>
                 All
             </a>
@@ -192,18 +192,13 @@
                         ({{task.created | date : 'HH:m a'}})
                     </small>
                 </td>
-                <td>
+                <td style="width: 10%;">
                     <span ng-repeat="user in task.users">
                         <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}" />
                         <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg" />
                     </span>
                 </td>
-                <td>
-                    <span>
-                        <i class="fa fa-comments"></i> {{task.comments.length}}
-                    </span>
-                </td>
-                <td class="text-right">
+                <td class="text-right" style="width: 5%;">
                     <a href="{{BASE_URL}}tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
                     <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
                 </td>
