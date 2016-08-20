@@ -105,9 +105,11 @@ class AppController extends Controller
 
         if(isset($iniData['APPLICATION_NAME'])){
             $this->appsName = $iniData['APPLICATION_NAME'];
-            $this->appsLogo = $iniData['APPLICATION_LOGO'];
         }
 
+        if(isset($iniData['APPLICATION_LOGO'])){
+            $this->appsLogo = $iniData['APPLICATION_LOGO'];
+        }
     }
 
     /**
