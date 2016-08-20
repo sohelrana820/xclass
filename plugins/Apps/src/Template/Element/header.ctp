@@ -1,4 +1,4 @@
-<ul class="nav navbar-right top-nav">
+<ul class="nav navbar-right top-nav hidden-sm hidden-xs">
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php echo $userInfo->profile->name?> <b class="caret"></b></a>
         <ul class="dropdown-menu header_nav">

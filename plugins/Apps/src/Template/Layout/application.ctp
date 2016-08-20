@@ -32,13 +32,13 @@
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">
-                    <?php echo $this->Html->link($appsName, ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']);?>
+                    <?php echo $this->Html->image($appsLogo, ['class' => 'logo', 'url' => ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']]);?>
                 </span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <?php echo $this->Html->link($appsName, ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']);?>
+            <?php echo $this->Html->image($appsLogo, ['class' => 'logo', 'url' => ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']]);?>
         </div>
         <!-- Top Menu Items -->
         <?php echo $this->element('header');?>
