@@ -140,7 +140,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
 
         $scope.users.forEach(function(oldUser, key){
-            if(oldUser.id == label.id){
+            if(oldUser.id == user.id){
                 $scope.users[key].checked = false;
             }
         });

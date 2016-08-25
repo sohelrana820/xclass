@@ -126,14 +126,14 @@
             <a class="btn btn-danger" ng-click="deleteTask(TaskObj.id)">Delete Task</a>
             <div class="task_sidebar" style="margin-top: 25px">
 
+
                 <div class="single_block">
-                    <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Labels
-                        <i class="fa fa-gear pull-right"></i>
-                    </h2>
-                    <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
                     <div class="dropdown">
-                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <h2 id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Labels
+                            <i class="fa fa-gear pull-right"></i>
+                        </h2>
+                        <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
@@ -142,6 +142,7 @@
                             </ul>
                         </div>
                     </div>
+                    <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
                     <div>
                         <ul class="task_labels" ng-show="taskLabels.length > 0">
                             <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel); quickUpdate('label_event', false)">X</span></li>
@@ -149,15 +150,13 @@
                     </div>
                 </div>
 
-
                 <div class="single_block">
-                    <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Users
-                        <i class="fa fa-gear pull-right"></i>
-                    </h2>
-                    <small class="red" ng-show="taskUsers.length < 1">User not assigned yet!</small>
                     <div class="dropdown">
-                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <h2 id="usersList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Users
+                            <i class="fa fa-gear pull-right"></i>
+                        </h2>
+                        <div class="dropdown-menu custom-dropdown" id="usersList" aria-labelledby="label">
                             <h2>Assign task to user <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
@@ -171,6 +170,8 @@
                             </ul>
                         </div>
                     </div>
+
+                    <small class="red" ng-show="taskUsers.length < 1">User not assigned yet!</small>
                     <div>
                         <ul class="task_users">
                             <li ng-repeat="user in taskUsers">
