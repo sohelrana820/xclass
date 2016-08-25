@@ -328,8 +328,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.filtterAssignee = [];
         $scope.filtterAuthor = [];
         $scope.filterLabels = [];
-        $scope.sort_by = false;
-        $scope.order_by = false;
+        $scope.filterQuery.sort_by = false;
+        $scope.filterQuery.order_by = false;
         $scope.filterQuery.status = 'all';
     };
 
@@ -372,11 +372,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             'labels[]': labels,
             'users[]': users,
             'authors[]': authors,
-            'sort_by': $scope.filterQuery.sort_by,
+            /*'sort_by': $scope.filterQuery.sort_by,
             'order_by': $scope.filterQuery.order_by,
             'unlabeled': $scope.filterQuery.unlabeled,
-            'unassigned': $scope.filterQuery.unassigned,
+            'unassigned': $scope.filterQuery.unassigned,*/
         };
+
+
 
         $scope.fetchTaskLists($scope.queryString);
         console.log(status);

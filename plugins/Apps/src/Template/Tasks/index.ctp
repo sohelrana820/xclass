@@ -46,12 +46,12 @@
             <div class="pull-right">
 
                 <div class="filter_block">
-                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Author
-                        <b class="caret"></b>
-                    </span>
                     <div class="dropdown">
-                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Author
+                            <b class="caret"></b>
+                        </span>
+                        <div class="dropdown-menu custom-dropdown" id="authorList" aria-labelledby="label">
                             <h2>Filter by author <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
@@ -68,12 +68,12 @@
                 </div>
 
                 <div class="filter_block">
-                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                    Labels
-                    <b class="caret"></b>
-                    </span>
                     <div class="dropdown">
-                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <span id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Labels
+                            <b class="caret"></b>
+                        </span>
+                        <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>Filter by label <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
@@ -84,14 +84,13 @@
                     </div>
                 </div>
 
-
                 <div class="filter_block">
-                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Assigned
-                        <b class="caret"></b>
-                    </span>
                     <div class="dropdown">
-                        <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
+                        <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Assigned
+                            <b class="caret"></b>
+                        </span>
+                        <div class="dropdown-menu custom-dropdown" id="assigneeList" aria-labelledby="label">
                             <h2>Filter by who’s assigned <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
