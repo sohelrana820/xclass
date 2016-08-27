@@ -28,6 +28,11 @@ class LabelsController extends AppController
         if (isset($this->request->query['status'])) {
             $conditions = array_merge($conditions, ['Labels.status' => $this->request->query['status']]);
         }
+
+        if (isset($this->request->query['name'])) {
+            $conditions = array_merge($conditions, ['Labels.name LIKE' => '%'.$this->request->query['name'].'%']);
+        }
+
         $this->paginate = [
             'conditions' => $conditions,
             'limit' => 50,

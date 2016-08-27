@@ -55,8 +55,18 @@
                             Labels
                             <i class="fa fa-gear pull-right"></i>
                         </h2>
+
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
+                            <div class="label_quick_operation">
+                                <div class="search_label">
+                                    <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
+                                    <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
                                     <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>

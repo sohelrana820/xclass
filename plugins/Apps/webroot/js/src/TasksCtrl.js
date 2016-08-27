@@ -82,15 +82,19 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     /**
      * Getting application active label list.
      */
-    $scope.fetchLabelLists = function(){
-        var labels = LabelResources.query({status: 1}).$promise;
+    $scope.fetchLabelLists = function(data){
+        $scope.show_label_search_loader = true;
+        var labels = LabelResources.query(data).$promise;
         labels.then(function (res) {
             if(res.result.success){
-                $scope.labels = res.result.data;
+                $timeout(function() {
+                    $scope.show_label_search_loader = false;
+                    $scope.labels = res.result.data;
+                }, 500);
             }
         });
     };
-    $scope.fetchLabelLists();
+    $scope.fetchLabelLists({status: 1});
 
     $scope.taskLabels = [];
     $scope.chooseTaskLabels = function(label, key, isChecked){
@@ -117,7 +121,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.labels[key].checked = false;
             }
         });
-    }
+    };
+
+    $scope.searchLabel = function(query){
+        $scope.fetchLabelLists({status: 1, name: query});
+    };
 
     $scope.taskUsers = [];
     $scope.chooseTaskUsers = function(user, key, isChecked){
