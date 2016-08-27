@@ -24,6 +24,8 @@ class LabelsController extends AppController
     public function index()
     {
         $conditions = [];
+        $limit = 10;
+        $page = 1;
 
         if (isset($this->request->query['status'])) {
             $conditions = array_merge($conditions, ['Labels.status' => $this->request->query['status']]);
@@ -33,17 +35,27 @@ class LabelsController extends AppController
             $conditions = array_merge($conditions, ['Labels.name LIKE' => '%'.$this->request->query['name'].'%']);
         }
 
-        $this->paginate = [
-            'conditions' => $conditions,
-            'limit' => 50,
-            'order' => ['Labels.created' => 'DESC'],
-        ];
-        $labels = $this->paginate($this->Labels);
+        if(isset($this->request->query['page']) && $this->request->query['page']){
+            $page = $this->request->query['page'];
+        }
 
+        $labels = $this->Labels->find('all',
+            [
+                'conditions' => $conditions,
+                'order' => 'created DESC',
+                'limit' => $limit,
+                'page' => $page
+            ]
+        );
+
+        $count = $this->Labels->find('all', ['conditions' => $conditions])->count();
         $response = [
             'success' => true,
             'message' => 'List of labels',
             'data' => $labels,
+            'count' => $count,
+            'limit' => $limit,
+            'page' => $page,
         ];
 
         $this->set('result', $response);

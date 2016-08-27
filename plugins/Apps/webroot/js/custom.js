@@ -18,3 +18,8 @@ $('ul.nav li.dropdown').hover(function() {
 }, function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(500);
 });
+
+$('body').on('click', 'a.disabled', function(event) {
+    console.log(111);
+    event.preventDefault();
+});

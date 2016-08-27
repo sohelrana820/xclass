@@ -1,18 +1,29 @@
-app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
+app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash){
 
     $scope.create_form = true;
     $scope.edit_form = false;
     $scope.labels = [];
 
-   $scope.fetchLabelLists = function(){
-       var labels = LabelResources.query().$promise;
+   $scope.fetchLabelLists = function(data){
+       var labels = LabelResources.query(data).$promise;
+       $scope.fetching_loading_area = true;
        labels.then(function (res) {
            if(res.result.success){
-               return $scope.labels = res.result.data;
+               $timeout(function() {
+                   if(res.result.success){
+                       $scope.label = {
+                           data: res.result.data,
+                           count: res.result.count,
+                           currentPage: res.result.page,
+                           limit: res.result.limit
+                       };
+                   }
+                   $scope.fetching_loading_area = false;
+               }, 1500);
            }
        });
    };
-    $scope.fetchLabelLists();
+    $scope.fetchLabelLists({});
 
     $scope.isLabelFormSubmitted = false;
     $scope.LabelObj = {color_code: '#C00C00'};
@@ -78,7 +89,7 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
         deletedLabel.then(function (res) {
             if(res.result.success)
             {
-                $scope.labels = $scope.labels.filter(function(label){
+                $scope.label.data = $scope.label.data.filter(function(label){
                     return label.id !== id
                 });
                 Flash.create('danger', res.result.message);
@@ -104,4 +115,25 @@ app.controller('LabelsCtrl', function($scope, LabelResources, Flash){
             }
         });
     };
+
+    $scope.goPreviousPage = function () {
+        $scope.label.currentPage = parseInt($scope.label.currentPage) - 1;
+        if($scope.label.currentPage < 1){
+            $scope.label.currentPage = 1;
+        }
+        $scope.fetchLabelLists({page: $scope.label.currentPage});
+    };
+
+    $scope.goNextPage = function () {
+        $scope.label.currentPage = parseInt($scope.label.currentPage ) + 1;
+        var maxPage = parseInt($scope.label.count / $scope.label.limit);
+        var modVal = $scope.label.count % $scope.label.limit;
+        if(modVal > 0){
+            maxPage = maxPage + 1;
+        }
+        if($scope.label.currentPage >= maxPage){
+            $scope.label.currentPage = maxPage;
+        }
+        $scope.fetchLabelLists({page:  $scope.label.currentPage});
+    }
 });

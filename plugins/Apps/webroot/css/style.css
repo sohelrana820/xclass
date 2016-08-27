@@ -36,6 +36,19 @@ a{
     width: 20px;
 }
 
+.fetching_loading_area{
+    text-align: center;
+}
+
+.fetching_loading_area h2{
+    color: #1ab394;
+    font-size: 18px;
+}
+
+.md_loader{
+    width: 40px;
+}
+
 /** Form elements classes **/
 .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
     top: -7px;
@@ -1134,4 +1147,32 @@ a{
 .label_quick_operation .text-danger {
     font-size: 10px;
     color: #f75353;
+}
+
+.pagination_area{
+
+}
+
+
+.pagination_area span {
+    font-size: 10px;
+    color: #888;
+}
+
+.pagination_area .previous_page, .pagination_area .next_page {
+    border: 1px solid #EEE;
+    padding: 10px 8px 8px 15px;
+    width: 105px;
+    color: #888;
+    font-size: 12px;
+    border-radius: 50px;
+}
+
+.pagination_area .previous_page:hover,
+.pagination_area .next_page:hover {
+    text-decoration: none;
+}
+
+.disabled {
+    cursor: not-allowed;
 }

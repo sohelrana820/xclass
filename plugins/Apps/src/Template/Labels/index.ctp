@@ -1,6 +1,6 @@
 <?php echo $this->assign('title', 'Manage Label');?>
 <div ng-controller="LabelsCtrl">
-    <div class="page-header" ng-show="labels.length > 0  || show_crate_form">
+    <div class="page-header" ng-show="label.count > 0  || show_crate_form">
         <h2 class="title pull-left">
             Manage Application Labels
         </h2>
@@ -10,7 +10,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
-        <div class="col-lg-5 col-md-5" ng-show="labels.length > 0 || show_crate_form">
+        <div class="col-lg-5 col-md-5" ng-show="label.count > 0 || show_crate_form">
             <!-- Create label form -->
             <div ng-show="create_form" class="widget">
                 <div class="widget-header">
@@ -90,13 +90,19 @@
             </div>
             <!-- /Edit label form -->
         </div>
-        <div class="col-lg-7 col-md-7" ng-show="labels.length > 0">
-            <div ng-show="labels.length > 0">
+        <div class="col-lg-7 col-md-7" ng-show="label.count > 0">
+            <div ng-show="label.count > 0">
                 <h2 class="md-header">
                     List of Label <br/>
-                    <span>{{labels.length}} result found</span>
+                    <span>{{label.count}} result found</span>
                 </h2>
-                <table class="table label_List">
+
+                <div class="fetching_loading_area" ng-show="fetching_loading_area">
+                    <img src="{{BASE_URL}}/img/loader-sm.gif" class="md_loader">
+                    <h2>Please wait! label is loading</h2>
+                </div>
+
+                <table class="table label_List" ng-show="!fetching_loading_area">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -107,7 +113,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="label in labels">
+                    <tr ng-repeat="label in label.data">
                         <td>
                             <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                         </td>
@@ -124,10 +130,19 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="pagination_area text-center">
+                    <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
+                    <span>
+                        showing {{((label.currentPage - 1) * label.limit) + 1}} -
+                        {{label.currentPage * label.limit > label.count ? label.count : label.currentPage * label.limit}}
+                        of {{label.count}} records
+                    </span>
+                    <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a
+                </div>
             </div>
         </div>
 
-        <div class="col-lg-8 col-lg-offset-2" ng-show="labels.length < 1 && !show_crate_form">
+        <div class="col-lg-8 col-lg-offset-2" ng-show="label.count < 1 && !show_crate_form">
             <div class="empty_block">
                 <span class="icon">
                     <i class="fa fa-bullhorn" aria-hidden="true"></i></span>
