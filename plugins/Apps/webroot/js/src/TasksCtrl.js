@@ -128,6 +128,14 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.fetchLabelLists({status: 1, name: query});
     };
 
+    $scope.refreshLabelList = function(query){
+        $scope.fetchLabelLists({status: 1});
+        $scope.label_query = null;
+        $scope.show_label_search_loader = false;
+        $scope.show_label_refresh_loader = true;
+        $scope.taskLabels = [];
+    };
+
     $scope.saveLabel = function(isValid){
         $scope.show_label_create_loader = isValid;
         $scope.isLabelFormSubmitted = true;

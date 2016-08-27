@@ -379,7 +379,7 @@ a{
     text-transform: uppercase;
 }
 
-.custom-dropdown .close_dropdown, .custom-dropdown .close_dropdown:hover {
+.custom-dropdown .quick_task, .custom-dropdown .quick_task:hover {
     position: absolute;
     right: 10px;
     color: #777;
