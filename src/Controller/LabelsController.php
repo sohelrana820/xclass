@@ -24,7 +24,7 @@ class LabelsController extends AppController
     public function index()
     {
         $conditions = [];
-        $limit = 10;
+        $limit = 3;
         $page = 1;
 
         if (isset($this->request->query['status'])) {
