@@ -83,12 +83,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active label list.
      */
     $scope.fetchLabelLists = function(data){
-        $scope.show_label_search_loader = true;
         var labels = LabelResources.query(data).$promise;
         labels.then(function (res) {
             if(res.result.success){
                 $timeout(function() {
                     $scope.show_label_search_loader = false;
+                    $scope.show_label_refresh_loader = false;
                     $scope.labels = res.result.data;
                 }, 500);
             }
@@ -124,6 +124,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
     $scope.searchLabel = function(query){
+        $scope.show_label_search_loader = true;
         $scope.fetchLabelLists({status: 1, name: query});
     };
 

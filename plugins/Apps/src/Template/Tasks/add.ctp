@@ -59,8 +59,11 @@
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>
                                 Apply label
-                                <span class="add_new_label" ng-click="show_create_new_label_form = true;"><i class="fa fa-plus"></i></span>
-                                <a class="close_dropdown">X</a>
+                                <a class="close_dropdown">
+                                    <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                    <span class="add_new_label" ng-click="fetchLabelLists({status: 1}); label_query = null; show_label_search_loader = false; show_label_refresh_loader = true;" title="Refresh Label List"><i class="fa fa-refresh grey"></i></span>
+                                    <span class="add_new_label" ng-click="show_create_new_label_form = true;" title="Create New Title"><i class="fa fa-plus"></i></span>
+                                </a>
                             </h2>
                             <div class="label_quick_operation">
 
