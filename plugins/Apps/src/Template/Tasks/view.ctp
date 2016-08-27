@@ -129,10 +129,9 @@
 
                 <div class="single_block">
                     <div class="dropdown">
-                        <h2 id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Labels
-                            <i class="fa fa-gear pull-right"></i>
-                        </h2>
+
+
+
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
@@ -157,7 +156,22 @@
                             <i class="fa fa-gear pull-right"></i>
                         </h2>
                         <div class="dropdown-menu custom-dropdown" id="usersList" aria-labelledby="label">
-                            <h2>Assign task to user <a class="close_dropdown">X</a></h2>
+                            <h2>
+                                Assign task to user
+                                <a class="quick_task">
+                                    <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                    <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
+                                </a>
+                            </h2>
+
+                            <div class="label_quick_operation">
+                                <div class="search_label">
+                                    <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                    <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('user_event', user.checked)"">
@@ -168,6 +182,7 @@
                                     </a>
                                 </li>
                             </ul>
+                            <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">User not found</p>
                         </div>
                     </div>
 
