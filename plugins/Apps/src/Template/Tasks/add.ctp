@@ -109,7 +109,7 @@
                                     <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
                                 </li>
                             </ul>
-                            <p style="text-align: center;" ng-show="labels.length < 1"class="red" ng-show="taskLabels.length < 1">Label not found</p>
+                            <p style="font-size: 9px; margin-top: 10px;" ng-show="labels.length < 1 && !show_create_new_label_form"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Label not found</p>
                         </div>
                     </div>
 
