@@ -2,11 +2,11 @@
 
 <div ng-controller="TasksCtrl">
 
-    <div class="page-header" ng-show="count_all > 0">
+    <div class="page-header" ng-show="tasks.count_all > 0">
         <h2 class="title pull-left">
             Manage Task
             <p class="sub-title">
-                {{totalTasks}} result found
+                {{tasks.count}} result found
             </p>
         </h2>
         <div class="pull-right btn-areas">
@@ -15,7 +15,7 @@
         <div class="clearfix"></div>
     </div>
 
-    <div class="col-lg-12 col-md-12" ng-show="count_all > 0">
+    <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
         <div class="filter_bar">
 
             <a class="search_item search_item_gray"  ng-click="clearQueryString(); doFilter(filterQuery.status = 'all')">
@@ -218,9 +218,9 @@
         </div>
 
         <div class="clearfix"></div>
-        <table class="table task_list_table" ng-show="tasks.length > 0">
+        <table class="table task_list_table" ng-show="tasks.count > 0">
             <tbody>
-            <tr ng-repeat="task in tasks">
+            <tr ng-repeat="task in tasks.data">
                 <td style="width: 50px;">
                     <a class="sl" href="{{BASE_URL}}tasks/view/{{task.id}}">#{{task.id}}</a>
                 </td>
@@ -255,7 +255,17 @@
             </tbody>
         </table>
 
-        <div class="empty_block" ng-show="tasks.length < 1">
+        <div class="pagination_area text-center">
+            <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
+                    <span>
+                        showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
+                        {{tasks.currentPage * tasks.limit > tasks.count ? tasks.count : tasks.currentPage * tasks.limit}}
+                        of {{tasks.count}} records
+                    </span>
+            <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a
+        </div>
+
+        <div class="empty_block" ng-show="tasks.count < 1">
             <span class="icon">
                 <i class="fa fa-bullhorn" aria-hidden="true"></i>
             </span>

@@ -24,12 +24,18 @@ class TasksController extends AppController
         $conditions = [];
         $sortBy = 'Tasks.id';
         $orderBy = 'DESC';
+        $limit = 5;
+        $page = 1;
 
         if( $this->request->params['_ext'] != 'json'){
             $this->set('tasks', $this->paginate($this->Tasks));
             $this->set('_serialize', ['tasks']);
         }
         else {
+
+            if(isset($this->request->query['page']) && $this->request->query['page']){
+                $page = $this->request->query['page'];
+            }
 
             if (isset($this->request->query['sort_by'])) {
                 if($this->request->query['sort_by'] == 'id'){
@@ -53,6 +59,8 @@ class TasksController extends AppController
             $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
             $tasks->where($conditions);
             $tasks->order([$sortBy => $orderBy]);
+            $tasks->limit($limit);
+            $tasks->page($page);
             $tasks->contain(
                 [
                     'Users' => function($q){
@@ -132,6 +140,8 @@ class TasksController extends AppController
                 'count' => $tasks->count(),
                 'data' => $tasks,
                 'count_all' => $countAll,
+                'limit' => $limit,
+                'page' => $page,
             ];
             $this->set('result', $response);
             $this->set('_serialize', ['result']);

@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload, blockUI){
     $scope.TaskObj = {};
 
     $scope.getTaskRelObj = function(){
@@ -72,12 +72,27 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active users.
      */
     $scope.fetchTaskLists = function(data){
+
+        var myBlockUI = blockUI.instances.get('blockTasksList');
+        console.log(myBlockUI);
+        myBlockUI.start({
+            message: 'Please wait!',
+        });
+
         var tasks = TasksResources.query(data).$promise;
         tasks.then(function (res) {
             if(res.result.success){
-                $scope.tasks = res.result.data;
-                $scope.totalTasks = res.result.count;
-                $scope.count_all = res.result.count_all;
+                $timeout(function() {
+                    $scope.tasks = {
+                        data: res.result.data,
+                        count: res.result.count,
+                        count_all: res.result.count_all,
+                        currentPage: res.result.page,
+                        limit: res.result.limit
+                    };
+                    myBlockUI.stop();
+                }, 1000);
+
             }
         });
     };
@@ -547,5 +562,35 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
         $scope.doFilter();
+    }
+
+
+    $scope.goPreviousPage = function () {
+        $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) - 1;
+
+        if($scope.tasks.currentPage >= 1){
+            $scope.fetchTaskLists({page: $scope.tasks.currentPage});
+        }
+
+        if($scope.tasks.currentPage < 1){
+            $scope.tasks.currentPage = 1;
+        }
+    };
+
+    $scope.goNextPage = function () {
+        $scope.tasks.currentPage = parseInt($scope.tasks.currentPage ) + 1;
+        var maxPage = parseInt($scope.tasks.count / $scope.tasks.limit);
+        var modVal = $scope.tasks.count % $scope.tasks.limit;
+        if(modVal > 0){
+            maxPage = maxPage + 1;
+        }
+
+        if(maxPage >= $scope.tasks.currentPage){
+            $scope.fetchTaskLists({page:  $scope.tasks.currentPage});
+        }
+
+        if($scope.tasks.currentPage >= maxPage){
+            $scope.tasks.currentPage = maxPage;
+        }
     }
 });
