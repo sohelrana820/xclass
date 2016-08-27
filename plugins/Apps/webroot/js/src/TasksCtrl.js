@@ -127,14 +127,16 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.fetchLabelLists({status: 1, name: query});
     };
 
-    $scope.saveLavel = function(data){
-        $scope.show_label_create_loader = true;
+    $scope.saveLabel = function(isValid){
+        $scope.show_label_create_loader = isValid;
+        $scope.isLabelFormSubmitted = true;
         var labels = LabelResources.save($scope.LabelObj).$promise;
         labels.then(function (res) {
             if(res.result.success){
 
                 $timeout(function() {
                     $scope.show_label_create_loader = false;
+                    $scope.isLabelFormSubmitted = false;
                     $scope.LabelObj = {};
                     $scope.labels.unshift(res.result.data);
 
@@ -146,11 +148,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     $scope.taskLabels.push(res.result.data);
                     toastr.success(res.result.message);
                     $scope.show_create_new_label_form = false;
-                }, 500);
+                }, 5000);
 
 
             }
             else{
+                $scope.show_label_create_loader = false;
                 toastr.error(res.result.message);
             }
         });

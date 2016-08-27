@@ -1076,6 +1076,7 @@ a{
     float: left;
     height: 30px;
     font-size: 11px;
+    margin-bottom: 0px;
 }
 
 
@@ -1088,6 +1089,17 @@ a{
 .label_quick_operation .create_new_label{
 
 }
+
+.label_quick_operation .create_new_label .form-group{
+    margin-bottom: 15px;
+
+}
+
+.label_quick_operation .create_new_label .form-group label{
+    font-size: 10px;
+    font-weight: 400;
+}
+
 .label_quick_operation .create_new_label .form-control,
 .label_quick_operation .create_new_label .form-control:focus
 {
@@ -1096,7 +1108,6 @@ a{
     float: left;
     height: 30px;
     font-size: 11px;
-    margin-bottom: 15px;
 }
 
 
@@ -1117,4 +1128,10 @@ a{
 
 .label_quick_operation .color-picker-wrapper {
     position: static;
+}
+
+
+.label_quick_operation .text-danger {
+    font-size: 10px;
+    color: #f75353;
 }

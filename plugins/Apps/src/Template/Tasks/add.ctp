@@ -65,10 +65,32 @@
                             <div class="label_quick_operation">
 
                                 <div class="create_new_label" ng-show="show_create_new_label_form">
-                                    <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label">
-                                    <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
-                                    <a class="btn btn-success" ng-click="saveLavel(LabelObj)">Save</a>
-                                    <img ng-show="show_label_create_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                    <ng-form name="create_label_form"  novalidate>
+
+                                        <div class="form-group">
+                                            <label>Label Name</label>
+                                            <div class="input text">
+                                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
+                                                <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
+                                                    <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Label Color</label>
+                                            <div class="input text">
+                                                <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <a class="btn btn-success" ng-click="saveLabel(create_label_form.$valid)">Save</a>
+                                            <a class="btn btn-danger" ng-show="!show_label_create_loader" ng-click="show_create_new_label_form = false">Cancel</a>
+                                            <img ng-show="show_label_create_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        </div>
+                                    </form>
                                 </div>
 
                                 <div class="search_label" ng-show="!show_create_new_label_form">
@@ -79,7 +101,7 @@
 
                             </div>
 
-                            <ul class="custom_dropdown_list nav nav-list">
+                            <ul class="custom_dropdown_list nav nav-list" ng-show="!show_create_new_label_form">
                                 <li ng-repeat="(key, label) in labels">
                                     <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
                                 </li>
