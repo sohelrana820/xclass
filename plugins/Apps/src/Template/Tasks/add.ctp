@@ -64,8 +64,8 @@
                             </h2>
                             <div class="label_quick_operation">
                                 <div class="create_new_label">
-                                    <form name="create_label_form" ng-submit="updateLabel(create_label_form.$valid)" novalidate>
-                                        <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
+                                    <form name="create_label_form">
+                                        <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label">
                                         <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
                                         <button class="btn btn-success">Save</button>
                                         <img src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">

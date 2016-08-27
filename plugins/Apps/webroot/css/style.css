@@ -1049,11 +1049,11 @@ a{
     color: lightslategray !important;
 }
 
-/* Visible DropDown */
-/*.dropdown:hover .dropdown-menu {
+/* Visible DropDown*/
+.dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
-}*/
+}
 
 
 .label_quick_operation{
@@ -1112,4 +1112,9 @@ a{
 .label_quick_operation  .btn {
     padding: 5px 10px 3px 9px;
     text-transform: none;
+}
+
+
+.label_quick_operation .color-picker-wrapper {
+    position: static;
 }
