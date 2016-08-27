@@ -77,6 +77,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                     $scope.create_form = true;
                     $scope.edit_form = false;
                     Flash.create('success', res.result.message);
+                    $scope.fetchLabelLists({});
                 }
                 else{
                     Flash.create('error', res.result.message);
@@ -98,6 +99,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                     return label.id !== id
                 });
                 Flash.create('danger', res.result.message);
+                $scope.fetchLabelLists({});
             }
             else{
                 Flash.create('error', res.result.message);
