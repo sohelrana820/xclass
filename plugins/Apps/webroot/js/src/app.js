@@ -7,6 +7,7 @@ app.config(function($provide) {
         var options = angular.copy($delegate);
         options.alpha = false;
         options.format = 'hex';
+        options.placeholder = 'Label color';
         return options;
     });
 });

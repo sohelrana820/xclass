@@ -388,6 +388,16 @@ a{
     text-decoration: none;
 }
 
+.custom-dropdown .add_new_label {
+    color: #1ab394;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.custom-dropdown .add_new_label .fa {
+    font-size: 11px;
+}
+
 .ta-editor,
 .ta-editor > .ta-bind {
     min-height: 300px;
@@ -1051,6 +1061,9 @@ a{
 }
 
 
+
+
+
 .label_quick_operation .search_label{
     position: relative;
 }
@@ -1061,9 +1074,8 @@ a{
     border: 1px solid #EEE;
     box-shadow: none;
     float: left;
-    height: 28px;
+    height: 30px;
     font-size: 11px;
-    padding: 5px 10px 3px 10px;
 }
 
 
@@ -1073,3 +1085,31 @@ a{
     top: 3px;
 }
 
+.label_quick_operation .create_new_label{
+
+}
+.label_quick_operation .create_new_label .form-control,
+.label_quick_operation .create_new_label .form-control:focus
+{
+    border: 1px solid #EEE;
+    box-shadow: none;
+    float: left;
+    height: 30px;
+    font-size: 11px;
+    margin-bottom: 15px;
+}
+
+
+.label_quick_operation  .color-picker-wrapper .input-group .input-group-addon{
+    display: none !important;
+}
+
+.label_quick_operation  .color-picker-wrapper .input-group {
+    width: 100%;
+}
+
+
+.label_quick_operation  .btn {
+    padding: 5px 10px 3px 9px;
+    text-transform: none;
+}
