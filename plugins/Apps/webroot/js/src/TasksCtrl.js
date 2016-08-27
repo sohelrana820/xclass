@@ -148,7 +148,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     $scope.taskLabels.push(res.result.data);
                     toastr.success(res.result.message);
                     $scope.show_create_new_label_form = false;
-                }, 5000);
+                }, 500);
 
 
             }
