@@ -52,7 +52,22 @@
                             <b class="caret"></b>
                         </span>
                         <div class="dropdown-menu custom-dropdown" id="authorList" aria-labelledby="label">
-                            <h2>Filter by author <a class="close_dropdown">X</a></h2>
+                            <h2>
+                                Filter by author
+                                <a class="quick_task">
+                                    <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                    <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
+                                </a>
+                            </h2>
+
+                            <div class="label_quick_operation">
+                                <div class="search_label">
+                                    <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                    <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseFilterAuthor(user, key, user.checked)"">
@@ -63,6 +78,8 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Author not found</p>
                         </div>
                     </div>
                 </div>
@@ -73,8 +90,24 @@
                             Labels
                             <b class="caret"></b>
                         </span>
+
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
-                            <h2>Filter by label <a class="close_dropdown">X</a></h2>
+                             <h2>
+                                Filter by label
+                                <a class="quick_task">
+                                    <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                    <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List"><i class="fa fa-refresh grey"></i></span>
+                                </a>
+                            </h2>
+
+                            <div class="label_quick_operation">
+                                <div class="search_label">
+                                    <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
+                                    <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, label) in labels">
                                     <a ng-click="chooseFilterLabel(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
@@ -91,7 +124,22 @@
                             <b class="caret"></b>
                         </span>
                         <div class="dropdown-menu custom-dropdown" id="assigneeList" aria-labelledby="label">
-                            <h2>Filter by who’s assigned <a class="close_dropdown">X</a></h2>
+                            <h2>
+                                Filter by who’s assigned
+                                <a class="quick_task">
+                                    <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                    <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
+                                </a>
+                            </h2>
+
+                            <div class="label_quick_operation">
+                                <div class="search_label">
+                                    <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                    <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li ng-repeat="(key, user) in users">
                                     <a ng-click="chooseFilterAssignee(user, key, user.checked)"">
@@ -102,6 +150,8 @@
                                     </a>
                                 </li>
                             </ul>
+
+                            <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Assignee not found</p>
                         </div>
                     </div>
                 </div>
