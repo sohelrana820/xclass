@@ -129,9 +129,10 @@
 
                 <div class="single_block">
                     <div class="dropdown">
-
-
-
+                        <h2 id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Labels
+                            <i class="fa fa-gear pull-right"></i>
+                        </h2>
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>Apply label <a class="close_dropdown">X</a></h2>
                             <ul class="custom_dropdown_list nav nav-list">
