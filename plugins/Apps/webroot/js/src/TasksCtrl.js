@@ -52,12 +52,16 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     /**
      * Getting application active users.
      */
-    $scope.fetchUserLists = function(){
+    $scope.fetchUserLists = function(data){
 
-        var users = UsersResources.query().$promise;
+        var users = UsersResources.query(data).$promise;
         users.then(function (res) {
             if(res.result.success){
-                $scope.users = res.result.data;
+                $timeout(function() {
+                    $scope.users = res.result.data;
+                    $scope.show_user_search_loader = false;
+                    $scope.show_user_refresh_loader = false;
+                }, 500);
             }
         });
     };
@@ -192,6 +196,18 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.users[key].checked = false;
             }
         });
+    };
+
+    $scope.searchUser = function(query){
+        $scope.show_user_search_loader = true;
+        $scope.fetchUserLists({name: query});
+    };
+
+    $scope.refreshUserList = function(query){
+        $scope.fetchUserLists();
+        $scope.user_query = null;
+        $scope.show_user_refresh_loader = true;
+        $scope.show_user_search_loader = false;
     };
 
     $scope.buildTaskObjForShow = function(id){
