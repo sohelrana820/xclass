@@ -24,7 +24,7 @@ class TasksController extends AppController
         $conditions = [];
         $sortBy = 'Tasks.id';
         $orderBy = 'DESC';
-        $limit = 5;
+        $limit = 10;
         $page = 1;
 
         if( $this->request->params['_ext'] != 'json'){
