@@ -133,7 +133,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.label_query = null;
         $scope.show_label_search_loader = false;
         $scope.show_label_refresh_loader = true;
-        $scope.taskLabels = [];
     };
 
     $scope.saveLabel = function(isValid){
