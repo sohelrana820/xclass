@@ -59,19 +59,19 @@
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                             <h2>
                                 Apply label
-                                <span class="add_new_label"><i class="fa fa-plus"></i></span>
+                                <span class="add_new_label" ng-click="show_create_new_label_form = true;"><i class="fa fa-plus"></i></span>
                                 <a class="close_dropdown">X</a>
                             </h2>
                             <div class="label_quick_operation">
-                                <div class="create_new_label">
-                                    <form name="create_label_form">
-                                        <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label">
-                                        <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
-                                        <button class="btn btn-success">Save</button>
-                                        <img src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
-                                    </form>
+
+                                <div class="create_new_label" ng-show="show_create_new_label_form">
+                                    <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label">
+                                    <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                                    <a class="btn btn-success" ng-click="saveLavel(LabelObj)">Save</a>
+                                    <img ng-show="show_label_create_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
                                 </div>
-                                <div class="search_label">
+
+                                <div class="search_label" ng-show="!show_create_new_label_form">
                                     <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
                                     <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
                                 </div>
