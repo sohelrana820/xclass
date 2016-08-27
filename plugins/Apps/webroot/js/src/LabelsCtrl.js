@@ -1,4 +1,4 @@
-app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash){
+app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, blockUI){
 
     $scope.create_form = true;
     $scope.edit_form = false;
@@ -6,7 +6,11 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash){
 
    $scope.fetchLabelLists = function(data){
        var labels = LabelResources.query(data).$promise;
-       $scope.fetching_loading_area = true;
+       var myBlockUI = blockUI.instances.get('myBlockUI');
+       myBlockUI.start({
+           message: 'Please wait!',
+       });
+
        labels.then(function (res) {
            if(res.result.success){
                $timeout(function() {
@@ -18,8 +22,8 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash){
                            limit: res.result.limit
                        };
                    }
-                   $scope.fetching_loading_area = false;
-               }, 1500);
+                   myBlockUI.stop();
+               }, 1000);
            }
        });
    };
@@ -43,6 +47,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash){
                     $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.labels.unshift(res.result.data);
                     Flash.create('success', res.result.message);
+                    $scope.fetchLabelLists({});
                 }
                 else{
                     Flash.create('danger', res.result.message);

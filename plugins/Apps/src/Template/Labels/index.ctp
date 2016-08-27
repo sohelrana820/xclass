@@ -90,19 +90,14 @@
             </div>
             <!-- /Edit label form -->
         </div>
-        <div class="col-lg-7 col-md-7" ng-show="label.count > 0">
+        <div class="col-lg-7 col-md-7" ng-show="label.count > 0"  block-ui="myBlockUI">
             <div ng-show="label.count > 0">
                 <h2 class="md-header">
                     List of Label <br/>
                     <span>{{label.count}} result found</span>
                 </h2>
 
-                <div class="fetching_loading_area" ng-show="fetching_loading_area">
-                    <img src="{{BASE_URL}}/img/loader-sm.gif" class="md_loader">
-                    <h2>Please wait! label is loading</h2>
-                </div>
-
-                <table class="table label_List" ng-show="!fetching_loading_area">
+                <table class="table label_List">
                     <thead>
                     <tr>
                         <th>Name</th>
