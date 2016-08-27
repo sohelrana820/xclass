@@ -139,13 +139,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.show_label_refresh_loader = true;
     };
 
-    $scope.saveLabel = function(isValid){
+    $scope.saveLabel = function(isValid, assignLabel){
         $scope.show_label_create_loader = isValid;
         $scope.isLabelFormSubmitted = true;
         var labels = LabelResources.save($scope.LabelObj).$promise;
         labels.then(function (res) {
             if(res.result.success){
-
                 $timeout(function() {
                     $scope.show_label_create_loader = false;
                     $scope.isLabelFormSubmitted = false;
@@ -158,8 +157,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                         }
                     });
                     $scope.taskLabels.push(res.result.data);
-                    toastr.success(res.result.message);
                     $scope.show_create_new_label_form = false;
+
+                    if(assignLabel && assignLabel != undefined){
+                       $scope.quickUpdate('label_event', true)
+                    }
+                    toastr.success(res.result.message);
                 }, 500);
 
 
@@ -259,6 +262,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.quickUpdate = function(event, value){
         $scope.getTaskRelObj();
+
+        console.log($scope.TaskObj);
+        console.log('hello');
+
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
