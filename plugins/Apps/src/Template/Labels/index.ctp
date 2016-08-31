@@ -14,16 +14,16 @@
             <!-- Create label form -->
             <div ng-show="create_form" class="widget">
                 <div class="widget-header">
-                    <h2 class="title">New Label</h2>
+                    <h2 class="title">New Label</h2>{{isLabelFormSubmitted}}
                 </div>
                 <div class="widget-body">
                     <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>
                         <div class="form-group">
                             <label>Label Name</label>
                             <div class="input text">
-                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
-                                <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
-                                    <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                                <input type="text" ng-model="LabelObj.name" name="c_label_name" class="form-control" placeholder="Name of label" required="required">
+                                <div ng-if="create_label_form.c_label_name.$touched || isLabelFormSubmitted">
+                                    <p ng-show="create_label_form.c_label_name.$error.required"  class="error-message">Label name is required</p>
                                 </div>
                             </div>
                         </div>
@@ -56,13 +56,13 @@
                     <h2 class="title">Update Label</h2>
                 </div>
                 <div class="widget-body">
-                    <form name="create_label_form" ng-submit="updateLabel(create_label_form.$valid)" novalidate>
+                    <form name="update_label_form" ng-submit="updateLabel(update_label_form.$valid)" novalidate>
                         <div class="form-group">
                             <label>Label Name</label>
                             <div class="input text">
-                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
-                                <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
-                                    <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                                <input type="text" ng-model="LabelObj.name" name="u_label_name" class="form-control" placeholder="Name of label" required="required">
+                                <div ng-if="update_label_form.u_label_name.$touched || isLabelFormSubmitted">
+                                    <p ng-show="update_label_form.u_label_name.$error.required"  class="error-message">Label name is required</p>
                                 </div>
                             </div>
                         </div>
