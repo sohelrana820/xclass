@@ -14,7 +14,7 @@
             <!-- Create label form -->
             <div ng-show="create_form" class="widget">
                 <div class="widget-header">
-                    <h2 class="title">New Label</h2>{{isLabelFormSubmitted}}
+                    <h2 class="title">New Label</h2>
                 </div>
                 <div class="widget-body">
                     <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>

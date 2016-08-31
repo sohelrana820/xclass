@@ -1,4 +1,4 @@
-app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, blockUI){
+app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, blockUI, toastr){
 
     $scope.create_form = true;
     $scope.edit_form = false;
@@ -46,11 +46,11 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                     $scope.isLabelFormSubmitted = false;
                     $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.labels.unshift(res.result.data);
-                    Flash.create('success', res.result.message);
+                    toastr.success(res.result.message);
                     $scope.fetchLabelLists({});
                 }
                 else{
-                    Flash.create('danger', res.result.message);
+                    toastr.error(res.result.message);
                 }
             });
         }
@@ -76,11 +76,11 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                     $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.create_form = true;
                     $scope.edit_form = false;
-                    Flash.create('success', res.result.message);
+                    toastr.success(res.result.message);
                     $scope.fetchLabelLists({});
                 }
                 else{
-                    Flash.create('error', res.result.message);
+                    toastr.error(res.result.message);
                 }
             });
         }
@@ -98,11 +98,11 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                 $scope.label.data = $scope.label.data.filter(function(label){
                     return label.id !== id
                 });
-                Flash.create('danger', res.result.message);
+                toastr.warning(res.result.message);
                 $scope.fetchLabelLists({});
             }
             else{
-                Flash.create('error', res.result.message);
+                toastr.error(res.result.message);
             }
         });
     };
