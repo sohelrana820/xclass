@@ -57,7 +57,7 @@
                         </h2>
 
                         <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
-                            <h2>
+                            <h2 ng-show="!show_create_new_label_form">
                                 Apply label
                                 <a class="quick_task">
                                     <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
