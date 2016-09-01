@@ -1197,3 +1197,13 @@ a{
 .disabled {
     cursor: not-allowed;
 }
+
+.theme-table thead th {
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #777;
+}
+
+.theme-table tbody td {
+    font-weight: 300;
+}

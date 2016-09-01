@@ -96,7 +96,7 @@
                                     </form>
                                 </div>
 
-                                <div class="search_label" ng-show="!show_create_new_label_form">
+                                <div class="search_label" ng-show="!show_create_new_label_form && taskLabels.length > 0">
                                     <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
                                     <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
                                 </div>
