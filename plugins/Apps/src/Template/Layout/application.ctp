@@ -11,6 +11,9 @@
 
     <?php
     echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'style.css'));
+    echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700" rel="stylesheet">';
+    echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
+';
     echo $this->fetch('cssTop');
     echo $this->fetch('jsTop');
     ?>

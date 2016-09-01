@@ -13,6 +13,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
 
        labels.then(function (res) {
            if(res.result.success){
+               console.log(res.result);
                $timeout(function() {
                    if(res.result.success){
                        $scope.label = {

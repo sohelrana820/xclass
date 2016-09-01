@@ -10,6 +10,7 @@
         <div class="clearfix"></div>
     </div>
     <div class="row">
+
         <div class="col-lg-5 col-md-5" ng-show="label.count > 0 || show_crate_form">
             <!-- Create label form -->
             <div ng-show="create_form" class="widget">
@@ -90,8 +91,9 @@
             </div>
             <!-- /Edit label form -->
         </div>
+
         <div class="col-lg-7 col-md-7" ng-show="label.count > 0"  block-ui="myBlockUI">
-            <div ng-show="label.count > 0">
+            <div>
                 <h2 class="md-header">
                     List of Label <br/>
                     <span>{{label.count}} result found</span>
@@ -132,7 +134,7 @@
                         {{label.currentPage * label.limit > label.count ? label.count : label.currentPage * label.limit}}
                         of {{label.count}} records
                     </span>
-                    <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a
+                    <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
                 </div>
             </div>
         </div>

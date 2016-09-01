@@ -8,6 +8,7 @@ a{
     cursor: pointer;
 }
 
+
 .alert{
     text-align: center;
     text-transform: uppercase;
@@ -392,8 +393,9 @@ a{
 .custom-dropdown h2 {
     margin: 10px;
     font-size: 11px;
-    font-weight: 600;
+    font-weight: 400;
     text-transform: uppercase;
+    color: #525252;
 }
 
 .custom-dropdown .quick_task, .custom-dropdown .quick_task:hover {
@@ -532,6 +534,11 @@ a{
     text-transform: uppercase;
 }
 
+.task_list_table td strong{
+    font-weight: 400;
+    font-size: 16px;
+}
+
 /** Label pages classes */
 .label_List th{
     font-size: 11px;
@@ -541,6 +548,8 @@ a{
 .label_List td{
     font-size: 12px;
 }
+
+
 
 /** Formatting elements classes */
 .widget{
@@ -755,8 +764,10 @@ a{
     color: #1ab394;
 }
 
-.empty_block .lead{
-    font-size: 20px;
+.empty_block .lead {
+    font-size: 24px;
+    font-weight: 300;
+    color: #525252;
 }
 
 .empty_block .btn{
@@ -845,7 +856,7 @@ a{
 
 .author{
     font-size: 10px;
-    color: #777;
+    color: #999;
 }
 
 .task_details{
@@ -870,6 +881,12 @@ a{
 .filter_bar .filter_block{
     float: left;
     margin-right: 25px;
+}
+
+.filter_bar .filter_block .dropdown > span {
+    color: #999;
+    font-size: 13px;
+    /* text-transform: uppercase; */
 }
 
 .filter_bar .filter_block:last-child{

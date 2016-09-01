@@ -157,13 +157,13 @@
                 </div>
 
                 <div class="filter_block">
-                    <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Sort
-                        <b class="caret"></b>
-                    </span>
                     <div class="dropdown">
+                        <span class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
+                            Sort
+                            <b class="caret"></b>
+                        </span>
                         <div class="dropdown-menu custom-dropdown" id="label" aria-labelledby="label">
-                            <h2>Sort by <a class="close_dropdown">X</a></h2>
+                            <h2>Sort by</h2>
                             <ul class="custom_dropdown_list nav nav-list">
                                 <li>
                                     <a ng-click="doFilter(filterQuery.sort_by = 'id', filterQuery.order_by = 'DESC')">Newest</a>
