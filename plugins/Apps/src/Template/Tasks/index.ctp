@@ -23,22 +23,22 @@
                 All
             </a>
 
-            <a class="search_item search_item_red"  ng-click="doFilter(filterQuery.status = 'closed')">
+            <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'closed')">
                 <i class="fa fa-bell-slash-o" aria-hidden="true"></i>
                 Closed
             </a>
 
-            <a class="search_item search_item_theme" ng-click="doFilter(filterQuery.status = 'open')">
+            <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.status = 'open')">
                 <i class="fa fa-bell-o" aria-hidden="true"></i>
                 Open
             </a>
 
-            <a class="search_item search_item_info" ng-click="doFilter(filterQuery.unlabeled = true)">
+            <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unlabeled = true)">
                 <i class="fa fa-tags" aria-hidden="true"></i>
                 Unlabeled
             </a>
 
-            <a class="search_item search_item_orange" ng-click="doFilter(filterQuery.unassigned = true)">
+            <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unassigned = true)">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 Unassigned
             </a>
