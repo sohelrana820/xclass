@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label>Description</label>
                     <div class="input text">
-                        <text-angular ng-model="TaskObj.description" ng-model="htmlVariable"></text-angular>
+                        <text-angular ng-model="TaskObj.description" ta-toolbar="[['h1','h2','h3', 'h4' , 'h5', 'h6'],['p', 'bold','italics', 'underline'], ['ol', 'ul'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', ]]" ng-model="htmlVariable"></text-angular>
                     </div>
                 </div>
                 <div class="row">
