@@ -363,14 +363,19 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             $scope.commentsObj.changing_status = 'reopened'
         }
 
-        var comments = CommentsResources.save($scope.commentsObj).$promise;
-        comments.then(function (res) {
-            if(res.result.success){
+
+        Upload.upload({
+            url: BASE_URL + 'comments/add.json',
+            data: $scope.commentsObj
+        }).then(function (response) {
+            if(response.data.result.success){
                 $scope.commentsObj = {task_id: id};
-                $scope.taskComments.push(res.result.data);
+                $scope.taskComments.push(response.data.result.data);
+                Flash.create('success', response.data.result.message);
+                $scope.countAttachments = [0];
             }
             else{
-                Flash.create('info', res.result.message);
+                Flash.create('info', response.data.result.message);
             }
         });
     };

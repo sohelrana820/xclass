@@ -112,7 +112,7 @@
                         <br/>
                         <div class="pull-left">
                             <button type="submit" class="btn btn-success" ></i> Comment</button>
-                            <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Close Task</a>
+                            <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Comment & Close Task</a>
                             <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)"></i> Reopen Task</a>
                         </div>
                         <div class="clearfix"></div>
