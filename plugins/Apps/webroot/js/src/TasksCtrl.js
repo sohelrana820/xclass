@@ -317,9 +317,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.commentsObj = {task_id: id};
     $scope.doComment = function(){
+        blockUI.start();
         if($scope.commentsObj.comment)
         {
-
             Upload.upload({
                 url: BASE_URL + 'comments/add.json',
                 data: $scope.commentsObj
@@ -334,26 +334,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     Flash.create('info', response.data.result.message);
                 }
             });
-
-
-            /*var comments = CommentsResources.save($scope.commentsObj).$promise;
-            comments.then(function (res) {
-                if(res.result.success){
-                    $scope.commentsObj = {task_id: id};
-                    $scope.taskComments.push(res.result.data);
-                    Flash.create('success', res.result.message);
-                }
-                else{
-                    Flash.create('danger', res.result.message);
-                }
-            });*/
         }
         else{
             Flash.create('danger', 'Write something in comments');
         }
+        $timeout(function() {
+            blockUI.stop();
+        }, 1000);
     };
 
     $scope.changeStatus = function(status){
+        blockUI.start();
         $scope.TaskObj.status = status;
         $scope.quickUpdate('change_status', status);
         if(status == 2){
@@ -362,7 +353,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         else if(status == 3){
             $scope.commentsObj.changing_status = 'reopened'
         }
-
 
         Upload.upload({
             url: BASE_URL + 'comments/add.json',
@@ -378,6 +368,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 Flash.create('info', response.data.result.message);
             }
         });
+
+        $timeout(function() {
+            blockUI.stop();
+        }, 1000);
     };
 
     /**
