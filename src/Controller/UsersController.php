@@ -322,12 +322,22 @@ class UsersController extends AppController{
     {
         $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
+        $limit = $this->paginationLimit;
         $conditions = [];
 
         if(isset($this->request->query) && $this->request->query)
         {
             $response = $this->Utilities->buildUsesrListConditions($this->request->query);
             $conditions = array_merge($conditions, $response);
+        }
+
+        if(isset($this->request->query['limit']) && $this->request->query['limit']){
+            if($this->request->query['limit'] == 'false'){
+                $limit = null;
+            }
+            else{
+                $limit = (int) $this->request->query['limit'];
+            }
         }
 
         if($this->request->params['_ext'] != 'json'){
@@ -339,7 +349,7 @@ class UsersController extends AppController{
                         'fields'=> []
                     ]
                 ],
-                'limit' => $this->paginationLimit,
+                'limit' => $limit,
                 'order' => ['Users.id' => 'desc']
             ];
             $users = $this->paginate($this->Users);
@@ -355,7 +365,7 @@ class UsersController extends AppController{
                         'fields'=> []
                     ]
                 ],
-                'limit' => $this->paginationLimit,
+                'limit' => $limit,
                 'order' => ['Users.id' => 'desc']
             ]);
 

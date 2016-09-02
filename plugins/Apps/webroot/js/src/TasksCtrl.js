@@ -65,7 +65,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
-    $scope.fetchUserLists();
+    $scope.fetchUserLists({'limit': false});
 
 
     /**
@@ -220,11 +220,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.searchUser = function(query){
         $scope.show_user_search_loader = true;
-        $scope.fetchUserLists({name: query});
+        $scope.fetchUserLists({name: query, 'limit': false});
     };
 
     $scope.refreshUserList = function(query){
-        $scope.fetchUserLists();
+        $scope.fetchUserLists({'limit': false});
         $scope.user_query = null;
         $scope.show_user_refresh_loader = true;
         $scope.show_user_search_loader = false;
