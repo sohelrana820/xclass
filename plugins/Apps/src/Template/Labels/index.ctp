@@ -2,7 +2,7 @@
 <div ng-controller="LabelsCtrl">
     <div class="page-header" ng-show="label.count > 0  || show_crate_form">
         <h2 class="title pull-left">
-            Manage Application Labels
+            Manage Your Application Labels
         </h2>
         <div class="pull-right btn-areas">
 
@@ -23,7 +23,7 @@
                             <label>Label Name</label>
                             <div class="input text">
                                 <input type="text" ng-model="LabelObj.name" name="c_label_name" class="form-control" placeholder="Name of label" required="required">
-                                <div ng-if="create_label_form.c_label_name.$touched || isLabelFormSubmitted">
+                                <div ng-if="create_label_form.c_label_name.$dirty || isLabelFormSubmitted">
                                     <p ng-show="create_label_form.c_label_name.$error.required"  class="error-message">Label name is required</p>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                             <label>Label Name</label>
                             <div class="input text">
                                 <input type="text" ng-model="LabelObj.name" name="u_label_name" class="form-control" placeholder="Name of label" required="required">
-                                <div ng-if="update_label_form.u_label_name.$touched || isLabelFormSubmitted">
+                                <div ng-if="update_label_form.u_label_name.$dirty || isLabelFormSubmitted">
                                     <p ng-show="update_label_form.u_label_name.$error.required"  class="error-message">Label name is required</p>
                                 </div>
                             </div>
@@ -128,13 +128,13 @@
                     </tbody>
                 </table>
                 <div class="pagination_area text-center">
-                    <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
+                    <a ng-show="label.limit < label.count" class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
                     <span>
                         showing {{((label.currentPage - 1) * label.limit) + 1}} -
                         {{label.currentPage * label.limit > label.count ? label.count : label.currentPage * label.limit}}
                         of {{label.count}} records
                     </span>
-                    <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                    <a ng-show="label.limit < label.count" class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
                 </div>
             </div>
         </div>

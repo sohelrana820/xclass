@@ -45,6 +45,9 @@
 
             <div class="pull-right">
 
+
+
+
                 <div class="filter_block">
                     <div class="dropdown">
                         <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -173,6 +176,12 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="filter_block">
+                    <div>
+                        <input class="form-control" placeholder="search">
+                    </div>
+                </div>
             </div>
 
             <div class="clearfix"></div>
@@ -287,7 +296,7 @@
                 and then assign into user. After completing each task you can marked them as closed/reopened. It also
                 allowed to comments on task</p>
             <br/>
-            <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create first task</a>
+            <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create your first task</a>
         </div>
     </div>
 </div>

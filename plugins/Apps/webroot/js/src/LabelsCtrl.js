@@ -8,12 +8,11 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
        var labels = LabelResources.query(data).$promise;
        var myBlockUI = blockUI.instances.get('myBlockUI');
        myBlockUI.start({
-           message: 'Please wait!',
+           message: 'Please wait!'
        });
 
        labels.then(function (res) {
            if(res.result.success){
-               console.log(res.result);
                $timeout(function() {
                    if(res.result.success){
                        $scope.label = {
@@ -45,8 +44,9 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
             labels.then(function (res) {
                 if(res.result.success){
                     $scope.isLabelFormSubmitted = false;
-                    $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.labels.unshift(res.result.data);
+                    $scope.create_label_form.$setPristine();
+                    $scope.LabelObj = {color_code: '#C00C00'};
                     toastr.success(res.result.message);
                     $scope.fetchLabelLists({});
                 }

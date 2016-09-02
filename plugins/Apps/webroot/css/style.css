@@ -395,7 +395,7 @@ a{
     font-size: 11px;
     font-weight: 400;
     text-transform: uppercase;
-    color: #525252;
+    color: #555;
 }
 
 .custom-dropdown .quick_task, .custom-dropdown .quick_task:hover {
@@ -575,6 +575,7 @@ a{
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
+    color: #555;
 }
 
 
@@ -591,6 +592,7 @@ a{
     background: #f8f8f8;
     padding: 15px 15px 5px 10px;
     border-left: 5px solid #222;
+    color: #555 !important;
 }
 
 .md-header span{
@@ -767,7 +769,7 @@ a{
 .empty_block .lead {
     font-size: 24px;
     font-weight: 300;
-    color: #525252;
+    color: #555;
 }
 
 .empty_block .btn{
@@ -861,7 +863,7 @@ a{
 
 .task_details{
     margin-bottom: 30px;
-    color: #525252;
+    color: #555;
 }
 
 
@@ -876,7 +878,7 @@ a{
     background: #f8f8f8;
     padding: 15px;
     margin-bottom: 10px;
-    border-left: 5px solid #525252;
+    border-left: 5px solid #555;
 }
 
 .filter_bar .filter_block{
@@ -1031,7 +1033,7 @@ a{
 
 .show_attachments h4 {
     font-size: 12px;
-    color: #525252;
+    color: #555;
     font-weight: 600;
     /* border-bottom: 1px solid #f8f8f8; */
     /* padding-bottom: 7px; */
