@@ -383,13 +383,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         deletedTask.then(function (res) {
             if(res.result.success)
             {
-                $scope.tasks = $scope.tasks.filter(function(task){
-                    return task.id !== id
-                });
-                Flash.create('danger', res.result.message);
-                $timeout(function() {
-                    window.location.href = BASE_URL + "tasks";
-                }, 1000);
+                toastr.warning(res.result.message);
+                var url = window.location.href.split("view/");
+                if(url[1] != undefined && url[1]){
+                    $timeout(function() {
+                        console.log(11);
+                        window.location.href = BASE_URL + "tasks";
+                    }, 1000);
+                }
+                else{
+                    $scope.fetchTaskLists($scope.queryString);
+                }
             }
             else{
                 Flash.create('danger', res.result.message);
