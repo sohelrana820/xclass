@@ -152,7 +152,7 @@
                     <br/>
                     <br/>
                     <h2>Welcome to Task Label!</h2>
-                    <p class="lead">Task labels are used to categorized the your tasks list. With the task label you can labelling your task and assign them based on your needs. And also it's helpful to search your task list.</p>
+                    <p class="lead">Task labels are used to categorized your tasks list. With the task label, you can be labeling your task and assign them based on your needs. And also it's helpful to search your task list.</p>
                     <br/>
                     <a class="btn-lg-theme" ng-click="show_crate_form = true">Create first label</a>
                 </div>
