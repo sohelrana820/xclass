@@ -22,6 +22,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                            limit: res.result.limit
                        };
                    }
+                   $scope.hide_page_loader = true;
                    myBlockUI.stop();
                }, 1000);
            }

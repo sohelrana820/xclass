@@ -41,6 +41,10 @@ a{
     width: 20px;
 }
 
+.md_loader{
+    width: 40px;
+}
+
 .fetching_loading_area{
     text-align: center;
 }
@@ -50,9 +54,15 @@ a{
     font-size: 18px;
 }
 
-.md_loader{
-    width: 40px;
+.pabe_loader{
+    margin-top: 40px;
+    text-align: center;
+    color: #5bc0de;
 }
+
+
+
+
 
 /** Form elements classes **/
 .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
