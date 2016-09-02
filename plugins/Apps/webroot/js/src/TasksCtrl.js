@@ -154,6 +154,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.show_label_refresh_loader = true;
     };
 
+    $scope.LabelObj = {color_code: '#C00C00'};
     $scope.saveLabel = function(isValid, assignLabel){
         $scope.show_label_create_loader = isValid;
         $scope.isLabelFormSubmitted = true;
@@ -163,7 +164,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $timeout(function() {
                     $scope.show_label_create_loader = false;
                     $scope.isLabelFormSubmitted = false;
-                    $scope.LabelObj = {};
+                    $scope.create_label_form.$setPristine();
+                    $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.labels.unshift(res.result.data);
 
                     $scope.labels.forEach(function(label,key){
