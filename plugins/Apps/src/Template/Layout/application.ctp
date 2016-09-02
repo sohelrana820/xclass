@@ -26,7 +26,7 @@
     <![endif]-->
 </head>
 
-<body ng-controller="MainsCtrl">
+<body ng-controller="MainsCtrl" ng-cloak>
 
 <div id="wrapper">
     <!-- Navigation -->
