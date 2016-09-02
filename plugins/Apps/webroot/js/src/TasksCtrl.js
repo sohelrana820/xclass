@@ -153,37 +153,42 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.saveLabel = function(isValid, assignLabel){
         $scope.show_label_create_loader = isValid;
         $scope.isLabelFormSubmitted = true;
-        var labels = LabelResources.save($scope.LabelObj).$promise;
-        labels.then(function (res) {
-            if(res.result.success){
-                $timeout(function() {
-                    $scope.show_label_create_loader = false;
-                    $scope.isLabelFormSubmitted = false;
-                    $scope.create_label_form.$setPristine();
-                    $scope.LabelObj = {color_code: '#C00C00'};
-                    $scope.labels.unshift(res.result.data);
+        if($scope.LabelObj.name != undefined && $scope.LabelObj.name){
+            var labels = LabelResources.save($scope.LabelObj).$promise;
+            labels.then(function (res) {
+                if(res.result.success){
+                    $timeout(function() {
+                        $scope.show_label_create_loader = false;
+                        $scope.isLabelFormSubmitted = false;
+                        $scope.create_label_form.$setPristine();
+                        $scope.LabelObj = {color_code: '#C00C00'};
+                        $scope.labels.unshift(res.result.data);
 
-                    $scope.labels.forEach(function(label,key){
-                        if(label.id == res.result.data.id){
-                            $scope.labels[key].checked = true;
+                        $scope.labels.forEach(function(label,key){
+                            if(label.id == res.result.data.id){
+                                $scope.labels[key].checked = true;
+                            }
+                        });
+                        $scope.taskLabels.push(res.result.data);
+                        $scope.show_create_new_label_form = false;
+
+                        if(assignLabel && assignLabel != undefined){
+                            $scope.quickUpdate('label_event', true)
                         }
-                    });
-                    $scope.taskLabels.push(res.result.data);
-                    $scope.show_create_new_label_form = false;
-
-                    if(assignLabel && assignLabel != undefined){
-                       $scope.quickUpdate('label_event', true)
-                    }
-                    toastr.success(res.result.message);
-                }, 500);
+                        toastr.success(res.result.message);
+                    }, 500);
 
 
-            }
-            else{
-                $scope.show_label_create_loader = false;
-                toastr.error(res.result.message);
-            }
-        });
+                }
+                else{
+                    $scope.show_label_create_loader = false;
+                    toastr.error(res.result.message);
+                }
+            });
+        }
+        else{
+            toastr.error('Label name can not be empty');
+        }
     };
 
     $scope.taskUsers = [];
