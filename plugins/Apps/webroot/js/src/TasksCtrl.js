@@ -151,9 +151,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.LabelObj = {color_code: '#C00C00'};
     $scope.saveLabel = function(isValid, assignLabel){
-        $scope.show_label_create_loader = isValid;
-        $scope.isLabelFormSubmitted = true;
         if($scope.LabelObj.name != undefined && $scope.LabelObj.name){
+            $scope.show_label_create_loader = isValid;
+            $scope.isLabelFormSubmitted = true;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){

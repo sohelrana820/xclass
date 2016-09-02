@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <label>Label Name</label>
                                             <div class="input text">
-                                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label" required="required">
+                                                <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label">
                                                 <div ng-if="create_label_form.label_name.$touched || isLabelFormSubmitted">
                                                     <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
                                                 </div>
