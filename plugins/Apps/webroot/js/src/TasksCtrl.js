@@ -21,12 +21,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.saveTask = function(){
         $scope.getTaskRelObj();
-        console.log($scope.TaskObj);
         Upload.upload({
             url: BASE_URL + 'tasks/add.json',
             data: $scope.TaskObj
         }).then(function (response) {
-            console.log(response.data);
             if(response.data.result.success){
                 $scope.TaskObj = {};
                 Flash.create('success', response.data.result.message);
@@ -44,9 +42,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.countAttachments = [0];
     $scope.addMoreAttachment = function()
     {
-        console.log($scope.countAttachments);
         $scope.countAttachments.push($scope.countAttachments.length);
-        console.log($scope.countAttachments);
     };
 
     /**
@@ -74,7 +70,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.fetchTaskLists = function(data){
 
         var myBlockUI = blockUI.instances.get('blockTasksList');
-        console.log(myBlockUI);
         myBlockUI.start({
             message: 'Please wait!',
         });
@@ -280,8 +275,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.quickUpdate = function(event, value){
         $scope.getTaskRelObj();
 
-        console.log($scope.TaskObj);
-        console.log('hello');
 
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
@@ -326,7 +319,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 url: BASE_URL + 'comments/add.json',
                 data: $scope.commentsObj
             }).then(function (response) {
-                console.log(response);
                 if(response.data.result.success){
                     $scope.commentsObj = {task_id: id};
                     $scope.taskComments.push(response.data.result.data);
@@ -469,11 +461,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
         $scope.fetchTaskLists($scope.queryString);
-        console.log(status);
-        console.log(status);
-        console.log(labels);
-        console.log(authors);
-        console.log($scope.queryString);
     };
 
     $scope.filtterAssignee = [];
@@ -489,7 +476,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 return oldUser.id !== user.id;
             });
         }
-        console.log($scope.filtterAssignee);
         $scope.doFilter();
     };
 
@@ -520,7 +506,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 return oldUser.id !== user.id;
             });
         }
-        console.log($scope.filtterAuthor);
         $scope.doFilter();
     };
 
