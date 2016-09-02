@@ -113,7 +113,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
-    $scope.fetchLabelLists({status: 1});
+    $scope.fetchLabelLists({status: 1, 'limit': false});
 
     $scope.taskLabels = [];
     $scope.chooseTaskLabels = function(label, key, isChecked){
@@ -144,11 +144,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.searchLabel = function(query){
         $scope.show_label_search_loader = true;
-        $scope.fetchLabelLists({status: 1, name: query});
+        $scope.fetchLabelLists({status: 1, 'limit': false, name: query});
     };
 
     $scope.refreshLabelList = function(query){
-        $scope.fetchLabelLists({status: 1});
+        $scope.fetchLabelLists({status: 1, 'limit': false});
         $scope.label_query = null;
         $scope.show_label_search_loader = false;
         $scope.show_label_refresh_loader = true;

@@ -39,6 +39,15 @@ class LabelsController extends AppController
             $page = $this->request->query['page'];
         }
 
+        if(isset($this->request->query['limit']) && $this->request->query['limit']){
+            if($this->request->query['limit'] == 'false'){
+                $limit = null;
+            }
+            else{
+                $limit = (int) $this->request->query['limit'];
+            }
+        }
+
         $labels = $this->Labels->find('all',
             [
                 'conditions' => $conditions,
