@@ -1,5 +1,4 @@
 .ui-kit-9 {
-    margin: 60px auto;
     font-family: 'Lato', sans-serif;
     background:#f4f8fd;
 }
@@ -14,6 +13,11 @@
     border: 1px dashed #ddd;
     padding: 15px 20px;
     margin: 15px auto;
+}
+
+
+.ui-kit-9 .ui-item:first-child {
+    margin-top: 0px;
 }
 .ui-kit-9 .ui-item .ui-heading h5 {
     font-size: 13px;

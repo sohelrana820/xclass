@@ -572,6 +572,11 @@ a{
 /** Formatting elements classes */
 .widget{
     border: 1px solid #DDD;
+    margin-bottom: 15px;
+}
+
+.no-border{
+    border: none !important;
 }
 
 .widget-header{
@@ -599,6 +604,10 @@ a{
 
 .widget .sm-title{
 
+}
+.widget .see-all {
+    color: #555;
+    font-weight: 300;
 }
 
 
@@ -1236,6 +1245,10 @@ a{
     cursor: not-allowed;
 }
 
+.theme-table{
+    margin-bottom: 5px;
+}
+
 .theme-table thead th {
     text-transform: uppercase;
     font-size: 11px;
@@ -1245,6 +1258,15 @@ a{
 .theme-table tbody td {
     font-weight: 300;
 }
+
+.theme-table tbody label {
+    color: #FFF;
+    font-size: 10px;
+    padding: 3px 7px 2px 7px;
+    border-radius: 3px;
+}
+
+
 
 .btn-margin .btn{
     margin-left: 5px;
@@ -1267,3 +1289,4 @@ a{
     padding: 8px;
     border-radius: 3px;
 }
+

@@ -1,6 +1,5 @@
 
 .ui-kit-21{
-    margin:50px 0px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -11,7 +10,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .ui-kit-21 .ui-item{
     background: #ffffff;
-    padding: 25px;
     margin-bottom: 15px;
     font-family: 'Lato', sans-serif;
 }
@@ -24,12 +22,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 14px;
 }
 .ui-kit-21 .ui-item .comment-center {
-    margin: 0 -25px;
 }
 .ui-kit-21 .ui-item .comment-center .comment-body {
     border-bottom: 1px solid rgba(120,130,140,0.13);
     display: table;
-    padding: 20px 25px;
+    padding: 10px;
 }
 
 .ui-kit-21 .ui-item .comment-center .comment-body:last-child{
@@ -37,6 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .ui-kit-21 .ui-item .comment-center .comment-body:hover{
     background:#F7FAFC;
+    cursor: pointer;
 }
 .ui-kit-21 .ui-item .comment-center .user-img {
     width: 40px;
@@ -44,6 +42,11 @@ h1, h2, h3, h4, h5, h6 {
     display: table-cell;
     position: relative;
     margin: 0 10px 0 0;
+}
+
+.ui-kit-21 .ui-item .comment-center .user-img .profile-image{
+    width: 100%;
+    margin-top: 10px;
 }
 
 .ui-kit-21 .ui-item .comment-center .mail-contnet {
