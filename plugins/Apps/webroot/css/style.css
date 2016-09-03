@@ -721,6 +721,7 @@ a{
 
 .modal-title {
     text-align: center;
+    font-size: 16px;
 }
 
 .btn {
@@ -1239,4 +1240,15 @@ a{
 
 .btn-margin .btn{
     margin-left: 5px;
+}
+
+.modal-content {
+    border-radius: 2px;
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #2f4050;
+    color: #FFF;
 }
