@@ -8,56 +8,43 @@
     <div class="clearfix"></div>
 </div>
 
-<?php echo $this->Form->create(null, array('controller' => 'users', 'action' => 'add'));?>
+<?php echo $this->Form->create(null, array('controller' => 'settings', 'action' => 'update'));?>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            <label class="text-info">Application Logo</label>
+            <?php echo $this->Form->input('application.logo', ['type' => 'file', 'class' => 'form-control', 'label' => false, 'required' => false]);?>
+        </div>
 
-<div class="form-group">
-    <label class="text-info">Application Logo</label>
-    <?php echo $this->Form->input('application.logo', ['type' => 'file', 'class' => 'form-control', 'label' => false, 'required' => false]);?>
+        <div class="form-group">
+            <label class="text-info">Name of Application</label>
+            <?php echo $this->Form->input('application.name', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Application name', 'label' => false, 'required' => false]);?>
+        </div>
+
+
+        <div class="form-group">
+            <label class="text-info">Host</label>
+            <?php echo $this->Form->input('email.host', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Host', 'label' => false, 'required' => false]);?>
+        </div>
+
+        <div class="form-group">
+            <label class="text-info">Port</label>
+            <?php echo $this->Form->input('email.port', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Port', 'label' => false, 'required' => false]);?>
+        </div>
+
+        <div class="form-group">
+            <label class="text-info">Username</label>
+            <?php echo $this->Form->input('email.username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Username', 'label' => false, 'required' => false]);?>
+        </div>
+
+        <div class="form-group">
+            <label class="text-info">Password</label>
+            <?php echo $this->Form->input('email.password', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false]);?>
+        </div>
+    </div>
 </div>
-
-<div class="form-group">
-    <label class="text-info">Name of Application</label>
-    <?php echo $this->Form->input('application.name', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Application name', 'label' => false, 'required' => false]);?>
-</div>
-
-
-<div class="form-group">
-    <label class="text-info">Host</label>
-    <?php echo $this->Form->input('email.host', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Host', 'label' => false, 'required' => false]);?>
-</div>
-
-<div class="form-group">
-    <label class="text-info">Port</label>
-    <?php echo $this->Form->input('email.port', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Port', 'label' => false, 'required' => false]);?>
-</div>
-
-<div class="form-group">
-    <label class="text-info">Username</label>
-    <?php echo $this->Form->input('email.username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Username', 'label' => false, 'required' => false]);?>
-</div>
-
-<div class="form-group">
-    <label class="text-info">Password</label>
-    <?php echo $this->Form->input('email.password', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false]);?>
-</div>
-
 <button type="submit" class="btn btn-success">Update Configuration</button>
 <?php echo $this->Form->end();?>
-
-<?php
-$this->start('cssTop');
-
-$this->end();
-
-$this->start('jsTop');
-
-$this->end();
-
-$this->start('jsBottom');
-echo $this->Html->script(['datepicker']);
-?>
-
-<?php $this->end(); ?>
 
 
 
