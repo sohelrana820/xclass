@@ -1,4 +1,4 @@
-<?php echo $this->assign('title', 'My Profile'); ?>
+<?php echo $this->assign('title', 'Edit User'); ?>
 
     <div class="page-header">
         <h2 class="title pull-left">
