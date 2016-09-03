@@ -2,6 +2,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
 
     $scope.create_form = true;
     $scope.edit_form = false;
+    $scope.searched_labels = false;
     $scope.labels = [];
 
    $scope.fetchLabelLists = function(data){
@@ -29,6 +30,11 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
        });
    };
     $scope.fetchLabelLists({});
+
+    $scope.searchLabel = function(query){
+        $scope.searched_labels = true;
+        $scope.fetchLabelLists({name: query});
+    };
 
     $scope.isLabelFormSubmitted = false;
     $scope.LabelObj = {color_code: '#C00C00'};

@@ -593,25 +593,6 @@ a{
 
 }
 
-.md-header {
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 0px;
-    margin-bottom: 10px;
-    background: #f8f8f8;
-    padding: 15px 15px 5px 10px;
-    border-left: 5px solid #222;
-    color: #555 !important;
-}
-
-.md-header span{
-    font-size: 10px;
-    text-transform: lowercase;
-    font-weight: 300;
-    color: #555 !important;
-    line-height: 21px;
-}
 
 .color-picker-wrapper .input-group .input-group-addon {
     width: 120px;
@@ -694,6 +675,10 @@ a{
     background: #f8f8f8;
     margin-bottom: 10px;
     border-left: 2px solid #CCC;
+}
+
+.not-found{
+    padding: 10px;
 }
 
 .not-found h4{
@@ -889,6 +874,25 @@ a{
     padding: 15px;
     margin-bottom: 10px;
     border-left: 5px solid #555;
+}
+
+.filter_bar .filter_header {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0px;
+}
+
+.filter_bar .form-control {
+    height: 32px;
+}
+
+.filter_bar .filter_header span{
+    font-size: 10px;
+    text-transform: lowercase;
+    font-weight: 300;
+    color: #555 !important;
+    line-height: 21px;
 }
 
 .filter_bar .filter_block{
