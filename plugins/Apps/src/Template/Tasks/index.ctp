@@ -290,9 +290,7 @@
             <br/>
             <br/>
             <h2>Welcome to Task!</h2>
-            <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labelling
-                and then assign into user. After completing each task you can marked them as closed/reopened. It also
-                allowed to comments on task</p>
+            <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labeling and then assign to the user. After completing each task you can mark them as closed/reopened. It also allowed to comments on task</p>
             <br/>
             <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create your first task</a>
         </div>
