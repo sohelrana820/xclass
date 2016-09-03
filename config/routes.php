@@ -43,11 +43,7 @@ Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
     $routes->extensions(['json', 'xml', 'html']);
-    /**
-     * Here, we are connecting '/' (base path) to a controller called 'Pages',
-     * its action called 'display', and we pass a param to select the view file
-     * to use (in this case, src/Template/Pages/home.ctp)...
-     */
+
     $routes->connect('/', ['controller' => 'dashboard', 'action' => 'index', 'home']);
 
     $routes->connect('/profile', ['controller' => 'users', 'action' => 'profile']);
