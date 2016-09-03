@@ -190,6 +190,10 @@
                 <h2 ng-show="filterLabels.length > 0 || filtterAuthor.length > 0 || filtterAssignee.length > 0 || filterQuery.status == 'closed' || filterQuery.status == 'open' || filterQuery.unlabeled || filterQuery.unassigned">Filtered By:</h2>
 
                 <ul class="filter_user">
+                    <li ng-show="filterQuery.query">
+                        Query: {{filterQuery.query}}
+                        <span class="red" ng-click="doFilter(filterQuery.query = null)">X</span>
+                    </li>
                     <li ng-show="filterQuery.status == 'closed'">
                         Closed
                         <span class="red" ng-click="doFilter(filterQuery.status = 'all')">X</span>
@@ -262,7 +266,7 @@
             </tbody>
         </table>
 
-        <div class="pagination_area text-center">
+        <div class="pagination_area text-center" ng-show="tasks.count > 0" >
             <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
                     <span>
                         showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
@@ -271,15 +275,10 @@
                     </span>
             <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a
         </div>
+    </div>
 
-        <div class="empty_block" ng-show="tasks.count < 1">
-            <span class="icon">
-                <i class="fa fa-bullhorn" aria-hidden="true"></i>
-            </span>
-            <br/>
-            <br/>
-            <h2>Sorry! no result found</h2>
-        </div>
+    <div class="not-found" ng-show="tasks.count < 1 && filtered_tasks_list">
+        <h4>Sorry! task not found</h4>
     </div>
 
     <div class="col-lg-8 col-lg-offset-2" ng-show="count_all < 1">

@@ -429,6 +429,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var users = [];
         var authors = [];
         var authors = [];
+        $scope.filtered_tasks_list = true;
 
         if($scope.filterQuery){
             if($scope.filterQuery.status == 'closed'){
