@@ -24,7 +24,7 @@
     ?>
 
     <?php if($requirements['success']):?>
-        <p class="lead">Congratulation!. Your system meets all the requirements and your system is now ready for the installation!</p>
+        <p class="lead">Congratulation! Your system meets all the requirements and your system is now ready for the installation!</p>
         <?php echo $this->Html->link('Next Process', ['controller' => 'installation', 'action' => 'database'], ['class' => 'btn btn-lg-theme']);?>
     <?php endif;?>
 </div>
