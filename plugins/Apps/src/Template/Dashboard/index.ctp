@@ -418,65 +418,44 @@
     <div class="col-lg-4">
         <div class="ui-kit-9">
             <div class="col-mob">
+                <?php foreach($recentTasks as $task):?>
                 <!-- Item -->
                 <div class="ui-item">
                     <!-- Heading -->
                     <div class="ui-heading clearfix">
-                        <h5><a href="#">Sedunde omnis facil</a></h5>
-                    </div>
-                    <!-- Date -->
-                    <span> 14/04/2013 <a href="#" class="label label-sm bg-red">High</a></span>
-                    <!-- Paragraph -->
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et etlaudantium explicabo dolorete.</p>
-                </div>
+                        <h5>
+                            <?php
+                            if($task->users){
+                                foreach($task->users as $user){
+                                    echo $this->Html->link($user->profile->first_name. ' '. $user->profile->last_name, ['controller' => 'users', 'action' => 'details', $user->uuid], ['class' => 'task_user_link']);
+                                }
+                            }
+                            else{
+                                echo '<label>Not Assigned Yet!</label>';
+                            }
+                            ?>
 
-                <!-- Item -->
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5><a href="#">Sedunde omnis facil</a></h5>
+                        </h5>
                     </div>
                     <!-- Date -->
-                    <span> 14/04/2013 <a href="#" class="label label-sm bg-red">High</a></span>
-                    <!-- Paragraph -->
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et etlaudantium explicabo dolorete.</p>
-                </div>
+                    <span>
+                        <?php echo $this->Time->format($task->created, 'MMM d, Y');?>
 
-                <!-- Item -->
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5><a href="#">Sedunde omnis facil</a></h5>
-                    </div>
-                    <!-- Date -->
-                    <span> 14/04/2013 <a href="#" class="label label-sm bg-red">High</a></span>
+                        <?php
+                        foreach($task->labels as $label){
+                            echo '<a href="#" class="label label-sm" style="background: '.$label->color_code.'">'.$label->name.'</a>';
+                        }
+                        ?>
+                    </span>
                     <!-- Paragraph -->
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et etlaudantium explicabo dolorete.</p>
+                    <p>
+                        <?php echo $task->task;?>
+                    </p>
+                    <?php
+                    echo $this->Html->link('View Details', ['controller' => 'tasks', 'action' => 'view', $task->id], ['class' => 'task_link']);
+                    ?>
                 </div>
-
-                <!-- Item -->
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5><a href="#">Sedunde omnis facil</a></h5>
-                    </div>
-                    <!-- Date -->
-                    <span> 14/04/2013 <a href="#" class="label label-sm bg-red">High</a></span>
-                    <!-- Paragraph -->
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et etlaudantium explicabo dolorete.</p>
-                </div>
-
-                <!-- Item -->
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5><a href="#">Sedunde omnis facil</a></h5>
-                    </div>
-                    <!-- Date -->
-                    <span> 14/04/2013 <a href="#" class="label label-sm bg-red">High</a></span>
-                    <!-- Paragraph -->
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque et etlaudantium explicabo dolorete.</p>
-                </div>
+                <?php endforeach;?>
             </div>
         </div>
     </div>

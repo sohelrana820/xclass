@@ -1290,3 +1290,27 @@ a{
     border-radius: 3px;
 }
 
+.task_user_link {
+    color: #5bc0de !important;
+    margin-right: 10px;
+    font-weight: 400;
+}
+
+.task_user_link:after {
+    content: ',';
+}
+
+.task_user_link:last-child:after {
+    content: '';
+}
+
+.task_link {
+    font-size: 10px;
+    color: #FFF !important;
+    text-transform: uppercase;
+    background: #1ab394;
+    padding: 4px 4px 2px 5px;
+    font-weight: 600;
+    border-radius: 2px;
+    cursor: pointer;
+}

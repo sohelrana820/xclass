@@ -20,6 +20,9 @@ class DashboardController extends AppController{
             'total_open_task' => $this->Tasks->countTotalTasks($stauts = 1),
             'total_closed_task' => $this->Tasks->countTotalTasks($stauts = 2)
         ];
+
+        $recentTasks = $this->Tasks->getRecentTasks(5);
         $this->set('overview', $overview);
+        $this->set('recentTasks', $recentTasks);
     }
 } 

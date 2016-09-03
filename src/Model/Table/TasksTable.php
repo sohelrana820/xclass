@@ -95,4 +95,25 @@ class TasksTable extends Table
 
         return $result;
     }
+
+    public function getRecentTasks($limit = 5)
+    {
+        $result = $this->find('all', [
+            'fields' => ['id', 'uuid', 'task', 'description', 'created'],
+            'contain' => [
+                'Labels' => [
+                    'fields' => ['id', 'TasksLabels.task_id','name', 'color_code']
+                ],
+                'Users' => [
+                    'fields' => ['id', 'UsersTasks.task_id','uuid']
+                ],
+                'Users.Profiles' => [
+                    'fields' => ['id', 'UsersTasks.task_id', 'first_name', 'last_name', 'profile_pic']
+                ]
+            ],
+            'limit' => $limit,
+            'order' => 'Tasks.created DESC'
+        ]);
+        return $result;
+    }
 }

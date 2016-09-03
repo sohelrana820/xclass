@@ -1,7 +1,4 @@
-.ui-kit-9 {
-    font-family: 'Lato', sans-serif;
-    background:#f4f8fd;
-}
+
 .ui-kit-9 h2 {
     font-size: 20px;
     line-height: 26px;
@@ -37,7 +34,13 @@
 }
 .ui-kit-9 .ui-item span > a.label {
     float: right;
-    margin-top:0px;
+    margin-top: 0px;
+    margin-left: 3px;
+    font-weight: 400;
+    text-transform: none;
+    line-height: 15px;
+    border-radius: 2px;
+    padding: 2px 5px 3px 5px;
 }
 .ui-kit-9 .ui-item p {
     color: #999;
