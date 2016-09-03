@@ -88,9 +88,9 @@ class TasksTable extends Table
         return $validator;
     }
 
-    public function countTotalTasks()
+    public function countTotalTasks($status)
     {
-        $result = $this->find()
+        $result = $this->find('all', ['conditions' => ['Tasks.status' => $status]])
             ->count();
 
         return $result;

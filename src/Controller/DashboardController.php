@@ -17,7 +17,8 @@ class DashboardController extends AppController{
         $overview = [
             'total_user' => $this->Users->countTotalUser(),
             'total_label' => $this->Labels->countTotalLabel(),
-            'total_task' => $this->Tasks->countTotalTasks()
+            'total_open_task' => $this->Tasks->countTotalTasks($stauts = 1),
+            'total_closed_task' => $this->Tasks->countTotalTasks($stauts = 2)
         ];
         $this->set('overview', $overview);
     }

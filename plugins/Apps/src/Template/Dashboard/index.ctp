@@ -32,7 +32,7 @@
     </div>
 <?php endif; ?>
 
-<?php if ($overview['total_task'] < 1): ?>
+<?php if ($overview['total_open_task'] + $overview['total_closed_task'] < 1): ?>
     <div class="alert alert-warning alert-dismissible fade in text-left static_message" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
         </button>
@@ -49,21 +49,16 @@
             <div class="ui-item bg-teal">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h2>1230</h2>
+                        <h2><?php echo $overview['total_user'];?></h2>
                         <h4 class="color-teal-50">
-                            <i class="fa fa-plus"></i>
-                            New Users
+                            <i class="fa fa-user"></i>
+                            Total Users
                         </h4>
                     </div>
                     <div class="pull-right">
-                        <i class="fa fa-user-plus color-teal-100"></i>
+                        <i class="fa fa-users color-teal-100"></i>
                     </div>
                 </div>
-                <!-- progress -->
-                <div class="progress">
-                    <div class="progress-bar bg-teal-100" style="width:72%;"></div>
-                </div>
-                <h5 class="color-teal-50">Progress<span>72%</span></h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
@@ -71,21 +66,16 @@
             <div class="ui-item bg-red">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h2>5613</h2>
+                        <h2><?php echo $overview['total_label'];?></h2>
                         <h4 class="color-red-50">
-                            <i class="fa fa-plus"></i>
-                            New Messages
+                            <i class="fa fa-tag"></i>
+                            Total Label
                         </h4>
                     </div>
                     <div class="pull-right">
-                        <i class="fa fa-envelope color-red-100"></i>
+                        <i class="fa fa-tags color-red-100"></i>
                     </div>
                 </div>
-                <!-- progress -->
-                <div class="progress">
-                    <div class="progress-bar bg-red-100 " style="width:80%;"></div>
-                </div>
-                <h5 class="color-red-50">Unread<span>80%</span></h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
@@ -93,21 +83,16 @@
             <div class="ui-item bg-blue">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h2>343</h2>
+                        <h2><?php echo $overview['total_open_task'];?></h2>
                         <h4 class="color-blue-50 ">
-                            <i class="fa fa-plus"></i>
-                            Orders
+                            <i class="fa fa-bell-o"></i>
+                            Total Open Task
                         </h4>
                     </div>
                     <div class="pull-right">
-                        <i class="fa fa-shopping-cart color-blue-100"></i>
+                        <i class="fa fa-bell-o color-blue-100"></i>
                     </div>
                 </div>
-                <!-- progress -->
-                <div class="progress">
-                    <div class="progress-bar bg-blue-100" style="width:45%;"></div>
-                </div>
-                <h5 class="color-blue-50">Unread<span>45%</span></h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
@@ -115,20 +100,16 @@
             <div class="ui-item bg-blue-grey">
                 <div class="clearfix">
                     <div class="pull-left">
-                        <h2>152</h2>
+                        <h2><?php echo $overview['total_closed_task'];?></h2>
                         <h4 class="color-blue-grey-50">
-                            <i class="fa fa-plus"></i>
-                            New Subscribers</h4>
+                            <i class="fa fa-bell-slash-o"></i>
+                            Total Closed Task
+                        </h4>
                     </div>
                     <div class="pull-right">
-                        <i class="fa fa-rss color-blue-grey-100 "></i>
+                        <i class="fa fa-bell-slash-o color-blue-grey-100 "></i>
                     </div>
                 </div>
-                <!-- progress -->
-                <div class="progress">
-                    <div class="progress-bar bg-blue-grey-100 " style="width:80%;"></div>
-                </div>
-                <h5 class="color-blue-grey-50">Unread<span>80%</span></h5>
             </div>
         </div>
     </div>
