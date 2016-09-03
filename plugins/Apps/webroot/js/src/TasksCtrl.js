@@ -411,26 +411,24 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.queryString = {};
 
     $scope.clearQueryString = function(){
-        $scope.filterQuery.unlabeled = false;
+        $scope.filterQuery.unlabeled = null;
         $scope.filterQuery.unassigned = false;
         $scope.filtterAssignee = [];
         $scope.filtterAuthor = [];
         $scope.filterLabels = [];
-        $scope.filterQuery.sort_by = false;
-        $scope.filterQuery.order_by = false;
+        $scope.filterQuery.sort_by = null;
+        $scope.filterQuery.order_by = null;
         $scope.filterQuery.status = 'all';
+        $scope.filterQuery.query = null;
     };
 
+    $scope.filterQuery = {};
     $scope.doFilter = function(){
         var status = [];
         var labels = [];
         var users = [];
         var authors = [];
         var authors = [];
-        var sortBy = null;
-        var orderBy = null;
-        var unLabeled = null;
-        var unAssigned = null;
 
         if($scope.filterQuery){
             if($scope.filterQuery.status == 'closed'){
@@ -442,28 +440,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             else if($scope.filterQuery.status == 'all'){
                 status = [1, 2, 3];
             }
-
-            if($scope.filterQuery.sort_by){
-                sortBy = $scope.filterQuery.sort_by;
-            }
-
-            if($scope.filterQuery.sort_by){
-                sortBy = $scope.filterQuery.sort_by;
-            }
-
-            if($scope.filterQuery.order_by){
-                orderBy = $scope.filterQuery.order_by;
-            }
-
-            if($scope.filterQuery.unlabeled){
-                unLabeled = $scope.filterQuery.unlabeled;
-            }
-
-            if($scope.filterQuery.unassigned){
-                unAssigned = $scope.filterQuery.unassigned;
-            }
         };
-
 
         var users = [];
         $scope.filtterAssignee.forEach(function(user){
@@ -481,20 +458,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
 
         $scope.queryString = {
+            'query': $scope.filterQuery.query,
             'status[]': status,
             'labels[]': labels,
             'users[]': users,
             'authors[]': authors,
-            'sort_by': sortBy,
-            'order_by': orderBy,
-            'unlabeled': unLabeled,
-            'unassigned': unAssigned
+            'sort_by': $scope.filterQuery.sort_by,
+            'order_by': $scope.filterQuery.order_by,
+            'unlabeled': $scope.filterQuery.unlabeled,
+            'unassigned': $scope.filterQuery.unassigned
         };
-
-        console.log($scope.filterQuery);
-
-
-
+        console.log($scope.queryString);
         $scope.fetchTaskLists($scope.queryString);
     };
 

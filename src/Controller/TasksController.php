@@ -47,6 +47,10 @@ class TasksController extends AppController
                 $orderBy = $this->request->query['order_by'];
             }
 
+            if (isset($this->request->query['query'])) {
+                $conditions = array_merge($conditions, ['Tasks.task LIKE' => '%'.$this->request->query['query'].'%']);
+            }
+
             if (isset($this->request->query['status'])) {
                 $conditions = array_merge($conditions, ['Tasks.status IN' => $this->request->query['status']]);
             }

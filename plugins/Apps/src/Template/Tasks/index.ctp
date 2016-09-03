@@ -177,7 +177,7 @@
 
                 <div class="filter_block">
                     <div>
-                        <input class="form-control" placeholder="search">
+                        <input ng-model="filterQuery.query" class="form-control" placeholder="search" ng-change="doFilter()">
                     </div>
                 </div>
             </div>
