@@ -426,6 +426,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var labels = [];
         var users = [];
         var authors = [];
+        var authors = [];
+        var sortBy = null;
+        var orderBy = null;
+        var unLabeled = null;
+        var unAssigned = null;
 
         if($scope.filterQuery){
             if($scope.filterQuery.status == 'closed'){
@@ -436,6 +441,26 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
             else if($scope.filterQuery.status == 'all'){
                 status = [1, 2, 3];
+            }
+
+            if($scope.filterQuery.sort_by){
+                sortBy = $scope.filterQuery.sort_by;
+            }
+
+            if($scope.filterQuery.sort_by){
+                sortBy = $scope.filterQuery.sort_by;
+            }
+
+            if($scope.filterQuery.order_by){
+                orderBy = $scope.filterQuery.order_by;
+            }
+
+            if($scope.filterQuery.unlabeled){
+                unLabeled = $scope.filterQuery.unlabeled;
+            }
+
+            if($scope.filterQuery.unassigned){
+                unAssigned = $scope.filterQuery.unassigned;
             }
         };
 
@@ -460,11 +485,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             'labels[]': labels,
             'users[]': users,
             'authors[]': authors,
-            /*'sort_by': $scope.filterQuery.sort_by,
-            'order_by': $scope.filterQuery.order_by,
-            'unlabeled': $scope.filterQuery.unlabeled,
-            'unassigned': $scope.filterQuery.unassigned,*/
+            'sort_by': sortBy,
+            'order_by': orderBy,
+            'unlabeled': unLabeled,
+            'unassigned': unAssigned
         };
+
+        console.log($scope.filterQuery);
 
 
 
