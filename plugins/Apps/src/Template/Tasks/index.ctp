@@ -1,4 +1,4 @@
-<?php echo $this->assign('title', 'Manage Task'); ?>
+<?php echo $this->assign('title', 'Task Lists'); ?>
 
 <div ng-controller="TasksCtrl">
 
