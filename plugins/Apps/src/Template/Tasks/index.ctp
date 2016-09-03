@@ -18,36 +18,34 @@
     <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
         <div class="filter_bar">
 
-            <a class="search_item search_item_gray"  ng-click="clearQueryString(); doFilter(filterQuery.status = 'all')">
-                <i class="fa fa-signal" aria-hidden="true"></i>
-                All
-            </a>
+            <div class="filter_items pull-left">
+                <a class="search_item search_item_gray"  ng-click="clearQueryString(); doFilter(filterQuery.status = 'all')">
+                    <i class="fa fa-signal" aria-hidden="true"></i>
+                    All
+                </a>
 
-            <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'closed')">
-                <i class="fa fa-bell-slash-o" aria-hidden="true"></i>
-                Closed
-            </a>
+                <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'closed')">
+                    <i class="fa fa-bell-slash-o" aria-hidden="true"></i>
+                    Closed
+                </a>
 
-            <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.status = 'open')">
-                <i class="fa fa-bell-o" aria-hidden="true"></i>
-                Open
-            </a>
+                <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.status = 'open')">
+                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    Open
+                </a>
 
-            <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unlabeled = true)">
-                <i class="fa fa-tags" aria-hidden="true"></i>
-                Unlabeled
-            </a>
+                <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unlabeled = true)">
+                    <i class="fa fa-tags" aria-hidden="true"></i>
+                    Unlabeled
+                </a>
 
-            <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unassigned = true)">
-                <i class="fa fa-users" aria-hidden="true"></i>
-                Unassigned
-            </a>
+                <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unassigned = true)">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                    Unassigned
+                </a>
+            </div>
 
             <div class="pull-right">
-
-
-
-
                 <div class="filter_block">
                     <div class="dropdown">
                         <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

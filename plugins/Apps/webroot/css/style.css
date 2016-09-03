@@ -887,6 +887,14 @@ a{
     height: 32px;
 }
 
+.filter_bar .filter_items {
+    margin-top: 7px;
+}
+
+.filter_bar .filter_items a{
+    margin-right: 5px;
+}
+
 .filter_bar .filter_header span{
     font-size: 10px;
     text-transform: lowercase;
@@ -898,6 +906,10 @@ a{
 .filter_bar .filter_block{
     float: left;
     margin-right: 25px;
+}
+
+.filter_block .dropdown{
+    margin-top: 7px;
 }
 
 .filter_bar .filter_block .dropdown > span {
