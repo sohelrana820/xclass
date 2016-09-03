@@ -1,0 +1,116 @@
+
+.ui-kit-21{
+    margin:50px 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight:400;
+    margin: 2px 0px;
+    padding: 0px;
+}
+
+.ui-kit-21 .ui-item{
+    background: #ffffff;
+    padding: 25px;
+    margin-bottom: 15px;
+    font-family: 'Lato', sans-serif;
+}
+
+
+.ui-kit-21 .ui-item .Heading {
+    margin: 0 0 12px;
+    font-weight:600;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.ui-kit-21 .ui-item .comment-center {
+    margin: 0 -25px;
+}
+.ui-kit-21 .ui-item .comment-center .comment-body {
+    border-bottom: 1px solid rgba(120,130,140,0.13);
+    display: table;
+    padding: 20px 25px;
+}
+
+.ui-kit-21 .ui-item .comment-center .comment-body:last-child{
+    border-bottom: none;
+}
+.ui-kit-21 .ui-item .comment-center .comment-body:hover{
+    background:#F7FAFC;
+}
+.ui-kit-21 .ui-item .comment-center .user-img {
+    width: 40px;
+    height:40px;
+    display: table-cell;
+    position: relative;
+    margin: 0 10px 0 0;
+}
+
+.ui-kit-21 .ui-item .comment-center .mail-contnet {
+    padding-left: 15px;
+    padding-right: 0px;
+}
+.ui-kit-21 .ui-item .comment-center .mail-contnet h5 {
+    margin: 0;
+    font-weight:600;
+    text-overflow: ellipsis;
+}
+
+.ui-kit-21 .ui-item .comment-center .mail-contnet .mail-desc {
+    font-size: 14px;
+    display: block;
+    margin: 8px 0  15px;
+    line-height: 25px;
+    color: #848a96;
+    height:70px;
+    font-weight:300;
+}
+.ui-kit-21 .ui-item .comment-center .btn{
+    border-radius: 60px;
+    padding: 4px 12px 3px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color:#fff;
+    font-size:12px;
+}
+.img-circle {
+    border-radius: 50%;
+
+    width:100%;
+}
+.date{
+    display: block;
+    font-size: 12px;
+    color: #2b2b2b;
+}
+.bt-lbule{
+    background-color: #03a9f3;
+}
+.bt-green{
+    background-color: #00c292;
+}
+.bt-red{
+    background-color: #f75656;
+}
+.bt-yellow{
+    background-color:#ffad1f;
+}
+.float-right{
+    float:right;
+}
+@media (min-width:0px){
+    .col-md-6 {
+        width:100%;
+        float:left;
+    }
+}
+@media (min-width:1000px){
+    .col-md-6 {
+        width:50%;
+        float:left;
+    }
+}
+
+
+

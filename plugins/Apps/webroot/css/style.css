@@ -4,6 +4,14 @@ body{
     background: #FFF;
 }
 
+.body-color{
+    background: #f4f8fd;
+}
+
+#page-wrapper {
+    background-color: transparent !important;
+}
+
 a{
     cursor: pointer;
 }

@@ -10,7 +10,7 @@
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <?php
-    echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'style.css'));
+    echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'kits/kit-9' , 'kits/kit-22', 'kits/kit-19', 'style.css'));
     echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700" rel="stylesheet">';
     echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
 ';
@@ -26,7 +26,7 @@
     <![endif]-->
 </head>
 
-<body ng-controller="MainsCtrl" ng-cloak>
+<body class="body-color" ng-controller="MainsCtrl" ng-cloak>
 
 <div id="wrapper">
     <!-- Navigation -->
