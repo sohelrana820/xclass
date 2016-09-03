@@ -32,7 +32,6 @@ class SettingsController extends AppController
             $appLogo = $iniData['APPLICATION_LOGO'];
 
             if(isset($this->request->data['application']['logo']['name']) && $this->request->data['application']['logo']['name']){
-                var_dump(111111111111);
                 $appLogo = $this->Utilities->uploadFile(WWW_ROOT.'img', $this->request->data['application']['logo'], 'logo');
             }
             if($this->request->data['application']['name']){
