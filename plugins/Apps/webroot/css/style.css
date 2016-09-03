@@ -1236,3 +1236,7 @@ a{
 .theme-table tbody td {
     font-weight: 300;
 }
+
+.btn-margin .btn{
+    margin-left: 5px;
+}

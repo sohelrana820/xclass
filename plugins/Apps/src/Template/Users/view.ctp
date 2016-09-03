@@ -5,7 +5,7 @@
             Details of <?php echo $user->profile->name;?>
             <p class="sub-title"></p>
         </h2>
-        <div class="pull-right btn-areas">
+        <div class="pull-right btn-areas btn-margin">
             <?php
             echo $this->Html->link('New User', ['controller' => 'users', 'action' => 'add'], ['class' => 'btn btn-info']);
 

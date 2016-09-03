@@ -8,7 +8,7 @@
                 (<?php echo $this->Time->format($user->profile->modified, 'h:mm a');?>)
             </p>
         </h2>
-        <div class="pull-right btn-areas">
+        <div class="pull-right btn-areas btn-margin">
             <?php
             echo $this->Html->link('New User', ['controller' => 'users', 'action' => 'add'], ['class' => 'btn btn-info']);
 

@@ -5,7 +5,7 @@
             Update Profile
             <p class="sub-title"></p>
         </h2>
-        <div class="pull-right btn-areas">
+        <div class="pull-right btn-areas btn-margin">
             <?php
             echo $this->Html->link('My Profile', ['controller' => 'profile', 'action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
 
