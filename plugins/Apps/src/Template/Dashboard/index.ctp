@@ -418,6 +418,7 @@
     <div class="col-lg-4">
         <div class="ui-kit-9">
             <div class="col-mob">
+                <h2>Recent Tasks</h2>
                 <?php foreach($recentTasks as $task):?>
                 <!-- Item -->
                 <div class="ui-item">
