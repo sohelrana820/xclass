@@ -82,7 +82,7 @@ class AppController extends Controller
 
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'index', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
+        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'install', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
 
@@ -95,7 +95,7 @@ class AppController extends Controller
         }
         else {
             if($this->request->param('controller') != 'Installation'){
-                return $this->redirect(['controller' => 'installation', 'action' => 'index']);
+                return $this->redirect(['controller' => 'installation', 'action' => 'install']);
             }
         }
 

@@ -41,6 +41,11 @@ class InstallationController extends AppController{
     }
 
     public function index(){
+        $this->redirect(['action' => 'install']);
+    }
+
+    public function install()
+    {
 
     }
 
