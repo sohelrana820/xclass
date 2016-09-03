@@ -1114,7 +1114,7 @@ a{
 }
 
 /* Visible DropDown*/
-.dropdown:hover .dropdown-menu {
+.dropdown-menu:hover {
     display: block;
     margin-top: 0;
 }
