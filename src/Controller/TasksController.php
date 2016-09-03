@@ -48,7 +48,12 @@ class TasksController extends AppController
             }
 
             if (isset($this->request->query['query'])) {
-                $conditions = array_merge($conditions, ['Tasks.task LIKE' => '%'.$this->request->query['query'].'%']);
+                $conditions = array_merge($conditions, [
+                    'or' => [
+                        'Tasks.task LIKE' => '%'.$this->request->query['query'].'%',
+                        'Tasks.id' => $this->request->query['query']
+                        ]
+                ]);
             }
 
             if (isset($this->request->query['status'])) {
