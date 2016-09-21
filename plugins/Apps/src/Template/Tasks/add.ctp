@@ -11,8 +11,8 @@
 </div>
 
 <div ng-controller="TasksCtrl">
-    <form ng-submit="saveTask()">
-    <div class="row">
+    <ng-form ng-submit="saveTask()">
+        <div class="row">
         <div class="col-lg-8 col-md-8">
             <div class="well">
                 <div class="form-group">
@@ -93,7 +93,7 @@
                                             <a class="btn btn-danger" ng-show="!show_label_create_loader" ng-click="show_create_new_label_form = false">Cancel</a>
                                             <img ng-show="show_label_create_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         </div>
-                                    </form>
+                                    </ng-form>
                                 </div>
 
                                 <div class="search_label" ng-show="!show_create_new_label_form && taskLabels.length > 0">
@@ -174,7 +174,7 @@
             </div>
         </div>
     </div>
-    </form>
+    </ng-form>
 </div>
 
 <?php
