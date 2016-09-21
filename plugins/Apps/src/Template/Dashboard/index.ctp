@@ -493,3 +493,8 @@
 </div>
 </div>
 
+<?php
+echo $this->start('jsBottom');
+echo $this->Html->script(['src/TasksCtrl']);
+echo $this->end();
+?>
