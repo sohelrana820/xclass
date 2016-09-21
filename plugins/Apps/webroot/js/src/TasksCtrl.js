@@ -48,6 +48,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                         window.location.href = BASE_URL + "tasks";
                     }, 1000);
                 }
+                else{
+                    $scope.fetchTaskLists();
+                }
             }
             else{
                 Flash.create('info', response.data.result.message);
@@ -104,8 +107,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     };
                     myBlockUI.stop();
                 }, 1000);
-
             }
+
         });
     };
     $scope.fetchTaskLists();
@@ -404,7 +407,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 var url = window.location.href.split("view/");
                 if(url[1] != undefined && url[1]){
                     $timeout(function() {
-                        console.log(11);
                         window.location.href = BASE_URL + "tasks";
                     }, 1000);
                 }

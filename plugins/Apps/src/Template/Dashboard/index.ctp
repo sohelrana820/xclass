@@ -115,7 +115,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" ng-controller="TasksCtrl">
     <div class="col-lg-9">
         <div class="row">
             <div class="col-lg-7">
@@ -303,43 +303,24 @@
                 <div class="ui-kit-9">
                     <div class="col-mob">
                         <h2>Recent Tasks</h2>
-                        <?php foreach ($recentTasks as $task): ?>
-                            <!-- Item -->
-                            <div class="ui-item">
-                                <!-- Heading -->
-                                <div class="ui-heading clearfix">
-                                    <h5>
-                                        <?php
-                                        if ($task->users) {
-                                            foreach ($task->users as $user) {
-                                                echo $this->Html->link($user->profile->first_name . ' ' . $user->profile->last_name, ['controller' => 'users', 'action' => 'details', $user->uuid], ['class' => 'task_user_link']);
-                                            }
-                                        } else {
-                                            echo '<label>Not Assigned Yet!</label>';
-                                        }
-                                        ?>
-
-                                    </h5>
-                                </div>
-                                <!-- Date -->
-                                <span>
-                                    <?php echo $this->Time->format($task->created, 'MMM d, Y'); ?>
-
-                                    <?php
-                                    foreach ($task->labels as $label) {
-                                        echo '<a href="#" class="label label-sm" style="background: ' . $label->color_code . '">' . $label->name . '</a>';
-                                    }
-                                    ?>
-                                </span>
-                                <!-- Paragraph -->
-                                <p>
-                                    <?php echo $task->task; ?>
-                                </p>
-                                <?php
-                                echo $this->Html->link('View Details', ['controller' => 'tasks', 'action' => 'view', $task->id], ['class' => 'task_link']);
-                                ?>
+                        <!-- Item -->
+                        <div class="ui-item" ng-repeat="task in tasks.data">
+                            <!-- Heading -->
+                            <div class="ui-heading clearfix">
+                                <h5>
+                                    <a ng-show="task.users.length > 0" ng-repeat="user in task.users" href="/users/details{{user.uuuid}}" class="task_user_link">{{user.profile.first_name}} {{user.profile.last_name}}</a>
+                                    <label ng-show="task.users.length < 1">Not Assigned Yet!</label>
+                                </h5>
                             </div>
-                        <?php endforeach; ?>
+                            <!-- Date -->
+                                <span>
+                                    {{task.created | date}} ({{task.created | date : 'HH:m a'}})
+                                    <a ng-repeat="label in task.labels" class="label label-sm" style="background: {{label.color_code}}">{{label.name}}</a>
+                                </span>
+                            <!-- Paragraph -->
+                            <p>{{task.task}}</p>
+                            <a href="/tasks/view/{{task.id}}" class="task_link">View Details</a>
+                        </div>
                     </div>
                 </div>
             </div>
