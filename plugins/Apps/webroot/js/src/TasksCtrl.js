@@ -31,6 +31,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         };
     };
 
+
+
     $scope.saveTask = function(){
         $scope.getTaskRelObj();
         Upload.upload({
@@ -40,9 +42,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             if(response.data.result.success){
                 $scope.TaskObj = {};
                 Flash.create('success', response.data.result.message);
-                $timeout(function() {
-                    window.location.href = BASE_URL + "tasks";
-                }, 1000);
+                var isDashboardOpend = window.location.href.split("dashboard");
+                if(isDashboardOpend.length < 2){
+                    $timeout(function() {
+                        window.location.href = BASE_URL + "tasks";
+                    }, 1000);
+                }
             }
             else{
                 Flash.create('info', response.data.result.message);
