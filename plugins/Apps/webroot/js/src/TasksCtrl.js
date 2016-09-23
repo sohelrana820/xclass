@@ -34,6 +34,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.saveTask = function(){
+        console.log('here');
         $scope.getTaskRelObj();
         Upload.upload({
             url: BASE_URL + 'tasks/add.json',
@@ -42,15 +43,19 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             if(response.data.result.success){
                 $scope.TaskObj = {};
                 Flash.create('success', response.data.result.message);
+
                 var isDashboardOpend = window.location.href.split("dashboard");
                 if(isDashboardOpend.length < 2){
+                    console.log('from task panel');
                     $timeout(function() {
                         window.location.href = BASE_URL + "tasks";
                     }, 1000);
                 }
                 else{
+                    console.log('from dashboard');
                     $scope.fetchTaskLists();
                 }
+
             }
             else{
                 Flash.create('info', response.data.result.message);

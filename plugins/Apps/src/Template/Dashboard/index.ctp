@@ -119,8 +119,8 @@
     <div class="col-lg-9">
         <div class="row">
             <div class="col-lg-7">
-                <div class="widget-body" ng-controller="TasksCtrl">
-                    <ng-form ng-submit="saveTask()">
+                <div class="widget-body">
+                    <form ng-submit="saveTask()">
                         <div class="row">
                             <div class="col-lg-9 col-md-9">
                                 <div class="">
@@ -296,7 +296,7 @@
                                 </div>
                             </div>
                         </div>
-                    </ng-form>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-5">
