@@ -44,6 +44,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.saveTask = function(){
         $scope.getTaskRelObj();
+        console.log($scope.TaskObj);
         Upload.upload({
             url: BASE_URL + 'tasks/add.json',
             data: $scope.TaskObj
