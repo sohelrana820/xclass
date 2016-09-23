@@ -59,6 +59,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     }, 1000);
                 }
                 else{
+                    $scope.labels.forEach(function(label, key){
+                        $scope.labels[key].checked = false;
+                    });
+                    $scope.users.forEach(function(user, key){
+                        $scope.users[key].checked = false;
+                    });
+                    $scope.countAttachments = [0];
                     toastr.success(response.data.result.message);
                     $scope.fetchTaskLists({limit: 5});
                 }

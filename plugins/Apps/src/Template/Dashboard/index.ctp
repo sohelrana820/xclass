@@ -301,11 +301,12 @@
                         <h2>Recent Tasks</h2>
                         <div class="long_loader" ng-show="task_loader">
                             <div class="loader_content">
-                                <img src="{{BASE_URL}}/img/reload.gif" class="lg_loader">
+                                <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                                <p>Please wait. Loading reloading...</p>
                             </div>
                         </div>
                         <!-- Item -->
-                        <div class="ui-item"  ng-show="!task_loader" ng-repeat="task in tasks.data">
+                        <div class="ui-item" ng-repeat="task in tasks.data">
                             <!-- Heading -->
                             <div class="ui-heading clearfix">
                                 <h5>

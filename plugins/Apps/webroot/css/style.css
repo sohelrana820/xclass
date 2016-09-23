@@ -74,16 +74,13 @@ a{
 }
 
 .long_loader{
-    min-height: 350px;
     color: #5bc0de;
     text-align: center;
-    position: relative;
+    border: 1px dashed #ddd;
 }
 
 .loader_content {
-    height: 60px;
-    position: absolute;
-    width: 100%;
+    padding: 25px 0px 15px 0px;
 }
 
 
