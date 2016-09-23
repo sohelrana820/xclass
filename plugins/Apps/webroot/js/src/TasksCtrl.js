@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload, blockUI){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload, blockUI){
     $scope.BASE_URL = BASE_URL;
     /*    // Getting all active labels.
      $scope.fetchLabelsLists = function(){
@@ -69,6 +69,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     $scope.countAttachments = [0];
                     toastr.success(response.data.result.message);
                     $scope.fetchTaskLists({limit: 5});
+                    $scope.fetchAppOverview();
                 }
 
             }
@@ -117,7 +118,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.task_loader = true;
         var myBlockUI = blockUI.instances.get('blockTasksList');
         myBlockUI.start({
-            message: 'Please wait!',
+            message: 'Please wait!'
         });
 
         var tasks = TasksResources.query(data).$promise;
@@ -139,12 +140,22 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
+    $scope.fetchAppOverview = function(data){
+        var overview = DashboardResources.get().$promise;
+        overview.then(function (res) {
+            $scope.overview = res.result;
+            console.log($scope.overview);
+        });
+    };
+
     if(isDashboardOpend){
         $scope.fetchTaskLists({limit: 5});
+        $scope.fetchAppOverview();
     }
     else{
         $scope.fetchTaskLists();
     }
+
 
     /**
      * Getting application active label list.
@@ -227,6 +238,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
                         if(assignLabel && assignLabel != undefined){
                             $scope.quickUpdate('label_event', true)
+                        }
+                        if(isDashboardOpend){
+                            $scope.fetchAppOverview();
                         }
                         toastr.success(res.result.message);
                     }, 500);

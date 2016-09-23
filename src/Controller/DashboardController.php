@@ -25,4 +25,16 @@ class DashboardController extends AppController{
         $this->set('overview', $overview);
         $this->set('recentTasks', $recentTasks);
     }
+
+    public function overview()
+    {
+        $overview = [
+            'total_user' => $this->Users->countTotalUser(),
+            'total_label' => $this->Labels->countTotalLabel(),
+            'total_open_task' => $this->Tasks->countTotalTasks($stauts = 1),
+            'total_closed_task' => $this->Tasks->countTotalTasks($stauts = 2)
+        ];
+        $this->set('result', $overview);
+        $this->set('_serialize', ['result']);
+    }
 } 

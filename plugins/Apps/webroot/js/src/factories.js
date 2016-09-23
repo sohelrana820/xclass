@@ -37,3 +37,9 @@ app.factory('CommentsResources', function ($resource, BASE_URL) {
         delete: {method: 'DELETE', url: BASE_URL +  'comments/:id.json'}
     });
 });
+
+app.factory('DashboardResources', function ($resource, BASE_URL) {
+    return $resource(':id', {id: '@id'}, {
+        get: {method: 'GET', url: BASE_URL +  'dashboard/overview.json'}
+    });
+});
