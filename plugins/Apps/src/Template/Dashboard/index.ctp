@@ -313,14 +313,13 @@
                                     <label ng-show="task.users.length < 1">Not Assigned Yet!</label>
                                 </h5>
                             </div>
-                            <!-- Date -->
-                                <span>
-                                    {{task.created | date}} ({{task.created | date : 'HH:m a'}})
-                                    <a ng-repeat="label in task.labels" class="label label-sm" style="background: {{label.color_code}}">{{label.name}}</a>
-                                </span>
-                            <!-- Paragraph -->
-                            <p>{{task.task}}</p>
-                            <a href="/tasks/view/{{task.id}}" class="task_link">View Details</a>
+                            <p>
+                                <a href="{{BASE_URL}}/tasks/view/{{task.id}}">{{task.task}}</a>
+                            </p>
+                            <div>
+                                <a ng-repeat="label in task.labels" class="label label-sm d-label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}}">{{label.name}}</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>

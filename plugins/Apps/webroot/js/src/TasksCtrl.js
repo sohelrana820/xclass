@@ -43,7 +43,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.saveTask = function(){
-        console.log('here');
         $scope.getTaskRelObj();
         Upload.upload({
             url: BASE_URL + 'tasks/add.json',
@@ -514,7 +513,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             'unlabeled': $scope.filterQuery.unlabeled,
             'unassigned': $scope.filterQuery.unassigned
         };
-        console.log($scope.queryString);
         $scope.fetchTaskLists($scope.queryString);
     };
 
