@@ -51,20 +51,27 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         }).then(function (response) {
             if(response.data.result.success){
                 $scope.TaskObj = {};
-                Flash.create('success', response.data.result.message);
-
+                $scope.taskLabels = [];
+                $scope.taskUsers = [];
                 if(!isDashboardOpend){
+                    Flash.create('success', response.data.result.message);
                     $timeout(function() {
                         window.location.href = BASE_URL + "tasks";
                     }, 1000);
                 }
                 else{
+                    toastr.success(response.data.result.message);
                     $scope.fetchTaskLists({limit: 5});
                 }
 
             }
             else{
-                Flash.create('info', response.data.result.message);
+                if(isDashboardOpend){
+                    toastr.success(response.data.result.message);
+                }
+                else{
+                    Flash.create('info', response.data.result.message);
+                }
             }
         });
     };
