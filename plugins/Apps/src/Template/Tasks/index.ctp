@@ -242,7 +242,7 @@
                     <strong>
                         <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">{{task.task}}</a>
                         <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="!task.task">-</a>
-                        <label ng-repeat="label in task.labels" class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
+                        <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
                     </strong>
                     <br>
                     <small class="author">Opened by {{task.createdUserProfile.first_name}}

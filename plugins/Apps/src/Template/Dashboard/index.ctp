@@ -135,7 +135,7 @@
                                             <label>Description</label>
 
                                             <div class="input text">
-                                                <text-angular ng-model="TaskObj.description" ta-toolbar="[['h1','h2','h3', 'h4' , 'h5', 'h6'],['p', 'bold','italics', 'underline'], ['ol', 'ul'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', ]]" ng-model="htmlVariable"></text-angular>
+                                                <text-angular ng-model="TaskObj.description" ta-toolbar="[['h1','h2','h3'],['p', 'bold'], ['ol', 'ul']]" ng-model="htmlVariable"></text-angular>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -299,7 +299,7 @@
                 <div class="col-lg-5">
                     <div class="ui-kit-9">
                         <div class="col-mob">
-                            <h2>Recent Tasks</h2>
+                            <h2>Recent Opened Tasks</h2>
                             <div class="long_loader" ng-show="task_loader">
                                 <div class="loader_content">
                                     <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
