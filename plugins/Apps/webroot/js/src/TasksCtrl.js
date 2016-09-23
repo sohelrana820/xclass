@@ -33,6 +33,15 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
 
+    var isDashboardOpend = window.location.href.split("dashboard");
+    if(isDashboardOpend.length < 2){
+        isDashboardOpend = false;
+    }
+    else{
+        isDashboardOpend = true;
+    }
+
+
     $scope.saveTask = function(){
         console.log('here');
         $scope.getTaskRelObj();
@@ -44,16 +53,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 $scope.TaskObj = {};
                 Flash.create('success', response.data.result.message);
 
-                var isDashboardOpend = window.location.href.split("dashboard");
-                if(isDashboardOpend.length < 2){
-                    console.log('from task panel');
+                if(!isDashboardOpend){
                     $timeout(function() {
                         window.location.href = BASE_URL + "tasks";
                     }, 1000);
                 }
                 else{
-                    console.log('from dashboard');
-                    $scope.fetchTaskLists();
+                    $scope.fetchTaskLists({limit: 5});
                 }
 
             }
@@ -94,6 +100,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      */
     $scope.fetchTaskLists = function(data){
 
+        $scope.task_loader = true;
         var myBlockUI = blockUI.instances.get('blockTasksList');
         myBlockUI.start({
             message: 'Please wait!',
@@ -110,13 +117,20 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                         currentPage: res.result.page,
                         limit: res.result.limit
                     };
+                    $scope.task_loader = false;
                     myBlockUI.stop();
                 }, 1000);
             }
 
         });
     };
-    $scope.fetchTaskLists();
+
+    if(isDashboardOpend){
+        $scope.fetchTaskLists({limit: 5});
+    }
+    else{
+        $scope.fetchTaskLists();
+    }
 
     /**
      * Getting application active label list.

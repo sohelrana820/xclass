@@ -43,6 +43,10 @@ class TasksController extends AppController
                 }
             }
 
+            if (isset($this->request->query['limit'])) {
+                $limit = $this->request->query['limit'];
+            }
+
             if (isset($this->request->query['order_by'])) {
                 $orderBy = $this->request->query['order_by'];
             }

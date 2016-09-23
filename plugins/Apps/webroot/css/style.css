@@ -53,6 +53,11 @@ a{
     width: 40px;
 }
 
+
+.lg_loader{
+    width: 60px;
+}
+
 .fetching_loading_area{
     text-align: center;
 }
@@ -66,6 +71,20 @@ a{
     margin-top: 40px;
     text-align: center;
     color: #5bc0de;
+}
+
+.long_loader{
+    min-height: 350px;
+    border:1px solid #EEE;
+    color: #5bc0de;
+    text-align: center;
+    position: relative;
+}
+
+.loader_content {
+    height: 60px;
+    position: absolute;
+    width: 100%;
 }
 
 

@@ -303,8 +303,13 @@
                 <div class="ui-kit-9">
                     <div class="col-mob">
                         <h2>Recent Tasks</h2>
+                        <div class="long_loader" ng-show="task_loader">
+                            <div class="loader_content">
+                                <img src="{{BASE_URL}}/img/reload.gif" class="lg_loader">
+                            </div>
+                        </div>
                         <!-- Item -->
-                        <div class="ui-item" ng-repeat="task in tasks.data">
+                        <div class="ui-item"  ng-show="!task_loader" ng-repeat="task in tasks.data">
                             <!-- Heading -->
                             <div class="ui-heading clearfix">
                                 <h5>
