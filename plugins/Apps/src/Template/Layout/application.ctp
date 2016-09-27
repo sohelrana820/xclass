@@ -28,36 +28,7 @@
 
 <div id="wrapper">
     <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    <img src="img/logo.png" class="logo" alt="Logo"/>
-                </a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-area-chart"></i> Analytics</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-tree"></i> Treading</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-shield"></i> Privacy</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-foursquare"></i> Forum</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-support"></i> Support</a>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-signal"></i> Settings</a>
-            </li>
-        </ul>
-    </div>
+    <?php echo $this->element('sidebar');?>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
@@ -71,42 +42,7 @@
 
         <div class="clearfix"></div>
         <!-- Header -->
-        <div class="header">
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-lg-6 visible-lg visible-md">
-                    <div class="search_bar">
-                        <div class="input-group search_bar_input">
-                            <span class="input-group-addon">
-                                <button type="submit">
-                                    <span class="fa fa-search"></span>
-                                </button>
-                            </span>
-                            <input type="text" class="form-control"  placeholder="Search..." >
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="pull-right">
-                        <div class="profile-overview">
-                            <div class="dropdown customm-dropdown">
-                                <img src="img/profile.jpg" class="profile-pic" alt="Avatar"/>
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    Preview Techs
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                    <li><a href="#"><i class="fa fa-user"></i> Preview Techs</a></li>
-                                    <li><a href="#"><i class="fa fa-wrench"></i> Setting</a></li>
-                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
+        <?php echo $this->element('header');?>
         <!-- /#header -->
 
         <!-- Content area -->
