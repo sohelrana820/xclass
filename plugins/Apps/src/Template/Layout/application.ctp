@@ -10,10 +10,9 @@
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <?php
-    echo $this->Html->css(array('bootstrap.min', 'sb-admin', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'kits/kit-9' , 'kits/kit-22', 'kits/kit-19', 'style.css'));
-    echo '<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,700" rel="stylesheet">';
-    echo '<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
-';
+    echo $this->Html->css(array('bootstrap.min', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'kits/kit-9' , 'kits/kit-22', 'kits/kit-19', 'main', 'style.css'));
+    echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">';
+
     echo $this->fetch('cssTop');
     echo $this->fetch('jsTop');
     ?>
@@ -25,46 +24,116 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body class="body-color" ng-controller="MainsCtrl" ng-cloak>
 
 <div id="wrapper">
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">
-                    <?php echo $this->Html->image($appsLogo, ['class' => 'logo', 'url' => ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']]);?>
-                </span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <?php echo $this->Html->image($appsLogo, ['class' => 'logo', 'url' => ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']]);?>
-        </div>
-        <!-- Top Menu Items -->
-        <?php echo $this->element('header');?>
-        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <?php echo $this->element('sidebar');?>
-        <!-- /.navbar-collapse -->
-    </nav>
-
-    <div id="page-wrapper">
-
-        <div class="container-fluid">
-            <?php echo $this->Flash->render() ?>
-            <flash-message></flash-message>
-            <?php echo $this->fetch('content'); ?>
-        </div>
-        <!-- /.container-fluid -->
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    <img src="img/logo.png" class="logo" alt="Logo"/>
+                </a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-area-chart"></i> Analytics</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-tree"></i> Treading</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-shield"></i> Privacy</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-foursquare"></i> Forum</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-support"></i> Support</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-signal"></i> Settings</a>
+            </li>
+        </ul>
     </div>
-    <!-- /#page-wrapper -->
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+        <button href="#menu-toggle" class="wrapper_toggle_btn" id="menu-toggle">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+
+        <div class="clearfix"></div>
+        <!-- Header -->
+        <div class="header">
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-lg-6 visible-lg visible-md">
+                    <div class="search_bar">
+                        <div class="input-group search_bar_input">
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                            </span>
+                            <input type="text" class="form-control"  placeholder="Search..." >
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="pull-right">
+                        <div class="profile-overview">
+                            <div class="dropdown customm-dropdown">
+                                <img src="img/profile.jpg" class="profile-pic" alt="Avatar"/>
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Preview Techs
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li><a href="#"><i class="fa fa-user"></i> Preview Techs</a></li>
+                                    <li><a href="#"><i class="fa fa-wrench"></i> Setting</a></li>
+                                    <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /#header -->
+
+        <!-- Content area -->
+        <div class="container-fluid">
+            <div class="content-area">
+                <?php echo $this->Flash->render() ?>
+                <flash-message></flash-message>
+                <?php echo $this->fetch('content'); ?>
+            </div>
+        </div>
+        <!-- /#Content area -->
+
+        <!-- Footer area -->
+        <footer class="footer">
+            <div class="container-fluid">
+                <p class="copy-text">Copyright All Rights Reserved by Preview Technologies Limited © 2016</p>
+            </div>
+        </footer>
+        <!-- /#Footer area -->
+    </div>
+    <!-- /#page-content-wrapper -->
 </div>
 <!-- /#wrapper -->
 
+
 <?php
-echo $this->Html->script(array('jquery', 'bootstrap.min', 'custom'));
+echo $this->Html->script(array('jquery', 'bootstrap.min', 'theme'));
 echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'tinycolor-min.js', 'angularjs-color-picker.min.js', 'angular-flash.min', 'angular-toastr.tpls.js', 'ng-file-upload-shim.min.js', 'ng-file-upload.min.js', 'angular-block-ui']);
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
@@ -74,5 +143,6 @@ echo $this->fetch('jsBottom');
     localStorage.setItem("BASE_URL", '<?php echo $baseUrl;?>');
 </script>
 <?php ?>
+
 </body>
 </html>
