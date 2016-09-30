@@ -14,6 +14,7 @@ body {
 
 a {
     cursor: pointer;
+    color: #3c85a6;
 }
 
 .alert {
@@ -61,18 +62,18 @@ a {
 }
 
 .fetching_loading_area h2 {
-    color: #1ab394;
+    color: #3c85a6;
     font-size: 18px;
 }
 
 .pabe_loader {
     margin-top: 40px;
     text-align: center;
-    color: #5bc0de;
+    color: #3c85a6;
 }
 
 .long_loader {
-    color: #5bc0de;
+    color: #3c85a6;
     text-align: center;
     border: 1px dashed #ddd;
 }
@@ -239,8 +240,8 @@ a {
 }
 
 .checkbox-info input[type="checkbox"]:checked + label::before {
-    background-color: #5bc0de;
-    border-color: #5bc0de;
+    background-color: #3c85a6;
+    border-color: #3c85a6;
 }
 
 .checkbox-theme input[type="checkbox"]:checked + label::after {
@@ -338,7 +339,7 @@ a {
 }
 
 .green {
-    color: #1ab394;
+    color: #3c85a6;
 }
 
 .red {
@@ -412,8 +413,8 @@ a {
 }
 
 .status-info {
-    border: 2px solid #5bc0de;
-    color: #5bc0de;
+    border: 2px solid #3c85a6;
+    color: #3c85a6;
 }
 
 .status-orange {
@@ -422,13 +423,13 @@ a {
 }
 
 .status-green {
-    border: 2px solid #1ab394;
-    color: #1ab394;
+    border: 2px solid #3c85a6;
+    color: #3c85a6;
 }
 
 .status-success {
-    border: 2px solid #1ab394;
-    color: #1ab394;
+    border: 2px solid #3c85a6;
+    color: #3c85a6;
 }
 
 .status-red {
@@ -465,7 +466,7 @@ a {
 }
 
 .custom-dropdown .add_new_label {
-    color: #1ab394;
+    color: #3c85a6;
     font-size: 10px;
     cursor: pointer;
 }
@@ -534,7 +535,7 @@ a {
 
 .task_sidebar .task_users li {
     list-style: none;
-    color: #5bc0de;
+    color: #3c85a6;
     font-size: 10px;
     margin-bottom: 10px;
     border-radius: 3px;
@@ -810,7 +811,7 @@ a {
     font-weight: 600;
     text-transform: uppercase;
     margin: 29px 0px;
-    color: #1ab394;
+    color: #3c85a6;
 }
 
 .empty_block .lead {
@@ -1044,13 +1045,13 @@ a {
 }
 
 .btn-lg-theme, .btn-lg-theme:hover {
-    background: #1ab394;
+    background: #3c85a6;
     color: #FFF;
     padding: 15px 29px;
     font-weight: 700;
     font-size: 19px;
     border-radius: 3px;
-    border: 2px solid #1ab394;
+    border: 2px solid #3c85a6;
     color: #fff;
     text-transform: uppercase;
     font-size: 13px;
@@ -1063,8 +1064,8 @@ a {
 .btn-success:active,
 .btn-success:visited,
 .btn-success:focus {
-    background: #1ab394;
-    border-color: #1ab394;
+    background: #3c85a6;
+    border-color: #3c85a6;
 }
 
 .btn-info,
@@ -1138,8 +1139,8 @@ a {
 }
 
 .search_item_theme {
-    border: 1px solid #1ab394;
-    color: #1ab394 !important;
+    border: 1px solid #3c85a6;
+    color: #3c85a6 !important;
 }
 
 .search_item_red {
@@ -1148,8 +1149,8 @@ a {
 }
 
 .search_item_info {
-    border: 1px solid #5bc0de;
-    color: #5bc0de !important;
+    border: 1px solid #3c85a6;
+    color: #3c85a6 !important;
 }
 
 .search_item_orange {
@@ -1325,7 +1326,7 @@ a {
     font-size: 10px;
     color: #FFF !important;
     text-transform: uppercase;
-    background: #1ab394;
+    background: #3c85a6;
     padding: 4px 4px 2px 5px;
     font-weight: 600;
     border-radius: 2px;
