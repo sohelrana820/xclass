@@ -245,75 +245,35 @@ body {
     margin-bottom: 25px;
 }
 
-.overview-block {
-    background: #FFF;
-    margin-bottom: 10px;
-    border: 1px solid #eee;
-}
-
-.overview-left {
-    background: #f9fafb;
-}
-
-.overview-icon {
-    color: #fff;
-    background: #f3f5f7;
-    border-right: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    width: 70px;
-    height: 70px;
-    font-size: 36px;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.overview-right {
-    padding: 20px 25px;
-
-}
-
-.overview-right .overview-value {
-    margin: 10px 0px 10px 0px;
-    font-size: 24px;
-    font-weight: 400;
-    color: #748795;
-}
-
-.overview-right .overview-title {
-    color: #bdc6cc;
-    font-size: 12px;
-}
-
-.panel {
+/* Dashboard: stats classes */
+.app-stats-item {
+    position: relative;
+    overflow: hidden;
+    padding: 30px 20px;
+    margin-bottom: 30px;
     border-radius: 2px;
+    background-color: #464960;
+}
+.app-stats-item > .fa {
+    position: absolute;
+    bottom: -20%;
+    left: -5%;
+    font-size: 100px;
+    color: rgba(255, 255, 255, 0.15);
+}
+.app-stats-title {
+    margin: 0;
+    text-align: right;
+    font-size: 36px;
+    color: white;
+}
+.app-stats-title > small {
+    display: block;
+    font-size: 17px;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.panel-primary {
-    border-color: #596d7c;
-}
-
-.panel-primary > .panel-heading {
-    color: #fff;
-    background-color: #596d7c;
-    border-color: #596d7c;
-    padding: 15px;
-}
-
-.panel-default {
-    border-color: #d9d9d9;
-}
-
-.panel-default > .panel-heading {
-    color: #565e6a;
-    background-color: #f3f5f7;
-    border-color: #d9d9d9;
-    padding: 15px;
-}
-
-.panel-title {
-    text-transform: uppercase;
-}
 
 /* Footer classes */
 .footer {

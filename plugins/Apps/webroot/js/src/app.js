@@ -19,7 +19,7 @@ app.controller('MainsCtrl', function($scope, LabelResources, BASE_URL){
     $scope.options = {
         chart: {
             type: 'pieChart',
-            height: 500,
+            height: 250,
             x: function(d){return d.key;},
             y: function(d){return d.y;},
             showLabels: true,
@@ -56,7 +56,7 @@ app.controller('MainsCtrl', function($scope, LabelResources, BASE_URL){
     $scope.options2 = {
         chart: {
             type: 'cumulativeLineChart',
-            height: 450,
+            height: 250,
             margin : {
                 top: 20,
                 right: 20,
