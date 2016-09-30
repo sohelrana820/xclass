@@ -1,6 +1,6 @@
 /** Start common classes **/
 body{
-    font-family: 'Roboto Condensed', sans-serif !important;
+    font-family: 'Roboto', sans-serif;
     background: #FFF;
 }
 
@@ -714,7 +714,7 @@ a{
 }
 
 .not-found h4{
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #d9534f !important;
     text-align: center;
 }
@@ -726,6 +726,7 @@ a{
 
 .page-header {
     clear: both;
+    margin-top: 15px;
     margin-bottom: 30px;
     padding-bottom: 13px;
 }
@@ -1332,3 +1333,4 @@ a{
     border-radius: 2px;
     cursor: pointer;
 }
+

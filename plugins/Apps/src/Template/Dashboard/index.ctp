@@ -11,73 +11,6 @@
     <div class="clearfix"></div>
 </div>
 
-<!-- content overview -->
-<div class="row">
-    <div class="col-lg-3">
-        <!-- Single block -->
-        <div class="overview-block">
-            <div class="overview-left pull-left">
-                <div class="overview-icon">
-                    <i class="fa fa-pie-chart"></i>
-                </div>
-            </div>
-            <div class="overview-right pull-left">
-                <h4 class="overview-value">$156060</h4>
-                <span class="overview-title">Total Revenue</span>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <!-- Single block -->
-        <div class="overview-block">
-            <div class="overview-left pull-left">
-                <div class="overview-icon">
-                    <i class="fa fa-bar-chart"></i>
-                </div>
-            </div>
-            <div class="overview-right pull-left">
-                <h4 class="overview-value">$156050</h4>
-                <span class="overview-title">Total Expense</span>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <!-- Single block -->
-        <div class="overview-block">
-            <div class="overview-left pull-left">
-                <div class="overview-icon">
-                    <i class="fa fa-bullhorn"></i>
-                </div>
-            </div>
-            <div class="overview-right pull-left">
-                <h4 class="overview-value">$1256</h4>
-                <span class="overview-title">Total Interest</span>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <!-- Single block -->
-        <div class="overview-block">
-            <div class="overview-left pull-left">
-                <div class="overview-icon">
-                    <i class="fa fa-briefcase"></i>
-                </div>
-            </div>
-            <div class="overview-right pull-left">
-                <h4 class="overview-value">$96652</h4>
-                <span class="overview-title">Total Balance</span>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-
 <?php if ($overview['total_user'] < 2): ?>
     <div class="alert alert-warning alert-dismissible fade in text-left static_message" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
@@ -109,79 +42,72 @@
 <?php endif; ?>
 
 <div ng-controller="TasksCtrl">
-    <div class="ui-kit-19">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
-                <!-- Item -->
-                <div class="ui-item bg-teal">
-                    <div class="clearfix">
-                        <div class="pull-left">
-                            <h2>{{overview.total_user}}</h2>
-                            <h4 class="color-teal-50">
-                                <i class="fa fa-user"></i>
-                                Total Users
-                            </h4>
-                        </div>
-                        <div class="pull-right">
-                            <i class="fa fa-users color-teal-100"></i>
-                        </div>
+    <!-- content overview -->
+    <div class="row">
+        <div class="col-lg-3">
+            <!-- Single block -->
+            <div class="overview-block">
+                <div class="overview-left pull-left">
+                    <div class="overview-icon bg-red">
+                        <i class="fa fa-users"></i>
                     </div>
                 </div>
+                <div class="overview-right pull-left">
+                    <h4 class="overview-value">{{overview.total_user}}</h4>
+                    <span class="overview-title">Total User</span>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
-                <!-- Item -->
-                <div class="ui-item bg-red">
-                    <div class="clearfix">
-                        <div class="pull-left">
-                            <h2>{{overview.total_label}}</h2>
-                            <h4 class="color-red-50">
-                                <i class="fa fa-tag"></i>
-                                Total Label
-                            </h4>
-                        </div>
-                        <div class="pull-right">
-                            <i class="fa fa-tags color-red-100"></i>
-                        </div>
+        </div>
+
+        <div class="col-lg-3">
+            <!-- Single block -->
+            <div class="overview-block">
+                <div class="overview-left pull-left">
+                    <div class="overview-icon bg-green">
+                        <i class="fa fa-tags"></i>
                     </div>
                 </div>
+                <div class="overview-right pull-left">
+                    <h4 class="overview-value">{{overview.total_label}}</h4>
+                    <span class="overview-title">Total Label</span>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
-                <!-- Item -->
-                <div class="ui-item bg-blue">
-                    <div class="clearfix">
-                        <div class="pull-left">
-                            <h2>{{overview.total_open_task}}</h2>
-                            <h4 class="color-blue-50 ">
-                                <i class="fa fa-bell-o"></i>
-                                Total Open Task
-                            </h4>
-                        </div>
-                        <div class="pull-right">
-                            <i class="fa fa-bell-o color-blue-100"></i>
-                        </div>
+        </div>
+
+        <div class="col-lg-3">
+            <!-- Single block -->
+            <div class="overview-block">
+                <div class="overview-left pull-left">
+                    <div class="overview-icon bg-black">
+                        <i class="fa fa-bell-o"></i>
                     </div>
                 </div>
+                <div class="overview-right pull-left">
+                    <h4 class="overview-value">{{overview.total_open_task}}</h4>
+                    <span class="overview-title">Total Interest</span>
+                </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 cod-pad">
-                <!-- Item -->
-                <div class="ui-item bg-blue-grey">
-                    <div class="clearfix">
-                        <div class="pull-left">
-                            <h2>{{overview.total_closed_task}}</h2>
-                            <h4 class="color-blue-grey-50">
-                                <i class="fa fa-bell-slash-o"></i>
-                                Total Closed Task
-                            </h4>
-                        </div>
-                        <div class="pull-right">
-                            <i class="fa fa-bell-slash-o color-blue-grey-100 "></i>
-                        </div>
+        </div>
+
+        <div class="col-lg-3">
+            <!-- Single block -->
+            <div class="overview-block">
+                <div class="overview-left pull-left">
+                    <div class="overview-icon bg-purple">
+                        <i class="fa fa-bell-slash-o"></i>
                     </div>
                 </div>
+                <div class="overview-right pull-left">
+                    <h4 class="overview-value">{{overview.total_closed_task}}</h4>
+                    <span class="overview-title">Total Balance</span>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
-
     <div class="row">
         <div class="col-lg-9">
             <div class="row">

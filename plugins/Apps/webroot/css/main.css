@@ -256,7 +256,7 @@ body {
 }
 
 .overview-icon {
-    color: #81bcf7;
+    color: #fff;
     background: #f3f5f7;
     border-right: 1px solid #eee;
     border-bottom: 1px solid #eee;
@@ -334,6 +334,7 @@ body {
 @media (min-width: 1400px) {
     .content-area {
         padding: 25px;
+        margin-bottom: 50px;
     }
 
     .overview-right .overview-value {
