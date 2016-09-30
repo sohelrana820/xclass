@@ -94,11 +94,6 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="widget widget-boxed ">
-                <div class="widget-body bg-white">
-                    <nvd3 options="options2" data="data2"></nvd3>
-                </div>
-            </div>
-            <div class="widget widget-boxed ">
                 <div class="widget-header">
                     <h4 class="widget-title">
                         Daily Stats
@@ -282,16 +277,6 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="widget widget-boxed">
-                <div class="widget-header">
-                    <h4 class="widget-title">
-                        Daily Stats
-                    </h4>
-                </div>
-                <div class="widget-body">
-                    <nvd3 options="options" data="data"></nvd3>
-                </div>
-            </div>
             <div class="ui-kit-9">
                 <div class="col-mob">
                     <h2>Recent Opened Tasks</h2>
