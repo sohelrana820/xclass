@@ -49,7 +49,7 @@
             <div class="app-stats-item bg-orange">
                 <i class="fa fa-users"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="1250">{{overview.total_user}}</span>
+                    <span class="count-to" data-from="0" data-to="1250">{{overview.total_user - 1}}</span>
                     <small>Total Users</small>
                 </h3>
             </div>
