@@ -15,6 +15,20 @@
         <div class="clearfix"></div>
     </div>
 
+    <div class="col-lg-8 col-lg-offset-2" ng-show="tasks.count_all < 1">
+        <div class="empty_block">
+            <span class="icon">
+                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+            </span>
+            <br/>
+            <br/>
+            <h2>Welcome to Task!</h2>
+            <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labeling and then assign to the user. After completing each task you can mark them as closed/reopened. It also allowed to comments on task</p>
+            <br/>
+            <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create your first task</a>
+        </div>
+    </div>
+
     <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
         <div class="filter_bar">
 
@@ -278,20 +292,6 @@
 
     <div class="not-found" ng-show="tasks.count < 1 && filtered_tasks_list">
         <h4>Sorry! task not found</h4>
-    </div>
-
-    <div class="col-lg-8 col-lg-offset-2" ng-show="count_all < 1">
-        <div class="empty_block">
-            <span class="icon">
-                <i class="fa fa-bullhorn" aria-hidden="true"></i>
-            </span>
-            <br/>
-            <br/>
-            <h2>Welcome to Task!</h2>
-            <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labeling and then assign to the user. After completing each task you can mark them as closed/reopened. It also allowed to comments on task</p>
-            <br/>
-            <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create your first task</a>
-        </div>
     </div>
 </div>
 
