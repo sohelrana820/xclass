@@ -26,7 +26,7 @@
                         }
                         ?>
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <?php echo $userInfo->profile->name?>
+                            <?php echo 'Hi, ', $userInfo->profile->name?>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

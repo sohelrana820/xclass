@@ -47,43 +47,43 @@
         <div class="col-xs-12 col-sm-3">
 
             <div class="app-stats-item bg-orange">
-                <i class="fa fa-comments"></i>
+                <i class="fa fa-users"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="1250">1250</span>
-                    <small>Comments</small>
+                    <span class="count-to" data-from="0" data-to="1250">{{overview.total_user}}</span>
+                    <small>Total Users</small>
                 </h3>
             </div>
 
         </div>
         <div class="col-xs-12 col-sm-3">
 
-            <div class="app-stats-item bg-pink">
-                <i class="fa fa-globe"></i>
+            <div class="app-stats-item bg-green">
+                <i class="fa fa-tags"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="5411">5411</span>
-                    <small>Customers</small>
+                    <span class="count-to" data-from="0" data-to="5411">{{overview.total_label}}</span>
+                    <small>Total Label</small>
                 </h3>
             </div>
 
         </div>
         <div class="col-xs-12 col-sm-3">
 
-            <div class="app-stats-item bg-accent">
-                <i class="fa fa-pie-chart"></i>
+            <div class="app-stats-item bg-red">
+                <i class="fa fa-bell-slash-o"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="4151">4151</span>
-                    <small>Orders</small>
+                    <span class="count-to" data-from="0" data-to="4151">{{overview.total_closed_task}}</span>
+                    <small>Total Closed Task</small>
                 </h3>
             </div>
 
         </div>
         <div class="col-xs-12 col-sm-3">
 
-            <div class="app-stats-item bg-teal">
-                <i class="fa fa-eur"></i>
+            <div class="app-stats-item bg-blue">
+                <i class="fa fa-bell"></i>
                 <h3 class="app-stats-title">
-                    $<span class="count-to" data-from="0" data-to="105">105</span>K
-                    <small>Total profit</small>
+                    <span class="count-to" data-from="0" data-to="105">{{overview.total_open_task}}</span>
+                    <small>Total Opened Task</small>
                 </h3>
             </div>
 
@@ -96,7 +96,7 @@
             <div class="widget widget-boxed ">
                 <div class="widget-header">
                     <h4 class="widget-title">
-                        Daily Stats
+                        New Task
                     </h4>
                 </div>
                 <div class="widget-body bg-white">
