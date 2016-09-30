@@ -9,6 +9,7 @@
 
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css"/>
     <?php
     echo $this->Html->css(array('bootstrap.min', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'kits/kit-9' , 'kits/kit-22', 'kits/kit-19', 'main', 'style.css'));
     echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">';
@@ -71,6 +72,11 @@
 <?php
 echo $this->Html->script(array('jquery', 'bootstrap.min', 'theme'));
 echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'tinycolor-min.js', 'angularjs-color-picker.min.js', 'angular-flash.min', 'angular-toastr.tpls.js', 'ng-file-upload-shim.min.js', 'ng-file-upload.min.js', 'angular-block-ui']);
+?>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-nvd3/1.0.5/angular-nvd3.min.js"></script>
+<?php
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>

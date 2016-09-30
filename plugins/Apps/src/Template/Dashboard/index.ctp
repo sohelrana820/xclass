@@ -42,6 +42,104 @@
 <?php endif; ?>
 
 <div ng-controller="TasksCtrl">
+
+    <div class="col-lg-4">
+        <nvd3 options="options" data="data"></nvd3>
+    </div>
+
+    <div class="col-lg-8">
+        <nvd3 options="options2" data="data2"></nvd3>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-3">
+
+            <div class="dashboard-stats__item bg-orange">
+                <i class="fa fa-comments"></i>
+                <h3 class="dashboard-stats__title">
+                    <span class="count-to" data-from="0" data-to="1250">1250</span>
+                    <small>Comments</small>
+                </h3>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-3">
+
+            <div class="dashboard-stats__item bg-pink">
+                <i class="fa fa-globe"></i>
+                <h3 class="dashboard-stats__title">
+                    <span class="count-to" data-from="0" data-to="5411">5411</span>
+                    <small>Customers</small>
+                </h3>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-3">
+
+            <div class="dashboard-stats__item bg-accent">
+                <i class="fa fa-pie-chart"></i>
+                <h3 class="dashboard-stats__title">
+                    <span class="count-to" data-from="0" data-to="4151">4151</span>
+                    <small>Orders</small>
+                </h3>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-sm-3">
+
+            <div class="dashboard-stats__item bg-teal">
+                <i class="fa fa-eur"></i>
+                <h3 class="dashboard-stats__title">
+                    $<span class="count-to" data-from="0" data-to="105">105</span>K
+                    <small>Total profit</small>
+                </h3>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-4 col-sm-5">
+
+        <div class="portlet portlet-boxed">
+
+            <div class="portlet-header">
+                <h4 class="portlet-title">
+                    Daily Stats
+                </h4>
+            </div> <!-- /.portlet-header -->
+
+            <div class="portlet-body" style="min-height: 400px;">
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, fugiat, dolores, laborum sit.</p>
+
+                <hr>
+
+                <table class="table keyvalue-table">
+                    <tbody>
+                    <tr>
+                        <td class="kv-key"><i class="fa fa-dollar kv-icon kv-icon-primary"></i> Revenue</td>
+                        <td class="kv-value">$5,367 </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-key"><i class="fa fa-gift kv-icon kv-icon-secondary"></i> Total Sales</td>
+                        <td class="kv-value">473 </td>
+                    </tr>
+                    <tr>
+                        <td class="kv-key"><i class="fa fa-exchange kv-icon kv-icon-tertiary"></i>Referrals</td>
+                        <td class="kv-value">78</td>
+                    </tr>
+                    <tr>
+                        <td class="kv-key"><i class="fa fa-envelope-o kv-icon kv-icon-default"></i> Inquiries</td>
+                        <td class="kv-value">39 </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div> <!-- /.portlet-body -->
+
+        </div> <!-- /.portlet -->
+
+    </div>
     <!-- content overview -->
     <div class="row">
         <div class="col-lg-3">

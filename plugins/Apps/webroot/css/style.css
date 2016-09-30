@@ -1334,3 +1334,175 @@ a{
     cursor: pointer;
 }
 
+.portlet-boxed .portlet-header {
+    padding: 20px 20px;
+    border: 1px solid #ddd;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.portlet-boxed .portlet-title {
+    display: inline-block;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+.portlet-boxed .portlet-title u {
+    text-decoration: none;
+}
+.portlet-boxed .portlet-title:after {
+    content: "";
+    display: block;
+    position: relative;
+    bottom: -22px;
+    z-index: 100;
+    width: auto;
+    height: 1px;
+    padding: 0 0 0 0;
+    margin: 0 -35px 0 0;
+    background: #6685a4;
+}
+.portlet-boxed .portlet-body {
+    padding: 25px 25px 25px;
+    border: 1px solid #ddd;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.portlet-boxed .portlet-header + .portlet-body {
+    padding-top: 30px;
+    border-top: none;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}.portlet-boxed .portlet-header {
+     background-color: #ffffff;
+ }
+.portlet-boxed .portlet-title {
+    color: #435f76;
+}
+.portlet-boxed.portlet-inverse .portlet-header {
+    background-color: #354b5e;
+}
+.portlet-boxed.portlet-inverse .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-danger .portlet-header {
+    background-color: #db5b57;
+}
+.portlet-boxed.portlet-danger .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-warning .portlet-header {
+    background-color: #f1b157;
+}
+.portlet-boxed.portlet-warning .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-success .portlet-header {
+    background-color: #5cb85c;
+}
+.portlet-boxed.portlet-success .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-info .portlet-header {
+    background-color: #5bc0de;
+}
+.portlet-boxed.portlet-info .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-primary .portlet-header {
+    background-color: #d74b4b;
+}
+.portlet-boxed.portlet-primary .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-secondary .portlet-header {
+    background-color: #6685a4;
+}
+.portlet-boxed.portlet-secondary .portlet-title {
+    color: #ffffff;
+}
+.portlet-boxed.portlet-tertiary .portlet-header {
+    background-color: #bcbcbc;
+}
+.portlet-boxed.portlet-tertiary .portlet-title {
+    color: #ffffff;
+}.kv-icon {
+     position: relative;
+     top: 1px;
+     width: 30px;
+     height: 30px;
+     margin-right: .75em;
+     color: #444;
+     font-size: 15px;
+     text-align: center;
+     line-height: 30px;
+     background-color: #eee;
+     border-top-right-radius: 4px;
+     border-top-left-radius: 4px;
+     border-bottom-right-radius: 4px;
+     border-bottom-left-radius: 4px;
+ }
+.kv-icon-default {
+    background-color: #fff;
+    color: #555;
+    border: 1px solid #ccc;
+}
+.kv-icon-primary {
+    background-color: #d74b4b;
+    color: #fff;
+}
+.kv-icon-secondary {
+    background-color: #6685a4;
+    color: #fff;
+}
+.kv-icon-tertiary {
+    background-color: #bcbcbc;
+    color: #fff;
+}
+.kv-icon-success {
+    background-color: #5cb85c;
+    color: #fff;
+}
+.kv-icon-info {
+    background-color: #5bc0de;
+    color: #fff;
+}
+.kv-icon-danger {
+    background-color: #d9534f;
+    color: #fff;
+}
+.kv-icon-warning {
+    background-color: #f0ad4e;
+    color: #fff;
+}/*** Dashboard: Stats ***/
+.dashboard-stats__item {
+    position: relative;
+    overflow: hidden;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    border-radius: 2px;
+    background-color: #464960;
+}
+.dashboard-stats__item > .fa {
+    position: absolute;
+    bottom: -20%;
+    left: -5%;
+    font-size: 100px;
+    color: rgba(255, 255, 255, 0.15);
+}
+.dashboard-stats__title {
+    margin: 0;
+    text-align: right;
+    font-size: 36px;
+    color: white;
+}
+.dashboard-stats__title > small {
+    display: block;
+    font-size: 17px;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.7);
+}.bg-pink {
+     background-color: #f06292 !important;
+ }.bg-accent {
+      background-color: #a471c6 !important;
+  }
