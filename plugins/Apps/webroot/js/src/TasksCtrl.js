@@ -628,8 +628,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.goPreviousPage = function () {
-        if($scope.tasks.currentPage > 0){
-            $scope.tasks.currentPage = $scope.tasks.currentPage - 1;
+        if($scope.tasks.currentPage > 1){
+            $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) - 1;
             $scope.fetchTaskLists({page: $scope.tasks.currentPage});
         }
     };
@@ -637,7 +637,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.goNextPage = function () {
         var maxPage = parseInt($scope.tasks.count / $scope.tasks.limit);
         if($scope.tasks.currentPage <= maxPage){
-            $scope.tasks.currentPage = $scope.tasks.currentPage + 1;
+            $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) + 1;
             $scope.fetchTaskLists({page: $scope.tasks.currentPage});
         }
     };
