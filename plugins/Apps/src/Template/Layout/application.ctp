@@ -58,7 +58,7 @@
         <!-- Footer area -->
         <footer class="footer">
             <div class="container-fluid">
-                <p class="copy-text">Copyright All Rights Reserved by Preview Technologies Limited © 2016</p>
+                <p class="copy-text">Copyright All Rights Reserved by <?php echo $appsName;?> © <?php echo date('Y')?></p>
             </div>
         </footer>
         <!-- /#Footer area -->
