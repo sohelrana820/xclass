@@ -134,32 +134,19 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
         });
     };
 
+
     $scope.goPreviousPage = function () {
-        $scope.label.currentPage = parseInt($scope.label.currentPage) - 1;
-
-        if($scope.label.currentPage >= 1){
+        if($scope.label.currentPage > 1){
+            $scope.label.currentPage = parseInt($scope.label.currentPage) - 1;
             $scope.fetchLabelLists({page: $scope.label.currentPage});
-        }
-
-        if($scope.label.currentPage < 1){
-            $scope.label.currentPage = 1;
         }
     };
 
     $scope.goNextPage = function () {
-        $scope.label.currentPage = parseInt($scope.label.currentPage ) + 1;
         var maxPage = parseInt($scope.label.count / $scope.label.limit);
-        var modVal = $scope.label.count % $scope.label.limit;
-        if(modVal > 0){
-            maxPage = maxPage + 1;
+        if($scope.label.currentPage <= maxPage){
+            $scope.label.currentPage = parseInt($scope.label.currentPage) + 1;
+            $scope.fetchLabelLists({page: $scope.label.currentPage});
         }
-
-        if(maxPage >= $scope.label.currentPage){
-            $scope.fetchLabelLists({page:  $scope.label.currentPage});
-        }
-
-        if($scope.label.currentPage >= maxPage){
-            $scope.label.currentPage = maxPage;
-        }
-    }
+    };
 });
