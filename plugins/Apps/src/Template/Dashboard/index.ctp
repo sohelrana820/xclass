@@ -137,7 +137,7 @@
                                     <div class="single_block">
                                         <div class="dropdown">
                                             <h2 id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                Labels
+                                                Set Task Label
                                                 <i class="fa fa-gear pull-right"></i>
                                             </h2>
 
@@ -216,7 +216,7 @@
                                         <div class="dropdown">
                                             <h2 id="usersList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button"
                                                 aria-haspopup="true" aria-expanded="false">
-                                                Users
+                                                Assign User
                                                 <i class="fa fa-gear pull-right"></i>
                                             </h2>
 
@@ -291,7 +291,7 @@
                         <!-- Heading -->
                         <div class="ui-heading clearfix">
                             <h5>
-                                <a ng-show="task.users.length > 0" ng-repeat="user in task.users" href="/users/details{{user.uuuid}}" class="task_user_link">{{user.profile.first_name}} {{user.profile.last_name}}</a>
+                                <a ng-show="task.users.length > 0" ng-repeat="user in task.users" href="{{BASE_URL}}users/details{{user.uuid}}" class="task_user_link">{{user.profile.first_name}} {{user.profile.last_name}}</a>
                                 <label ng-show="task.users.length < 1">Not Assigned Yet!</label>
                             </h5>
                         </div>

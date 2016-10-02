@@ -48,11 +48,11 @@
             </div>
         </div>
         <div class="col-lg-2 col-md-4">
-            <div class="task_sidebar" style="margin-top: 25px">
+            <div class="task_sidebar">
                 <div class="single_block">
                     <div class="dropdown">
                         <h2 id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Labels
+                            Set Task Label
                             <i class="fa fa-gear pull-right"></i>
                         </h2>
 
@@ -124,7 +124,7 @@
                 <div class="single_block">
                     <div class="dropdown">
                         <h2 id="usersList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            Users
+                            Assign User
                             <i class="fa fa-gear pull-right"></i>
                         </h2>
                         <div class="dropdown-menu custom-dropdown" id="usersList" aria-labelledby="label">

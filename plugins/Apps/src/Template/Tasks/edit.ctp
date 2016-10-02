@@ -37,7 +37,7 @@
 
                 <div class="single_block">
                     <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Labels
+                        Set Task Label
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
                     <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
@@ -60,7 +60,7 @@
 
                 <div class="single_block">
                     <h2 class="dropdown-toggle task_operation" id="label" role="button" aria-haspopup="true" aria-expanded="false">
-                        Users
+                        Assign User
                         <i class="fa fa-gear pull-right"></i>
                     </h2>
                     <small class="red" ng-show="taskUsers.length < 1">User not assigned yet!</small>
