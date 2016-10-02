@@ -628,32 +628,17 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.goPreviousPage = function () {
-        $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) - 1;
-
-        if($scope.tasks.currentPage >= 1){
+        if($scope.tasks.currentPage > 0){
+            $scope.tasks.currentPage = $scope.tasks.currentPage - 1;
             $scope.fetchTaskLists({page: $scope.tasks.currentPage});
-        }
-
-        if($scope.tasks.currentPage < 1){
-            $scope.tasks.currentPage = 1;
         }
     };
 
     $scope.goNextPage = function () {
-        $scope.tasks.currentPage = parseInt($scope.tasks.currentPage ) + 1;
         var maxPage = parseInt($scope.tasks.count / $scope.tasks.limit);
-        var modVal = $scope.tasks.count % $scope.tasks.limit;
-        if(modVal > 0){
-            maxPage = maxPage + 1;
+        if($scope.tasks.currentPage <= maxPage){
+            $scope.tasks.currentPage = $scope.tasks.currentPage + 1;
+            $scope.fetchTaskLists({page: $scope.tasks.currentPage});
         }
-
-        if(maxPage >= $scope.tasks.currentPage){
-            $scope.fetchTaskLists({page:  $scope.tasks.currentPage});
-        }
-
-        if($scope.tasks.currentPage >= maxPage){
-            $scope.tasks.currentPage = maxPage;
-        }
-    }
-
+    };
 });
