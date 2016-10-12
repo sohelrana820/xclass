@@ -11,7 +11,7 @@
 
     <?php
     echo $this->Html->css(array('bootstrap.min', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'angular-block', 'kits/kit-9' , 'kits/kit-22', 'kits/kit-19', 'main', 'style.css'));
-    //echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">';
+    echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">';
 
     echo $this->fetch('cssTop');
     echo $this->fetch('jsTop');

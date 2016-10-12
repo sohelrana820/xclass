@@ -12,7 +12,7 @@
     <!-- Bootstrap core CSS -->
     <?php echo $this->Html->css(array('bootstrap'));?>
     <!--external css-->
-    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <?php echo $this->Html->css(array('login'));?>
