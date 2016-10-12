@@ -31,16 +31,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         };
     };
 
-
-
-    var isDashboardOpend = window.location.href.split("dashboard");
-    if(isDashboardOpend.length < 2){
-        isDashboardOpend = false;
-    }
-    else{
+    isDashboardOpend = false;
+    var openedUrl = window.location.href.split("tasks");
+    if(openedUrl.length < 2){
         isDashboardOpend = true;
     }
-
 
     $scope.saveTask = function(){
         $scope.getTaskRelObj();
@@ -144,7 +139,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var overview = DashboardResources.get().$promise;
         overview.then(function (res) {
             $scope.overview = res.result;
-            console.log($scope.overview);
         });
     };
 
