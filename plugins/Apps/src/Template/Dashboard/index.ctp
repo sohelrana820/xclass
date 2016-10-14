@@ -280,7 +280,7 @@
             <div class="ui-kit-9">
                 <div class="col-mob">
                     <h2>Recent Opened Tasks</h2>
-                    <div class="long_loader" ng-show="task_loader">
+                    <div class="long_loader" ng-show="dashboard_task_loader">
                         <div class="loader_content">
                             <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
                             <p>Please wait. Loading reloading...</p>
