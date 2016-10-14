@@ -339,7 +339,7 @@ a {
 }
 
 .green {
-    color: #1ABC9C;
+    color: #51d466;
 }
 
 .red {
@@ -423,13 +423,13 @@ a {
 }
 
 .status-green {
-    border: 2px solid #3c85a6;
-    color: #3c85a6;
+    border: 2px solid #51d466;
+    color: #51d466;
 }
 
 .status-success {
-    border: 2px solid #3c85a6;
-    color: #3c85a6;
+    border: 2px solid #51d466;
+    color: #51d466;
 }
 
 .status-red {
