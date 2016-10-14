@@ -444,7 +444,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         deletedTask.then(function (res) {
             if(res.result.success)
             {
-                toastr.warning(res.result.message);
+                toastr.error(res.result.message);
                 var url = window.location.href.split("view/");
                 if(url[1] != undefined && url[1]){
                     $timeout(function() {

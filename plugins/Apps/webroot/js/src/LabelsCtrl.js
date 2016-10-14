@@ -109,7 +109,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                 $scope.label.data = $scope.label.data.filter(function(label){
                     return label.id !== id
                 });
-                toastr.warning(res.result.message);
+                toastr.error(res.result.message);
                 $scope.fetchLabelLists({});
             }
             else{
