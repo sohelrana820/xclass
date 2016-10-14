@@ -2,6 +2,7 @@
 
 <div ng-controller="TasksCtrl">
 
+
     <div class="page-header" ng-show="tasks.count_all > 0">
         <h2 class="title pull-left">
             Manage Task
@@ -33,7 +34,12 @@
 
     <div class="clearfix"></div>
 
-    <div class="widget">
+    <div class="pabe_loader" ng-show="!task_loader">
+        <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+        <h4>Content loading, please wait...</h4>
+    </div>
+
+    <div class="widget" ng-show="task_loader">
         <div class="widget-header">
             <div class="filter_bar">
 

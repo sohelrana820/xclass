@@ -110,7 +110,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      */
     $scope.fetchTaskLists = function(data){
 
-        $scope.task_loader = true;
         var myBlockUI = blockUI.instances.get('blockTasksList');
         myBlockUI.start({
             message: 'Please wait!'
@@ -127,7 +126,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                         currentPage: res.result.page,
                         limit: res.result.limit
                     };
-                    $scope.task_loader = false;
+                    $scope.task_loader = true;
                     myBlockUI.stop();
                 }, 1000);
             }
