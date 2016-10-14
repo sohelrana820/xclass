@@ -95,7 +95,7 @@ a {
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-    color: #999 !important;;
+    color: #9fa5ab !important;;
     line-height: 35px !important;;
     font-size: 14px !important;;
     border-bottom: 1px solid #ccc;
@@ -112,19 +112,19 @@ a {
 }
 
 .form-control::-webkit-input-placeholder {
-    color: #999;
+    color: #9fa5ab;
 }
 
 .form-control:-moz-placeholder {
-    color: #999;;
+    color: #9fa5ab;;
 }
 
 .form-control::-moz-placeholder {
-    color: #999;;
+    color: #9fa5ab;;
 }
 
 .form-control:-ms-input-placeholder {
-    color: #999;;
+    color: #9fa5ab;;
 }
 
 .form-control:focus,
@@ -339,7 +339,7 @@ a {
 }
 
 .green {
-    color: #3c85a6;
+    color: #1ABC9C;
 }
 
 .red {
@@ -442,6 +442,7 @@ a {
     color: #d9534f;
 }
 
+
 /* Task pages classes */
 
 .custom-dropdown {
@@ -459,7 +460,7 @@ a {
 .custom-dropdown .quick_task, .custom-dropdown .quick_task:hover {
     position: absolute;
     right: 10px;
-    color: #777;
+    color: #9fa5ab;
     font-size: 11px;
     cursor: pointer;
     text-decoration: none;
@@ -494,7 +495,7 @@ a {
     font-size: 10px;
     text-transform: uppercase;
     font-weight: 400;
-    color: #777;
+    color: #9fa5ab;
 }
 
 .task_sidebar h2 i {
@@ -697,7 +698,7 @@ a {
 }
 
 .data-list li {
-    color: #777;
+    color: #9fa5ab;
     margin-bottom: 5px;
     font-size: 13px;
     font-weight: 400;
@@ -752,11 +753,17 @@ a {
 
 .page-header .title {
     margin: 0px;
+    color: #565e6a;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
 }
 
 .page-header .sub-title {
-    margin: 0px;
+    margin: 8px 0px 0px 0px;
     font-size: 11px;
+    color: #9fa5ab;
+    font-weight: 400;
 }
 
 .page-header .btn-areas {
@@ -852,67 +859,7 @@ a {
     padding: 0px;
 }
 
-.panel {
-    position: relative;
-}
 
-.panel-default {
-    border-color: #EEE;
-}
-
-.panel > .panel-heading:after, .panel > .panel-heading:before {
-    position: absolute;
-    top: 11px;
-    left: -16px;
-    right: 100%;
-    width: 0;
-    height: 0;
-    display: block;
-    content: " ";
-    border-color: transparent;
-    border-style: solid solid outset;
-    pointer-events: none;
-}
-
-.panel > .panel-heading:after {
-    border-width: 7px;
-    border-right-color: #f7f7f7;
-    margin-top: 1px;
-    margin-left: 2px;
-}
-
-.panel > .panel-heading:before {
-    border-right-color: #ddd;
-    border-width: 8px;
-}
-
-.comments_panel .panel-heading {
-    color: #333;
-    background-color: #f8f8f8;
-    border-color: #EEE;
-}
-
-.comments_panel .panel-body {
-    font-size: 14px;
-    color: #666;
-    line-height: 25px;
-}
-
-.user_comments_avatar {
-    position: absolute;
-    left: -43px;
-}
-
-.sl {
-    font-size: 16px;
-    font-weight: 400;
-    text-decoration: none;
-}
-
-.author {
-    font-size: 10px;
-    color: #999;
-}
 
 .task_details {
     margin-bottom: 30px;
@@ -973,7 +920,7 @@ a {
 }
 
 .filter_bar .filter_block .dropdown > span {
-    color: #999;
+    color: #9fa5ab;
     font-size: 13px;
     /* text-transform: uppercase; */
 }
@@ -983,7 +930,7 @@ a {
 }
 
 .filter_bar > a {
-    color: #777;
+    color: #9fa5ab;
     cursor: pointer;
     text-decoration: none;
     margin-right: 15px;
@@ -1000,7 +947,7 @@ a {
     font-size: 10px;
     float: left;
     width: 70px;
-    color: #777;
+    color: #9fa5ab;
     text-transform: uppercase;
     font-weight: 600;
     margin: 0px;
@@ -1244,14 +1191,14 @@ a {
 
 .pagination_area span {
     font-size: 10px;
-    color: #888;
+    color: #9fa5ab;
 }
 
 .pagination_area .previous_page, .pagination_area .next_page {
-    border: 1px solid #EEE;
+    /*border: 1px solid #EEE;
     padding: 10px 8px 8px 15px;
-    width: 105px;
-    color: #888;
+    width: 105px;*/
+    color: #9fa5ab;
     font-size: 12px;
     border-radius: 50px;
 }
@@ -1272,7 +1219,7 @@ a {
 .theme-table thead th {
     text-transform: uppercase;
     font-size: 11px;
-    color: #777;
+    color: #9fa5ab;
 }
 
 .theme-table tbody td {
@@ -1331,4 +1278,11 @@ a {
     font-weight: 600;
     border-radius: 2px;
     cursor: pointer;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #eee;
 }

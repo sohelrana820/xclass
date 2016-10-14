@@ -21,7 +21,7 @@
                 <!-- Create label form -->
                 <div ng-show="create_form" class="widget widget widget-boxed">
                     <div class="widget-header">
-                        <h4 class="widget-title">
+                        <h4 class="title">
                             New Label
                         </h4>
                     </div>
@@ -101,13 +101,11 @@
             </div>
 
             <div class="col-lg-7 col-md-7" ng-show="label.count > 0 || searched_labels"  block-ui="myBlockUI">
-                <div>
-                    <div class="filter_bar">
+                <div class="widget">
+                    <div class="widget-header">
                         <div class="pull-left">
-                            <h2 class="filter_header">
-                                List of Label <br/>
-                                <span>{{label.count}} result found</span>
-                            </h2>
+                            <h2>List of Label</h2>
+                            <span>{{label.count}} result found</span>
                         </div>
                         <div class="filter_block pull-right" style="margin-right: 0px;">
                             <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
@@ -115,50 +113,53 @@
                         <div class="clearfix"></div>
                     </div>
 
-                    <div ng-show="label.count > 0">
-                        <table class="table label_List">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Color</th>
-                                <th>Status</th>
-                                <th class="text-center">Last Modified</th>
-                                <th class="text-right">Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="label in label.data">
-                                <td>
-                                    <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
-                                </td>
-                                <td>{{label.color_code}}</td>
-                                <td>
-                                    <span class="green" ng-show="label.status == 1">Active</span>
-                                    <span class="red" ng-show="label.status == 2">Inactive</span>
-                                </td>
-                                <td class="text-center">{{label.modified | date}}</td>
-                                <td class="text-right">
-                                    <a ng-click="openEditLabel(label.id)" class="icons"><i class="fa fa-pencil"></i></a>
-                                    <a ng-click="deleteLabel(label.id)" class="icons red"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="pagination_area text-center">
-                            <a ng-show="label.limit < label.count" class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
-                    <span>
-                        showing {{((label.currentPage - 1) * label.limit) + 1}} -
-                        {{label.currentPage * label.limit > label.count ? label.count : label.currentPage * label.limit}}
-                        of {{label.count}} records
-                    </span>
-                            <a ng-show="label.limit < label.count" class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                    <div class="widget-body">
+                        <div ng-show="label.count > 0">
+                            <table class="table label_List">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Color</th>
+                                    <th>Status</th>
+                                    <th>Last Modified</th>
+                                    <th class="text-right">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="label in label.data">
+                                    <td>
+                                        <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
+                                    </td>
+                                    <td>{{label.color_code}}</td>
+                                    <td>
+                                        <span class="status-text test status-text-green" ng-show="label.status == 1">Active</span>
+                                        <span class="status-text status-text-danger" ng-show="label.status == 2">Inactive</span>
+                                    </td>
+                                    <td>{{label.modified | date}}</td>
+                                    <td class="text-right">
+                                        <a ng-click="openEditLabel(label.id)" class="btn-small btn-small-primary">Edit</a>
+                                        <a ng-click="deleteLabel(label.id)" class="btn-small btn-small-red">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="pagination_area text-center">
+                                <a ng-show="label.limit < label.count" class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
+                                <span>
+                                    showing {{((label.currentPage - 1) * label.limit) + 1}} -
+                                    {{label.currentPage * label.limit > label.count ? label.count : label.currentPage * label.limit}}
+                                    of {{label.count}} records
+                                </span>
+                                <a ng-show="label.limit < label.count" class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                            </div>
+
+                        </div>
+
+                        <div class="not-found" ng-show="label.count < 1">
+                            <h4>Sorry, label not found</h4>
                         </div>
                     </div>
-
-                    <div class="not-found" ng-show="label.count < 1">
-                        <h4>Sorry, label not found</h4>
-                    </div>
-
                 </div>
             </div>
 
