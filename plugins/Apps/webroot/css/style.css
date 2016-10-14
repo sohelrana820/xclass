@@ -608,6 +608,7 @@ a {
     font-size: 12px;
 }
 
+
 /** Formatting elements classes *//*
 .widget{
     border: 1px solid #DDD;
@@ -1329,4 +1330,9 @@ a {
 .comments .media-body{
     color: #777;
     line-height: 20px;
+}
+
+.author{
+    font-size: 11px;
+    color: #777;
 }
