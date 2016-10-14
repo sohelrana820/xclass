@@ -769,6 +769,15 @@ a {
     font-weight: 400;
 }
 
+.commom-title {
+    margin: 0px;
+    color: #565e6a;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
 .page-header .btn-areas {
     margin-top: 8px;
 }
@@ -870,10 +879,11 @@ a {
 }
 
 .task_details h2 {
-    font-size: 32px;
+    font-size: 22px;
     line-height: 36px;
     margin-top: 0px;
     padding-right: 25px;
+    margin-bottom: 15px;
 }
 
 .filter_bar {
@@ -1296,4 +1306,27 @@ a {
 
 .table>thead>tr>th{
     color: #565e6a !important;
+}
+
+.comments {
+    padding: 10px;
+    font-size: 12px;
+    border-bottom: 1px dotted #DDD;
+    margin-bottom: 10px;
+}
+
+
+.comments .media-heading{
+    font-size: 11px;
+    color: #9fa5ab;
+}
+
+.comments .media-heading strong{
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.comments .media-body{
+    color: #777;
+    line-height: 20px;
 }

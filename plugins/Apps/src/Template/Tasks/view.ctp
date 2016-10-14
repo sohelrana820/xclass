@@ -64,41 +64,43 @@
                             </div>
                         </div>
 
-                        <div class="row" ng-repeat="comment in taskComments">
-                            <div class="col-lg-11 col-lg-offset-1">
-                                <div class="user_comments_avatar">
-                                    <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
-                                    <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                        <h2 class="commom-title">Comments</h2>
+                        <div class="comments" ng-repeat="comment in taskComments">
+                            <div class="media"> <div class="media-left">
+                                    <a href="#">
+                                        <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
+                                        <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                    </a>
                                 </div>
-                                <div class="panel panel-default comments_panel">
-                                    <div class="panel-heading">
+                                <div class="media-body">
+                                    <h4 class="media-heading">
                                         <strong>
                                             <a href="{{BASE_URL}}users/view/{{comment.user.uuid}}">
                                                 {{comment.user.profile.first_name}} {{comment.user.profile.last_name}}
                                             </a>
                                         </strong>
-                                <span class="text-muted">
-                                    commented {{comment.created | date}} at
-                                    ({{comment.created | date : 'HH:m a'}})
-                                </span>
+                                        <span>
+                                            commented {{comment.created | date}} at
+                                            ({{comment.created | date : 'HH:m a'}})
+                                        </span>
+                                    </h4>
+                                    {{comment.comment}}
+                                    <div ng-show="comment.changing_status">
+                                        - Task marked as
+                                        <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
+                                        <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
                                     </div>
-                                    <div class="panel-body">
-                                        {{comment.comment}}
-                                        <div ng-show="comment.changing_status">
-                                            - Task marked as
-                                            <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
-                                            <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
-                                        </div>
-                                        <div class="show_attachments" ng-show="comment.attachments.length > 0">
-                                            <h4>Attachments</h4>
-                                            <p ng-repeat="attachment in comment.attachments">
-                                                <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                                            </p>
-                                        </div>
-                                    </div><!-- /panel-body -->
-                                </div><!-- /panel panel-default -->
-                            </div><!-- /col-sm-5 -->
-                        </div><!-- /col-sm-5 -->
+                                    <div class="show_attachments" ng-show="comment.attachments.length > 0">
+                                        <h4>Attachments</h4>
+                                        <p ng-repeat="attachment in comment.attachments">
+                                            <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="comment_widget well">
                             <form ng-submit="doComment()">
                                 <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
@@ -132,7 +134,7 @@
                 </div>
                 <div class="col-lg-2 col-md-4">
                     <a class="btn btn-success" ng-show="!edit_task_form" ng-click="edit_task_form = true; view_task = false">Edit Task</a>
-                    <a class="btn btn-danger" ng-click="deleteTask(TaskObj.id)">Delete Task</a>
+                    <a class="btn btn-danger" ng-show="!edit_task_form"  ng-click="deleteTask(TaskObj.id)">Delete Task</a>
                     <div class="task_sidebar" style="margin-top: 25px">
 
                         <div class="single_block">
