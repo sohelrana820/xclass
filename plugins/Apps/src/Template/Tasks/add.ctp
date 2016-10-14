@@ -20,7 +20,7 @@
     </div>
     <div class="widget-body">
         <div ng-controller="TasksCtrl">
-            <ng-form ng-submit="saveTask()">
+            <form ng-submit="saveTask()">
                 <div class="row">
                     <div class="col-lg-8 col-md-8">
                         <div>
@@ -183,7 +183,7 @@
                         </div>
                     </div>
                 </div>
-            </ng-form>
+            </form>
         </div>
     </div>
 </div>
