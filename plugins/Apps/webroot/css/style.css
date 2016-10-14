@@ -5,7 +5,7 @@ body {
 }
 
 .body-color {
-    background: #f8f8f8;
+    background: #fff;
 }
 
 #page-wrapper {
@@ -150,7 +150,7 @@ a {
 .form-group > label {
     font-size: 10px;
     text-transform: uppercase;
-    color: #666;
+    color: #565e6a;
     font-weight: 600;
 }
 
@@ -746,9 +746,12 @@ a {
 
 .page-header {
     clear: both;
-    margin-top: 15px;
+    margin-top: -25px;
+    margin-left: -25px;
+    margin-right: -25px;
     margin-bottom: 30px;
-    padding-bottom: 13px;
+    padding: 30px 25px;
+    background: #f8f8f8;
 }
 
 .page-header .title {
@@ -874,13 +877,13 @@ a {
 }
 
 .filter_bar {
-    background: #f8f8f8;
+    /*background: #f8f8f8;
     padding: 15px;
     margin-bottom: 10px;
     border-left: 5px solid #555;
     border-top: 1px solid rgba(221, 221, 221, 0.62);
     border-bottom: 1px solid rgba(221, 221, 221, 0.62);
-    border-right: 1px solid rgba(221, 221, 221, 0.62);
+    border-right: 1px solid rgba(221, 221, 221, 0.62);*/
 }
 
 .filter_bar .filter_header {
@@ -1289,4 +1292,8 @@ a {
 
 .padd-50{
     padding: 50px !important;
+}
+
+.table>thead>tr>th{
+    color: #565e6a !important;
 }

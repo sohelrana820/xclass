@@ -46,12 +46,10 @@
         <!-- /#header -->
 
         <!-- Content area -->
-        <div class="container-fluid">
-            <div class="content-area">
-                <?php echo $this->Flash->render() ?>
-                <flash-message></flash-message>
-                <?php echo $this->fetch('content'); ?>
-            </div>
+        <div class="content-area">
+            <?php echo $this->Flash->render() ?>
+            <flash-message></flash-message>
+            <?php echo $this->fetch('content'); ?>
         </div>
         <!-- /#Content area -->
 

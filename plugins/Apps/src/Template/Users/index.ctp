@@ -2,101 +2,111 @@
 
 <div class="page-header">
     <h2 class="title pull-left">
-        Users List
-        <p class="sub-title"><?php echo $users->count() ?> result found</p>
+        Manage User
     </h2>
-    <div class="pull-right btn-areas">
-        <?php echo $this->Html->link('New User', ['controller' => 'users', 'action' => 'add'], ['class' => 'btn btn-info']) ?>
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchUserModal">Search User
-        </button>
-    </div>
     <div class="clearfix"></div>
 </div>
 
-<?php if (!$users->isEmpty()): ?>
-    <table class="table theme-table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Gender</th>
-            <th>User Type</th>
-            <th>Status</th>
-            <th class="text-right">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($users as $user): ?>
-            <tr>
-                <td>
-                    <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid]); ?>
-                </td>
-                <td>
-                    <?php echo $user->username; ?>
-                </td>
-                <td>
-                    <?php
-                    if ($user->profile->phone) {
-                        echo $user->profile->phone;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </td>
-                <td>
-                    <?php if ($user->profile->gender == 1): ?>
-                        <span class="orange">Male (<i class="fa fa-male"></i>)</span>
-                    <?php elseif ($user->profile->gender == 2): ?>
-                        <span class="green">Female (<i class="fa fa-female"></i>)</span>
-                    <?php else: ?>
-                        N/A
-                    <?php endif; ?>
-                </td>
+<div class="widget">
+    <div class="widget-header">
+        <div class="pull-left">
+            <h2>User List</h2>
+            <span><?php echo $users->count() ?> result found</span>
+        </div>
+        <div class="pull-right btn-areas">
+            <?php echo $this->Html->link('New User', ['controller' => 'users', 'action' => 'add'], ['class' => 'btn btn-info']) ?>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchUserModal">Search User
+            </button>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="widget-body">
+        <?php if (!$users->isEmpty()): ?>
+            <table class="table theme-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Gender</th>
+                    <th>User Type</th>
+                    <th>Status</th>
+                    <th class="text-right">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td>
+                            <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid]); ?>
+                        </td>
+                        <td>
+                            <?php echo $user->username; ?>
+                        </td>
+                        <td>
+                            <?php
+                            if ($user->profile->phone) {
+                                echo $user->profile->phone;
+                            } else {
+                                echo 'N/A';
+                            }
+                            ?>
+                        </td>
+                        <td>
+                            <?php if ($user->profile->gender == 1): ?>
+                                <span class="orange">Male (<i class="fa fa-male"></i>)</span>
+                            <?php elseif ($user->profile->gender == 2): ?>
+                                <span class="green">Female (<i class="fa fa-female"></i>)</span>
+                            <?php else: ?>
+                                N/A
+                            <?php endif; ?>
+                        </td>
 
-                <td>
-                    <?php if ($user->role == 1): ?>
+                        <td>
+                            <?php if ($user->role == 1): ?>
                         <strong class="text-muted">Admin</strong>
                     <?php elseif ($user->role == 2): ?>
                         <span class="text-muted"">General</span>
                     <?php else: ?>
                         N/A
                     <?php endif; ?>
-                </td>
+                        </td>
 
-                <td>
-                    <?php if ($user->status == 1): ?>
-                        <span class="green">Active</span>
-                    <?php elseif ($user->status == 0): ?>
-                        <span class="red">Inactive</span>
-                    <?php else: ?>
-                        N/A
-                    <?php endif; ?>
-                </td>
+                        <td>
+                            <?php if ($user->status == 1): ?>
+                                <span class="status-text status-text-success">Active</span>
+                            <?php elseif ($user->status == 0): ?>
+                                <span class="status-text status-text-danger">Inactive</span>
+                            <?php else: ?>
+                                N/A
+                            <?php endif; ?>
+                        </td>
 
 
-                <td class="text-right">
-                    <?php
-                    echo $this->Html->link('<i class="fa fa-gear"></i>', ['controller' => 'users', 'action' => 'view', $user->uuid], ['escape' => false, 'class' => 'icons green']);
-                    echo $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'users', 'action' => 'edit', $user->uuid], ['escape' => false, 'class' => 'icons']);
-                    echo $this->Html->link('<i class="fa fa-trash"></i>', ['controller' => 'users', 'action' => 'delete', $user->uuid], ['escape' => false, 'class' => 'icons red']);
-                    ?>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator pull-right">
-        <ul class="pagination">
-            <?php echo $this->Paginator->prev(__('«')) ?>
-            <?php echo $this->Paginator->numbers() ?>
-            <?php echo $this->Paginator->next(__('»')) ?>
-        </ul>
-        <p><?php echo $this->Paginator->counter() ?></p>
+                        <td class="text-right">
+                            <?php
+                            echo $this->Html->link('<i class="fa fa-gear"></i>', ['controller' => 'users', 'action' => 'view', $user->uuid], ['escape' => false, 'class' => 'icons green']);
+                            echo $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'users', 'action' => 'edit', $user->uuid], ['escape' => false, 'class' => 'icons']);
+                            echo $this->Html->link('<i class="fa fa-trash"></i>', ['controller' => 'users', 'action' => 'delete', $user->uuid], ['escape' => false, 'class' => 'icons red']);
+                            ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div class="paginator pull-right">
+                <ul class="pagination">
+                    <?php echo $this->Paginator->prev(__('«')) ?>
+                    <?php echo $this->Paginator->numbers() ?>
+                    <?php echo $this->Paginator->next(__('»')) ?>
+                </ul>
+            </div>
+        <?php else: ?>
+            <?php echo $this->element('not_found'); ?>
+        <?php endif; ?>
+        <div class="clearfix"></div>
     </div>
-<?php else: ?>
-    <?php echo $this->element('not_found'); ?>
-<?php endif; ?>
+</div>
 
 <div class="modal fade modal-primary" id="searchUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" style="display: none;">

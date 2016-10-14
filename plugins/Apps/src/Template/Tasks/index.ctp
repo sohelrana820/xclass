@@ -33,8 +33,8 @@
 
     <div class="clearfix"></div>
 
-    <div class="row">
-        <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
+    <div class="widget">
+        <div class="widget-header">
             <div class="filter_bar">
 
                 <div class="filter_items pull-left">
@@ -91,10 +91,10 @@
                                 <ul class="custom_dropdown_list nav nav-list">
                                     <li ng-repeat="(key, user) in users">
                                         <a ng-click="chooseFilterAuthor(user, key, user.checked)"">
-                                            <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                            <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
-                                            {{user.profile.first_name}} {{user.profile.last_name}}
-                                            <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                        {{user.profile.first_name}} {{user.profile.last_name}}
+                                        <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                         </a>
                                     </li>
                                 </ul>
@@ -202,6 +202,8 @@
                 <div class="clearfix"></div>
 
             </div>
+        </div>
+        <div class="widget-body">
             <div class="filter_options">
                 <div class="filter_option_bar">
                     <h2 ng-show="filterLabels.length > 0 || filtterAuthor.length > 0 || filtterAssignee.length > 0 || filterQuery.status == 'closed' || filterQuery.status == 'open' || filterQuery.unlabeled || filterQuery.unassigned">Filtered By:</h2>
@@ -244,61 +246,64 @@
                     </ul>
                 </div>
             </div>
-
-            <div class="clearfix"></div>
-            <table class="table task_list_table" ng-show="tasks.count > 0">
-                <tbody>
-                <tr ng-repeat="task in tasks.data">
-                    <td style="width: 50px;">
-                        <a class="sl" href="{{BASE_URL}}tasks/view/{{task.id}}">#{{task.id}}</a>
-                    </td>
-                    <td style="width: 15px; padding-right: 0px;">
-                        <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
-                        <i ng-show="task.status != 2"  class="fa fa-bell-o green" aria-hidden="true"></i>
-                    </td>
-                    <td>
-                        <strong>
-                            <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">{{task.task}}</a>
-                            <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="!task.task">-</a>
-                            <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
-                        </strong>
-                        <br>
-                        <small class="author">Opened by {{task.createdUserProfile.first_name}}
-                            {{task.createdUserProfile.first_name}} at
-                            {{task.created | date}}.
-                            ({{task.created | date : 'HH:m a'}})
-                        </small>
-                    </td>
-                    <td style="width: 10%;">
+            <div class="row">
+                <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
+                    <div class="clearfix"></div>
+                    <table class="table" ng-show="tasks.count > 0">
+                        <tbody>
+                        <tr ng-repeat="task in tasks.data">
+                            <td style="width: 50px;">
+                                <a class="sl" href="{{BASE_URL}}tasks/view/{{task.id}}">#{{task.id}}</a>
+                            </td>
+                            <td style="width: 15px; padding-right: 0px;">
+                                <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
+                                <i ng-show="task.status != 2"  class="fa fa-bell-o green" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                                <strong>
+                                    <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">{{task.task}}</a>
+                                    <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="!task.task">-</a>
+                                    <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
+                                </strong>
+                                <br>
+                                <small class="author">Opened by {{task.createdUserProfile.first_name}}
+                                    {{task.createdUserProfile.first_name}} at
+                                    {{task.created | date}}.
+                                    ({{task.created | date : 'HH:m a'}})
+                                </small>
+                            </td>
+                            <td style="width: 10%;">
                     <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
                         <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}" />
                         <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg" />
                     </span>
-                    </td>
-                    <td class="text-right" style="width: 5%;">
-                        <a href="{{BASE_URL}}tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
-                        <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                            </td>
+                            <td class="text-right" style="width: 5%;">
+                                <a href="{{BASE_URL}}tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
+                                <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-            <div class="pagination_area text-center" ng-show="tasks.count > 0" >
-                <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
+                    <div class="pagination_area text-center" ng-show="tasks.count > 0" >
+                        <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
                     <span>
                         showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
                         {{tasks.currentPage * tasks.limit > tasks.count ? tasks.count : tasks.currentPage * tasks.limit}}
                         of {{tasks.count}} records
                     </span>
-                <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                        <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="not-found" ng-show="tasks.count < 1 && filtered_tasks_list">
+                <h4>Sorry! task not found</h4>
             </div>
         </div>
-    </div>
-
-    <div class="clearfix"></div>
-
-    <div class="not-found" ng-show="tasks.count < 1 && filtered_tasks_list">
-        <h4>Sorry! task not found</h4>
     </div>
 </div>
 
