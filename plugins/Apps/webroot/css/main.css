@@ -114,6 +114,21 @@ body {
     text-decoration: none;
 }
 
+.submenu {
+    margin: 0px;
+    padding: 0px;
+}
+
+.submenu li{
+    padding-left: 50px;
+}
+
+
+.submenu li:hover{
+    background: #181e27;
+}
+
+
 .sidebar-nav > .sidebar-brand {
     padding: 20px 10px 15px 5px;
 }
