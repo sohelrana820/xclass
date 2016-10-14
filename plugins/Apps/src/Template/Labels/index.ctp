@@ -1,6 +1,6 @@
 <?php echo $this->assign('title', 'Manage Label');?>
 <div ng-controller="LabelsCtrl">
-    <div class="pabe_loader" ng-show="!hide_page_loader">
+    <div class="page_loader" ng-show="!hide_page_loader">
         <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
         <h4>Content loading, please wait...</h4>
     </div>

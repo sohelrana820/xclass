@@ -34,7 +34,7 @@
 
     <div class="clearfix"></div>
 
-    <div class="pabe_loader" ng-show="!task_loader">
+    <div class="page_loader" ng-show="!task_loader">
         <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
         <h4>Content loading, please wait...</h4>
     </div>
