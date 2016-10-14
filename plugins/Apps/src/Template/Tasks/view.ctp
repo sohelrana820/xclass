@@ -64,7 +64,7 @@
                             </div>
                         </div>
 
-                        <h2 class="commom-title">Comments</h2>
+                        <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
                         <div class="comments" ng-repeat="comment in taskComments">
                             <div class="media"> <div class="media-left">
                                     <a href="#">
@@ -101,7 +101,7 @@
                         </div>
 
 
-                        <div class="comment_widget well">
+                        <div class="comment_widget">
                             <form ng-submit="doComment()">
                                 <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
                                 <br/>

@@ -80,7 +80,7 @@
         <div class="col-xs-12 col-sm-3">
 
             <div class="app-stats-item bg-blue">
-                <i class="fa fa-bell"></i>
+                <i class="fa fa-bell-o"></i>
                 <h3 class="app-stats-title">
                     <span class="count-to" data-from="0" data-to="105">{{overview.total_open_task}}</span>
                     <small>Total Opened Task</small>
