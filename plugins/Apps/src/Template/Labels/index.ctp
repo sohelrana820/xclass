@@ -104,7 +104,7 @@
                 <div class="widget">
                     <div class="widget-header">
                         <div class="pull-left">
-                            <h2>List of Label</h2>
+                            <h2>Lists of Label</h2>
                             <span>{{label.count}} result found</span>
                         </div>
                         <div class="filter_block pull-right" style="margin-right: 0px;">
@@ -157,7 +157,7 @@
                         </div>
 
                         <div class="not-found" ng-show="label.count < 1">
-                            <h4>Sorry, label not found</h4>
+                            <h4>Sorry, label not found!</h4>
                         </div>
                     </div>
                 </div>

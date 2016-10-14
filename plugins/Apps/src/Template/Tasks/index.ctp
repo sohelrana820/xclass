@@ -75,7 +75,7 @@
                                 <h2>
                                     Filter by author
                                     <a class="quick_task">
-                                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
                                     </a>
                                 </h2>
@@ -83,7 +83,7 @@
                                 <div class="label_quick_operation">
                                     <div class="search_label">
                                         <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
-                                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -114,7 +114,7 @@
                                 <h2>
                                     Filter by label
                                     <a class="quick_task">
-                                        <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List"><i class="fa fa-refresh grey"></i></span>
                                     </a>
                                 </h2>
@@ -122,7 +122,7 @@
                                 <div class="label_quick_operation">
                                     <div class="search_label">
                                         <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
-                                        <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
@@ -146,7 +146,7 @@
                                 <h2>
                                     Filter by who’s assigned
                                     <a class="quick_task">
-                                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
                                     </a>
                                 </h2>
@@ -154,7 +154,7 @@
                                 <div class="label_quick_operation">
                                     <div class="search_label">
                                         <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
-                                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-sm.gif" class="sm_loader">
+                                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>

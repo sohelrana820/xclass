@@ -10,7 +10,7 @@
 <div class="widget">
     <div class="widget-header">
         <div class="pull-left">
-            <h2>User List</h2>
+            <h2>Lists of User</h2>
             <span><?php echo $users->count() ?> result found</span>
         </div>
         <div class="pull-right btn-areas">
