@@ -21,7 +21,7 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
         {
             $scope.global_task_loader = true;
             angular.element(document).find('.header_task_list').show();
-            var tasks = TasksResources.query({query: query}).$promise;
+            var tasks = TasksResources.query({query: query, limit: 5}).$promise;
             tasks.then(function (res) {
                 $timeout(function(){
                     $scope.global_task_loader = false;
