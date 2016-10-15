@@ -36,7 +36,7 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
 
     $scope.hideHeaderTaskArea = function () {
         $timeout(function(){
-            //angular.element(document).find('.header_task_list').fadeOut(500);
+            angular.element(document).find('.header_task_list').fadeOut(500);
         },2000);
     }
 });
