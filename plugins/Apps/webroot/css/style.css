@@ -1343,6 +1343,7 @@ a {
     z-index: 9999;
     position: absolute;
     background: #273140;
+    width: 100%;
 
 }
 
@@ -1382,4 +1383,17 @@ a {
 .header_task_list .not_found h4{
     text-align: center;
     color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header_task_list .global_task_loader{
+    color: #FFF;
+    text-align: center;
+    margin: 25px 0px;
+}
+
+.header_task_list .global_task_loader h4{
+    font-size: 14px;
+    font-weight: 500;
 }
