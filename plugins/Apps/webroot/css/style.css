@@ -1336,3 +1336,50 @@ a {
     font-size: 11px;
     color: #777;
 }
+
+.header_task_list{
+    border: 1px solid #eee;
+    margin-top: 50px;
+    z-index: 9999;
+    position: absolute;
+    background: #273140;
+
+}
+
+.header_task_list ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+.header_task_list ul li {
+    list-style: none;
+    padding: 15px;
+    border-bottom: 1px dotted #0b0f15;
+}
+
+.header_task_list ul li:last-child {
+    border-bottom: none;
+}
+
+.header_task_list ul li p{
+    margin-bottom: 0px;
+}
+
+
+.header_task_list ul li a{
+    display: block;
+}
+
+
+.header_task_list ul li small{
+    color: #999;
+}
+
+.header_task_list .not_found{
+    padding: 25px;
+}
+
+.header_task_list .not_found h4{
+    text-align: center;
+    color: #FFF;
+}
