@@ -18,7 +18,7 @@
                         </div>
                         <ul>
                             <li ng-repeat="task in globalTaskLists">
-                                <p><a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">(task ID #{{Task.id}}) {{task.task}}</a></p>
+                                <p><a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">(Task ID #{{task.id}}) {{task.task}}</a></p>
                                 <small>Opened by {{task.createdUserProfile.first_name}}
                                     {{task.createdUserProfile.first_name}} at
                                     {{task.created | date}}.

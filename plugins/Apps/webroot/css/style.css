@@ -1367,13 +1367,16 @@ a {
 }
 
 
-.header_task_list ul li a{
+.header_task_list ul li a, .header_task_list ul li a:hover {
     display: block;
+    color: #596d7c;
+    font-size: 12px;
+    font-weight: 500;
 }
 
-
 .header_task_list ul li small{
-    color: #999;
+    color: #6f7d92;
+    font-size: 10px;
 }
 
 .header_task_list .not_found{
