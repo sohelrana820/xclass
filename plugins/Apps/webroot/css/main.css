@@ -268,9 +268,9 @@ body {
 
 .app-stats-item > .fa {
     position: absolute;
-    bottom: -20%;
-    left: -5%;
-    font-size: 100px;
+    top: 10%;
+    left: 2%;
+    font-size: 70px;
     color: rgba(255, 255, 255, 0.15);
 }
 
