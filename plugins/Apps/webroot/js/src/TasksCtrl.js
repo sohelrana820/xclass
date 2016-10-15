@@ -358,7 +358,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 else if(event == 'label_event'){
                     if(value)
                     {
-                        toastr.success('New label has been added successfully!');
+                        //toastr.success('New label has been added successfully!');
                     }
                     else{
                         toastr.error('Label has been removed successfully!');
@@ -619,7 +619,26 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
         $scope.doFilter();
-    }
+    };
+
+    $scope.hasLabelAssigned = function(labelList, singleLabel){
+        labelList.forEach(function(label){
+            if(label.id ==  singleLabel.id){
+                singleLabel.checked = true;
+            }
+        });
+        return singleLabel;
+    };
+
+
+    $scope.hasUserAssigned = function(userLists, singleUser){
+        userLists.forEach(function(user){
+            if(user.id ==  singleUser.id){
+                singleUser.checked = true;
+            }
+        });
+        return singleUser;
+    };
 
 
     $scope.goPreviousPage = function () {

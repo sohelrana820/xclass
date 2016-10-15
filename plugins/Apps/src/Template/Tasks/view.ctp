@@ -192,7 +192,7 @@
                                 </div>
 
                                 <ul class="custom_dropdown_list nav nav-list" ng-show="!show_create_new_label_form">
-                                    <li ng-repeat="(key, label) in labels">
+                                    <li ng-repeat="(key, label) in labels" ng-init="label = hasLabelAssigned(taskLabels, label)">
                                         <a ng-click="chooseTaskLabels(label, key, label.checked); quickUpdate('label_event', label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
                                     </li>
                                 </ul>
@@ -233,7 +233,7 @@
                                 </div>
 
                                 <ul class="custom_dropdown_list nav nav-list">
-                                    <li ng-repeat="(key, user) in users">
+                                    <li ng-repeat="(key, user) in users" ng-init="user = hasUserAssigned(taskUsers, user)">
                                         <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('user_event', user.checked)"">
                                         <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
                                         <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
