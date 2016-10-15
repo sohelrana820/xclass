@@ -20,7 +20,7 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
         if(query)
         {
             $scope.global_task_loader = true;
-            angular.element(document).find('.header_task_list').show();
+            angular.element(document).find('.header_task_list').fadeIn(500);
             var tasks = TasksResources.query({query: query, limit: 5}).$promise;
             tasks.then(function (res) {
                 $timeout(function(){
@@ -30,8 +30,13 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
             });
         }
         else{
-            angular.element(document).find('.header_task_list').hide();
+            angular.element(document).find('.header_task_list').fadeOut(500);
         }
+    };
 
+    $scope.hideHeaderTaskArea = function () {
+        $timeout(function(){
+            //angular.element(document).find('.header_task_list').fadeOut(500);
+        },2000);
     }
 });
