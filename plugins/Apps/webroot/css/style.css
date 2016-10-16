@@ -747,10 +747,7 @@ a {
 
 .page-header {
     clear: both;
-    margin-top: -25px;
-    margin-left: -25px;
-    margin-right: -25px;
-    margin-bottom: 30px;
+    margin: 0px -15px 30px -15px !important;
     padding: 30px 25px;
     background: #f8f8f8;
 }

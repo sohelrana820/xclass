@@ -44,8 +44,7 @@
 <div ng-controller="TasksCtrl">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-3">
-
+        <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-orange">
                 <i class="fa fa-users"></i>
                 <h3 class="app-stats-title">
@@ -53,10 +52,8 @@
                     <small>Total Users</small>
                 </h3>
             </div>
-
         </div>
-        <div class="col-xs-12 col-sm-3">
-
+        <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-green">
                 <i class="fa fa-tags"></i>
                 <h3 class="app-stats-title">
@@ -64,10 +61,8 @@
                     <small>Total Label</small>
                 </h3>
             </div>
-
         </div>
-        <div class="col-xs-12 col-sm-3">
-
+        <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-red">
                 <i class="fa fa-bell-slash-o"></i>
                 <h3 class="app-stats-title">
@@ -75,10 +70,8 @@
                     <small>Total Closed Task</small>
                 </h3>
             </div>
-
         </div>
-        <div class="col-xs-12 col-sm-3">
-
+        <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-blue">
                 <i class="fa fa-bell-o"></i>
                 <h3 class="app-stats-title">
@@ -86,7 +79,6 @@
                     <small>Total Opened Task</small>
                 </h3>
             </div>
-
         </div>
     </div>
 

@@ -49,7 +49,9 @@
         <div class="content-area">
             <?php echo $this->Flash->render() ?>
             <flash-message></flash-message>
-            <?php echo $this->fetch('content'); ?>
+            <div class="container-fluid">
+                <?php echo $this->fetch('content'); ?>
+            </div>
         </div>
         <!-- /#Content area -->
 

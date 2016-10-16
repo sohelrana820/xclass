@@ -249,7 +249,7 @@ body {
 
 /* Content classes */
 .content-area {
-    padding-top: 15px;
+
 }
 
 .content-area > .row {
@@ -268,9 +268,9 @@ body {
 
 .app-stats-item > .fa {
     position: absolute;
-    top: 10%;
+    top: 25%;
     left: 2%;
-    font-size: 70px;
+    font-size: 60px;
     color: rgba(255, 255, 255, 0.15);
 }
 
@@ -416,7 +416,6 @@ body {
 /* Media queries for large display */
 @media (min-width: 1400px) {
     .content-area {
-        padding: 25px;
         margin-bottom: 50px;
     }
 
@@ -455,7 +454,13 @@ body {
 
 /* Media queries for medium display */
 @media (min-width: 768px) and (max-width: 991px) {
-
+    .app-stats-item > .fa {
+        top: 28%;
+        font-size: 50px;
+    }
+    .app-stats-title > small {
+        font-size: 12px;
+    }
 }
 
 /* Media queries for small (Tab/Mobile) display */
@@ -469,7 +474,7 @@ body {
     }
 
     .content-area {
-        padding-top: 15px;
+
     }
 
     .overview-right {
@@ -479,4 +484,5 @@ body {
     .overview-right .overview-value {
         font-size: 32px;
     }
+
 }
