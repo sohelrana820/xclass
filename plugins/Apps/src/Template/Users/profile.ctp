@@ -126,7 +126,7 @@
                         <li>
                             <strong>Country: </strong>
                             <?php
-                            if($profile->profile->country){
+                            if($profile->profile->country && $profile->profile->country != '-1'){
                                 echo $profile->profile->country;
                             }
                             else{
