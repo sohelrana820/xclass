@@ -39,7 +39,7 @@
         <h4>Content loading, please wait...</h4>
     </div>
 
-    <div class="widget" ng-show="task_loader">
+    <div class="widget" ng-show="task_loader && tasks.count_all > 0">
         <div class="widget-header">
             <div class="filter_bar">
 

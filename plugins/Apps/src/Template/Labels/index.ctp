@@ -119,9 +119,9 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Color</th>
+                                    <th class="hidden-xs">Color</th>
                                     <th>Status</th>
-                                    <th>Last Modified</th>
+                                    <th class="hidden-xs">Last Modified</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                                 </thead>
@@ -130,12 +130,12 @@
                                     <td>
                                         <label class="app_label" style="background: {{label.color_code}}">{{label.name}}</label>
                                     </td>
-                                    <td>{{label.color_code}}</td>
+                                    <td class="hidden-xs">{{label.color_code}}</td>
                                     <td>
                                         <span class="status-text test status-text-green" ng-show="label.status == 1">Active</span>
                                         <span class="status-text status-text-danger" ng-show="label.status == 2">Inactive</span>
                                     </td>
-                                    <td>{{label.modified | date}}</td>
+                                    <td class="hidden-xs">{{label.modified | date}}</td>
                                     <td class="text-right">
                                         <a ng-click="openEditLabel(label.id)" class="btn-small btn-small-primary">Edit</a>
                                         <a ng-click="deleteLabel(label.id)" class="btn-small btn-small-red">Delete</a>
