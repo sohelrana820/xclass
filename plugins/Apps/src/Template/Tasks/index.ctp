@@ -1,6 +1,6 @@
 <?php echo $this->assign('title', 'Task Lists'); ?>
 
-<div ng-controller="TasksCtrl">
+<div ng-controller="TasksCtrl" ng-cloak>
 
 
     <div class="page-header" ng-show="tasks.count_all > 0">

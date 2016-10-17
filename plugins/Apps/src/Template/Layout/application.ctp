@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  ng-app="Application">
+<html lang="en"  ng-app="Application" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
