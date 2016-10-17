@@ -249,12 +249,9 @@ body {
 
 /* Content classes */
 .content-area {
-
+    margin-bottom: 50px;
 }
 
-.content-area > .row {
-    margin-bottom: 25px;
-}
 
 /* Dashboard: stats classes */
 .app-stats-item {
@@ -453,6 +450,13 @@ body {
 }
 
 /* Media queries for medium display */
+@media (min-width: 991px) and (max-width: 1200px) {
+    .right-side-filter{
+        float: left !important;
+    }
+}
+
+/* Media queries for medium display */
 @media (min-width: 768px) and (max-width: 991px) {
     .app-stats-item > .fa {
         top: 28%;
@@ -460,6 +464,14 @@ body {
     }
     .app-stats-title > small {
         font-size: 12px;
+    }
+
+    .right-side-filter{
+        float: left !important;
+    }
+
+    .right-side-filter .filter_block {
+        margin: 5px 7px !important;
     }
 }
 
@@ -485,4 +497,21 @@ body {
         font-size: 32px;
     }
 
+    .right-side-filter{
+        float: left !important;
+    }
+
+    .right-side-filter .filter_block {
+        margin: 5px 7px !important;
+    }
+
+    .right-side-filter .search_query{
+        width: 100%;
+        display: block;
+    }
+
+    .task-list-table td strong{
+        font-weight: 500;
+        font-size: 12px;
+    }
 }

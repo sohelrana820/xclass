@@ -43,7 +43,7 @@
         <div class="widget-header">
             <div class="filter_bar">
 
-                <div class="filter_items pull-left">
+                <div class="filter_items pull-left visible-lg">
                     <a class="search_item search_item_gray"  ng-click="clearQueryString(); doFilter(filterQuery.status = 'all')">
                         <i class="fa fa-signal" aria-hidden="true"></i>
                         All
@@ -70,7 +70,7 @@
                     </a>
                 </div>
 
-                <div class="pull-right">
+                <div class="pull-right right-side-filter">
                     <div class="filter_block">
                         <div class="dropdown">
                             <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -198,7 +198,7 @@
                         </div>
                     </div>
 
-                    <div class="filter_block">
+                    <div class="filter_block search_query">
                         <div>
                             <input ng-model="filterQuery.query" class="form-control" placeholder="Search task" ng-change="doFilter()">
                         </div>
@@ -255,13 +255,13 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
                     <div class="clearfix"></div>
-                    <table class="table" ng-show="tasks.count > 0">
+                    <table class="table task-list-table" ng-show="tasks.count > 0">
                         <tbody>
                         <tr ng-repeat="task in tasks.data">
-                            <td style="width: 50px;">
+                            <td style="width: 50px;" class="hidden-xs">
                                 <a class="sl" href="{{BASE_URL}}tasks/view/{{task.id}}">#{{task.id}}</a>
                             </td>
-                            <td style="width: 15px; padding-right: 0px;">
+                            <td style="width: 15px; padding-right: 0px;" class="hidden-xs">
                                 <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
                                 <i ng-show="task.status != 2"  class="fa fa-bell-o green" aria-hidden="true"></i>
                             </td>
@@ -279,12 +279,12 @@
                                 </small>
                             </td>
                             <td style="width: 10%;">
-                    <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
-                        <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}" />
-                        <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg" />
-                    </span>
+                                <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
+                                    <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}" />
+                                    <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg" />
+                                </span>
                             </td>
-                            <td class="text-right" style="width: 5%;">
+                            <td class="text-right" style="width: 10%;">
                                 <a href="{{BASE_URL}}tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
                                 <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
                             </td>
