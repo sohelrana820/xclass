@@ -70,7 +70,19 @@
 
 <?php
 echo $this->Html->script(array('jquery', 'bootstrap.min', 'theme'));
-echo $this->Html->script(['angular.min', 'angular-resource.min', 'textAngular-rangy.min.js', 'textAngular-sanitize.min.js', 'textAngular.min.js', 'tinycolor-min.js', 'angularjs-color-picker.min.js', 'angular-flash.min', 'angular-toastr.tpls.js', 'ng-file-upload-shim.min.js', 'ng-file-upload.min.js', 'angular-block-ui']);
+echo $this->Html->script([
+    'angular.min',
+    'angular-resource.min',
+    'textAngular-rangy.min.js',
+    'textAngular-sanitize.min.js',
+    'textAngular.min.js',
+    'tinycolor-min.js',
+    'angularjs-color-picker.min.js',
+    'angular-flash.min',
+    'angular-toastr.tpls.js',
+    'ng-file-upload-shim.min.js',
+    'ng-file-upload.min.js',
+    'angular-block-ui']);
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>

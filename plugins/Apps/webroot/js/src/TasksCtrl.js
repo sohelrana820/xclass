@@ -40,43 +40,47 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.saveTask = function(){
         $scope.getTaskRelObj();
         console.log($scope.TaskObj);
-        Upload.upload({
-            url: BASE_URL + 'tasks/add.json',
-            data: $scope.TaskObj
-        }).then(function (response) {
-            if(response.data.result.success){
-                $scope.TaskObj = {};
-                $scope.taskLabels = [];
-                $scope.taskUsers = [];
-                if(!isDashboardOpend){
-                    Flash.create('success', response.data.result.message);
-                    $timeout(function() {
-                        window.location.href = BASE_URL + "tasks";
-                    }, 1000);
-                }
-                else{
-                    $scope.labels.forEach(function(label, key){
-                        $scope.labels[key].checked = false;
-                    });
-                    $scope.users.forEach(function(user, key){
-                        $scope.users[key].checked = false;
-                    });
-                    $scope.countAttachments = [0];
-                    toastr.success(response.data.result.message);
-                    $scope.fetchTaskLists({limit: 5});
-                    $scope.fetchAppOverview();
-                }
+        if($scope.TaskObj.task){
+            Upload.upload({
+                url: BASE_URL + 'tasks/add.json',
+                data: $scope.TaskObj
+            }).then(function (response) {
+                if(response.data.result.success){
+                    $scope.TaskObj = {};
+                    $scope.taskLabels = [];
+                    $scope.taskUsers = [];
+                    if(!isDashboardOpend){
+                        Flash.create('success', response.data.result.message);
+                        $timeout(function() {
+                            window.location.href = BASE_URL + "tasks";
+                        }, 1000);
+                    }
+                    else{
+                        $scope.labels.forEach(function(label, key){
+                            $scope.labels[key].checked = false;
+                        });
+                        $scope.users.forEach(function(user, key){
+                            $scope.users[key].checked = false;
+                        });
+                        $scope.countAttachments = [0];
+                        toastr.success(response.data.result.message);
+                        $scope.fetchTaskLists({limit: 5});
+                    }
 
-            }
-            else{
-                if(isDashboardOpend){
-                    toastr.success(response.data.result.message);
                 }
                 else{
-                    Flash.create('info', response.data.result.message);
+                    if(isDashboardOpend){
+                        toastr.success(response.data.result.message);
+                    }
+                    else{
+                        Flash.create('info', response.data.result.message);
+                    }
                 }
-            }
-        });
+            });
+        }
+        else{
+            toastr.error('Task title can not be empty');
+        }
     };
 
 
@@ -136,21 +140,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-    $scope.fetchAppOverview = function(data){
-        var overview = DashboardResources.get().$promise;
-        overview.then(function (res) {
-            $scope.overview = res.result;
-        });
-    };
 
     if(isDashboardOpend){
         $scope.fetchTaskLists({limit: 5});
-        $scope.fetchAppOverview();
     }
     else{
         $scope.fetchTaskLists();
     }
-
 
     /**
      * Getting application active label list.

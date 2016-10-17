@@ -263,7 +263,7 @@ body {
     background-color: #273140;
 }
 
-.app-stats-item > .fa {
+.app-stats-item .fa {
     position: absolute;
     top: 25%;
     left: 2%;

@@ -41,49 +41,66 @@
     </div>
 <?php endif; ?>
 
-<div ng-controller="TasksCtrl" ng-cloak>
-
+<div ng-controller="DashboardCtrl" ng-cloak>
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-orange">
-                <i class="fa fa-users"></i>
-                <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="1250">{{overview.total_user - 1}}</span>
-                    <small>Total Users</small>
-                </h3>
+                <div class="overview-loader" ng-show="overview_loader">
+                    <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                </div>
+                <div ng-show="!overview_loader">
+                    <i class="fa fa-users"></i>
+                    <h3 class="app-stats-title">
+                        <span class="count-to" data-from="0" data-to="1250">{{overview.total_user - 1}}</span>
+                        <small>Total Users</small>
+                    </h3>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-green">
-                <i class="fa fa-tags"></i>
-                <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="5411">{{overview.total_label}}</span>
-                    <small>Total Label</small>
-                </h3>
+                <div class="overview-loader" ng-show="overview_loader">
+                    <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                </div>
+                <div ng-show="!overview_loader">
+                    <i class="fa fa-tags"></i>
+                    <h3 class="app-stats-title">
+                        <span class="count-to" data-from="0" data-to="5411">{{overview.total_label}}</span>
+                        <small>Total Label</small>
+                    </h3>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-red">
-                <i class="fa fa-bell-slash-o"></i>
-                <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="4151">{{overview.total_closed_task}}</span>
-                    <small>Total Closed Task</small>
-                </h3>
+                <div class="overview-loader" ng-show="overview_loader">
+                    <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                </div>
+                <div ng-show="!overview_loader">
+                    <i class="fa fa-bell-slash-o"></i>
+                    <h3 class="app-stats-title">
+                        <span class="count-to" data-from="0" data-to="4151">{{overview.total_closed_task}}</span>
+                        <small>Total Closed Task</small>
+                    </h3>
+                </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-blue">
-                <i class="fa fa-bell-o"></i>
-                <h3 class="app-stats-title">
-                    <span class="count-to" data-from="0" data-to="105">{{overview.total_open_task}}</span>
-                    <small>Total Opened Task</small>
-                </h3>
+                <div class="overview-loader" ng-show="overview_loader">
+                    <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                </div>
+                <div ng-show="!overview_loader">
+                    <i class="fa fa-bell-o"></i>
+                    <h3 class="app-stats-title">
+                        <span class="count-to" data-from="0" data-to="105">{{overview.total_open_task}}</span>
+                        <small>Total Opened Task</small>
+                    </h3>
+                </div>
             </div>
         </div>
     </div>
-
-
-    <div class="row">
+    <div class="row" ng-controller="TasksCtrl">
         <div class="col-lg-8">
             <div class="widget widget-boxed ">
                 <div class="widget-header">
@@ -303,6 +320,6 @@
 
 <?php
 echo $this->start('jsBottom');
-echo $this->Html->script(['src/TasksCtrl']);
+echo $this->Html->script(['src/TasksCtrl', 'src/DashboardCtrl']);
 echo $this->end();
 ?>
