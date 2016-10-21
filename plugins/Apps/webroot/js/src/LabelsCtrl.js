@@ -1,4 +1,4 @@
-app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, blockUI, toastr){
+app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, toastr){
 
     $scope.create_form = true;
     $scope.edit_form = false;
@@ -7,11 +7,6 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
 
    $scope.fetchLabelLists = function(data){
        var labels = LabelResources.query(data).$promise;
-       var myBlockUI = blockUI.instances.get('myBlockUI');
-       myBlockUI.start({
-           message: 'Please wait!'
-       });
-
        labels.then(function (res) {
            if(res.result.success){
                $timeout(function() {
@@ -27,7 +22,6 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, b
                        $scope.show_crate_form = false;
                    }
                    $scope.hide_page_loader = true;
-                   myBlockUI.stop();
                }, 1000);
            }
        });

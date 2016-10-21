@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload, blockUI){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
     /*    // Getting all active labels.
      $scope.fetchLabelsLists = function(){
@@ -115,11 +115,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.fetchTaskLists = function(data){
 
         $scope.dashboard_task_loader = true;
-        var myBlockUI = blockUI.instances.get('blockTasksList');
-        myBlockUI.start({
-            message: 'Please wait!'
-        });
-
         var tasks = TasksResources.query(data).$promise;
         tasks.then(function (res) {
             if(res.result.success){
@@ -133,7 +128,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     };
                     $scope.dashboard_task_loader = false;
                     $scope.task_loader = true;
-                    myBlockUI.stop();
                 }, 1000);
             }
 
@@ -375,7 +369,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.commentsObj = {task_id: id};
     $scope.doComment = function(){
-        blockUI.start();
         if($scope.commentsObj.comment)
         {
             Upload.upload({
@@ -396,13 +389,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         else{
             Flash.create('danger', 'Write something in comments');
         }
-        $timeout(function() {
-            blockUI.stop();
-        }, 1000);
     };
 
     $scope.changeStatus = function(status){
-        blockUI.start();
         $scope.TaskObj.status = status;
         $scope.quickUpdate('change_status', status);
         if(status == 2){
@@ -426,10 +415,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 Flash.create('info', response.data.result.message);
             }
         });
-
-        $timeout(function() {
-            blockUI.stop();
-        }, 1000);
     };
 
     /**

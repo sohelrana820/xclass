@@ -1,4 +1,4 @@
-app.controller('DashboardCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload, blockUI){
+app.controller('DashboardCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
 
     $scope.fetchAppOverview = function(data){

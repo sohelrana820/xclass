@@ -5,10 +5,6 @@ $("#menu-toggle").click(function(e) {
 
 var docHeight = $( document ).height();
 var contentHeight = $('.content-area').height() + 50;
-
-console.log(docHeight);
-console.log(contentHeight);
-
 if(docHeight > contentHeight)
 {
     $('#page-content-wrapper').css('min-height', docHeight);
