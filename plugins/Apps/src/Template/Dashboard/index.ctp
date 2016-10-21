@@ -41,7 +41,7 @@
     </div>
 <?php endif; ?>
 
-<div ng-controller="DashboardCtrl" ng-cloak>
+<div ng-controller="DashboardCtrl">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-lg-3">
             <div class="app-stats-item bg-orange">
