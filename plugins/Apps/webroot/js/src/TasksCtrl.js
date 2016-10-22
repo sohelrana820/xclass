@@ -38,6 +38,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     }
 
     $scope.saveTask = function(){
+        $scope.save_task_loader = true;
         $scope.getTaskRelObj();
         console.log($scope.TaskObj);
         if($scope.TaskObj.task){
@@ -49,6 +50,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     $scope.TaskObj = {};
                     $scope.taskLabels = [];
                     $scope.taskUsers = [];
+                    $scope.save_task_loader = false;
                     if(!isDashboardOpend){
                         Flash.create('success', response.data.result.message);
                         $timeout(function() {
