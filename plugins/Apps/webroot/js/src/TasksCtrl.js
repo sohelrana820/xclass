@@ -347,7 +347,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 else if(event == 'label_event'){
                     if(value)
                     {
-                        //toastr.success('New label has been added successfully!');
+                        toastr.success('New label has been added successfully!');
                     }
                     else{
                         toastr.error('Label has been removed successfully!');
@@ -356,10 +356,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 else if(event == 'change_status'){
                     if(value == 2)
                     {
-                        //toastr.success('Task has been marked as closed');
+                        toastr.success('Task has been marked as closed');
                     }
                     else if(value == 3){
-                        //toastr.error('Task has been reopened');
+                        toastr.error('Task has been reopened');
                     }
                 }
             }
