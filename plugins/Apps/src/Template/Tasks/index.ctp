@@ -17,10 +17,10 @@
     </div>
 
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2" ng-show="tasks.count_all < 1">
+        <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1">
             <div class="empty_block">
             <span class="icon">
-                <i class="fa fa-bullhorn" aria-hidden="true"></i>
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
             </span>
                 <br/>
                 <br/>

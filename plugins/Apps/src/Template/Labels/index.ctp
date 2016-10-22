@@ -163,10 +163,11 @@
                 </div>
             </div>
 
-            <div class="col-lg-8 col-lg-offset-2" ng-show="label.count < 1 && !show_crate_form && !searched_labels">
+            <div class="col-lg-10 col-lg-offset-1" ng-show="label.count < 1 && !show_crate_form && !searched_labels">
                 <div class="empty_block">
-                <span class="icon">
-                    <i class="fa fa-bullhorn" aria-hidden="true"></i></span>
+                    <span class="icon" style="padding: 24px 13px 18px 17px;">
+                        <i class="fa fa-tags" aria-hidden="true"></i>
+                    </span>
                     <br/>
                     <br/>
                     <h2>Welcome to Task Label!</h2>

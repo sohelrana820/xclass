@@ -845,13 +845,13 @@ a {
 
 .empty_block .icon {
     border: 2px solid #CCC;
-    padding: 40px 24px 28px 28px;
+    padding: 22px 13px 20px 17px;
     border-radius: 50px;
     color: #CCC;
 }
 
 .empty_block .icon i {
-    font-size: 32px;
+    font-size: 24px;
 }
 
 .well {
