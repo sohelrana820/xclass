@@ -71,12 +71,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
                 }
                 else{
-                    if(isDashboardOpend){
-                        toastr.success(response.data.result.message);
-                    }
-                    else{
-                        Flash.create('info', response.data.result.message);
-                    }
+                    toastr.error(response.data.result.message);
                 }
             });
         }
@@ -316,25 +311,27 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     $scope.updateTask = function(){
+        $scope.update_task_loader = true;
         $scope.getTaskRelObj();
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
-            if(res.result.success){
-                $scope.buildTaskObjForShow(id);
-                $scope.view_task = true;
-                $scope.edit_task_form = false;
-                Flash.create('success', res.result.message);
-            }
-            else{
-                Flash.create('info', res.result.message);
-            }
+            $timeout(function () {
+                if(res.result.success){
+                    $scope.buildTaskObjForShow(id);
+                    $scope.update_task_loader = false;
+                    $scope.view_task = true;
+                    $scope.edit_task_form = false;
+                    toastr.success(res.result.message);
+                }
+                else{
+                    toastr.error(res.result.message);
+                }
+            }, 1000)
         });
     };
 
     $scope.quickUpdate = function(event, value){
         $scope.getTaskRelObj();
-
-
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
@@ -359,10 +356,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 else if(event == 'change_status'){
                     if(value == 2)
                     {
-                        Flash.create('success', 'Task has been marked as closed');
+                        //toastr.success('Task has been marked as closed');
                     }
                     else if(value == 3){
-                        Flash.create('danger', 'Task has been reopened');
+                        //toastr.error('Task has been reopened');
                     }
                 }
             }
@@ -373,27 +370,30 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.doComment = function(){
         if($scope.commentsObj.comment)
         {
+            $scope.task_quick_update_loader = true;
             Upload.upload({
                 url: BASE_URL + 'comments/add.json',
                 data: $scope.commentsObj
             }).then(function (response) {
                 if(response.data.result.success){
+                    $scope.task_quick_update_loader = false;
                     $scope.commentsObj = {task_id: id};
                     $scope.taskComments.push(response.data.result.data);
-                    Flash.create('success', response.data.result.message);
+                    toastr.success(response.data.result.message);
                     $scope.countAttachments = [0];
                 }
                 else{
-                    Flash.create('info', response.data.result.message);
+                    toastr.success(response.data.result.message);
                 }
             });
         }
         else{
-            Flash.create('danger', 'Write something in comments');
+            toastr.error('Write something in comments');
         }
     };
 
     $scope.changeStatus = function(status){
+        $scope.task_quick_update_loader = true;
         $scope.TaskObj.status = status;
         $scope.quickUpdate('change_status', status);
         if(status == 2){
@@ -408,13 +408,14 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             data: $scope.commentsObj
         }).then(function (response) {
             if(response.data.result.success){
+                $scope.task_quick_update_loader = false;
                 $scope.commentsObj = {task_id: id};
                 $scope.taskComments.push(response.data.result.data);
-                Flash.create('success', response.data.result.message);
+                toastr.success(response.data.result.message);
                 $scope.countAttachments = [0];
             }
             else{
-                Flash.create('info', response.data.result.message);
+                toastr.success(response.data.result.message);
             }
         });
     };

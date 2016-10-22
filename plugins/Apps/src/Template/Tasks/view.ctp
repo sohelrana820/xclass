@@ -22,7 +22,7 @@
     <div class="widget-body">
         <div>
             <div class="row">
-                <div class="col-lg-8 col-md-8">
+                <div class="col-lg-9 col-md-8">
                     <div class="">
 
                         <span ng-show="TaskObj.status != 2" class="status-button status-success">Status: Open</span>
@@ -59,6 +59,10 @@
                                     <div class="form-group">
                                         <button class="btn btn-success">Update Task</button>
                                         <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel</a>
+                                        <br/>
+                                        <span class="instance-loader" ng-show="update_task_loader" >
+                                            <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                        </span>
                                     </div>
                                 </form>
                             </div>
@@ -126,13 +130,17 @@
                                     <button type="submit" class="btn btn-success" ></i> Comment</button>
                                     <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Comment & Close Task</a>
                                     <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)"></i> Reopen Task</a>
+                                    <br/>
+                                    <span class="instance-loader" ng-show="task_quick_update_loader" >
+                                        <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                    </span>
                                 </div>
                                 <div class="clearfix"></div>
                             </form>
                         </div><!-- Widget Area -->
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4">
+                <div class="col-lg-3 col-md-4">
                     <a class="btn btn-success" ng-show="!edit_task_form" ng-click="edit_task_form = true; view_task = false">Edit Task</a>
                     <a class="btn btn-danger" ng-show="!edit_task_form"  ng-click="deleteTask(TaskObj.id)">Delete Task</a>
                     <div class="task_sidebar" style="margin-top: 25px">
