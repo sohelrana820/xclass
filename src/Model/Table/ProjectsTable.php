@@ -1,19 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Attachment;
+use App\Model\Entity\Project;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Attachments Model
+ * Projects Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Tasks
- * @property \Cake\ORM\Association\BelongsTo $Comments
+ * @property \Cake\ORM\Association\BelongsTo $Users
+ * @property \Cake\ORM\Association\HasMany $Attachments
  */
-class AttachmentsTable extends Table
+class ProjectsTable extends Table
 {
 
     /**
@@ -26,19 +26,17 @@ class AttachmentsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('attachments');
+        $this->table('projects');
         $this->displayField('name');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Tasks', [
-            'foreignKey' => 'task_id'
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id',
+            'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Comments', [
-            'foreignKey' => 'comment_id'
-        ]);
-        $this->belongsTo('Projects', [
+        $this->hasMany('Attachments', [
             'foreignKey' => 'project_id'
         ]);
     }
@@ -56,16 +54,21 @@ class AttachmentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('uuid', 'create')
-            ->notEmpty('uuid');
-
-        $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
         $validator
-            ->requirePresence('path', 'create')
-            ->notEmpty('path');
+            ->requirePresence('description', 'create')
+            ->notEmpty('description');
+
+        $validator
+            ->add('status', 'valid', ['rule' => 'numeric'])
+            ->requirePresence('status', 'create')
+            ->notEmpty('status');
+
+        $validator
+            ->requirePresence('note', 'create')
+            ->notEmpty('note');
 
         return $validator;
     }
@@ -79,25 +82,7 @@ class AttachmentsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['task_id'], 'Tasks'));
-        $rules->add($rules->existsIn(['comment_id'], 'Comments'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
-    }
-
-    /**
-     * @param $uuid
-     * @return mixed|null
-     */
-    public function getAttachmentByUUID($uuid)
-    {
-        $result = $this->find()
-            ->where(['Attachments.uuid' => $uuid])
-            ->first();
-
-        if($result)
-        {
-            return $result;
-        }
-        return null;
     }
 }

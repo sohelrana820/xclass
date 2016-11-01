@@ -35,6 +35,9 @@ class UsersTable extends Table
         $this->hasOne('Profiles', [
             'foreignKey' => 'user_id'
         ]);
+        $this->hasMany('Projects', [
+           'foreignKey' => 'user_id'
+        ]);
     }
 
     /**
