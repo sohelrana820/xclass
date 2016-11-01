@@ -3,15 +3,15 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 19, 2016 at 04:11 PM
+-- Generation Time: Nov 02, 2016 at 05:06 AM
 -- Server version: 5.7.13-0ubuntu0.16.04.2
--- PHP Version: 7.0.8-0ubuntu0.16.04.2
+-- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `my_personal_tacker`
+-- Database: `task_manager`
 --
 
 -- --------------------------------------------------------
@@ -23,6 +23,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `attachments` (
   `id` int(11) NOT NULL,
   `uuid` varchar(36) NOT NULL,
+  `project_id` int(11) DEFAULT NULL,
   `task_id` int(11) DEFAULT NULL,
   `comment_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
@@ -92,6 +93,23 @@ CREATE TABLE `profiles` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `description` text NOT NULL,
+  `status` int(1) NOT NULL COMMENT 'status: 1 = Progressing, 2 = Paused, 3 = Invalid, 4 = Completed',
+  `note` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tasks`
 --
 
@@ -117,7 +135,7 @@ CREATE TABLE `tasks_labels` (
   `task_id` int(11) NOT NULL,
   `label_id` int(11) NOT NULL,
   `created` datetime NOT NULL,
-  `status` int(11) NOT NULL
+  `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -164,7 +182,8 @@ CREATE TABLE `users_tasks` (
 ALTER TABLE `attachments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `task_id` (`task_id`),
-  ADD KEY `comment_id` (`comment_id`);
+  ADD KEY `comment_id` (`comment_id`),
+  ADD KEY `project_id` (`project_id`);
 
 --
 -- Indexes for table `comments`
@@ -189,6 +208,13 @@ ALTER TABLE `profiles`
   ADD KEY `user_id` (`user_id`),
   ADD KEY `created_by` (`created_by`),
   ADD KEY `user_id_2` (`user_id`);
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `tasks`
@@ -233,37 +259,42 @@ ALTER TABLE `attachments`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `labels`
 --
 ALTER TABLE `labels`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+--
+-- AUTO_INCREMENT for table `projects`
+--
+ALTER TABLE `projects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `tasks_labels`
 --
 ALTER TABLE `tasks_labels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 --
 -- AUTO_INCREMENT for table `users_tasks`
 --
 ALTER TABLE `users_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
