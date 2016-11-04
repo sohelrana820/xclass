@@ -1,4 +1,4 @@
-<?php echo $this->assign('title', 'Manage Label');?>
+<?php echo $this->assign('title', 'New Project');?>
 <div ng-controller="ProjectsCtrl">
     <div>
         <div class="page-header">
@@ -18,29 +18,44 @@
                         <h2>
                             New Project
                         </h2>
-                        <span>Please provide all valid information to create new task TASKS LIST</span>
+                        <span>Please provide all valid information to create new project</span>
                     </div>
                     <div class="widget-body">
-                        <form name="create_label_form" ng-submit="saveLabel(create_label_form.$valid)" novalidate>
+                        <?php echo $this->Form->create($project, ['controller' => 'projects', 'action' => 'add']);?>
                             <div class="form-group">
                                 <label>Name of Project</label>
                                 <div class="input text">
-                                    <input type="text" ng-model="projectObj.name" name="c_label_name" class="form-control" placeholder="Name of label" required="required">
-                                    <div ng-if="create_label_form.c_label_name.$dirty || isLabelFormSubmitted">
-                                        <p ng-show="create_label_form.c_label_name.$error.required"  class="error-message">Label name is required</p>
-                                    </div>
+                                    <?php echo $this->Form->input('project.name', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Name of project', 'label' => false, 'required' => false]);?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Project Slug</label>
+                                <div class="input text">
+                                    <input type="text" name="project[slug]" class="form-control" placeholder="Project slug">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Project Description</label>
                                 <div class="input text">
-                                    <textarea ng-model="projectObj.description" rows="8" class="form-control" placeholder="Name of label"></textarea>
+                                    <textarea name="project[description]" rows="8" class="form-control" placeholder="Project description"></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Note</label>
                                 <div class="input text">
-                                    <textarea ng-model="projectObj.name" rows="4" class="form-control" placeholder="Name of label"></textarea>
+                                    <textarea name="project[note]" rows="4" class="form-control" placeholder="Project note"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <div class="input text">
+                                    <select name="project[status]" class="form-control">
+                                        <option value="">Choose status</option>
+                                        <option value="1">Progressing</option>
+                                        <option value="2">Paused</option>
+                                        <option value="3">Invalid</option>
+                                        <option value="4">Completed</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
