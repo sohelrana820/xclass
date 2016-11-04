@@ -12,9 +12,9 @@ use Cake\Validation\Validator;
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\HasMany $Attachments
- * @property \Cake\ORM\Association\HasMany $ProjectUsers
  * @property \Cake\ORM\Association\HasMany $Tasks
  * @property \Cake\ORM\Association\BelongsToMany $Labels
+ * @property \Cake\ORM\Association\BelongsToMany $Users
  */
 class ProjectsTable extends Table
 {
@@ -42,9 +42,6 @@ class ProjectsTable extends Table
         $this->hasMany('Attachments', [
             'foreignKey' => 'project_id'
         ]);
-        /*$this->hasMany('ProjectUsers', [
-            'foreignKey' => 'project_id'
-        ]);*/
         $this->hasMany('Tasks', [
             'foreignKey' => 'project_id'
         ]);
@@ -54,9 +51,9 @@ class ProjectsTable extends Table
             'joinTable' => 'projects_labels'
         ]);
         $this->belongsToMany('Users', [
-            'foreignKey' => 'user_id',
+            'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
-            'joinTable' => 'projects_labels'
+            'joinTable' => 'projects_users'
         ]);
     }
 

@@ -17,15 +17,15 @@ class ProjectsControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.projects',
+        'app.attachments',
+        'app.tasks',
+        'app.comments',
         'app.users',
         'app.profiles',
         'app.projects_users',
-        'app.projects_labels',
         'app.labels',
-        'app.tasks',
-        'app.attachments',
-        'app.comments',
         'app.tasks_labels',
+        'app.projects_labels',
         'app.users_tasks'
     ];
 

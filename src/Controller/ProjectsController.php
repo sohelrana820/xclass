@@ -32,7 +32,7 @@ class ProjectsController extends AppController
     public function view($id = null)
     {
         $project = $this->Projects->get($id, [
-            'contain' => ['Users', 'Labels', 'Attachments', 'Tasks']
+            'contain' => ['Labels', 'Users', 'Attachments', 'Tasks']
         ]);
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
@@ -55,9 +55,9 @@ class ProjectsController extends AppController
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Projects->Users->find('list', ['limit' => 200]);
         $labels = $this->Projects->Labels->find('list', ['limit' => 200]);
-        $this->set(compact('project', 'users', 'labels'));
+        $users = $this->Projects->Users->find('list', ['limit' => 200]);
+        $this->set(compact('project', 'labels', 'users'));
         $this->set('_serialize', ['project']);
     }
 
@@ -71,7 +71,7 @@ class ProjectsController extends AppController
     public function edit($id = null)
     {
         $project = $this->Projects->get($id, [
-            'contain' => ['Users', 'Labels']
+            'contain' => ['Labels', 'Users']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $project = $this->Projects->patchEntity($project, $this->request->data);
@@ -82,9 +82,9 @@ class ProjectsController extends AppController
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Projects->Users->find('list', ['limit' => 200]);
         $labels = $this->Projects->Labels->find('list', ['limit' => 200]);
-        $this->set(compact('project', 'users', 'labels'));
+        $users = $this->Projects->Users->find('list', ['limit' => 200]);
+        $this->set(compact('project', 'labels', 'users'));
         $this->set('_serialize', ['project']);
     }
 

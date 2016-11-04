@@ -36,7 +36,7 @@ class UsersTable extends Table
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Projects', [
-           'foreignKey' => 'user_id'
+           'foreignKey' => 'created_by'
         ]);
         $this->belongsToMany('Projects', [
             'foreignKey' => 'user_id',

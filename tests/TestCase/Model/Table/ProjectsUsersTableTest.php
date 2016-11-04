@@ -1,14 +1,14 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\ProjectsTable;
+use App\Model\Table\ProjectsUsersTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\ProjectsTable Test Case
+ * App\Model\Table\ProjectsUsersTable Test Case
  */
-class ProjectsTableTest extends TestCase
+class ProjectsUsersTableTest extends TestCase
 {
 
     /**
@@ -17,13 +17,13 @@ class ProjectsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
+        'app.projects_users',
         'app.projects',
         'app.attachments',
         'app.tasks',
         'app.comments',
         'app.users',
         'app.profiles',
-        'app.projects_users',
         'app.labels',
         'app.tasks_labels',
         'app.projects_labels',
@@ -38,8 +38,8 @@ class ProjectsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Projects') ? [] : ['className' => 'App\Model\Table\ProjectsTable'];
-        $this->Projects = TableRegistry::get('Projects', $config);
+        $config = TableRegistry::exists('ProjectsUsers') ? [] : ['className' => 'App\Model\Table\ProjectsUsersTable'];
+        $this->ProjectsUsers = TableRegistry::get('ProjectsUsers', $config);
     }
 
     /**
@@ -49,7 +49,7 @@ class ProjectsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Projects);
+        unset($this->ProjectsUsers);
 
         parent::tearDown();
     }
@@ -70,6 +70,16 @@ class ProjectsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
+    {
+        $this->markTestIncomplete('Not implemented yet.');
+    }
+
+    /**
+     * Test buildRules method
+     *
+     * @return void
+     */
+    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
