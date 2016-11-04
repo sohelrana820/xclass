@@ -19,10 +19,12 @@ class ProjectsControllerTest extends IntegrationTestCase
         'app.projects',
         'app.users',
         'app.profiles',
-        'app.attachments',
-        'app.tasks',
-        'app.comments',
+        'app.projects_users',
+        'app.projects_labels',
         'app.labels',
+        'app.tasks',
+        'app.attachments',
+        'app.comments',
         'app.tasks_labels',
         'app.users_tasks'
     ];

@@ -36,6 +36,11 @@ class LabelsTable extends Table
             'targetForeignKey' => 'task_id',
             'joinTable' => 'tasks_labels'
         ]);
+        $this->belongsToMany('Projects', [
+            'foreignKey' => 'project_id',
+            'targetForeignKey' => 'label_id',
+            'joinTable' => 'projects_labels'
+        ]);
     }
 
     /**

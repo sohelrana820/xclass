@@ -38,6 +38,12 @@ class UsersTable extends Table
         $this->hasMany('Projects', [
            'foreignKey' => 'user_id'
         ]);
+        $this->belongsToMany('Projects', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'project_id',
+            'joinTable' => 'projects_users'
+        ]);
+
     }
 
     /**

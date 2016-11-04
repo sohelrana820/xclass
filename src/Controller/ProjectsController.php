@@ -18,9 +18,6 @@ class ProjectsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
         $this->set('projects', $this->paginate($this->Projects));
         $this->set('_serialize', ['projects']);
     }
@@ -35,7 +32,7 @@ class ProjectsController extends AppController
     public function view($id = null)
     {
         $project = $this->Projects->get($id, [
-            'contain' => ['Users', 'Attachments']
+            'contain' => ['Users', 'Labels', 'Attachments', 'Tasks']
         ]);
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
@@ -59,7 +56,8 @@ class ProjectsController extends AppController
             }
         }
         $users = $this->Projects->Users->find('list', ['limit' => 200]);
-        $this->set(compact('project', 'users'));
+        $labels = $this->Projects->Labels->find('list', ['limit' => 200]);
+        $this->set(compact('project', 'users', 'labels'));
         $this->set('_serialize', ['project']);
     }
 
@@ -73,7 +71,7 @@ class ProjectsController extends AppController
     public function edit($id = null)
     {
         $project = $this->Projects->get($id, [
-            'contain' => []
+            'contain' => ['Users', 'Labels']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $project = $this->Projects->patchEntity($project, $this->request->data);
@@ -85,7 +83,8 @@ class ProjectsController extends AppController
             }
         }
         $users = $this->Projects->Users->find('list', ['limit' => 200]);
-        $this->set(compact('project', 'users'));
+        $labels = $this->Projects->Labels->find('list', ['limit' => 200]);
+        $this->set(compact('project', 'users', 'labels'));
         $this->set('_serialize', ['project']);
     }
 
