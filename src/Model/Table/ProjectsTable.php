@@ -70,26 +70,14 @@ class ProjectsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->requirePresence('name', 'create', 'Name must be required!')
+            ->notEmpty('name', 'Name must be required!')
+            ->add('name', 'unique', ['rule' => 'ValidateUnique', 'provider' => 'table', 'message' => 'Sorry, this project is already created']);
 
         $validator
             ->requirePresence('slug', 'create')
-            ->notEmpty('slug')
+            ->notEmpty('slug', 'Slug must be required!')
             ->add('slug', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
-
-        $validator
-            ->requirePresence('description', 'create')
-            ->notEmpty('description');
-
-        $validator
-            ->add('status', 'valid', ['rule' => 'numeric'])
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
-
-        $validator
-            ->requirePresence('note', 'create')
-            ->notEmpty('note');
 
         return $validator;
     }

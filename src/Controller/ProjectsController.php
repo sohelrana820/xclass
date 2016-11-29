@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Utility\Inflector;
 
 /**
  * Projects Controller
@@ -43,20 +44,29 @@ class ProjectsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function create()
     {
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['user_id'] = $this->userID;
+            $this->request->data['slug'] = strtolower(Inflector::slug($this->request->data['name']));
             $project = $this->Projects->patchEntity($project, $this->request->data);
             if ($this->Projects->save($project)) {
-                $this->Flash->success(__('The project has been saved.'));
+                $this->Flash->success(__('The project has been successfully!'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The project could not be saved. Please, try again.'));
+                $this->Flash->error(__('The project could not be created. Please, try again.'));
             }
         }
         $labels = $this->Projects->Labels->find('list', ['limit' => 200]);
-        $users = $this->Projects->Users->find('list', ['limit' => 200]);
+        $users = $this->Projects->Users->find('list', [
+                'keyField' => 'id',
+                'valueField' => function ($p) {
+                    return $p->profile->get('name');
+                },
+                'limit' => 200
+            ]
+        )->contain('Profiles');
         $this->set(compact('project', 'labels', 'users'));
         $this->set('_serialize', ['project']);
     }
