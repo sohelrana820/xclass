@@ -19,6 +19,9 @@ class ProjectsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'limit' => 10
+        ];
         $this->set('projects', $this->paginate($this->Projects));
         $this->set('_serialize', ['projects']);
     }
