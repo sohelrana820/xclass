@@ -94,4 +94,14 @@ class ProjectsTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
+
+    public function getProjectBySlug($slug)
+    {
+        $result = $this->find()
+            ->where(['slug' => $slug])
+            ->contain(['Labels', 'Users', 'Attachments', 'Tasks'])
+            ->first();
+
+        return $result;
+    }
 }

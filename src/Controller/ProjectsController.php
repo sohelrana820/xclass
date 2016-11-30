@@ -36,11 +36,9 @@ class ProjectsController extends AppController
      * @return void
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug = null)
     {
-        $project = $this->Projects->get($id, [
-            'contain' => ['Labels', 'Users', 'Attachments', 'Tasks']
-        ]);
+        $project = $this->Projects->getProjectBySlug($slug);
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
     }
@@ -129,10 +127,11 @@ class ProjectsController extends AppController
      * @return void Redirects to index.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($slug = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $project = $this->Projects->get($id);
+        $project = $this->Projects->getProjectBySlug($slug);
+        $project = $this->Projects->get($project->id);
         if ($this->Projects->delete($project)) {
             $this->Flash->success(__('The project has been deleted.'));
         } else {
