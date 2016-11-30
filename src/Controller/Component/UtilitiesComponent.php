@@ -64,6 +64,37 @@ class UtilitiesComponent extends Component
         return $conditions;
     }
 
+    /**
+     * @param $query
+     * @return array
+     */
+    public function buildProjectListConditions($query)
+    {
+        $conditions = [];
+        if(isset($query['name']) && $query['name'])
+        {
+            $conditions = array_merge($conditions, ['Projects.name Like' => '%'.$query['name'].'%']);
+        }
+
+        if(isset($query['status']) && $query['status']){
+            $status = $query['status'];
+            if($status == 'progressing'){
+                $conditions = array_merge($conditions, ['Projects.status' => 1]);
+            }
+            elseif($status == 'paused'){
+                $conditions = array_merge($conditions, ['Projects.status' => 2]);
+            }
+            elseif($status == 'invalid'){
+                $conditions = array_merge($conditions, ['Projects.status' => 3]);
+            }
+            elseif($status == 'completed'){
+                $conditions = array_merge($conditions, ['Projects.status' => 4]);
+            }
+        }
+
+        return $conditions;
+    }
+
 
     /**
      * @param $path

@@ -15,6 +15,7 @@
         </div>
         <div class="pull-right btn-areas">
             <?php echo $this->Html->link('New Project', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn btn-info']) ?>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchProjectModal">Search Project</button>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -72,5 +73,64 @@
     </div>
 </div>
 
+<div class="modal fade modal-primary" id="searchProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <?php
+        echo $this->Form->create(null,
+            [
+                'type' => 'get',
+                'url' =>
+                    [
+                        'controller' => 'projects',
+                        'action' => 'index',
+                    ]
+            ]
+        );
+        ?>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title text-center text-uppercase" id="myModalLabel">Search Project</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Name</label>
+                    <div class="input text">
+                        <input type="text" name="name" class="form-control" placeholder="Name" value="<?php echo $this->request->query('name') != '' ? $this->request->query('name') : '' ?>">
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <label>Task Status</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="progressing" <?php if($this->request->query('status') && $this->request->query('status') == 1) {echo 'checked';}?>>Progressing
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="paused" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Paused
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="invalid" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Invalid
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="completed" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Completed
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="search">
+                <?php echo $this->Html->link('Reset', ['controller' => 'projects' , 'action' => 'index'], ['class' => 'btn btn-danger']);?>
+            </div>
+        </div>
+        <?php echo $this->Form->end();?>
+    </div>
+</div>
 

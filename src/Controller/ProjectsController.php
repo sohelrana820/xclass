@@ -20,7 +20,9 @@ class ProjectsController extends AppController
      */
     public function index()
     {
+        $conditions = $this->Utilities->buildProjectListConditions($this->request->query);
         $this->paginate = [
+            'conditions' => $conditions,
             'limit' => 10
         ];
         $this->set('projects', $this->paginate($this->Projects));
