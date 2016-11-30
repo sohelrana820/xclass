@@ -47,7 +47,10 @@
                                 N/A
                             <?php endif; ?>
                         </td>
-                        <td><?php echo h($project->created) ?></td>
+                        <td>
+                            <?php echo $project->created->format('M d, Y'); ?>
+                            (<?php echo $project->created->format('h:i A'); ?>)
+                        </td>
                         <td class="text-right">
                             <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $project->slug], ['escape' => false, 'class' => 'icons green']) ?>
                             <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $project->slug], ['escape' => false, 'class' => 'icons']) ?>
