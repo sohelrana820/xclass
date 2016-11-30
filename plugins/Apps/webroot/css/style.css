@@ -1411,3 +1411,17 @@ a {
     color: #3c85a6;
     font-size: 10px;
 }
+
+.single_attachment {
+    position: relative;
+}
+
+.single_attachment .form-group{
+    margin-bottom: 10px !important;
+}
+
+.deleteKeywordRow {
+    position: absolute;
+    right: -13px;
+    top: 32px;
+}

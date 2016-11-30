@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
 </div>
 
-<?php echo $this->Form->create($project, array('controller' => 'projects', 'action' => 'create'));?>
+<?php echo $this->Form->create($project, array('controller' => 'projects', 'action' => 'create', 'type' => 'file'));?>
 
 <div class="widget">
     <div class="widget-header">
@@ -46,29 +46,51 @@
             <label>Assign Label</label>
             <?php echo $this->Form->input('labels._ids', ['options' => $labels, 'class' => 'form-control', 'label' => false, 'required' => false]);?>
         </div>
-        <button type="submit" class="btn btn-success">Save User</button>
+
+        <div class="row">
+            <div class="attachment_area col-lg-6">
+                <div class="single_attachment">
+                    <div class="form-group">
+                        <label>Attachment 1</label>
+                        <input type="file" name="attachments[]" class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="add_more btn-theme-xs-rev">Add More Attachment</a>
+        <br/>
+        <br/>
+        <br/>
+        <div class="clearfix"></div>
+        <button type="submit" class="btn btn-success">Create Project</button>
         <?php echo $this->Form->end();?>
     </div>
 </div>
 
-<?php
-$this->start('cssTop');
-echo $this->Html->css(array('datepicker'));
-$this->end();
+<?php $this->start('jsBottom'); ?>
 
-$this->start('jsTop');
-echo $this->Html->script(array('country'));
-$this->end();
+<script type="text/javascript">
+    var counterSlider = 1;
+    $(".add_more").on("click", function () {
+        counterSlider++;
+        var newRow = $("");
+        var cols = "";
+        cols +=
+            '<div class="single_attachment">' +
+                '<div class="form-group">' +
+                    '<label>Attachment '+counterSlider+'</label>' +
+                    '<input type="file" name="attachments[]" class="form-control">' +
+                '</div>' +
+                '<a class="deleteKeywordRow"> x </a>' +
+            '</div>';
+        newRow.append(cols);
+        $(".attachment_area").append(cols);
+    });
 
-$this->start('jsBottom');
-echo $this->Html->script(['datepicker']);
-?>
-
-<script language="javascript">
-    populateCountries("country", "state");
-    $('.datepicker').datepicker();
+    $("div").on("click", "a.deleteKeywordRow", function (event) {
+        $(this).closest("div").remove();
+    });
 </script>
-
 <?php $this->end(); ?>
 
 

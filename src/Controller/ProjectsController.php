@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Utility\Inflector;
+use Cake\Utility\Text;
 
 /**
  * Projects Controller
@@ -51,8 +52,26 @@ class ProjectsController extends AppController
     {
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
+
             $this->request->data['user_id'] = $this->userID;
             $this->request->data['slug'] = strtolower(Inflector::slug($this->request->data['name']));
+
+            $allAttachments = [];
+            if(isset($this->request->data['attachments'])){
+                $attachments = $this->request->data['attachments'];
+                foreach($attachments as $attachment){
+                    if(isset($attachment['name']) && $attachment['name']){
+                        $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
+                        $allAttachments[] = [
+                            'uuid' => Text::uuid(),
+                            'name' => $attachment['name'],
+                            'path' => $result,
+                        ];
+                    }
+                }
+            }
+
+            $this->request->data['attachments'] = $allAttachments;
             $project = $this->Projects->patchEntity($project, $this->request->data);
             if ($this->Projects->save($project)) {
                 $this->Flash->success(__('The project has been successfully!'));
