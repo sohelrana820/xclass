@@ -5,6 +5,10 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, t
     $scope.searched_labels = false;
     $scope.labels = [];
 
+    var url = window.location.href.split("projects/");
+    url = url['1'].split("/labels");
+    var projectSlug = url[0];
+
    $scope.fetchLabelLists = function(data){
        var labels = LabelResources.query(data).$promise;
        labels.then(function (res) {
@@ -44,6 +48,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, t
         $scope.isLabelFormSubmitted = true;
         if($isValid && $scope.LabelObj.name != undefined)
         {
+            $scope.LabelObj.slug = projectSlug;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 console.log(res);

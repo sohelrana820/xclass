@@ -21,7 +21,7 @@ class LabelsController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function index($slug = null)
     {
         $conditions = [];
         $limit = 5;
@@ -108,12 +108,12 @@ class LabelsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($slug)
     {
         $this->request->data['created_by'] = $this->userID;
         $label = $this->Labels->newEntity();
 
-        var_dump($uuid); die();
+        var_dump($slug); die();
 
         if ($this->request->is('post')) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
