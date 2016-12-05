@@ -113,6 +113,8 @@ class LabelsController extends AppController
         $this->request->data['created_by'] = $this->userID;
         $label = $this->Labels->newEntity();
 
+        var_dump($uuid); die();
+
         if ($this->request->is('post')) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
             if ($this->Labels->save($label)) {

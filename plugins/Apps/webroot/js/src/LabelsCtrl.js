@@ -46,6 +46,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, t
         {
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
+                console.log(res);
                 if(res.result.success){
                     $scope.isLabelFormSubmitted = false;
                     $scope.labels.unshift(res.result.data);

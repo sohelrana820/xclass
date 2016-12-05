@@ -55,6 +55,24 @@ Router::scope('/', function ($routes) {
     $routes->fallbacks('DashedRoute');
 });
 
+Router::scope('/projects/', function ($routes){
+    $routes->extensions(['json', 'xml', 'html']);
+
+    $routes->connect('/', ['controller' => 'projects', 'action' => 'index']);
+
+    $routes->connect('/create/', ['controller' => 'projects', 'action' => 'create']);
+
+    $routes->connect('/:slug/', ['controller' => 'projects', 'action' => 'view'], ['pass' => ['slug']]);
+
+    $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
+
+
+
+    $routes->connect('/:slug/tasks', ['controller' => 'tasks', 'action' => 'index'], ['pass' => ['slug']]);
+
+    $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'create'], ['pass' => ['slug']]);
+});
+
 
 Router::scope('/', function ($routes) {
     $routes->extensions(['json']);

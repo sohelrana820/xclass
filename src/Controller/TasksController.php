@@ -17,7 +17,7 @@ class TasksController extends AppController
      *
      * @return void
      */
-    public function index()
+    public function index($slug)
     {
         //$this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
@@ -159,6 +159,18 @@ class TasksController extends AppController
             $this->set('result', $response);
             $this->set('_serialize', ['result']);
         }
+    }
+
+    /**
+     * View method
+     *
+     * @param string|null $id Task id.
+     * @return void
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function create($slug = null)
+    {
+        var_dump($slug);
     }
 
     /**
