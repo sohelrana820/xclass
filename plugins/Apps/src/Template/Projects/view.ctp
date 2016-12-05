@@ -15,6 +15,8 @@
         </div>
         <div class="pull-right btn-areas btn-margin">
             <?php
+            echo $this->Html->link('Project Tasks', ['controller' => 'tasks',  $project->slug], ['class' => 'btn btn-info']);
+            echo $this->Html->link('Project Label', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'btn btn-info']);
             echo $this->Html->link('New Project', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn btn-info']);
             ?>
         </div>
