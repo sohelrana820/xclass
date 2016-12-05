@@ -58,6 +58,9 @@ class TasksTable extends Table
         $this->hasMany('UsersTasks', [
             'foreignKey' => 'task_id'
         ]);
+        $this->belongsTo("Projects", [
+           'foreign_key' => 'project_id'
+        ]);
     }
 
     /**
