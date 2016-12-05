@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 02, 2016 at 05:06 AM
--- Server version: 5.7.13-0ubuntu0.16.04.2
+-- Generation Time: Dec 04, 2016 at 09:42 PM
+-- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -99,10 +99,39 @@ CREATE TABLE `profiles` (
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `description` text NOT NULL,
-  `status` int(1) NOT NULL COMMENT 'status: 1 = Progressing, 2 = Paused, 3 = Invalid, 4 = Completed',
-  `note` varchar(255) NOT NULL,
+  `name` varchar(128) NOT NULL,
+  `slug` varchar(128) NOT NULL,
+  `description` text,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = Progressing, 2 = Paused, 3 = Invalid, 4 = Completed',
+  `note` varchar(255) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects_labels`
+--
+
+CREATE TABLE `projects_labels` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `label_id` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects_users`
+--
+
+CREATE TABLE `projects_users` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -116,6 +145,7 @@ CREATE TABLE `projects` (
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL,
   `uuid` varchar(36) NOT NULL,
+  `project_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
   `task` text NOT NULL,
   `description` text,
@@ -214,6 +244,23 @@ ALTER TABLE `profiles`
 --
 ALTER TABLE `projects`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `slug` (`slug`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `projects_labels`
+--
+ALTER TABLE `projects_labels`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `project_id` (`project_id`),
+  ADD KEY `label_id` (`label_id`);
+
+--
+-- Indexes for table `projects_users`
+--
+ALTER TABLE `projects_users`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `project_id` (`project_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -221,7 +268,8 @@ ALTER TABLE `projects`
 --
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `created_by` (`created_by`);
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `project_id` (`project_id`);
 
 --
 -- Indexes for table `tasks_labels`
@@ -254,32 +302,42 @@ ALTER TABLE `users_tasks`
 -- AUTO_INCREMENT for table `attachments`
 --
 ALTER TABLE `attachments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `labels`
 --
 ALTER TABLE `labels`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `projects_labels`
+--
+ALTER TABLE `projects_labels`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `projects_users`
+--
+ALTER TABLE `projects_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tasks_labels`
 --
@@ -289,7 +347,7 @@ ALTER TABLE `tasks_labels`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 --
 -- AUTO_INCREMENT for table `users_tasks`
 --
