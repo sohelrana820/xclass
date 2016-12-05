@@ -37,16 +37,6 @@
             <?php echo $this->Form->input('note', ['type' => 'textarea', 'class' => 'form-control', 'placeholder' => 'Project note', 'label' => false, 'required' => false]);?>
         </div>
 
-        <div class="form-group">
-            <label>Assign User</label>
-            <?php echo $this->Form->input('users._ids', ['options' => $users, 'class' => 'form-control', 'label' => false, 'required' => false]); ?>
-        </div>
-
-        <div class="form-group">
-            <label>Assign Label</label>
-            <?php echo $this->Form->input('labels._ids', ['options' => $labels, 'class' => 'form-control', 'label' => false, 'required' => false]);?>
-        </div>
-
         <div class="row">
             <div class="attachment_area col-lg-6">
                 <div class="single_attachment">

@@ -80,16 +80,7 @@ class ProjectsController extends AppController
                 $this->Flash->error(__('The project could not be created. Please, try again.'));
             }
         }
-        $labels = $this->Projects->Labels->find('list', ['limit' => 200]);
-        $users = $this->Projects->Users->find('list', [
-                'keyField' => 'id',
-                'valueField' => function ($p) {
-                    return $p->profile->get('name');
-                },
-                'limit' => 200
-            ]
-        )->contain('Profiles');
-        $this->set(compact('project', 'labels', 'users'));
+        $this->set(compact('project'));
         $this->set('_serialize', ['project']);
     }
 
