@@ -108,29 +108,41 @@ class LabelsController extends AppController
      *
      * @return void Redirects on successful add, renders view otherwise.
      */
-    public function add($slug)
+    public function add()
     {
-        $this->request->data['created_by'] = $this->userID;
         $label = $this->Labels->newEntity();
+        $this->request->data['created_by'] = $this->userID;
+        $this->loadModel('Projects');
+        $project = $this->Projects->getProjectBySlug($this->request->data['slug']);
 
-        var_dump($slug); die();
-
-        if ($this->request->is('post')) {
-            $label = $this->Labels->patchEntity($label, $this->request->data);
-            if ($this->Labels->save($label)) {
-                $response = [
-                    'success' => true,
-                    'message' => 'New label has been created successfully',
-                    'data' => $label,
-                ];
-            } else {
-                $response = [
-                    'success' => false,
-                    'message' => 'Label could not created',
-                    'data' => null,
-                ];
+        if(isset($project) && $project->id)
+        {
+            $this->request->data['project_id'] = $project->id;
+            if ($this->request->is('post')) {
+                $label = $this->Labels->patchEntity($label, $this->request->data);
+                if ($this->Labels->save($label)) {
+                    $response = [
+                        'success' => true,
+                        'message' => 'New label has been created successfully',
+                        'data' => $label,
+                    ];
+                } else {
+                    $response = [
+                        'success' => false,
+                        'message' => 'Label could not created',
+                        'data' => null,
+                    ];
+                }
             }
         }
+        else{
+            $response = [
+                'success' => false,
+                'message' => 'Label could not created',
+                'data' => null,
+            ];
+        }
+
         $this->set('result', $response);
         $this->set('_serialize', ['result']);
     }

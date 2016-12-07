@@ -6,8 +6,7 @@ app.controller('LabelsCtrl', function($scope, $timeout, LabelResources, Flash, t
     $scope.labels = [];
 
     var url = window.location.href.split("projects/");
-    url = url['1'].split("/labels");
-    var projectSlug = url[0];
+    var projectSlug = url[1];
 
    $scope.fetchLabelLists = function(data){
        var labels = LabelResources.query(data).$promise;
