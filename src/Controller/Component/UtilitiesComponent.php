@@ -120,4 +120,17 @@ class UtilitiesComponent extends Component
         }
         return false;
     }
+
+    /**
+     * @param $url
+     * @return bool
+     */
+    public function getProjectSlug($url)
+    {
+        $explodedUrl = explode('projects/', $url);
+        if(isset($explodedUrl[1]) && $explodedUrl[1]){
+            return $explodedUrl[1];
+        }
+        return false;
+    }
 }

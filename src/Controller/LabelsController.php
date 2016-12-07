@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Routing\Router;
 
 /**
  * Labels Controller
@@ -27,10 +28,12 @@ class LabelsController extends AppController
         $limit = 5;
         $page = 1;
 
+        $projectSlug = $this->Utilities->getProjectSlug($this->referer());
         $this->loadModel('Projects');
-        $project = $this->Projects->getProjectBySlug($this->request->query['project_slug']);
-        if (isset($project->id) && $project->id) {
-            $conditions = array_merge($conditions, ['Labels.project_id' => $project->id]);
+        $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
+
+        if (isset($projectId) && $projectId) {
+            $conditions = array_merge($conditions, ['Labels.project_id' => $projectId]);
         }
 
         if (isset($this->request->query['name'])) {
@@ -112,14 +115,16 @@ class LabelsController extends AppController
      */
     public function add()
     {
-        $label = $this->Labels->newEntity();
-        $this->request->data['created_by'] = $this->userID;
+        $projectSlug = $this->Utilities->getProjectSlug($this->referer());
         $this->loadModel('Projects');
-        $project = $this->Projects->getProjectBySlug($this->request->data['project_slug']);
+        $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
 
-        if(isset($project) && $project->id)
+        if(isset($projectId) && $projectId)
         {
-            $this->request->data['project_id'] = $project->id;
+            $this->request->data['created_by'] = $this->userID;
+            $this->request->data['project_id'] = $projectId;
+            $label = $this->Labels->newEntity();
+
             if ($this->request->is('post')) {
                 $label = $this->Labels->patchEntity($label, $this->request->data);
                 if ($this->Labels->save($label)) {

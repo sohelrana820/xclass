@@ -102,4 +102,17 @@ class ProjectsTable extends Table
 
         return $result;
     }
+
+    public function getProjectIDBySlug($slug)
+    {
+        $result = $this->find()
+            ->where(['slug' => $slug])
+            ->contain(['Labels', 'Users', 'Attachments', 'Tasks'])
+            ->first();
+
+        if($result){
+            return $result->id;
+        }
+        return null;
+    }
 }

@@ -26,11 +26,11 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
             }
         });
     };
-    $scope.fetchLabelLists({project_slug: projectSlug});
+    $scope.fetchLabelLists({});
 
     $scope.searchLabel = function (query) {
         $scope.searched_labels = true;
-        $scope.fetchLabelLists({name: query, project_slug: projectSlug});
+        $scope.fetchLabelLists({name: query});
     };
 
     $scope.isLabelFormSubmitted = false;
@@ -43,7 +43,6 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
     $scope.saveLabel = function ($isValid) {
         $scope.isLabelFormSubmitted = true;
         if ($isValid && $scope.LabelObj.name != undefined) {
-            $scope.LabelObj.project_slug = projectSlug;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 console.log(res);
@@ -53,7 +52,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                     $scope.create_label_form.$setPristine();
                     $scope.LabelObj = {color_code: '#C00C00'};
                     toastr.success(res.result.message);
-                    $scope.fetchLabelLists({project_slug: projectSlug});
+                    $scope.fetchLabelLists({});
                 }
                 else {
                     toastr.error(res.result.message);
@@ -77,11 +76,12 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
             labels.then(function (res) {
                 if (res.result.success) {
                     $scope.isLabelFormSubmitted = false;
+                    $scope.fetchLabelLists();
                     $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.create_form = true;
                     $scope.edit_form = false;
                     toastr.success(res.result.message);
-                    $scope.fetchLabelLists({project_slug: projectSlug});
+                    $scope.fetchLabelLists({});
                 }
                 else {
                     toastr.error(res.result.message);
@@ -102,7 +102,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                     return label.id !== id
                 });
                 toastr.error(res.result.message);
-                $scope.fetchLabelLists({project_slug: projectSlug});
+                $scope.fetchLabelLists({});
             }
             else {
                 toastr.error(res.result.message);
@@ -129,7 +129,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
     $scope.goPreviousPage = function () {
         if ($scope.label.currentPage > 1) {
             $scope.label.currentPage = parseInt($scope.label.currentPage) - 1;
-            $scope.fetchLabelLists({page: $scope.label.currentPage, project_slug: projectSlug});
+            $scope.fetchLabelLists({page: $scope.label.currentPage});
         }
     };
 
@@ -137,7 +137,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
         var maxPage = parseInt($scope.label.count / $scope.label.limit);
         if ($scope.label.currentPage <= maxPage) {
             $scope.label.currentPage = parseInt($scope.label.currentPage) + 1;
-            $scope.fetchLabelLists({page: $scope.label.currentPage, project_slug: projectSlug});
+            $scope.fetchLabelLists({page: $scope.label.currentPage});
         }
     };
 });
