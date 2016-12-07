@@ -40,3 +40,7 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
         },2000);
     }
 });
+
+var url = window.location.href.split("projects/");
+var projectSlug = url[1];
+

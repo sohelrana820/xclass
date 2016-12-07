@@ -27,8 +27,10 @@ class LabelsController extends AppController
         $limit = 5;
         $page = 1;
 
-        if (isset($this->request->query['status'])) {
-            $conditions = array_merge($conditions, ['Labels.status' => $this->request->query['status']]);
+        $this->loadModel('Projects');
+        $project = $this->Projects->getProjectBySlug($this->request->query['project_slug']);
+        if (isset($project->id) && $project->id) {
+            $conditions = array_merge($conditions, ['Labels.project_id' => $project->id]);
         }
 
         if (isset($this->request->query['name'])) {
@@ -113,7 +115,7 @@ class LabelsController extends AppController
         $label = $this->Labels->newEntity();
         $this->request->data['created_by'] = $this->userID;
         $this->loadModel('Projects');
-        $project = $this->Projects->getProjectBySlug($this->request->data['slug']);
+        $project = $this->Projects->getProjectBySlug($this->request->data['project_slug']);
 
         if(isset($project) && $project->id)
         {
