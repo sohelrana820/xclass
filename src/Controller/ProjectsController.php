@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Network\Exception\BadRequestException;
 use Cake\Utility\Inflector;
 use Cake\Utility\Text;
 
@@ -39,6 +40,11 @@ class ProjectsController extends AppController
     public function view($slug = null)
     {
         $project = $this->Projects->getProjectBySlug($slug);
+
+        if($project == null)
+        {
+            throw new BadRequestException();
+        }
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
     }
