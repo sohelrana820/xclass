@@ -123,9 +123,480 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-pane" id="project_tasks">
-                    <h2>Project Tasks</h2>
+
+                <div class="tab-pane" id="project_tasks" ng-controller="TasksCtrl">
+
+                    <!-- Task list -->
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1">
+                            <div class="empty_block">
+            <span class="icon">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+            </span>
+                                <br/>
+                                <br/>
+                                <h2>Welcome to Task!</h2>
+                                <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labeling and then assign to the user. After completing each task you can mark them as closed/reopened. It also allowed to comments on task</p>
+                                <br/>
+                                <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create your first task</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="page_loader" ng-show="!task_loader">
+                        <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                        <h4>Content loading, please wait...</h4>
+                    </div>
+
+                    <div class="widget" ng-show="task_loader && tasks.count_all > 0">
+                        <div class="widget-header">
+                            <div class="filter_bar">
+
+                                <div class="filter_items pull-left visible-lg">
+                                    <a class="search_item search_item_gray"  ng-click="clearQueryString(); doFilter(filterQuery.status = 'all')">
+                                        <i class="fa fa-signal" aria-hidden="true"></i>
+                                        All
+                                    </a>
+
+                                    <a class="search_item search_item_gray"  ng-click="doFilter(filterQuery.status = 'closed')">
+                                        <i class="fa fa-bell-slash-o" aria-hidden="true"></i>
+                                        Closed
+                                    </a>
+
+                                    <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.status = 'open')">
+                                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                        Open
+                                    </a>
+
+                                    <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unlabeled = true)">
+                                        <i class="fa fa-tags" aria-hidden="true"></i>
+                                        Unlabeled
+                                    </a>
+
+                                    <a class="search_item search_item_gray" ng-click="doFilter(filterQuery.unassigned = true)">
+                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                        Unassigned
+                                    </a>
+                                </div>
+
+                                <div class="pull-right right-side-filter">
+                                    <div class="filter_block">
+                                        <div class="dropdown">
+                            <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Author
+                                <b class="caret"></b>
+                            </span>
+                                            <div class="dropdown-menu custom-dropdown" id="authorList" aria-labelledby="label">
+                                                <h2>
+                                                    Filter by author
+                                                    <a class="quick_task">
+                                                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                        <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
+                                                    </a>
+                                                </h2>
+
+                                                <div class="label_quick_operation">
+                                                    <div class="search_label">
+                                                        <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <ul class="custom_dropdown_list nav nav-list">
+                                                    <li ng-repeat="(key, user) in users">
+                                                        <a ng-click="chooseFilterAuthor(user, key, user.checked)"">
+                                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                                        {{user.profile.first_name}} {{user.profile.last_name}}
+                                                        <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Author not found</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter_block">
+                                        <div class="dropdown">
+                            <span id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Labels
+                                <b class="caret"></b>
+                            </span>
+
+                                            <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
+                                                <h2>
+                                                    Filter by label
+                                                    <a class="quick_task">
+                                                        <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                        <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List"><i class="fa fa-refresh grey"></i></span>
+                                                    </a>
+                                                </h2>
+
+                                                <div class="label_quick_operation">
+                                                    <div class="search_label">
+                                                        <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
+                                                        <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <ul class="custom_dropdown_list nav nav-list">
+                                                    <li ng-repeat="(key, label) in labels">
+                                                        <a ng-click="chooseFilterLabel(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter_block">
+                                        <div class="dropdown">
+                        <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Assigned
+                            <b class="caret"></b>
+                        </span>
+                                            <div class="dropdown-menu custom-dropdown" id="assigneeList" aria-labelledby="label">
+                                                <h2>
+                                                    Filter by who’s assigned
+                                                    <a class="quick_task">
+                                                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                        <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
+                                                    </a>
+                                                </h2>
+
+                                                <div class="label_quick_operation">
+                                                    <div class="search_label">
+                                                        <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                </div>
+
+                                                <ul class="custom_dropdown_list nav nav-list">
+                                                    <li ng-repeat="(key, user) in users">
+                                                        <a ng-click="chooseFilterAssignee(user, key, user.checked)"">
+                                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                                        {{user.profile.first_name}} {{user.profile.last_name}}
+                                                        <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+
+                                                <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Assignee not found</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter_block">
+                                        <div class="dropdown">
+                        <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Sort
+                            <b class="caret"></b>
+                        </span>
+                                            <div class="dropdown-menu custom-dropdown" id="assigneeList" aria-labelledby="label">
+                                                <ul class="custom_dropdown_list nav nav-list">
+                                                    <li>
+                                                        <a ng-click="doFilter(filterQuery.sort_by = 'id', filterQuery.order_by = 'DESC')">Newest</a>
+                                                        <a ng-click="doFilter(filterQuery.sort_by = 'id', filterQuery.order_by = 'ASC')">Oldest</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="filter_block search_query">
+                                        <div>
+                                            <input ng-model="filterQuery.query" class="form-control" placeholder="Search task" ng-change="doFilter()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                        <div class="widget-body">
+                            <div class="filter_options">
+                                <div class="filter_option_bar">
+                                    <h2 ng-show="filterLabels.length > 0 || filtterAuthor.length > 0 || filtterAssignee.length > 0 || filterQuery.status == 'closed' || filterQuery.status == 'open' || filterQuery.unlabeled || filterQuery.unassigned">Filtered By:</h2>
+
+                                    <ul class="filter_user">
+                                        <li ng-show="filterQuery.query">
+                                            Query: {{filterQuery.query}}
+                                            <span class="red" ng-click="doFilter(filterQuery.query = null)">X</span>
+                                        </li>
+                                        <li ng-show="filterQuery.status == 'closed'">
+                                            Closed
+                                            <span class="red" ng-click="doFilter(filterQuery.status = 'all')">X</span>
+                                        </li>
+                                        <li ng-show="filterQuery.status == 'open'">
+                                            Open
+                                            <span class="red" ng-click="doFilter(filterQuery.status = 'all')">X</span>
+                                        </li>
+                                        <li ng-show="filterQuery.unlabeled">
+                                            Unlabeled
+                                            <span class="red" ng-click="doFilter(filterQuery.unlabeled = false)">X</span>
+                                        </li>
+                                        <li ng-show="filterQuery.unassigned">
+                                            Unassigned
+                                            <span class="red" ng-click="doFilter(filterQuery.unassigned = false)">X</span>
+                                        </li>
+                                        <li ng-repeat="label in filterLabels">
+                                            Label: {{label.name}}
+                                            <span class="red" ng-click="removeFilterLabel(label)">X</span>
+                                        </li>
+
+                                        <li ng-repeat="user in filtterAuthor">
+                                            Author: {{user.profile.first_name}} {{user.profile.last_name}}
+                                            <span class="red" ng-click="removeFilterAuthor(user)">X</span>
+                                        </li>
+
+                                        <li ng-repeat="user in filtterAssignee">
+                                            Assignee: {{user.profile.first_name}} {{user.profile.last_name}}
+                                            <span class="red" ng-click="removeFilterAssignee(user)">X</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
+                                    <div class="clearfix"></div>
+                                    <table class="table task-list-table" ng-show="tasks.count > 0">
+                                        <tbody>
+                                        <tr ng-repeat="task in tasks.data">
+                                            <td style="width: 50px;" class="hidden-xs">
+                                                <a class="sl" href="{{BASE_URL}}tasks/view/{{task.id}}">#{{task.id}}</a>
+                                            </td>
+                                            <td style="width: 15px; padding-right: 0px;" class="hidden-xs">
+                                                <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
+                                                <i ng-show="task.status != 2"  class="fa fa-bell-o green" aria-hidden="true"></i>
+                                            </td>
+                                            <td>
+                                                <strong>
+                                                    <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">{{task.task}}</a>
+                                                    <a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="!task.task">-</a>
+                                                    <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
+                                                </strong>
+                                                <br>
+                                                <small class="author">Opened by {{task.createdUserProfile.first_name}}
+                                                    {{task.createdUserProfile.first_name}} at
+                                                    {{task.created | date}}.
+                                                    ({{task.created | date : 'HH:m a'}})
+                                                </small>
+                                            </td>
+                                            <td style="width: 10%;">
+                                <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
+                                    <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}" />
+                                    <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg" />
+                                </span>
+                                            </td>
+                                            <td class="text-right" style="width: 10%;">
+                                                <a href="{{BASE_URL}}tasks/view/{{task.id}}" class="icons green"><i class="fa fa-gear"></i></a>
+                                                <a ng-click="deleteTask(task.id)" class="icons red"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="pagination_area text-center" ng-show="tasks.count > 0" >
+                                        <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
+                                        <span>
+                        showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
+                        {{tasks.currentPage * tasks.limit > tasks.count ? tasks.count : tasks.currentPage * tasks.limit}}
+                        of {{tasks.count}} records
+                    </span>
+                                        <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="not-found" ng-show="tasks.count < 1 && filtered_tasks_list">
+                                <h4>Sorry! task not found</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Task list -->
+
+                    <!-- Saving new task -->
+                    <div>
+                        <form ng-submit="saveTask()">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8">
+                                    <div>
+                                        <div class="form-group">
+                                            <label>Title</label>
+                                            <div class="input text">
+                                                <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Description</label>
+                                            <div class="input text">
+                                                <text-angular ng-model="TaskObj.description" ta-toolbar="[['h1','h2','h3', 'h4' , 'h5', 'h6'],['p', 'bold','italics', 'underline'], ['ol', 'ul'], ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', ]]" ng-model="htmlVariable"></text-angular>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Attachments</label>
+                                                    <div class="input text" ng-repeat="key in countAttachments">
+                                                        <input type="file" class="form-control attachment_field"
+                                                               ngf-select ng-model="TaskObj.file[key]"
+                                                               name="task_attachments"
+                                                               ngf-max-size="20MB"
+                                                        />
+                                                    </div>
+                                                    <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-4">
+                                    <div class="task_sidebar">
+                                        <div class="single_block">
+                                            <div class="dropdown">
+                                                <h2 id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    Set Task Label
+                                                    <i class="fa fa-gear pull-right"></i>
+                                                </h2>
+
+                                                <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
+                                                    <h2 ng-show="!show_create_new_label_form">
+                                                        Apply label
+                                                        <a class="quick_task">
+                                                            <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                            <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List"><i class="fa fa-refresh grey"></i></span>
+                                                            <span class="add_new_label" ng-click="show_create_new_label_form = true;" title="Create New Title"><i class="fa fa-plus"></i></span>
+                                                        </a>
+                                                    </h2>
+                                                    <div class="label_quick_operation">
+
+                                                        <div class="create_new_label" ng-show="show_create_new_label_form">
+                                                            <ng-form name="create_label_form"  novalidate>
+
+                                                                <div class="form-group">
+                                                                    <label>Label Name</label>
+                                                                    <div class="input text">
+                                                                        <input type="text" ng-model="LabelObj.name" name="label_name" class="form-control" placeholder="Name of label">
+                                                                        <div ng-if="create_label_form.label_name.$dirty || isLabelFormSubmitted">
+                                                                            <p ng-show="create_label_form.label_name.$error.required"  class="text-danger">Label name is required</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <label>Label Color</label>
+                                                                    <div class="input text">
+                                                                        <color-picker ng-model="LabelObj.color_code" options="color_options"></color-picker>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <a class="btn btn-success" ng-click="saveLabel(create_label_form.$valid)">Save</a>
+                                                                    <a class="btn btn-danger" ng-show="!show_label_create_loader" ng-click="show_create_new_label_form = false">Cancel</a>
+                                                                    <img ng-show="show_label_create_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                                </div>
+                                                            </ng-form>
+                                                        </div>
+
+                                                        <div class="search_label" ng-show="!show_create_new_label_form && taskLabels.length > 0">
+                                                            <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
+                                                            <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                        </div>
+                                                        <div class="clearfix"></div>
+
+                                                    </div>
+
+                                                    <ul class="custom_dropdown_list nav nav-list" ng-show="!show_create_new_label_form">
+                                                        <li ng-repeat="(key, label) in labels">
+                                                            <a ng-click="chooseTaskLabels(label, key, label.checked)"">{{label.name}} <i ng-show="label.checked" class="fa fa-check pull-right green"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                    <p style="font-size: 10px; margin-top: 10px;" ng-show="labels.length < 1 && !show_create_new_label_form"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Label list empty</p>
+                                                </div>
+                                            </div>
+
+                                            <small class="red" ng-show="taskLabels.length < 1">Label not set yet!</small>
+                                            <div>
+                                                <ul class="task_labels" ng-show="taskLabels.length > 0">
+                                                    <li ng-repeat="taskLabel in taskLabels" style="background: {{taskLabel.color_code}};">{{taskLabel.name}} <span ng-click="removeTaskLabels(taskLabel)">X</span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                        <div class="single_block">
+                                            <div class="dropdown">
+                                                <h2 id="usersList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                                    Assign User
+                                                    <i class="fa fa-gear pull-right"></i>
+                                                </h2>
+                                                <div class="dropdown-menu custom-dropdown" id="usersList" aria-labelledby="label">
+                                                    <h2>
+                                                        Assign task to user
+                                                        <a class="quick_task">
+                                                            <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                            <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
+                                                        </a>
+                                                    </h2>
+
+                                                    <div class="label_quick_operation">
+                                                        <div class="search_label">
+                                                            <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                                            <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+
+
+                                                    <ul class="custom_dropdown_list nav nav-list">
+                                                        <li ng-repeat="(key, user) in users">
+                                                            <a ng-click="chooseTaskUsers(user, key, user.checked)"">
+                                                            <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                                            <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                                            {{user.profile.first_name}} {{user.profile.last_name}}
+                                                            <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1"class="red text-center text-uppercase" ng-show="taskLabels.length < 1">User not found</p>
+                                                </div>
+                                            </div>
+
+                                            <small class="red" ng-show="taskUsers.length < 1">User not assigned yet!</small>
+                                            <div>
+                                                <ul class="task_users">
+                                                    <li ng-repeat="user in taskUsers">
+                                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                                        {{user.profile.first_name}} {{user.profile.last_name}}
+                                                        <span class="pull-right red" ng-click="removeTaskUsers(user)">X</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success">SAVE TASK</button>
+                                <span class="instance-loader" ng-show="save_task_loader" >
+                        <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                    </span>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /Saving new task -->
                 </div>
+
                 <div class="tab-pane" id="project_labels">
                     <div ng-controller="LabelsCtrl">
                         <div class="page_loader" ng-show="!hide_page_loader">
@@ -319,6 +790,7 @@
 <?php
 echo $this->start('jsBottom');
 echo $this->Html->script(['src/LabelsCtrl']);
+echo $this->Html->script(['src/TasksCtrl']);
 echo $this->end();
 ?>
 
