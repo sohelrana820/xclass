@@ -1,12 +1,5 @@
 <?php echo $this->assign('title', $project->name); ?>
 
-<div class="page-header">
-    <h2 class="title pull-left">
-        Project Management
-    </h2>
-    <div class="clearfix"></div>
-</div>
-
 <div class="col-md-12">
     <div class="tabbable-panel">
         <div class="tabbable-line">
@@ -150,7 +143,14 @@
                         <h4>Content loading, please wait...</h4>
                     </div>
 
+                    <div class="pull-right btn-areas">
+                        <a class="btn btn-info">New Task</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br/>
+
                     <div class="widget" ng-show="task_loader && tasks.count_all > 0">
+
                         <div class="widget-header">
                             <div class="filter_bar">
 
