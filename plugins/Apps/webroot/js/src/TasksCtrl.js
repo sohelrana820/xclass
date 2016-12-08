@@ -37,10 +37,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         isDashboardOpend = true;
     }
 
+    /**
+     * Creating new tasks
+     */
     $scope.saveTask = function(){
         $scope.save_task_loader = true;
         $scope.getTaskRelObj();
-        console.log($scope.TaskObj);
         if($scope.TaskObj.task){
             Upload.upload({
                 url: BASE_URL + 'tasks/add.json',
@@ -80,6 +82,27 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         }
     };
 
+    /**
+     * Creating new tasks
+     */
+    $scope.viewTask = function(id){
+        var taskDetails = TasksResources.get({id: id}).$promise;
+        taskDetails.then(function (res) {
+            if (res.result.success) {
+                $scope.TaskObj.id = res.result.data.id;
+                $scope.TaskObj.task = res.result.data.task;
+                $scope.TaskObj.description = res.result.data.description;
+                $scope.TaskObj.status = res.result.data.status;
+                $scope.taskUsers = res.result.data.users;
+                $scope.taskLabels = res.result.data.labels;
+                $scope.taskComments = res.result.data.comments;
+                $scope.taskAttachments = res.result.data.attachments;
+            }
+            else {
+                toastr.error(res.result.message);
+            }
+        });
+    };
 
     $scope.countAttachments = [0];
     $scope.addMoreAttachment = function()
@@ -103,6 +126,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
+
+
+    /**
+     *
+     */
     $scope.fetchUserLists({'limit': false});
 
 
