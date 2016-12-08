@@ -499,7 +499,7 @@
                                 <span>Please provide all valid information to create new task</span>
                             </div>
                             <div class="pull-right btn-areas">
-                                <a ng-click="switchTaskView('list')" class="btn btn-info">Tasks List</a>
+                                <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-info">Tasks List</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -742,7 +742,7 @@
                                 <h2 class="title">Task Details</h2>
                             </div>
                             <div class="pull-right btn-areas">
-                                <a ng-click="switchTaskView('list')" class="btn btn-info">Tasks List</a>
+                                <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-info">Tasks List</a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
