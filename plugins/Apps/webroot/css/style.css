@@ -1444,8 +1444,7 @@ Licensed under MIT
 
 /* Tabs panel */
 .tabbable-panel {
-    border:1px solid #eee;
-    padding: 10px;
+
     margin-top: 25px;
 }
 
@@ -1453,6 +1452,8 @@ Licensed under MIT
 .tabbable-line > .nav-tabs {
     border: none;
     margin: 0px;
+    border:1px solid #eee;
+    background: #f3f5f7;
 }
 .tabbable-line > .nav-tabs > li {
     margin-right: 2px;
@@ -1466,7 +1467,6 @@ Licensed under MIT
     color: #a6a6a6;
 }
 .tabbable-line > .nav-tabs > li.open, .tabbable-line > .nav-tabs > li:hover {
-    border-bottom: 4px solid #fbcdcf;
 }
 .tabbable-line > .nav-tabs > li.open > a, .tabbable-line > .nav-tabs > li:hover > a {
     border: 0;
@@ -1480,12 +1480,17 @@ Licensed under MIT
     margin-top: 0px;
 }
 .tabbable-line > .nav-tabs > li.active {
-    border-bottom: 4px solid #3c85a6;
+    border-bottom: 4px solid red;
     position: relative;
+    border-radius: 0px !important;
+    background: #3c85a6;
 }
 .tabbable-line > .nav-tabs > li.active > a {
     border: 0;
-    color: #333333;
+    color: #fff;
+    background: #3c85a6;
+    border-radius: 0px;
+    padding-bottom: 4px;
 }
 .tabbable-line > .nav-tabs > li.active > a > i {
     color: #404040;
@@ -1510,14 +1515,9 @@ Licensed under MIT
     margin-top: 0;
 }
 .tabbable-line.tabs-below > .nav-tabs > li:hover {
-    border-bottom: 0;
-    border-top: 4px solid #fbcdcf;
+    background: #3c85a6;
 }
-.tabbable-line.tabs-below > .nav-tabs > li.active {
-    margin-bottom: -2px;
-    border-bottom: 0;
-    border-top: 4px solid #3c85a6;
-}
+
 .tabbable-line.tabs-below > .tab-content {
     margin-top: -10px;
     border-top: 0;
