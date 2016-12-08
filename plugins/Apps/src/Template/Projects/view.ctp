@@ -751,7 +751,6 @@
                                 <div class="row">
                                     <div class="col-lg-9 col-md-8">
                                         <div class="">
-
                                             <span ng-show="TaskObj.status != 2" class="status-button status-success">Status: Open</span>
                                             <span ng-show="TaskObj.status == 2" class="status-button status-danger">Status: Closed</span>
                                             <br/>

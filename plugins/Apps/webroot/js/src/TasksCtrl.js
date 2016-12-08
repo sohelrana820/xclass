@@ -345,7 +345,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         task.then(function (res) {
             $timeout(function () {
                 if(res.result.success){
-                    $scope.buildTaskObjForShow(id);
+                    $scope.buildTaskObjForShow($scope.TaskObj.id);
                     $scope.update_task_loader = false;
                     $scope.view_task = true;
                     $scope.edit_task_form = false;
