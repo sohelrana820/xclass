@@ -460,7 +460,7 @@
                                                 <td class="text-right" style="width: 10%;">
                                                     <a ng-click="viewTask(task.id); switchTaskView('view')"
                                                        class="icons green"><i class="fa fa-gear"></i></a>
-                                                    <a ng-click="deleteTask(task.id)" class="icons red"><i
+                                                    <a ng-click="deleteTask(task.id); switchTaskView('list')" class="icons red"><i
                                                             class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
@@ -886,7 +886,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4">
                                             <a class="btn btn-success" ng-show="!edit_task_form" ng-click="edit_task_form = true; view_task = false">Edit Task</a>
-                                             <a class="btn btn-danger" ng-show="!edit_task_form" ng-click="deleteTask(TaskObj.id)">Delete Task</a>
+                                             <a class="btn btn-danger" ng-show="!edit_task_form" ng-click="deleteTask(TaskObj.id); switchTaskView('list')">Delete Task</a>
                                             <div class="task_sidebar" style="margin-top: 25px">
                                                 <div class="single_block">
                                                     <div class="dropdown">
