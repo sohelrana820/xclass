@@ -1,14 +1,16 @@
 <?php echo $this->assign('title', $project->name); ?>
-
 <div class="col-md-12">
     <div class="tabbable-panel">
         <div class="tabbable-line">
             <ul class="nav nav-tabs ">
+                <div class="pull-right" ng-show="viewMode == 'task'">
+                    <a class="btn btn-info">New Task</a>
+                </div>
                 <li class="active">
                     <a href="#project_overview" data-toggle="tab">Project Overview</a>
                 </li>
                 <li class="">
-                    <a href="#project_tasks" data-toggle="tab">Tasks</a>
+                    <a href="#project_tasks" data-toggle="tab" ng-click="openedView('task')">Tasks</a>
                 </li>
                 <li class="">
                     <a href="#project_labels" data-toggle="tab">Labels</a>
@@ -123,9 +125,9 @@
                     <div class="row">
                         <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1">
                             <div class="empty_block">
-            <span class="icon">
-                <i class="fa fa-bell-o" aria-hidden="true"></i>
-            </span>
+                                <span class="icon">
+                                    <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                </span>
                                 <br/>
                                 <br/>
                                 <h2>Welcome to Task!</h2>
@@ -143,14 +145,8 @@
                         <h4>Content loading, please wait...</h4>
                     </div>
 
-                    <div class="pull-right btn-areas">
-                        <a class="btn btn-info">New Task</a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <br/>
 
                     <div class="widget" ng-show="task_loader && tasks.count_all > 0">
-
                         <div class="widget-header">
                             <div class="filter_bar">
 

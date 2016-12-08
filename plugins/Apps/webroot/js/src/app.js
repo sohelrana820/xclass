@@ -38,6 +38,11 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
         $timeout(function(){
             angular.element(document).find('.header_task_list').fadeOut(500);
         },2000);
+    };
+
+    $scope.viewMode = 'overview';
+    $scope.openedView =function (mode) {
+        $scope.viewMode = mode;
     }
 });
 
