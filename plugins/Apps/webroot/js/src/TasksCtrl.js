@@ -394,8 +394,9 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-    $scope.commentsObj = {task_id: id};
+    $scope.commentsObj = {};
     $scope.doComment = function(){
+        $scope.commentsObj.task_id = $scope.TaskObj.id;
         if($scope.commentsObj.comment)
         {
             $scope.task_quick_update_loader = true;
@@ -405,7 +406,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }).then(function (response) {
                 if(response.data.result.success){
                     $scope.task_quick_update_loader = false;
-                    $scope.commentsObj = {task_id: id};
+                    $scope.commentsObj = {task_id: $scope.TaskObj.id};
                     $scope.taskComments.push(response.data.result.data);
                     toastr.success(response.data.result.message);
                     $scope.countAttachments = [0];
