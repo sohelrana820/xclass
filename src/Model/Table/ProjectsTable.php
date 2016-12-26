@@ -14,7 +14,7 @@ use Cake\Validation\Validator;
  * @property \Cake\ORM\Association\HasMany $Attachments
  * @property \Cake\ORM\Association\HasMany $Tasks
  * @property \Cake\ORM\Association\BelongsToMany $Labels
- * @property \Cake\ORM\Association\BelongsToMany $Users
+ * @property \Cake\ORM\Association\BelongsToMany $AssignedUsers
  */
 class ProjectsTable extends Table
 {
@@ -48,7 +48,7 @@ class ProjectsTable extends Table
         $this->hasMany('Labels', [
             'foreignKey' => 'project_id',
         ]);
-        $this->belongsToMany('Users', [
+        $this->belongsToMany('AssignedUsers', [
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
             'joinTable' => 'projects_users'
