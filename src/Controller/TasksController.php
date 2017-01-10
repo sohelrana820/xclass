@@ -82,7 +82,7 @@ class TasksController extends AppController
             }
 
             $tasks = $this->Tasks->find();
-            $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+            $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id',   'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
             $tasks->where($conditions);
             $tasks->order([$sortBy => $orderBy]);
             $tasks->limit($limit);
@@ -158,7 +158,7 @@ class TasksController extends AppController
 
             $tasks->group(['Tasks.id']);
             $tasks->all();
-            $countAll = $this->Tasks->find('all')->count();
+            $countAll = $this->Tasks->find('all', ['conditions' => ['Tasks.project_id' => $this->projectId]])->count();
 
             $response = [
                 'success' => true,
@@ -195,14 +195,46 @@ class TasksController extends AppController
      */
     public function view($id = null)
     {
-        $task = $this->Tasks->get($id, [
-            'contain' => ['Attachments', 'Comments', 'Comments.Users', 'Comments.Users.Profiles', 'Labels', 'Users', 'Users.Profiles', 'Comments.Attachments']
+        /*$task = $this->Tasks->find($id, [
+            'contain' => ['Attachments', 'Comments', 'Comments.Users', 'Comments.Users.Profiles', 'Labels', 'Users', 'Users.Profiles', 'Comments.Attachments'],
+            'join' => [
+                'createdUser' => [
+                    'table' => 'users',
+                    'type' => 'LEFT',
+                    'conditions' => 'createdUser.id = Tasks.created_by'
+                ],
+                'createdUserProfile' => [
+                    'table' => 'profiles',
+                    'type' => 'LEFT',
+                    'conditions' => 'createdUserProfile.id = Tasks.created_by'
+                ],
+            ]
+        ]);*/
+
+        $task = $this->Tasks->find();
+        $task->where(['Tasks.id' => $id]);
+        $task->select(['id', 'task', 'description', 'created', 'status',  'createdUser.id', 'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+        $task->contain(['Attachments', 'Comments', 'Comments.Users', 'Comments.Users.Profiles', 'Labels', 'Users', 'Users.Profiles', 'Comments.Attachments']);
+        $task->join([
+            'createdUser' => [
+                'table' => 'users',
+                'type' => 'LEFT',
+                'conditions' => 'createdUser.id = Tasks.created_by'
+            ],
+            'createdUserProfile' => [
+                'table' => 'profiles',
+                'type' => 'LEFT',
+                'conditions' => 'createdUserProfile.id = Tasks.created_by'
+            ],
         ]);
 
+
+
+        $details = $task->first();
         $response = [
             'success' => true,
             'message' => 'Task details',
-            'data' => $task,
+            'data' => $details,
         ];
 
         $this->set('result', $response);
@@ -280,6 +312,11 @@ class TasksController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+            unset($this->request->data['createdUserProfile']);
+            unset($this->request->data['createdUser']);
+            unset($this->request->data['created']);
+
             $task = $this->Tasks->patchEntity($task, $this->request->data);
             if ($this->Tasks->save($task)) {
                 $response = [

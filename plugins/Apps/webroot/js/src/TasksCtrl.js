@@ -72,11 +72,15 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var taskDetails = TasksResources.get({id: id}).$promise;
         taskDetails.then(function (res) {
             if (res.result.success) {
+                console.log(res.result.data);
                 $scope.TaskObj = {};
                 $scope.TaskObj.id = res.result.data.id;
                 $scope.TaskObj.task = res.result.data.task;
                 $scope.TaskObj.description = res.result.data.description;
                 $scope.TaskObj.status = res.result.data.status;
+                $scope.TaskObj.created = res.result.data.created;
+                $scope.TaskObj.createdUserProfile = res.result.data.createdUserProfile;
+                $scope.TaskObj.createdUser = res.result.data.createdUser;
                 $scope.taskUsers = res.result.data.users;
                 $scope.taskLabels = res.result.data.labels;
                 $scope.taskComments = res.result.data.comments;
@@ -122,7 +126,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active users.
      */
     $scope.fetchTaskLists = function(data){
-
         $scope.dashboard_task_loader = true;
         var tasks = TasksResources.query(data).$promise;
         tasks.then(function (res) {

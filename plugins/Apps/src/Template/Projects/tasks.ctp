@@ -1,21 +1,22 @@
 <?php echo $this->assign('title', 'Task Lists'); ?>
 
 <div ng-controller="TasksCtrl">
-    <div class="page-header" ng-show="tasks.count_all > 0">
+    <div class="page-header" ng-show="tasks.count_all > 0 || taskView != 'list'">
         <h2 class="title pull-left">
             Task of <?php echo $project->name?>
             <p class="sub-title">
-                {{tasks.count}} task found
+                {{tasks.count}} result found
             </p>
         </h2>
         <div class="pull-right btn-areas">
-            <a class="btn btn-info" ng-click="switchTaskView('create')">New Task</a>
+            <a class="btn btn-info" ng-show="taskView == 'list' || taskView == 'view'" ng-click="switchTaskView('create')">New Task</a>
+            <a class="btn btn-info" ng-show="taskView == 'create' || taskView == 'view'" ng-click="switchTaskView('list')">Tasks List</a>
         </div>
         <div class="clearfix"></div>
     </div>
 
     <div class="row">
-        <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1">
+        <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1 && taskView == 'list'">
             <div class="empty_block">
             <span class="icon">
                 <i class="fa fa-bell-o" aria-hidden="true"></i>
@@ -25,7 +26,7 @@
                 <h2>Welcome to Task!</h2>
                 <p class="lead">Task are used to manage your tasks list. You can create your task list with proper labeling and then assign to the user. After completing each task you can mark them as closed/reopened. It also allowed to comments on task</p>
                 <br/>
-                <a class="btn-lg-theme" href="{{BASE_URL}}tasks/add">Create your first task</a>
+                <a class="btn-lg-theme" ng-click="switchTaskView('create')">Create your first task</a>
             </div>
         </div>
     </div>
@@ -37,34 +38,8 @@
         <h4>Content loading, please wait...</h4>
     </div>
 
-
     <!-- Task list -->
     <div ng-show="taskView == 'list'">
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1">
-                <div class="empty_block">
-                    <span class="icon">
-                        <i class="fa fa-bell-o" aria-hidden="true"></i>
-                    </span>
-                    <br/>
-                    <br/>
-                    <h2>Welcome to Task!</h2>
-                    <p class="lead">Task are used to manage your tasks list. You can create your task
-                        list with proper labeling and then assign to the user. After completing each
-                        task you can mark them as closed/reopened. It also allowed to comments on
-                        task</p>
-                    <br/>
-                    <a class="btn-lg-theme" ng-click="switchTaskView('create')">Create your first task</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-        <div class="page_loader" ng-show="!task_loader">
-            <img src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
-            <h4>Content loading, please wait...</h4>
-        </div>
-
         <div class="widget" ng-show="task_loader && tasks.count_all > 0">
             <div class="widget-header">
                 <div class="filter_bar">
@@ -281,62 +256,59 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
-                        <div class="clearfix"></div>
-                        <table class="table task-list-table" ng-show="tasks.count > 0">
-                            <tbody>
-                            <tr ng-repeat="task in tasks.data">
-                                <td style="width: 50px;" class="hidden-xs">
-                                    <a class="sl" ng-click="viewTask(task.id); switchTaskView('view')">#{{task.id}}</a>
-                                </td>
-                                <td style="width: 15px; padding-right: 0px;" class="hidden-xs">
-                                    <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
-                                    <i ng-show="task.status != 2" class="fa fa-bell-o green" aria-hidden="true"></i>
-                                </td>
-                                <td>
-                                    <strong>
-                                        <a ng-click="viewTask(task.id); switchTaskView('view')" ng-show="task.task">{{task.task}}</a>
-                                        <a ng-click="viewTask(task.id); switchTaskView('view')" ng-show="!task.task">-</a>
-                                        <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
-                                    </strong>
-                                    <br>
-                                    <small class="author">Opened by
-                                        {{task.createdUserProfile.first_name}}
-                                        {{task.createdUserProfile.first_name}} at
-                                        {{task.created | date}}.
-                                        ({{task.created | date : 'HH:m a'}})
-                                    </small>
-                                </td>
-                                <td style="width: 10%;">
+
+                <div class="" ng-show="tasks.count_all > 0" block-ui="blockTasksList">
+                    <div class="clearfix"></div>
+                    <table class="table task_list_table" ng-show="tasks.count > 0">
+                        <tbody>
+                        <tr ng-repeat="task in tasks.data">
+                            <td style="width: 50px;" class="hidden-xs">
+                                <a class="sl" ng-click="viewTask(task.id); switchTaskView('view')">#{{task.id}}</a>
+                            </td>
+                            <td style="width: 15px; padding-right: 0px;" class="hidden-xs">
+                                <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
+                                <i ng-show="task.status != 2" class="fa fa-bell-o green" aria-hidden="true"></i>
+                            </td>
+                            <td>
+                                <div>
+                                    <a ng-click="viewTask(task.id); switchTaskView('view')" ng-show="task.task" class="task_title">{{task.task}}</a>
+                                    <a ng-click="viewTask(task.id); switchTaskView('view')" ng-show="!task.task">-</a>
+                                    <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
+                                </div>
+                                <small class="author">Created by
+                                    <a href="/users/{{task.createdUser.uuid}}">{{task.createdUserProfile.first_name}} {{task.createdUserProfile.last_name}}</a> at
+                                    {{task.created | date}}.
+                                    ({{task.created | date : 'HH:m a'}})
+                                </small>
+                            </td>
+                            <td style="width: 10%;">
                                     <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
                                         <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}"/>
                                         <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
                                     </span>
-                                </td>
-                                <td class="text-right" style="width: 10%;">
-                                    <a ng-click="viewTask(task.id); switchTaskView('view')" class="icons green"><i class="fa fa-gear"></i></a>
-                                    <a ng-click="deleteTask(task.id); switchTaskView('list')" class="icons red"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                            </td>
+                            <td class="text-right" style="width: 10%;">
+                                <a ng-click="viewTask(task.id); switchTaskView('view')" class="icons green"><i class="fa fa-gear"></i></a>
+                                <a ng-click="deleteTask(task.id); switchTaskView('list')" class="icons red"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-                        <div class="pagination_area text-center" ng-show="tasks.count > 0">
-                            <a class="pull-left previous_page" ng-click="goPreviousPage()">
-                                <span aria-hidden="true">&laquo;</span> Previous
-                            </a>
-                            <a>
+                    <div class="pagination_area text-center" ng-show="tasks.count > 0">
+                        <a class="pull-left previous_page" ng-click="goPreviousPage()">
+                            <span aria-hidden="true">&laquo;</span> Previous
+                        </a>
+                        <a>
                                 <span>
                                     showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
                                     {{tasks.currentPage * tasks.limit > tasks.count ? tasks.count : tasks.currentPage * tasks.limit}}
                                     of {{tasks.count}} records
                                 </span>
-                            </a>
-                            <a class="pull-right next_page" ng-click="goNextPage()">
-                                Next <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </div>
+                        </a>
+                        <a class="pull-right next_page" ng-click="goNextPage()">
+                            Next <span aria-hidden="true">&raquo;</span>
+                        </a>
                     </div>
                 </div>
 
@@ -537,7 +509,6 @@
                     </div>
                     <div class="form-group">
                         <button class="btn btn-success" ng-click="switchTaskView('list')">SAVE TASK</button>
-                        <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-danger">Cancel</a>
                         <span class="instance-loader" ng-show="save_task_loader">
                             <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
                         </span>
@@ -552,10 +523,8 @@
     <div class="widget" ng-show="taskView == 'view'">
         <div class="widget-header">
             <div class="pull-left">
-                <h2 class="title">Task Details</h2>
-            </div>
-            <div class="pull-right btn-areas">
-                <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-info">Tasks List</a>
+                <h2>Task Details</h2>
+                <span>Task ID: #{{TaskObj.id}}</span>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -570,7 +539,13 @@
                             <br/>
                             <div class="task_details" ng-init="view_task = true" ng-show="view_task">
                                 <h2>{{TaskObj.task}}</h2>
-                                <div ng-bind-html="TaskObj.description"></div>
+                                <small class="author">Created by
+                                    <a href="/users/{{TaskObj.createdUser.uuid}}">{{TaskObj.createdUserProfile.first_name}} {{TaskObj.createdUserProfile.last_name}}</a> at
+                                    {{TaskObj.created | date}}.
+                                    ({{TaskObj.created | date : 'HH:m a'}})
+                                </small>
+
+                                <div class="description" ng-bind-html="TaskObj.description"></div>
                             </div>
                             <div class="show_attachments" ng-show="taskAttachments.length > 0">
                                 <h4>Attachments</h4>

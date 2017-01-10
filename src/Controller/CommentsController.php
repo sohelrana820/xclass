@@ -52,8 +52,6 @@ class CommentsController extends AppController
         $comment = $this->Comments->newEntity();
         $this->request->data['user_id'] = $this->userID;
         if ($this->request->is('post')) {
-
-
             $allAttachments = [];
             if(isset($this->request->data['file'])){
                 $attachments = $this->request->data['file'];
