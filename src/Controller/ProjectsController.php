@@ -146,5 +146,6 @@ class ProjectsController extends AppController
         }
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
+        $this->request->session()->write('project_slug', $slug);
     }
 }

@@ -43,9 +43,9 @@
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1" ng-show="tasks.count_all < 1">
                 <div class="empty_block">
-                                    <span class="icon">
-                                        <i class="fa fa-bell-o" aria-hidden="true"></i>
-                                    </span>
+                    <span class="icon">
+                        <i class="fa fa-bell-o" aria-hidden="true"></i>
+                    </span>
                     <br/>
                     <br/>
                     <h2>Welcome to Task!</h2>
@@ -54,8 +54,7 @@
                         task you can mark them as closed/reopened. It also allowed to comments on
                         task</p>
                     <br/>
-                    <a class="btn-lg-theme" ng-click="switchTaskView('create')">Create your first
-                        task</a>
+                    <a class="btn-lg-theme" ng-click="switchTaskView('create')">Create your first task</a>
                 </div>
             </div>
         </div>
@@ -100,17 +99,16 @@
                     <div class="pull-right right-side-filter">
                         <div class="filter_block">
                             <div class="dropdown">
-                                                <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    Author
-                                                    <b class="caret"></b>
-                                                </span>
+                                <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Author <b class="caret"></b>
+                                </span>
                                 <div class="dropdown-menu custom-dropdown" id="authorList" aria-labelledby="label">
                                     <h2> Filter by author
                                         <a class="quick_task">
                                             <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                             <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
-                                                                <i class="fa fa-refresh grey"></i>
-                                                            </span>
+                                                <i class="fa fa-refresh grey"></i>
+                                            </span>
                                         </a>
                                     </h2>
 
@@ -139,10 +137,9 @@
 
                         <div class="filter_block">
                             <div class="dropdown">
-                                                <span id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    Labels
-                                                    <b class="caret"></b>
-                                                </span>
+                                <span id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Labels <b class="caret"></b>
+                                </span>
 
                                 <div class="dropdown-menu custom-dropdown" id="labelList" aria-labelledby="label">
                                     <h2>
@@ -155,11 +152,8 @@
 
                                     <div class="label_quick_operation">
                                         <div class="search_label">
-                                            <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)"
-                                                   placeholder="Search label">
-                                            <img ng-show="show_label_search_loader"
-                                                 src="{{BASE_URL}}/img/loader-blue.gif"
-                                                 class="sm_loader">
+                                            <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
+                                            <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -167,8 +161,8 @@
                                     <ul class="custom_dropdown_list nav nav-list">
                                         <li ng-repeat="(key, label) in labels">
                                             <a ng-click="chooseFilterLabel(label, key, label.checked)">{{label.name}}
-                                                <i ng-show="label.checked"
-                                                   class="fa fa-check pull-right green"></i></a>
+                                                <i ng-show="label.checked" class="fa fa-check pull-right green"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -177,18 +171,17 @@
 
                         <div class="filter_block">
                             <div class="dropdown">
-                                                <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    Assigned
-                                                    <b class="caret"></b>
-                                                </span>
+                                <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Assigned <b class="caret"></b>
+                                </span>
                                 <div class="dropdown-menu custom-dropdown" id="assigneeList" aria-labelledby="label">
                                     <h2>
                                         Filter by who’s assigned
                                         <a class="quick_task">
                                             <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                             <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
-                                                                <i class="fa fa-refresh grey"></i>
-                                                            </span>
+                                                <i class="fa fa-refresh grey"></i>
+                                            </span>
                                         </a>
                                     </h2>
 
@@ -218,10 +211,10 @@
 
                         <div class="filter_block">
                             <div class="dropdown">
-                                                <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                                    Sort
-                                                    <b class="caret"></b>
-                                                </span>
+                                <span id="assigneeList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    Sort
+                                    <b class="caret"></b>
+                                </span>
                                 <div class="dropdown-menu custom-dropdown" id="assigneeList" aria-labelledby="label">
                                     <ul class="custom_dropdown_list nav nav-list">
                                         <li>
@@ -316,10 +309,10 @@
                                     </small>
                                 </td>
                                 <td style="width: 10%;">
-                                                    <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
-                                                        <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}"/>
-                                                        <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
-                                                    </span>
+                                    <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
+                                        <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}"/>
+                                        <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
+                                    </span>
                                 </td>
                                 <td class="text-right" style="width: 10%;">
                                     <a ng-click="viewTask(task.id); switchTaskView('view')" class="icons green"><i class="fa fa-gear"></i></a>
@@ -330,13 +323,19 @@
                         </table>
 
                         <div class="pagination_area text-center" ng-show="tasks.count > 0">
-                            <a class="pull-left previous_page" ng-click="goPreviousPage()"><span aria-hidden="true">&laquo;</span> Previous</a>
-                            <span>
-                                                showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
-                                                {{tasks.currentPage * tasks.limit > tasks.count ? tasks.count : tasks.currentPage * tasks.limit}}
-                                                of {{tasks.count}} records
-                                            </span>
-                            <a class="pull-right next_page" ng-click="goNextPage()">Next <span aria-hidden="true">&raquo;</span></a>
+                            <a class="pull-left previous_page" ng-click="goPreviousPage()">
+                                <span aria-hidden="true">&laquo;</span> Previous
+                            </a>
+                            <a>
+                                <span>
+                                    showing {{((tasks.currentPage - 1) * tasks.limit) + 1}} -
+                                    {{tasks.currentPage * tasks.limit > tasks.count ? tasks.count : tasks.currentPage * tasks.limit}}
+                                    of {{tasks.count}} records
+                                </span>
+                            </a>
+                            <a class="pull-right next_page" ng-click="goNextPage()">
+                                Next <span aria-hidden="true">&raquo;</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -540,8 +539,8 @@
                         <button class="btn btn-success" ng-click="switchTaskView('list')">SAVE TASK</button>
                         <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-danger">Cancel</a>
                         <span class="instance-loader" ng-show="save_task_loader">
-                                            <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
-                                        </span>
+                            <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                        </span>
                     </div>
                 </form>
             </div>
@@ -556,8 +555,7 @@
                 <h2 class="title">Task Details</h2>
             </div>
             <div class="pull-right btn-areas">
-                <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-info">Tasks
-                    List</a>
+                <a ng-click="switchTaskView('list'); fetchTaskLists()" class="btn btn-info">Tasks List</a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -604,8 +602,8 @@
                                             <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel</a>
                                             <br/>
                                             <span class="instance-loader" ng-show="update_task_loader">
-                                                                <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
-                                                            </span>
+                                                <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                            </span>
                                         </div>
                                     </form>
                                 </div>
@@ -629,9 +627,8 @@
                                                 </a>
                                             </strong>
                                             <span>
-                                                                commented {{comment.created | date}} at
-                                                                ({{comment.created | date : 'HH:m a'}})
-                                                            </span>
+                                                commented {{comment.created | date}} at{{comment.created | date : 'HH:m a'}})
+                                            </span>
                                         </h4>
                                         {{comment.comment}}
                                         <div ng-show="comment.changing_status">
@@ -675,8 +672,8 @@
                                         <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)">Reopen Task</a>
                                         <br/>
                                         <span class="instance-loader" ng-show="task_quick_update_loader">
-                                                            <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
-                                                        </span>
+                                            <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                        </span>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
@@ -778,43 +775,32 @@
                                             <a class="quick_task">
                                                 <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                 <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
-                                                                    <i class="fa fa-refresh grey"></i>
-                                                                </span>
+                                                    <i class="fa fa-refresh grey"></i>
+                                                </span>
                                             </a>
                                         </h2>
 
                                         <div class="label_quick_operation">
                                             <div class="search_label">
-                                                <input class="form-control" ng-model="user_query"
-                                                       ng-change="searchUser(user_query)"
-                                                       placeholder="Search user">
-                                                <img ng-show="show_user_search_loader"
-                                                     src="{{BASE_URL}}/img/loader-blue.gif"
-                                                     class="sm_loader">
+                                                <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                                                <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>
 
                                         <ul class="custom_dropdown_list nav nav-list">
-                                            <li ng-repeat="(key, user) in users"
-                                                ng-init="user = hasUserAssigned(taskUsers, user)">
+                                            <li ng-repeat="(key, user) in users" ng-init="user = hasUserAssigned(taskUsers, user)">
                                                 <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('user_event', user.checked)">
-                                                    <img ng-if="user.profile.profile_pic != null"
-                                                         src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                                    <img ng-if="!user.profile.profile_pic"
-                                                         src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                                    <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                                    <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                                     {{user.profile.first_name}}
                                                     {{user.profile.last_name}}
                                                     {{user.checked}}
-                                                    <i ng-show="user.checked"
-                                                       class="fa fa-check pull-right green"></i>
+                                                    <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                                 </a>
                                             </li>
                                         </ul>
-                                        <p style="font-size: 10px; margin-top: 10px;"
-                                           ng-show="users.length < 1"
-                                           class="red text-center text-uppercase"
-                                           ng-show="taskLabels.length < 1">User not found</p>
+                                        <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-center text-uppercase" ng-show="taskLabels.length < 1">User not found</p>
                                     </div>
                                 </div>
                                 <small class="red" ng-show="taskUsers.length < 1">User not assigned
@@ -822,13 +808,10 @@
                                 </small>
                                 <ul class="task_users">
                                     <li ng-repeat="user in taskUsers">
-                                        <img ng-if="user.profile.profile_pic != null"
-                                             src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                        <img ng-if="!user.profile.profile_pic"
-                                             src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                         {{user.profile.first_name}} {{user.profile.last_name}}
-                                        <span class="pull-right red"
-                                              ng-click="removeTaskUsers(user); quickUpdate('user_event', false)">X</span>
+                                        <span class="pull-right red" ng-click="removeTaskUsers(user); quickUpdate('user_event', false)">X</span>
                                     </li>
                                 </ul>
                             </div>
@@ -837,7 +820,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /Task Details -->
 </div>
