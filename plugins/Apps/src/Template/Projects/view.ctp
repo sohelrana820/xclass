@@ -1,4 +1,12 @@
 <?php echo $this->assign('title', $project->name); ?>
+
+<div class="page-header">
+    <h2 class="title pull-left">
+        <?php echo $project->name; ?>
+    </h2>
+    <div class="clearfix"></div>
+</div>
+
 <div class="col-md-12">
     <div class="tabbable-panel">
         <div class="tabbable-line">
