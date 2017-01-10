@@ -29,12 +29,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         };
     };
 
-    isDashboardOpend = false;
-    var openedUrl = window.location.href.split("tasks");
-    if(openedUrl.length < 2){
-        isDashboardOpend = true;
-    }
-
     /**
      * Creating new tasks
      */
@@ -51,24 +45,15 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     $scope.taskLabels = [];
                     $scope.taskUsers = [];
                     $scope.save_task_loader = false;
-                    if(!isDashboardOpend){
-                        Flash.create('success', response.data.result.message);
-                        $timeout(function() {
-                            window.location.href = BASE_URL + "tasks";
-                        }, 1000);
-                    }
-                    else{
-                        $scope.labels.forEach(function(label, key){
-                            $scope.labels[key].checked = false;
-                        });
-                        $scope.users.forEach(function(user, key){
-                            $scope.users[key].checked = false;
-                        });
-                        $scope.countAttachments = [0];
-                        toastr.success(response.data.result.message);
-                        $scope.fetchTaskLists({limit: 5});
-                    }
-
+                    $scope.labels.forEach(function(label, key){
+                        $scope.labels[key].checked = false;
+                    });
+                    $scope.users.forEach(function(user, key){
+                        $scope.users[key].checked = false;
+                    });
+                    $scope.countAttachments = [0];
+                    toastr.success(response.data.result.message);
+                    $scope.fetchTaskLists();
                 }
                 else{
                     toastr.error(response.data.result.message);
@@ -87,6 +72,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var taskDetails = TasksResources.get({id: id}).$promise;
         taskDetails.then(function (res) {
             if (res.result.success) {
+                $scope.TaskObj = {};
                 $scope.TaskObj.id = res.result.data.id;
                 $scope.TaskObj.task = res.result.data.task;
                 $scope.TaskObj.description = res.result.data.description;
@@ -158,12 +144,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
 
-    if(isDashboardOpend){
-        $scope.fetchTaskLists({limit: 5});
-    }
-    else{
-        $scope.fetchTaskLists();
-    }
+    $scope.fetchTaskLists();
 
     /**
      * Getting application active label list.
@@ -246,9 +227,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
                         if(assignLabel && assignLabel != undefined){
                             $scope.quickUpdate('label_event', true)
-                        }
-                        if(isDashboardOpend){
-                            $scope.fetchAppOverview();
                         }
                         toastr.success(res.result.message);
                     }, 500);
