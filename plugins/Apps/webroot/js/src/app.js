@@ -1,7 +1,6 @@
 var app = angular.module('Application', ['ngResource', 'textAngular', 'ngFileUpload', 'color.picker', 'ngFlash', 'toastr']);
 
 app.constant('BASE_URL', localStorage.getItem('BASE_URL'));
-
 app.config(function($provide) {
     $provide.decorator('ColorPickerOptions', function($delegate) {
         var options = angular.copy($delegate);
@@ -50,7 +49,3 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
         $scope.taskView = viewMode;
     };
 });
-
-var url = window.location.href.split("projects/");
-var projectSlug = url[1];
-

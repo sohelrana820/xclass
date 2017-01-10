@@ -11,8 +11,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
      $scope.fetchLabelsLists();*/
 
-    $scope.TaskObj = {};
-
     $scope.getTaskRelObj = function(){
         var usersIDs = [];
         $scope.taskUsers.forEach(function(user){
