@@ -31,6 +31,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         };
     };
 
+
+    var urlDivider = window.location.href.split("/tasks");
+    urlDivider = urlDivider[0].split("/");
+    var projectSlug = urlDivider[urlDivider.length - 1];
+    
     /**
      * Creating new tasks
      */
@@ -39,12 +44,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.getTaskRelObj();
         if($scope.TaskObj.task){
             Upload.upload({
-                url: BASE_URL + 'tasks/add.json',
+                url: BASE_URL + projectSlug +'/tasks/create.json',
                 data: $scope.TaskObj
             }).then(function (response) {
                 if(response.data.result.success){
                     console.log(response.data);
-                    /*$scope.TaskObj = {};
+                    $scope.TaskObj = {};
                     $scope.taskLabels = [];
                     $scope.taskUsers = [];
                     $scope.save_task_loader = false;
@@ -56,7 +61,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     });
                     $scope.countAttachments = [0];
                     toastr.success(response.data.result.message);
-                    $scope.fetchTaskLists();*/
+                    $scope.fetchTaskLists({slug: projectSlug});
                 }
                 else{
                     toastr.error(response.data.result.message);
@@ -150,7 +155,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     };
 
 
-    $scope.fetchTaskLists();
+    $scope.fetchTaskLists({slug: projectSlug});
 
     /**
      * Getting application active label list.
@@ -464,7 +469,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      'users[]': [12, 3, 3, 4]
      };*/
 
-    $scope.queryString = {};
+    $scope.queryString = {slug: projectSlug};
 
     $scope.clearQueryString = function(){
         $scope.filterQuery.unlabeled = null;
@@ -639,7 +644,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.goPreviousPage = function () {
         if($scope.tasks.currentPage > 1){
             $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) - 1;
-            $scope.fetchTaskLists({page: $scope.tasks.currentPage});
+            $scope.fetchTaskLists({page: $scope.tasks.currentPage, slug: projectSlug});
         }
     };
 
@@ -647,7 +652,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var maxPage = parseInt($scope.tasks.count / $scope.tasks.limit);
         if($scope.tasks.currentPage <= maxPage){
             $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) + 1;
-            $scope.fetchTaskLists({page: $scope.tasks.currentPage});
+            $scope.fetchTaskLists({page: $scope.tasks.currentPage, slug: projectSlug});
         }
     };
 });

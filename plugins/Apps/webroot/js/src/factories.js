@@ -19,12 +19,12 @@ app.factory('UsersResources', function ($resource, BASE_URL) {
 });
 
 app.factory('TasksResources', function ($resource, BASE_URL) {
-    return $resource(':id', {id: '@id'}, {
-        get: {method: 'GET', url: BASE_URL +  'tasks/:id.json'},
-        save: {method: 'POST', url: BASE_URL +  'tasks.json'},
-        query: {method: 'GET', url: BASE_URL +  'tasks.json', isArray: false},
-        update: {method: 'PUT', url: BASE_URL +  'tasks/:id.json'},
-        delete: {method: 'DELETE', url: BASE_URL +  'tasks/:id.json'}
+    return $resource(':id, :slug', {id: '@id', slug: '@slug'}, {
+        get: {method: 'GET', url: BASE_URL +  ':slug/tasks/:id.json'},
+        save: {method: 'POST', url: BASE_URL +  ':slug/tasks.json'},
+        query: {method: 'GET', url: BASE_URL +  ':slug/tasks.json', isArray: false},
+        update: {method: 'PUT', url: BASE_URL +  ':slug/tasks/:id.json'},
+        delete: {method: 'DELETE', url: BASE_URL +  ':slug/tasks/:id.json'}
     });
 });
 
