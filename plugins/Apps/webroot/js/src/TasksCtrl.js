@@ -11,6 +11,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
      $scope.fetchLabelsLists();*/
 
+    $scope.TaskObj = {};
+
     $scope.getTaskRelObj = function(){
         var usersIDs = [];
         $scope.taskUsers.forEach(function(user){
@@ -41,7 +43,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                 data: $scope.TaskObj
             }).then(function (response) {
                 if(response.data.result.success){
-                    $scope.TaskObj = {};
+                    console.log(response.data);
+                    /*$scope.TaskObj = {};
                     $scope.taskLabels = [];
                     $scope.taskUsers = [];
                     $scope.save_task_loader = false;
@@ -53,7 +56,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     });
                     $scope.countAttachments = [0];
                     toastr.success(response.data.result.message);
-                    $scope.fetchTaskLists();
+                    $scope.fetchTaskLists();*/
                 }
                 else{
                     toastr.error(response.data.result.message);

@@ -52,6 +52,10 @@ Router::scope('/', function ($routes) {
 
     $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
 
+    $routes->connect('/:slug/tasks', ['controller' => 'projects', 'action' => 'tasks'], ['pass' => ['slug']]);
+
+    $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'create'], ['pass' => ['slug']]);
+
     $routes->fallbacks('DashedRoute');
 });
 
@@ -66,9 +70,7 @@ Router::scope('/projects/', function ($routes){
 
     $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
 
-    $routes->connect('/:slug/tasks', ['controller' => 'projects', 'action' => 'tasks'], ['pass' => ['slug']]);
 
-    $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'create'], ['pass' => ['slug']]);
 });
 
 

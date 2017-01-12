@@ -183,7 +183,7 @@ class TasksController extends AppController
      */
     public function create($slug = null)
     {
-        var_dump($slug);
+
     }
 
     /**
@@ -267,8 +267,10 @@ class TasksController extends AppController
                     }
                 }
 
+                $identity = ($this->Tasks->countTaskByProject($this->projectId) + 1);
                 $this->request->data['uuid'] =  Text::uuid();
                 $this->request->data['project_id'] = $this->projectId;
+                $this->request->data['identity'] =  $identity;
                 $this->request->data['created_by'] = $this->userID;
                 $this->request->data['attachments'] = $allAttachments;
                 $task = $this->Tasks->patchEntity($task, $this->request->data);

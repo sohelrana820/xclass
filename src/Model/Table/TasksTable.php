@@ -91,6 +91,10 @@ class TasksTable extends Table
         return $validator;
     }
 
+    /**
+     * @param $status
+     * @return int
+     */
     public function countTotalTasks($status)
     {
         $result = $this->find('all', ['conditions' => ['Tasks.status' => $status]])
@@ -99,6 +103,22 @@ class TasksTable extends Table
         return $result;
     }
 
+    /**
+     * @param $projectId
+     * @return int]
+     */
+    public function countTaskByProject($projectId)
+    {
+        $result = $this->find('all', ['conditions' => ['Tasks.project_id' => $projectId]])
+            ->count();
+
+        return $result;
+    }
+
+    /**
+     * @param int $limit
+     * @return Query
+     */
     public function getRecentTasks($limit = 5)
     {
         $result = $this->find('all', [
