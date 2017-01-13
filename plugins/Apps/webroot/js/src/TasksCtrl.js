@@ -537,6 +537,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             'unlabeled': $scope.filterQuery.unlabeled,
             'unassigned': $scope.filterQuery.unassigned
         };
+        $scope.queryString.slug = projectSlug;
         $scope.fetchTaskLists($scope.queryString);
     };
 

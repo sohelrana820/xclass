@@ -52,6 +52,8 @@ Router::scope('/', function ($routes) {
 
     $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
 
+    $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'add'], ['pass' => ['slug']]);
+
     $routes->connect('/:slug/tasks', ['controller' => 'tasks', 'action' => 'index'], ['pass' => ['slug']]);
 
     $routes->connect('/:slug/tasks/:id', ['controller' => 'tasks', 'action' => 'view'], ['pass' => ['slug', 'id']]);
