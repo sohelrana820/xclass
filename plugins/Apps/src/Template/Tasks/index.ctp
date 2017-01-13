@@ -263,7 +263,7 @@
                         <tbody>
                         <tr ng-repeat="task in tasks.data">
                             <td style="width: 50px;" class="hidden-xs">
-                                <a class="sl" ng-click="viewTask(task.id); switchTaskView('view')">#{{task.id}}</a>
+                                <a class="sl" ng-click="viewTask(task.id); switchTaskView('view')">#{{task.identity}}</a>
                             </td>
                             <td style="width: 15px; padding-right: 0px;" class="hidden-xs">
                                 <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>

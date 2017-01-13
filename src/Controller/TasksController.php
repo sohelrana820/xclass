@@ -88,7 +88,7 @@ class TasksController extends AppController
             }
 
             $tasks = $this->Tasks->find();
-            $tasks->select(['id', 'task', 'created', 'status',  'createdUser.id',   'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+            $tasks->select(['id', 'identity', 'task', 'created', 'status',  'createdUser.id',   'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
             $tasks->where($conditions);
             $tasks->order([$sortBy => $orderBy]);
             $tasks->limit($limit);
