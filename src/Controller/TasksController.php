@@ -95,6 +95,11 @@ class TasksController extends AppController
             $tasks->page($page);
             $tasks->contain(
                 [
+                    'Projects' => function($q){
+                        $q->select(['name', 'slug']);
+                        $q->autoFields(false);
+                        return $q;
+                    },
                     'Users' => function($q){
                         $q->select(['uuid', 'username']);
                         $q->autoFields(false);
@@ -193,33 +198,16 @@ class TasksController extends AppController
     }
 
     /**
-     * View method
-     *
-     * @param string|null $id Task id.
-     * @return void
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     * @param $projectSlug
+     * @param $id
      */
-    public function view($id = null)
+    public function view($projectSlug, $id)
     {
-        /*$task = $this->Tasks->find($id, [
-            'contain' => ['Attachments', 'Comments', 'Comments.Users', 'Comments.Users.Profiles', 'Labels', 'Users', 'Users.Profiles', 'Comments.Attachments'],
-            'join' => [
-                'createdUser' => [
-                    'table' => 'users',
-                    'type' => 'LEFT',
-                    'conditions' => 'createdUser.id = Tasks.created_by'
-                ],
-                'createdUserProfile' => [
-                    'table' => 'profiles',
-                    'type' => 'LEFT',
-                    'conditions' => 'createdUserProfile.id = Tasks.created_by'
-                ],
-            ]
-        ]);*/
-
+        $this->loadModel('Projects');
+        $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
         $task = $this->Tasks->find();
-        $task->where(['Tasks.id' => $id]);
-        $task->select(['id', 'task', 'description', 'created', 'status',  'createdUser.id', 'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+        $task->where(['Tasks.project_id' => $projectId, 'Tasks.identity' => $id]);
+        $task->select(['id', 'task', 'identity', 'description', 'created', 'status',  'createdUser.id', 'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
         $task->contain(['Attachments', 'Comments', 'Comments.Users', 'Comments.Users.Profiles', 'Labels', 'Users', 'Users.Profiles', 'Comments.Attachments']);
         $task->join([
             'createdUser' => [
@@ -233,18 +221,26 @@ class TasksController extends AppController
                 'conditions' => 'createdUserProfile.id = Tasks.created_by'
             ],
         ]);
-
-
-
         $details = $task->first();
-        $response = [
-            'success' => true,
-            'message' => 'Task details',
-            'data' => $details,
-        ];
 
-        $this->set('result', $response);
-        $this->set('_serialize', ['result']);
+        if( $this->request->params['_ext'] != 'json'){
+            if($details == null)
+            {
+                throw new BadRequestException();
+            }
+            $this->set('task', $details);
+            $this->set('_serialize', ['project']);
+        }
+        else{
+            $response = [
+                'success' => true,
+                'message' => 'Task details',
+                'data' => $details,
+            ];
+
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
     }
 
     /**

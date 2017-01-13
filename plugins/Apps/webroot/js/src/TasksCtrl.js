@@ -35,7 +35,10 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     var urlDivider = window.location.href.split("/tasks");
     urlDivider = urlDivider[0].split("/");
     var projectSlug = urlDivider[urlDivider.length - 1];
-    
+
+    var taskIdentity = window.location.href.split('/tasks/');
+    var taskIdentity = parseInt(taskIdentity[1]);
+
     /**
      * Creating new tasks
      */
@@ -73,11 +76,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         }
     };
 
+
     /**
      * Creating new tasks
      */
-    $scope.viewTask = function(id){
-        var taskDetails = TasksResources.get({id: id}).$promise;
+    $scope.viewTask = function(taskIdentity){
+        var taskDetails = TasksResources.get({slug: projectSlug, identity: taskIdentity}).$promise;
         taskDetails.then(function (res) {
             if (res.result.success) {
                 console.log(res.result.data);
@@ -99,6 +103,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
+
+    $scope.viewTask(taskIdentity);
 
     $scope.countAttachments = [0];
     $scope.addMoreAttachment = function()

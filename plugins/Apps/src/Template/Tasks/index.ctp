@@ -263,7 +263,7 @@
                         <tbody>
                         <tr ng-repeat="task in tasks.data">
                             <td style="width: 50px;" class="hidden-xs">
-                                <a class="sl" ng-click="viewTask(task.id); switchTaskView('view')">#{{task.identity}}</a>
+                                <a class="sl" href="{{BASE_URL}}{{task.project.slug}}/tasks/{{task.identity}}">#{{task.identity}}</a>
                             </td>
                             <td style="width: 15px; padding-right: 0px;" class="hidden-xs">
                                 <i ng-show="task.status == 2" class="fa fa-bell-slash-o red" aria-hidden="true"></i>
@@ -271,8 +271,8 @@
                             </td>
                             <td>
                                 <div>
-                                    <a ng-click="viewTask(task.id); switchTaskView('view')" ng-show="task.task" class="task_title">{{task.task}}</a>
-                                    <a ng-click="viewTask(task.id); switchTaskView('view')" ng-show="!task.task">-</a>
+                                    <a href="{{BASE_URL}}{{task.project.slug}}/tasks/{{task.identity}}" ng-show="task.task" class="task_title">{{task.task}}</a>
+                                    <a href="{{BASE_URL}}{{task.project.slug}}/tasks/{{task.identity}}" ng-show="!task.task">-</a>
                                     <label ng-repeat="label in task.labels" class="app_label" style="color: {{label.color_code}}; border: 1px solid {{label.color_code}};">{{label.name}}</label>
                                 </div>
                                 <small class="author">Created by

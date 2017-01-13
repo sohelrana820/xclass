@@ -11,7 +11,7 @@
     <div class="widget-header">
         <div class="pull-left">
             <h2>Task Details</h2>
-            <span>Details of task ID: #{{TaskObj.id}}</span>
+            <span>Details of task ID: #<?php echo $task->identity;?></span>
         </div>
         <div class="pull-right btn-areas">
             <?php echo $this->Html->link('New Task', ['controller' => 'tasks', 'action' => 'add'], ['class' => 'btn btn-info'])?>
