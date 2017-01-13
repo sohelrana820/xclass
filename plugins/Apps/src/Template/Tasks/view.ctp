@@ -110,7 +110,7 @@
                         </div>
 
 
-                        <div class="comment_widget">
+                        <div class="comment_widget" ng-show="!edit_task_form">
                             <form ng-submit="doComment()">
                                 <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
                                 <br/>
