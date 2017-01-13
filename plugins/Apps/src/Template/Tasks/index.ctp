@@ -3,7 +3,7 @@
 <div ng-controller="TasksCtrl">
     <div class="page-header" ng-show="tasks.count_all > 0 || taskView != 'list'">
         <h2 class="title pull-left">
-            <?php echo $this->Html->link($project->name, ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'link']);?>
+            <?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link']);?>
             <p class="sub-title">
                 {{tasks.count}} result found
             </p>
