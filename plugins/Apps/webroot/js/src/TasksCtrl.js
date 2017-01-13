@@ -53,7 +53,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
                     });
                     $scope.countAttachments = [0];
                     toastr.success(response.data.result.message);
-                    $scope.fetchTaskLists({slug: projectSlug});
+                    $scope.fetchTaskLists({});
                 }
                 else{
                     toastr.error(response.data.result.message);
@@ -126,6 +126,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application tasks.
      */
     $scope.fetchTaskLists = function(data){
+        data.slug = projectSlug;
         $scope.dashboard_task_loader = true;
         var tasks = TasksResources.query(data).$promise;
         tasks.then(function (res) {
@@ -318,7 +319,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.viewTask({slug: projectSlug, identity: taskIdentity});
     }
     else{
-        $scope.fetchTaskLists({slug: projectSlug});
+        $scope.fetchTaskLists({});
     }
 
     $scope.updateTask = function(){
@@ -467,8 +468,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      'users[]': [12, 3, 3, 4]
      };*/
 
-    $scope.queryString = {slug: projectSlug};
-
+    $scope.queryString = {};
     $scope.clearQueryString = function(){
         $scope.filterQuery.unlabeled = null;
         $scope.filterQuery.unassigned = false;
@@ -643,7 +643,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     $scope.goPreviousPage = function () {
         if($scope.tasks.currentPage > 1){
             $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) - 1;
-            $scope.fetchTaskLists({page: $scope.tasks.currentPage, slug: projectSlug});
+            $scope.fetchTaskLists({page: $scope.tasks.currentPage});
         }
     };
 
@@ -651,7 +651,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         var maxPage = parseInt($scope.tasks.count / $scope.tasks.limit);
         if($scope.tasks.currentPage <= maxPage){
             $scope.tasks.currentPage = parseInt($scope.tasks.currentPage) + 1;
-            $scope.fetchTaskLists({page: $scope.tasks.currentPage, slug: projectSlug});
+            $scope.fetchTaskLists({page: $scope.tasks.currentPage});
         }
     };
 });
