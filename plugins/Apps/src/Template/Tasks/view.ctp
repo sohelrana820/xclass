@@ -14,8 +14,8 @@
             <span>Details of task ID: #<?php echo $task->identity;?></span>
         </div>
         <div class="pull-right btn-areas">
-            <?php echo $this->Html->link('New Task', ['controller' => 'tasks', 'action' => 'add'], ['class' => 'btn btn-info'])?>
-            <?php echo $this->Html->link('Tasks List', ['controller' => 'tasks', 'action' => 'index'], ['class' => 'btn btn-info'])?>
+            <?php echo $this->Html->link('New Task', ['controller' => 'tasks', 'action' => 'index', $task->project->slug], ['class' => 'btn btn-info'])?>
+            <?php echo $this->Html->link('Tasks List', ['controller' => 'tasks', 'action' => 'index', $task->project->slug], ['class' => 'btn btn-info'])?>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -31,7 +31,12 @@
                         <br/>
                         <div class="task_details" ng-init="view_task = true" ng-show="view_task">
                             <h2>{{TaskObj.task}}</h2>
-                            <div ng-bind-html="TaskObj.description"></div>
+                            <small class="author">Created by
+                                <a href="/users/{{TaskObj.createdUser.uuid}}">{{TaskObj.createdUserProfile.first_name}} {{TaskObj.createdUserProfile.last_name}}</a> at
+                                {{TaskObj.created | date}}.
+                                ({{TaskObj.created | date : 'HH:m a'}})
+                            </small>
+                            <div class="description" ng-bind-html="TaskObj.description"></div>
                         </div>
                         <div class="show_attachments" ng-show="taskAttachments.length > 0">
                             <h4>Attachments</h4>

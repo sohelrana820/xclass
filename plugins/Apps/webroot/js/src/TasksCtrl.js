@@ -80,8 +80,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     /**
      * Creating new tasks
      */
-    $scope.viewTask = function(taskIdentity){
-        var taskDetails = TasksResources.get({slug: projectSlug, identity: taskIdentity}).$promise;
+    $scope.viewTask = function(data){
+        var taskDetails = TasksResources.get(data).$promise;
         taskDetails.then(function (res) {
             if (res.result.success) {
                 console.log(res.result.data);
@@ -103,8 +103,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
-
-    $scope.viewTask(taskIdentity);
 
     $scope.countAttachments = [0];
     $scope.addMoreAttachment = function()
@@ -131,13 +129,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
 
     /**
-     *
+     *Getting application active users.
      */
     $scope.fetchUserLists({'limit': false});
 
-
     /**
-     * Getting application active users.
+     * Getting application tasks.
      */
     $scope.fetchTaskLists = function(data){
         $scope.dashboard_task_loader = true;
@@ -160,9 +157,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-
-    $scope.fetchTaskLists({slug: projectSlug});
-
     /**
      * Getting application active label list.
      */
@@ -178,6 +172,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             }
         });
     };
+
     $scope.fetchLabelLists({status: 1, 'limit': false});
 
     $scope.taskLabels = [];
@@ -329,7 +324,13 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         $scope.buildTaskObjForShow(id);
     }
 
-
+    if(taskIdentity)
+    {
+        $scope.viewTask({slug: projectSlug, identity: taskIdentity});
+    }
+    else{
+        $scope.fetchTaskLists({slug: projectSlug});
+    }
 
     $scope.updateTask = function(){
         $scope.update_task_loader = true;
