@@ -2,7 +2,7 @@
 
     <div class="page-header">
         <h2 class="title pull-left">
-            Manage User
+            <?php echo $this->Html->link('Manage User', ['controller' => 'users', 'action' => 'index'], ['class' => 'link']);?>
         </h2>
         <div class="clearfix"></div>
     </div>

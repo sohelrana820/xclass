@@ -2,7 +2,7 @@
 
 <div class="page-header">
     <h2 class="title pull-left">
-        Manage Task
+        <?php echo $this->Html->link($task->project->name, ['controller' => 'tasks', 'action' => 'index', $task->project->slug], ['class' => 'link']);?>
     </h2>
     <div class="clearfix"></div>
 </div>

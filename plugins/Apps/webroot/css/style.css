@@ -17,6 +17,10 @@ a {
     color: #3c85a6;
 }
 
+.link, link:hover{
+    text-decoration: none !important;
+}
+
 .alert {
     text-align: center;
     text-transform: uppercase;
