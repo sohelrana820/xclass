@@ -1,8 +1,8 @@
 app.factory('LabelResources', function ($resource, BASE_URL) {
-    return $resource(':id', {id: '@id'}, {
-        get: {method: 'GET', url: BASE_URL +  'labels/:id.json'},
-        save: {method: 'POST', url: BASE_URL +  'labels.json'},
-        query: {method: 'GET', url: BASE_URL +  'labels.json', isArray: false,},
+    return $resource(':id, :slug', {id: '@id', slug: '@slug'}, {
+        get: {method: 'GET', url: BASE_URL +  ':labels/:id.json'},
+        save: {method: 'POST', url: BASE_URL +  ':slug/labels/create.json'},
+        query: {method: 'GET', url: BASE_URL +  ':slug/labels.json', isArray: false,},
         update: {method: 'PUT', url: BASE_URL +  'labels/:id.json'},
         delete: {method: 'DELETE', url: BASE_URL +  'labels/:id.json'}
     });

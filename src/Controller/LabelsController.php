@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Network\Exception\BadRequestException;
 use Cake\Routing\Router;
 
 /**
@@ -18,19 +19,21 @@ class LabelsController extends AppController
     }
 
     /**
-     * Index method
-     *
-     * @return void
+     * @param null $projectSlug
      */
-    public function index($slug = null)
+    public function index($projectSlug = null)
     {
         $conditions = [];
         $limit = 5;
         $page = 1;
 
-        $projectSlug = $this->Utilities->getProjectSlug($this->referer());
         $this->loadModel('Projects');
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
+
+        if(!$projectId)
+        {
+            throw new BadRequestException();
+        }
 
         if (isset($projectId) && $projectId) {
             $conditions = array_merge($conditions, ['Labels.project_id' => $projectId]);
@@ -109,15 +112,17 @@ class LabelsController extends AppController
     }
 
     /**
-     * Add method
-     *
-     * @return void Redirects on successful add, renders view otherwise.
+     * @param null $projectSlug
      */
-    public function add()
+    public function add($projectSlug)
     {
-        $projectSlug = $this->Utilities->getProjectSlug($this->referer());
         $this->loadModel('Projects');
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
+
+        if(!$projectId)
+        {
+            throw new BadRequestException();
+        }
 
         if(isset($projectId) && $projectId)
         {
