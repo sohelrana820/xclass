@@ -1,15 +1,5 @@
 app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
-    /*    // Getting all active labels.
-     $scope.fetchLabelsLists = function(){
-     $scope.labels = [];
-     var labels = LabelResources.query().$promise;
-     labels.then(function (res) {
-     $scope.labels = res.labels
-     });
-     };
-
-     $scope.fetchLabelsLists();*/
 
     $scope.TaskObj = {};
 
@@ -30,7 +20,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
             '_ids': labelsIDs
         };
     };
-
 
     var urlDivider = window.location.href.split("/tasks");
     urlDivider = urlDivider[0].split("/");
