@@ -7,6 +7,8 @@
     <div class="clearfix"></div>
 </div>
 
+<?php echo $this->Html->link('Task Manager', ['controller' => 'tasks', 'action' => 'index', $project->slug]);?>
+
 <div class="col-md-12">
     <div class="tabbable-panel">
         <div class="tabbable-line">
