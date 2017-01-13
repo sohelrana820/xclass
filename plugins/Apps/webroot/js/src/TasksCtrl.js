@@ -151,6 +151,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active label list.
      */
     $scope.fetchLabelLists = function(data){
+        data.slug = projectSlug;
         var labels = LabelResources.query(data).$promise;
         labels.then(function (res) {
             if(res.result.success){
@@ -209,6 +210,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         if($scope.LabelObj.name != undefined && $scope.LabelObj.name){
             $scope.show_label_create_loader = isValid;
             $scope.isLabelFormSubmitted = true;
+            $scope.LabelObj.slug = projectSlug;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if(res.result.success){
