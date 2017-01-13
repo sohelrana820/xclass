@@ -49,16 +49,13 @@ Router::scope('/', function ($routes) {
     $routes->connect('/profile', ['controller' => 'users', 'action' => 'profile']);
     $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'updateProfile']);
     $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
-
-    $routes->connect('projects/:slug', ['controller' => 'projects', 'action' => 'view'], ['pass' => ['slug']]);
+    $routes->connect('/projects/:slug', ['controller' => 'projects', 'action' => 'view'], ['pass' => ['slug']]);
 
     $routes->connect('/:slug/tasks', ['controller' => 'tasks', 'action' => 'index'], ['pass' => ['slug']]);
     $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'add'], ['pass' => ['slug']]);
     $routes->connect('/:slug/tasks/:id', ['controller' => 'tasks', 'action' => 'view'], ['pass' => ['slug', 'id']]);
-
     $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
     $routes->connect('/:slug/labels/create', ['controller' => 'labels', 'action' => 'add'], ['pass' => ['slug']]);
-
 
     $routes->fallbacks('DashedRoute');
 });
