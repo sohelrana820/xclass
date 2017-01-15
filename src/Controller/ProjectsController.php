@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Table\ProjectsUsersTable;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Utility\Inflector;
 use Cake\Utility\Text;
@@ -10,6 +11,7 @@ use Cake\Utility\Text;
  * Projects Controller
  *
  * @property \App\Model\Table\ProjectsTable $Projects
+ * @property \App\Model\Table\ProjectsUsersTable $ProjectsUsers;
  */
 class ProjectsController extends AppController
 {
@@ -146,6 +148,10 @@ class ProjectsController extends AppController
         }
         $this->set('project', $project);
         $this->set('_serialize', ['project']);
-        $this->request->session()->write('project_slug', $slug);
+
+        if( $this->request->params['_ext'] == 'json'){
+            $this->loadModel('ProjectsUsers');
+            $users = $this->ProjectsUsers->getProjectUsers($project->id);
+        }
     }
 }

@@ -70,4 +70,36 @@ class ProjectsUsersTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         return $rules;
     }
+
+
+    public function getProjectUsers($projectId, $limit = 10)
+    {
+        $users = $this->find();
+        $users->where(['ProjectsUsers.project_id' => $projectId]);
+        $users->contain([
+            'Users' => function($q){
+                $q->select(['id', 'username', 'uuid']);
+                $q->autoFields(false);
+                return $q;
+            },
+            'Users.Profiles' => function($q){
+                $q->select(['first_name', 'last_name', 'profile_pic']);
+                $q->autoFields(false);
+                return $q;
+            }
+        ]);
+
+        $countUsers = $this->find()
+            ->where(['ProjectsUsers.project_id' => $projectId])
+            ->count();
+
+        $response = [
+            'success' => true,
+            'message' => 'List of users',
+            'count' => $countUsers,
+            'data' => $users,
+        ];
+
+        return $response;
+    }
 }
