@@ -102,4 +102,21 @@ class ProjectsUsersTable extends Table
 
         return $response;
     }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function assignProjectUser($data)
+    {
+        $projectUser = $this->newEntity($data);
+        $isAssigned = $this->save($projectUser);
+        if($isAssigned)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

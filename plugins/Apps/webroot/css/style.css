@@ -1567,3 +1567,63 @@ Licensed under MIT
 .profile-block .btn{
     padding: 8px 15px 4px 15px;
 }
+
+.assign_user_title{
+    margin-bottom: 10px;
+}
+
+.assign_user_title h2 {
+    font-size: 12px;
+    float: left;
+    font-weight: 400;
+    margin-right: 5px;
+    text-transform: uppercase;
+    line-height: 20px;
+}
+
+.search_project_user{
+    position: relative;
+}
+
+.search_project_user .sm_loader {
+    left: 5px;
+    position: absolute;
+    top: 12px;
+}
+
+.search_project_user input{
+    height: 44px;
+    padding-left: 25px;
+}
+
+.project_user_nav_list {
+    padding: 0px;
+    margin: 0px;
+    border: 1px solid #eee;
+    margin-top: 10px;
+}
+
+.project_user_nav_list li {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.project_user_nav_list li:last-child {
+    border-bottom: none;
+}
+
+.project_user_nav_list li strong{
+    font-weight: 400;
+}
+
+.project_user_nav_list img{
+    width: 32px;
+    float: left;
+    margin-right: 5px;
+}
+
+.project_user_nav_list div{
+    margin-left: 5px;
+}

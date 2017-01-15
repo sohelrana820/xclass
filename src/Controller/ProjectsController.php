@@ -12,6 +12,7 @@ use Cake\Utility\Text;
  *
  * @property \App\Model\Table\ProjectsTable $Projects
  * @property \App\Model\Table\ProjectsUsersTable $ProjectsUsers;
+ * @property \App\Model\Table\UsersTable $Users;
  */
 class ProjectsController extends AppController
 {
@@ -157,5 +158,45 @@ class ProjectsController extends AppController
             $this->set('projectUsers', $users);
             $this->set('_serialize', ['projectUsers']);
         }
+    }
+
+
+    public function assignUser()
+    {
+        $projectId = $this->Projects->getProjectIDBySlug($this->request->data['slug']);
+        $data['user_id'] = $this->request->data['user_id'];
+        $data['project_id'] = $projectId;
+
+        if(!$projectId)
+        {
+            $response = [
+                'success' => false,
+                'message' => 'Sorry, something went wrong',
+            ];
+        }
+        else{
+            $this->loadModel('ProjectsUsers');
+            $this->loadModel('Users');
+            $isAssigned = $this->ProjectsUsers->assignProjectUser($data);
+            if($isAssigned)
+            {
+                $user['user'] = $this->Users->getUserByID($data['user_id']);
+                $user['project_id'] = $projectId;
+                $user['status'] = 1;
+                $response = [
+                    'success' => true,
+                    'message' => 'User has been assigned successfully',
+                    'data' => $user,
+                ];
+            }
+            else{
+                $response = [
+                    'success' => false,
+                    'message' => 'Sorry, something went wrong',
+                ];
+            }
+        }
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 }

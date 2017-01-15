@@ -54,9 +54,12 @@ Router::scope('/', function ($routes) {
     $routes->connect('/:slug/tasks', ['controller' => 'tasks', 'action' => 'index'], ['pass' => ['slug']]);
     $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'add'], ['pass' => ['slug']]);
     $routes->connect('/:slug/tasks/:id', ['controller' => 'tasks', 'action' => 'view'], ['pass' => ['slug', 'id']]);
+
     $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
     $routes->connect('/:slug/labels/create', ['controller' => 'labels', 'action' => 'add'], ['pass' => ['slug']]);
+
     $routes->connect('/:slug/users', ['controller' => 'projects', 'action' => 'users'], ['pass' => ['slug']]);
+    $routes->connect('/:slug/assign_user', ['controller' => 'projects', 'action' => 'assign_user'], ['pass' => ['slug']]);
 
     $routes->fallbacks('DashedRoute');
 });
