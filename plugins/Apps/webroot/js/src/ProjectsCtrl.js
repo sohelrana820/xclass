@@ -1,5 +1,6 @@
 app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, UsersResources, Flash, toastr){
 
+    $scope.assignUserMode = false;
     var urlDivider = window.location.href.split("/users");
     urlDivider = urlDivider[0].split("/");
     var projectSlug = urlDivider[urlDivider.length - 1];

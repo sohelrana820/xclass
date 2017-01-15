@@ -1599,14 +1599,19 @@ Licensed under MIT
 .project_user_nav_list {
     padding: 0px;
     margin: 0px;
-    border: 1px solid #eee;
     margin-top: 10px;
+    position: absolute;
+    width: 500px;
+    z-index: 111;
+    background: #f3f5f7;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
 }
 
 .project_user_nav_list li {
     list-style: none;
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #d9d9d9;
     cursor: pointer;
 }
 
