@@ -1534,3 +1534,36 @@ Licensed under MIT
 .padd-0{
     padding: 0px !important;
 }
+
+.profile-block {
+    border: 1px dotted #DDD;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+
+.profile-block h4 {
+    margin-bottom: 5px;
+}
+
+.profile-block p {
+    color: #555;
+    line-height: 16px;
+    font-weight: 100;
+}
+
+.profile-block p i{
+    padding-right: 5px;
+}
+
+.profile-block img{
+    border: 1px solid #f8f8f8;
+    padding: 3px;
+    border-radius: 3px;
+    width: 150px;
+}
+
+.profile-block .btn{
+    padding: 8px 15px 4px 15px;
+}

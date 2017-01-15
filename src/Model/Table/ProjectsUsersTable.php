@@ -83,7 +83,7 @@ class ProjectsUsersTable extends Table
                 return $q;
             },
             'Users.Profiles' => function($q){
-                $q->select(['first_name', 'last_name', 'profile_pic']);
+                $q->select(['first_name', 'last_name', 'phone', 'profile_pic',]);
                 $q->autoFields(false);
                 return $q;
             }
@@ -95,7 +95,7 @@ class ProjectsUsersTable extends Table
 
         $response = [
             'success' => true,
-            'message' => 'List of users',
+            'message' => 'List of project users',
             'count' => $countUsers,
             'data' => $users,
         ];

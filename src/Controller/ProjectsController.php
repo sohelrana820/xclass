@@ -141,17 +141,21 @@ class ProjectsController extends AppController
 
     public function users($slug)
     {
-        $project = $this->Projects->getProjectBySlug($slug);
-        if($project == null)
-        {
-            throw new BadRequestException();
+        $this->loadModel('ProjectsUsers');
+        if( $this->request->params['_ext'] != 'json'){
+            $project = $this->Projects->getProjectBySlug($slug);
+            if($project == null)
+            {
+                throw new BadRequestException();
+            }
+            $this->set('project', $project);
+            $this->set('_serialize', ['project']);
         }
-        $this->set('project', $project);
-        $this->set('_serialize', ['project']);
-
-        if( $this->request->params['_ext'] == 'json'){
-            $this->loadModel('ProjectsUsers');
+        else{
+            $project = $this->Projects->getProjectBySlug($slug);
             $users = $this->ProjectsUsers->getProjectUsers($project->id);
+            $this->set('projectUsers', $users);
+            $this->set('_serialize', ['projectUsers']);
         }
     }
 }
