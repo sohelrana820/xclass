@@ -25,7 +25,6 @@ class TasksController extends AppController
      */
     public function index($projectSlug)
     {
-
         //$this->checkPermission($this->isAdmin());
         $conditions = [];
         $sortBy = 'Tasks.id';
@@ -36,9 +35,9 @@ class TasksController extends AppController
         $this->loadModel('Projects');
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
 
-
-        if(isset($projectId) && $projectId){
-            $conditions = array_merge($conditions, ['Tasks.project_id' => $projectId]);
+        if(!$projectId)
+        {
+            throw new BadRequestException();
         }
 
         if( $this->request->params['_ext'] != 'json'){
@@ -51,6 +50,10 @@ class TasksController extends AppController
             $this->set('_serialize', ['project']);
         }
         else {
+
+            if(isset($projectId) && $projectId){
+                $conditions = array_merge($conditions, ['Tasks.project_id' => $projectId]);
+            }
 
             if(isset($this->request->query['page']) && $this->request->query['page']){
                 $page = $this->request->query['page'];

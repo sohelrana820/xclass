@@ -35,48 +35,59 @@ class LabelsController extends AppController
             throw new BadRequestException();
         }
 
-        if (isset($projectId) && $projectId) {
-            $conditions = array_merge($conditions, ['Labels.project_id' => $projectId]);
-        }
-
-        if (isset($this->request->query['name'])) {
-            $conditions = array_merge($conditions, ['Labels.name LIKE' => '%'.$this->request->query['name'].'%']);
-        }
-
-        if(isset($this->request->query['page']) && $this->request->query['page']){
-            $page = $this->request->query['page'];
-        }
-
-        if(isset($this->request->query['limit']) && $this->request->query['limit']){
-            if($this->request->query['limit'] == 'false'){
-                $limit = null;
+        if( $this->request->params['_ext'] != 'json'){
+            $project = $this->Projects->getProjectBySlug($projectSlug);
+            if($project == null)
+            {
+                throw new BadRequestException();
             }
-            else{
-                $limit = (int) $this->request->query['limit'];
-            }
+            $this->set('project', $project);
+            $this->set('_serialize', ['project']);
         }
+        else{
+            if (isset($projectId) && $projectId) {
+                $conditions = array_merge($conditions, ['Labels.project_id' => $projectId]);
+            }
 
-        $labels = $this->Labels->find('all',
-            [
-                'conditions' => $conditions,
-                'order' => 'created DESC',
+            if (isset($this->request->query['name'])) {
+                $conditions = array_merge($conditions, ['Labels.name LIKE' => '%'.$this->request->query['name'].'%']);
+            }
+
+            if(isset($this->request->query['page']) && $this->request->query['page']){
+                $page = $this->request->query['page'];
+            }
+
+            if(isset($this->request->query['limit']) && $this->request->query['limit']){
+                if($this->request->query['limit'] == 'false'){
+                    $limit = null;
+                }
+                else{
+                    $limit = (int) $this->request->query['limit'];
+                }
+            }
+
+            $labels = $this->Labels->find('all',
+                [
+                    'conditions' => $conditions,
+                    'order' => 'created DESC',
+                    'limit' => $limit,
+                    'page' => $page
+                ]
+            );
+
+            $count = $this->Labels->find('all', ['conditions' => $conditions])->count();
+            $response = [
+                'success' => true,
+                'message' => 'List of labels',
+                'data' => $labels,
+                'count' => $count,
                 'limit' => $limit,
-                'page' => $page
-            ]
-        );
+                'page' => $page,
+            ];
 
-        $count = $this->Labels->find('all', ['conditions' => $conditions])->count();
-        $response = [
-            'success' => true,
-            'message' => 'List of labels',
-            'data' => $labels,
-            'count' => $count,
-            'limit' => $limit,
-            'page' => $page,
-        ];
-
-        $this->set('result', $response);
-        $this->set('_serialize', ['result']);
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
     }
 
     /**

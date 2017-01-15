@@ -10,6 +10,8 @@
 <?php echo $this->Html->link('Task Manager', ['controller' => 'tasks', 'action' => 'index', $project->slug]);?>
 <br/>
 <?php echo $this->Html->link('Task Label', ['controller' => 'labels', 'action' => 'index', $project->slug]);?>
+<br/>
+<?php echo $this->Html->link('Task Users', ['controller' => 'projects', 'action' => 'users', $project->slug]);?>
 
 <div class="col-md-12">
     <div class="tabbable-panel">

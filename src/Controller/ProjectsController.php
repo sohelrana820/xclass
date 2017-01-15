@@ -137,7 +137,7 @@ class ProjectsController extends AppController
     }
 
 
-    public function tasks($slug)
+    public function users($slug)
     {
         $project = $this->Projects->getProjectBySlug($slug);
         if($project == null)
