@@ -8,40 +8,6 @@
         <div class="clearfix"></div>
     </div>
 
-    <div ng-show="assignUserMode || projectsUsers.users.length > 0">
-        <div class="assign_user_title">
-            <h2>Assign new user</h2>
-            <a class="refresh_area">
-            <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
-                <i class="fa fa-refresh grey"></i>
-            </span>
-                <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
-            </a>
-        </div>
-
-        <div class="search_project_user">
-            <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
-            <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
-        </div>
-
-        <ul class="project_user_nav_list" ng-show="users.length > 0 && user_query">
-            <li ng-repeat="(key, user) in users">
-                <div ng-click="assignProjectUser(user.id); refreshUserList()">
-                    <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                    <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
-                    <div>
-                        <strong><a>{{user.profile.first_name}} {{user.profile.last_name}}</a></strong>
-                        <br/>
-                        <small>{{user.username}}</small>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </li>
-        </ul>
-        <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-uppercase not-found" ng-show="taskLabels.length < 1">User not found</p>
-        <br/><br/>
-    </div>
-
     <div class="row" ng-show="projectsUsers.users.length < 1">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="empty_block">
@@ -58,6 +24,46 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-5">
+            <div ng-show="assignUserMode || projectsUsers.users.length > 0">
+                <div class="assign_user_title">
+                    <h2>Assign new user</h2>
+                    <a class="refresh_area">
+            <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
+                <i class="fa fa-refresh grey"></i>
+            </span>
+                        <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                    </a>
+                </div>
+
+                <div class="search_project_user">
+                    <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
+                    <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                </div>
+
+                <ul class="project_user_nav_list" ng-show="users.length > 0 && user_query">
+                    <li ng-repeat="(key, user) in users">
+                        <div ng-click="assignProjectUser(user.id); refreshUserList()">
+                            <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                            <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                            <div>
+                                <strong><a>{{user.profile.first_name}} {{user.profile.last_name}}</a></strong>
+                                <br/>
+                                <small>{{user.username}}</small>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </li>
+                </ul>
+                <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-uppercase not-found" ng-show="taskLabels.length < 1">User not found</p>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
 
     <div class="widget">
         <div class="widget-header">
