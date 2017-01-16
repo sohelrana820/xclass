@@ -43,22 +43,24 @@
                     <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                 </div>
 
-                <ul class="project_user_nav_list" ng-show="users.length > 0 && user_query">
-                    <li ng-repeat="(key, user) in users">
-                        <div ng-click="assignProjectUser(user.id); refreshUserList()">
-                            <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                            <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
-                            <div>
-                                <strong><a>{{user.profile.first_name}} {{user.profile.last_name}}</a></strong>
-                                <br/>
-                                <small>{{user.username}}</small>
+                <div class="project_user_section">
+                    <ul class="project_user_nav_list" ng-show="users.length > 0 && user_query">
+                        <li ng-repeat="(key, user) in users">
+                            <div ng-click="assignProjectUser(user.id); refreshUserList()">
+                                <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                <div>
+                                    <strong><a>{{user.profile.first_name}} {{user.profile.last_name}}</a></strong>
+                                    <br/>
+                                    <small>{{user.username}}</small>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </li>
-                </ul>
-                <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-uppercase not-found" ng-show="taskLabels.length < 1">User not found</p>
-                <br/><br/>
+                        </li>
+                    </ul>
+                    <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-uppercase not-found" ng-show="taskLabels.length < 1">User not found</p>
+                    <div class="clearfix"></div>
+                </div>
             </div>
         </div>
 
@@ -66,21 +68,25 @@
             <div class="assign_user_title" style="margin-bottom: 20px">
                 <h2>Assigned User List</h2>
             </div>
-            <ul class="project_user_nav_list project_assigned_user_list">
-                <li ng-repeat="projectUser in projectsUsers.users">
-                    <div>
-                        <img ng-show="projectUser.user.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.user.profile.profile_pic}}"  class="img-rounded img-responsive"/>
-                        <img ng-show="!projectUser.user.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-rounded img-responsive"/>
+            <div class="clearfix"></div>
+            <div class="project_user_section">
+                <ul class="project_user_nav_list project_assigned_user_list">
+                    <li ng-repeat="projectUser in projectsUsers.users">
                         <div>
-                            <strong><a>{{projectUser.user.profile.first_name}} {{projectUser.user.profile.last_name}}</a></strong>
-                            <br/>
-                            <small>{{projectUser.user.username}}</small>
+                            <img ng-show="projectUser.user.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.user.profile.profile_pic}}"  class="img-rounded img-responsive"/>
+                            <img ng-show="!projectUser.user.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-rounded img-responsive"/>
+                            <div>
+                                <strong><a>{{projectUser.user.profile.first_name}} {{projectUser.user.profile.last_name}}</a></strong>
+                                <br/>
+                                <small>{{projectUser.user.username}}</small>
+                            </div>
+                            <div class="clearfix"></div>
+                            <a class="remove_user" ng-click="removeProjectUser(projectUser.id)">X</a>
                         </div>
-                        <div class="clearfix"></div>
-                        <a class="remove_user" ng-click="removeProjectUser(projectUser.id)">X</a>
-                    </div>
-                </li>
-            </ul>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
         </div>
     </div>
 </div>

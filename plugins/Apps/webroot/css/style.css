@@ -1596,12 +1596,14 @@ Licensed under MIT
     padding-left: 25px;
 }
 
+.project_user_section{
+
+}
+
 .project_user_nav_list {
     padding: 0px;
     margin: 0px;
     margin-top: 10px;
-    position: absolute;
-    width: 300px;
     z-index: 111;
     background: #f3f5f7;
     border: 1px solid #d9d9d9;
@@ -1634,8 +1636,7 @@ Licensed under MIT
 }
 
 .project_assigned_user_list{
-    width: 100% !important;
-    max-width: 100% !important;
+    margin-top: 10px;
 }
 
 .project_assigned_user_list li{

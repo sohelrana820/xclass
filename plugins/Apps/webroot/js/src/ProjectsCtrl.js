@@ -42,11 +42,11 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
 
     $scope.searchUser = function(query){
         $scope.show_user_search_loader = true;
-        $scope.fetchUserLists({name: query, 'limit': false});
+        $scope.fetchUserLists({name: query, 'limit': 5});
     };
 
     $scope.refreshUserList = function(query){
-        $scope.fetchUserLists({'limit': false});
+        $scope.fetchUserLists({'limit': 5});
         $scope.user_query = null;
         $scope.show_user_refresh_loader = true;
         $scope.show_user_search_loader = false;
