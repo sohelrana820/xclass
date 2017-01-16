@@ -120,7 +120,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
     /**
      *Getting application active users.
      */
-    $scope.fetchUserLists({'limit': false});
+    $scope.fetchUserLists({'limit': 5});
 
     /**
      * Getting application tasks.
@@ -164,7 +164,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
         });
     };
 
-    $scope.fetchLabelLists({status: 1, 'limit': false});
+    $scope.fetchLabelLists({status: 1, 'limit': 5});
 
     $scope.taskLabels = [];
     $scope.chooseTaskLabels = function(label, key, isChecked){
@@ -195,11 +195,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.searchLabel = function(query){
         $scope.show_label_search_loader = true;
-        $scope.fetchLabelLists({status: 1, 'limit': false, name: query});
+        $scope.fetchLabelLists({status: 1, 'limit': 5, name: query});
     };
 
     $scope.refreshLabelList = function(query){
-        $scope.fetchLabelLists({status: 1, 'limit': false});
+        $scope.fetchLabelLists({status: 1, 'limit': 5});
         $scope.label_query = null;
         $scope.show_label_search_loader = false;
         $scope.show_label_refresh_loader = true;
@@ -277,11 +277,11 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
 
     $scope.searchUser = function(query){
         $scope.show_user_search_loader = true;
-        $scope.fetchUserLists({name: query, 'limit': false});
+        $scope.fetchUserLists({name: query, 'limit': 5});
     };
 
     $scope.refreshUserList = function(query){
-        $scope.fetchUserLists({'limit': false});
+        $scope.fetchUserLists({'limit': 5});
         $scope.user_query = null;
         $scope.show_user_refresh_loader = true;
         $scope.show_user_search_loader = false;
