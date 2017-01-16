@@ -71,6 +71,20 @@ class ProjectsUsersTable extends Table
         return $rules;
     }
 
+    /**
+     * @param $userId
+     * @param $projectId
+     * @return bool
+     */
+    public function isUserAlreadyAssigned($userId, $projectId)
+    {
+        $hasUser = $this->find()
+            ->where(['ProjectsUsers.project_id' => $projectId, 'ProjectsUsers.user_id' => $userId])
+            ->first();
+        if($hasUser)
+            return true;
+        return false;
+    }
 
     public function getProjectUsers($projectId, $limit = 10)
     {

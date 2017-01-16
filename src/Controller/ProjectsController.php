@@ -167,32 +167,32 @@ class ProjectsController extends AppController
         $data['user_id'] = $this->request->data['user_id'];
         $data['project_id'] = $projectId;
 
-        if(!$projectId)
-        {
+        if (!$projectId) {
             $response = [
                 'success' => false,
                 'message' => 'Sorry, something went wrong',
             ];
-        }
-        else{
+        } else {
             $this->loadModel('ProjectsUsers');
-            $this->loadModel('Users');
-            $isAssigned = $this->ProjectsUsers->assignProjectUser($data);
-            if($isAssigned)
-            {
-                $user['user'] = $this->Users->getUserByID($data['user_id']);
-                $user['project_id'] = $projectId;
-                $user['status'] = 1;
+            $isAlreadyAssigned = $this->ProjectsUsers->isUserAlreadyAssigned($data['user_id'], $data['project_id']);
+            if (!$isAlreadyAssigned) {
+                $this->loadModel('Users');
+                $isAssigned = $this->ProjectsUsers->assignProjectUser($data);
+                if ($isAssigned) {
+                    $response = [
+                        'success' => true,
+                        'message' => 'User has been assigned successfully',
+                    ];
+                } else {
+                    $response = [
+                        'success' => false,
+                        'message' => 'Sorry, something went wrong',
+                    ];
+                }
+            } else {
                 $response = [
                     'success' => true,
-                    'message' => 'User has been assigned successfully',
-                    'data' => $user,
-                ];
-            }
-            else{
-                $response = [
-                    'success' => false,
-                    'message' => 'Sorry, something went wrong',
+                    'message' => 'This user is already assigned',
                 ];
             }
         }

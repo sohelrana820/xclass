@@ -56,7 +56,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
         var isUsersAssigned = ProjectsResources.assignUser({user_id: userId, slug: projectSlug}).$promise;
         isUsersAssigned.then(function (res) {
             if(res.result.success){
-                $scope.projectsUsers.users.unshift(res.result.data);
+                $scope.fetchProjectUsers({slug: projectSlug});
                 toastr.success(res.result.message);
             }
             else{
