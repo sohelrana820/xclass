@@ -63,5 +63,18 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
                 toastr.error(res.result.message);
             }
         });
+    };
+
+    $scope.removeProjectUser = function (projectsUsersId) {
+        var isUsersRemoved = ProjectsResources.removeUser({projects_users_id: projectsUsersId, slug: projectSlug}).$promise;
+        isUsersRemoved.then(function (res) {
+            if(res.result.success){
+                $scope.fetchProjectUsers({slug: projectSlug});
+                toastr.success(res.result.message);
+            }
+            else{
+                toastr.error(res.result.message);
+            }
+        });
     }
 });

@@ -133,4 +133,17 @@ class ProjectsUsersTable extends Table
             return false;
         }
     }
+
+    /**
+     * @param $id
+     * @return bool
+     */
+    public function removeProjectUser($id)
+    {
+        $projectUser = $this->get($id);
+        if($this->delete($projectUser)){
+            return true;
+        }
+        return false;
+    }
 }

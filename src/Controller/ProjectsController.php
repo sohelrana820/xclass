@@ -196,6 +196,35 @@ class ProjectsController extends AppController
                 ];
             }
         }
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
+    }
+
+    public function removeUser()
+    {
+        $projectUserId = $this->request->data['projects_users_id'];
+        if (!$projectUserId) {
+            $response = [
+                'success' => false,
+                'message' => 'Sorry, something went wrong',
+            ];
+        } else {
+            $this->loadModel('ProjectsUsers');
+            $isRemoved = $this->ProjectsUsers->removeProjectUser($projectUserId);
+            if ($isRemoved) {
+                $response = [
+                    'success' => true,
+                    'message' => 'User has been removed successfully',
+                ];
+            } else {
+                $response = [
+                    'success' => false,
+                    'message' => 'Sorry, something went wrong',
+                ];
+            }
+        }
+
         $this->set('result', $response);
         $this->set('_serialize', ['result']);
     }
