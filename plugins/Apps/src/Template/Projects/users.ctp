@@ -46,7 +46,7 @@
                 <div class="project_user_section">
                     <ul class="project_user_nav_list" ng-show="users.length > 0 && user_query">
                         <li ng-repeat="(key, user) in users">
-                            <div ng-click="assignProjectUser(user.id); refreshUserList()">
+                            <div ng-click="assignProjectUser(user.id);">
                                 <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
                                 <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
                                 <div>
@@ -73,12 +73,12 @@
                 <ul class="project_user_nav_list project_assigned_user_list">
                     <li ng-repeat="projectUser in projectsUsers.users">
                         <div>
-                            <img ng-show="projectUser.user.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.user.profile.profile_pic}}"  class="img-rounded img-responsive"/>
-                            <img ng-show="!projectUser.user.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-rounded img-responsive"/>
+                            <img ng-show="projectUser.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.profile.profile_pic}}"  class="img-rounded img-responsive"/>
+                            <img ng-show="!projectUser.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-rounded img-responsive"/>
                             <div>
-                                <strong><a>{{projectUser.user.profile.first_name}} {{projectUser.user.profile.last_name}}</a></strong>
+                                <strong><a>{{projectUser.profile.first_name}} {{projectUser.profile.last_name}}</a></strong>
                                 <br/>
-                                <small>{{projectUser.user.username}}</small>
+                                <small>{{projectUser.username}}</small>
                             </div>
                             <div class="clearfix"></div>
                             <a class="remove_user" ng-click="removeProjectUser(projectUser.id)">X</a>

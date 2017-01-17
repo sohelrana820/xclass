@@ -40,7 +40,7 @@ app.factory('CommentsResources', function ($resource, BASE_URL) {
 
 app.factory('ProjectsResources', function ($resource, BASE_URL) {
     return $resource(':id, :slug', {id: '@id', slug: '@slug'}, {
-        query: {method: 'GET', url: BASE_URL +  ':slug/users.json', isArray: false},
+        projects_users: {method: 'GET', url: BASE_URL +  ':slug/users.json', isArray: false},
         assignUser: {method: 'POST', url: BASE_URL +  ':slug/assign_user.json', isArray: false},
         removeUser: {method: 'PUT', url: BASE_URL +  ':slug/remove_user.json', isArray: false}
     });

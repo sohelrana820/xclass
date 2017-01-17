@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, ProjectsResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
 
     $scope.TaskObj = {};
@@ -103,8 +103,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Tas
      * Getting application active users.
      */
     $scope.fetchUserLists = function(data){
-
-        var users = UsersResources.query(data).$promise;
+        data.slug = projectSlug;
+        var users = ProjectsResources.projects_users(data).$promise;
         users.then(function (res) {
             if(res.result.success){
                 $timeout(function() {

@@ -51,7 +51,7 @@ class ProjectsTable extends Table
         $this->hasMany('Tasks', [
             'foreignKey' => 'project_id',
         ]);
-        $this->belongsToMany('AssignedUsers', [
+        $this->belongsToMany('ProjectsUsers', [
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
             'joinTable' => 'projects_users'

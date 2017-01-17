@@ -143,20 +143,42 @@ class ProjectsController extends AppController
     public function users($slug)
     {
         $this->loadModel('ProjectsUsers');
-        if( $this->request->params['_ext'] != 'json'){
+        $this->loadModel('Users');
+        if ($this->request->params['_ext'] != 'json') {
             $project = $this->Projects->getProjectBySlug($slug);
-            if($project == null)
-            {
+            if ($project == null) {
                 throw new BadRequestException();
             }
             $this->set('project', $project);
             $this->set('_serialize', ['project']);
-        }
-        else{
+        } else {
+            $limit = null;
+            if (isset($this->request->query['limit']) && $this->request->query['limit']) {
+                if ($this->request->query['limit'] != 'false') {
+                    $limit = (int)$this->request->query['limit'];
+                }
+            }
+
             $project = $this->Projects->getProjectBySlug($slug);
-            $users = $this->ProjectsUsers->getProjectUsers($project->id);
-            $this->set('projectUsers', $users);
-            $this->set('_serialize', ['projectUsers']);
+            $users = $this->Users->ProjectsUsers->find()
+                ->select(['Users.id', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'])
+                ->where(['ProjectsUsers.project_id' => $project->id])
+                ->contain(['Users', "Users.Profiles"])
+                ->limit($limit);
+
+            $result = [];
+            foreach ($users as $user) {
+                $result[] = $user['Users'];
+            }
+
+            $response = [
+                'success' => true,
+                'message' => 'List of project users',
+                'count' => 5,
+                'data' => $result,
+            ];
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
         }
     }
 
@@ -203,26 +225,20 @@ class ProjectsController extends AppController
 
     public function removeUser()
     {
-        $projectUserId = $this->request->data['projects_users_id'];
-        if (!$projectUserId) {
+        $this->loadModel('ProjectsUsers');
+        $projectId = $this->Projects->getProjectIDBySlug($this->request->data['slug']);
+        $userId = $this->request->data['user_id'];
+        $isRemoved = $this->ProjectsUsers->removeProjectUser($userId, $projectId);
+        if ($isRemoved) {
+            $response = [
+                'success' => true,
+                'message' => 'User has been removed successfully',
+            ];
+        } else {
             $response = [
                 'success' => false,
                 'message' => 'Sorry, something went wrong',
             ];
-        } else {
-            $this->loadModel('ProjectsUsers');
-            $isRemoved = $this->ProjectsUsers->removeProjectUser($projectUserId);
-            if ($isRemoved) {
-                $response = [
-                    'success' => true,
-                    'message' => 'User has been removed successfully',
-                ];
-            } else {
-                $response = [
-                    'success' => false,
-                    'message' => 'Sorry, something went wrong',
-                ];
-            }
         }
 
         $this->set('result', $response);

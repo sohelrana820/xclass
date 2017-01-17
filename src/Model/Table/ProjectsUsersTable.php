@@ -135,12 +135,15 @@ class ProjectsUsersTable extends Table
     }
 
     /**
-     * @param $id
+     * @param $userId
+     * @param $projectId
      * @return bool
      */
-    public function removeProjectUser($id)
+    public function removeProjectUser($userId, $projectId)
     {
-        $projectUser = $this->get($id);
+        $projectUser = $this->find()
+            ->where(['ProjectsUsers.user_id' => $userId, 'ProjectsUsers.project_id' => $projectId])
+            ->first();
         if($this->delete($projectUser)){
             return true;
         }

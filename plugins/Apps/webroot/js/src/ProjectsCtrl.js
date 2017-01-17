@@ -6,14 +6,14 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
     var projectSlug = urlDivider[urlDivider.length - 1];
 
     $scope.fetchProjectUsers = function (data) {
-        var users = ProjectsResources.query(data).$promise;
+        var users = ProjectsResources.projects_users(data).$promise;
         users.then(function (res) {
-            if (res.projectUsers.success) {
+            if (res.result.success) {
                 $timeout(function () {
-                    if (res.projectUsers.success) {
+                    if (res.result.success) {
                         $scope.projectsUsers = {
-                            users: res.projectUsers.data,
-                            count: res.projectUsers.count,
+                            users: res.result.data,
+                            count: res.result.count,
                             /*currentPage: res.result.page,
                             limit: res.result.limit*/
                         };
@@ -57,6 +57,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
         isUsersAssigned.then(function (res) {
             if(res.result.success){
                 $scope.fetchProjectUsers({slug: projectSlug});
+                $scope.user_query = null;
                 toastr.success(res.result.message);
             }
             else{
@@ -66,10 +67,11 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
     };
 
     $scope.removeProjectUser = function (projectsUsersId) {
-        var isUsersRemoved = ProjectsResources.removeUser({projects_users_id: projectsUsersId, slug: projectSlug}).$promise;
+        var isUsersRemoved = ProjectsResources.removeUser({user_id: projectsUsersId, slug: projectSlug}).$promise;
         isUsersRemoved.then(function (res) {
             if(res.result.success){
                 $scope.fetchProjectUsers({slug: projectSlug});
+                $scope.user_query = null;
                 toastr.error(res.result.message);
             }
             else{
