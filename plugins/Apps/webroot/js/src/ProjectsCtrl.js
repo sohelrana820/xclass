@@ -70,7 +70,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
         isUsersRemoved.then(function (res) {
             if(res.result.success){
                 $scope.fetchProjectUsers({slug: projectSlug});
-                toastr.success(res.result.message);
+                toastr.error(res.result.message);
             }
             else{
                 toastr.error(res.result.message);
