@@ -288,7 +288,7 @@
                                     </span>
                             </td>
                             <td style="width: 5%;" class="text-right">
-                                <span class="text-muted" ng-show="task.comments.length > 0">
+                                <span class="text-muted" ng-show="task.comments.length > 0" title="{{task.comments.length}} comments">
                                     <i class="fa fa-commenting-o"></i> {{task.comments.length}}
                                 </span>
                             </td>
