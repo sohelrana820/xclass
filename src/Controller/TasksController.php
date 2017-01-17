@@ -119,7 +119,7 @@ class TasksController extends AppController
                         return $q;
                     },
                     'Comments' => function($q){
-                        $q->select(['id']);
+                        $q->select(['id', 'task_id']);
                         $q->autoFields(false);
                         return $q;
                     },

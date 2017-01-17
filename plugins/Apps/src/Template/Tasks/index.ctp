@@ -287,6 +287,11 @@
                                         <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
                                     </span>
                             </td>
+                            <td style="width: 5%;" class="text-right">
+                                <span class="text-muted" ng-show="task.comments.length > 0">
+                                    <i class="fa fa-commenting-o"></i> {{task.comments.length}}
+                                </span>
+                            </td>
                             <td class="text-right" style="width: 10%;">
                                 <a ng-click="viewTask(task.id); switchTaskView('view')" class="icons green"><i class="fa fa-gear"></i></a>
                                 <a ng-click="deleteTask(task.id); switchTaskView('list')" class="icons red"><i class="fa fa-trash"></i></a>
