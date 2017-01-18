@@ -1,8 +1,8 @@
 app.factory('LabelResources', function ($resource, BASE_URL) {
     return $resource(':id, :slug', {id: '@id', slug: '@slug'}, {
-        get: {method: 'GET', url: BASE_URL +  ':labels/:id.json'},
         save: {method: 'POST', url: BASE_URL +  ':slug/labels/create.json'},
-        query: {method: 'GET', url: BASE_URL +  ':slug/labels.json', isArray: false,},
+        query: {method: 'GET', url: BASE_URL +  ':slug/labels.json', isArray: false},
+        get: {method: 'GET', url: BASE_URL +  'labels/:id.json'},
         update: {method: 'PUT', url: BASE_URL +  'labels/:id.json'},
         delete: {method: 'DELETE', url: BASE_URL +  'labels/:id.json'}
     });
@@ -19,7 +19,7 @@ app.factory('UsersResources', function ($resource, BASE_URL) {
 });
 
 app.factory('TasksResources', function ($resource, BASE_URL) {
-    return $resource(':id, :slug: :identity', {id: '@id', slug: '@slug', identity: '@identity'}, {
+    return $resource(':id, :slug :identity', {id: '@id', slug: '@slug', identity: '@identity'}, {
         get: {method: 'GET', url: BASE_URL +  ':slug/tasks/:identity.json'},
         save: {method: 'POST', url: BASE_URL +  ':slug/tasks.json'},
         query: {method: 'GET', url: BASE_URL +  ':slug/tasks.json', isArray: false},

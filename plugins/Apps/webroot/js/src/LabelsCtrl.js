@@ -83,7 +83,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
             labels.then(function (res) {
                 if (res.result.success) {
                     $scope.isLabelFormSubmitted = false;
-                    $scope.fetchLabelLists();
+                    $scope.fetchLabelLists({});
                     $scope.LabelObj = {color_code: '#C00C00'};
                     $scope.create_form = true;
                     $scope.edit_form = false;
