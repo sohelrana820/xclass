@@ -66,7 +66,7 @@
 
         <div class="col-lg-5" ng-show="projectsUsers.count > 0">
             <div class="assign_user_title" style="margin-bottom: 20px">
-                <h2>Assigned User List</h2>
+                <h2>Assigned User List ({{projectsUsers.count}} user assigned)</h2>
             </div>
             <div class="clearfix"></div>
             <div class="project_user_section">

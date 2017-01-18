@@ -171,10 +171,14 @@ class ProjectsController extends AppController
                 $result[] = $user['Users'];
             }
 
+            $countUsers = $this->Users->ProjectsUsers->find()
+                ->where(['ProjectsUsers.project_id' => $project->id])
+                ->count();
+
             $response = [
                 'success' => true,
                 'message' => 'List of project users',
-                'count' => 5,
+                'count' => $countUsers,
                 'data' => $result,
             ];
             $this->set('result', $response);
