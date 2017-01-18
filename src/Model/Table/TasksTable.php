@@ -192,6 +192,11 @@ class TasksTable extends Table
                     $q->autoFields(false);
                     return $q;
                 },
+                'Attachments' => function($q){
+                    $q->select(['uuid', 'task_id', 'name']);
+                    $q->autoFields(false);
+                    return $q;
+                },
             ]
         );
         $task->join([
