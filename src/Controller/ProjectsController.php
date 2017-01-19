@@ -252,6 +252,8 @@ class ProjectsController extends AppController
     public function attachments($productSlug)
     {
         $this->loadModel('ProjectsUsers');
+        $this->loadModel('Attachments');
+        $this->loadComponent('Paginator');
         $project = $this->Projects->getProjectBySlug($productSlug);
         if ($project == null) {
             throw new BadRequestException();
@@ -261,21 +263,23 @@ class ProjectsController extends AppController
             'conditions' => ['Tasks.project_id' => $project->id],
             'valueField' => 'id'
         ]);
-
         $commentsIds = $this->Tasks->Comments->find('list', [
             'conditions' => ['Comments.task_id IN' => $tasksIds],
             'valueField' => 'id'
         ]);
 
-        $attachments = $this->Projects->Attachments->find();
-        $attachments->where(['or' => [
-            'Attachments.project_id' => $project->id,
-            'Attachments.task_id IN' => $tasksIds,
-            'Attachments.comment_id IN' => $commentsIds
-        ]]);
-        $attachments->all();
-
-
+        $this->paginate = [
+            'conditions' => ['or' =>
+                [
+                'Attachments.project_id' => $project->id,
+                'Attachments.task_id IN' => $tasksIds,
+                'Attachments.comment_id IN' => $commentsIds
+                ]
+            ],
+            'limit' => 10,
+            'order' => ['Attachments.created' => 'DESC']
+        ];
+        $attachments = $this->paginate($this->Attachments);
         $this->set(compact('attachments', 'project'));
     }
 }

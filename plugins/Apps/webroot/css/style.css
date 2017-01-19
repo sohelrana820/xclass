@@ -1655,7 +1655,7 @@ Licensed under MIT
     text-decoration: none;
 }
 
-
+/* Attachment **/
 .attachment_thumb {
     padding: 20px 0px;
     background: #f8f8f8;
@@ -1691,4 +1691,12 @@ Licensed under MIT
 
 .attachment_thumb:hover .attachment_thumb_download{
     display: inherit;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #273140;
+    border-color: #273140;
 }

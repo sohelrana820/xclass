@@ -37,6 +37,14 @@
                             </div>
                         </div>
                     <?php endforeach;?>
+                    <div class="clearfix"></div>
+                    <div class="paginator">
+                        <ul class="pagination">
+                            <?php echo $this->Paginator->prev(__('«')) ?>
+                            <?php echo $this->Paginator->numbers() ?>
+                            <?php echo $this->Paginator->next(__('»')) ?>
+                        </ul>
+                    </div>
                 <?php else: ?>
                     <?php echo $this->element('not_found'); ?>
                 <?php endif; ?>
