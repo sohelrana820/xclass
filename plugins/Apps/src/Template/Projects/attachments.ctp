@@ -13,8 +13,20 @@
     <div class="col-lg-12">
         <div class="widget">
             <div class="widget-header">
-                <h2>Attachments</h2>
-                <span>All attachment list of <strong><?php echo $project->name;?></strong> </span>
+                <div class="pull-left">
+                    <h2>Attachments</h2>
+                    <span>All attachment list of <strong><?php echo $project->name;?></strong> </span>
+                </div>
+                <div class="pull-right">
+                    <form class="form-inline" action="" method="get">
+                        <div class="form-group">
+                            <label class="sr-only">Email address</label>
+                            <input type="text" name="attachment_name" class="form-control"  placeholder="Search attachment...">
+                        </div>
+                        <button type="submit" class="btn btn-default">Search</button>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
             </div>
             <div class="widget-body">
                 <?php if (!$attachments->isEmpty()): ?>

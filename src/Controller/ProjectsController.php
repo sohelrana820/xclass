@@ -268,14 +268,20 @@ class ProjectsController extends AppController
             'valueField' => 'id'
         ]);
 
-        $this->paginate = [
-            'conditions' => ['or' =>
-                [
+        $conditions = [
+            'or' => [
                 'Attachments.project_id' => $project->id,
                 'Attachments.task_id IN' => $tasksIds,
                 'Attachments.comment_id IN' => $commentsIds
-                ]
-            ],
+            ]
+        ];
+        if(isset($this->request->query['attachment_name']) && $this->request->query['attachment_name'])
+        {
+            $conditions = array_merge($conditions, ['Attachments.name LIKE' => '%' . $this->request->query['attachment_name'] . '%',]);
+        }
+
+        $this->paginate = [
+            'conditions' => $conditions,
             'limit' => 10,
             'order' => ['Attachments.created' => 'DESC']
         ];
