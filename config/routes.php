@@ -62,6 +62,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/:slug/users', ['controller' => 'projects', 'action' => 'users'], ['pass' => ['slug']]);
     $routes->connect('/:slug/assign_user', ['controller' => 'projects', 'action' => 'assign_user'], ['pass' => ['slug']]);
     $routes->connect('/:slug/remove_user', ['controller' => 'projects', 'action' => 'remove_user'], ['pass' => ['slug']]);
+    $routes->connect('/:slug/attachments', ['controller' => 'projects', 'action' => 'attachments'], ['pass' => ['slug']]);
 
     $routes->fallbacks('DashedRoute');
 });

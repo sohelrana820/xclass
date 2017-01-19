@@ -248,4 +248,34 @@ class ProjectsController extends AppController
         $this->set('result', $response);
         $this->set('_serialize', ['result']);
     }
+
+    public function attachments($productSlug)
+    {
+        $this->loadModel('ProjectsUsers');
+        $project = $this->Projects->getProjectBySlug($productSlug);
+        if ($project == null) {
+            throw new BadRequestException();
+        }
+
+        $tasksIds = $this->Projects->Tasks->find('list', [
+            'conditions' => ['Tasks.project_id' => $project->id],
+            'valueField' => 'id'
+        ]);
+
+        $commentsIds = $this->Tasks->Comments->find('list', [
+            'conditions' => ['Comments.task_id IN' => $tasksIds],
+            'valueField' => 'id'
+        ]);
+
+        $attachments = $this->Projects->Attachments->find();
+        $attachments->where(['or' => [
+            'Attachments.project_id' => $project->id,
+            'Attachments.task_id IN' => $tasksIds,
+            'Attachments.comment_id IN' => $commentsIds
+        ]]);
+        $attachments->all();
+
+
+        $this->set(compact('attachments', 'project'));
+    }
 }

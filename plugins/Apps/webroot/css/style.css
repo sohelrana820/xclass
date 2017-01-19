@@ -1654,3 +1654,41 @@ Licensed under MIT
     color: #c9302c;
     text-decoration: none;
 }
+
+
+.attachment_thumb {
+    padding: 20px 0px;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    width: 170px;
+    text-align: center;
+    float: left;
+    margin: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+.attachment_thumb .icon{
+    font-size: 40px;
+    color: #999;
+}
+
+
+.attachment_thumb .name {
+    font-size: 12px;
+    line-height: 26px;
+    color: #777;
+}
+
+
+.attachment_thumb_download {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    display: none;
+    text-align: center;
+}
+
+.attachment_thumb:hover .attachment_thumb_download{
+    display: inherit;
+}
