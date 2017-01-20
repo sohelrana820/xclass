@@ -12,6 +12,8 @@
 <?php echo $this->Html->link('Task Label', ['controller' => 'labels', 'action' => 'index', $project->slug]);?>
 <br/>
 <?php echo $this->Html->link('Task Users', ['controller' => 'projects', 'action' => 'users', $project->slug]);?>
+<br/>
+<?php echo $this->Html->link('Attachments', ['controller' => 'projects', 'action' => 'attachments', $project->slug]);?>
 
 <div class="col-md-12">
     <div class="tabbable-panel">

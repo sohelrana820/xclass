@@ -11,7 +11,7 @@
     <div class="widget-header">
         <div class="pull-left">
             <h2>Lists of User</h2>
-            <span><?php echo $users->count() ?> result found</span>
+            <span><?php echo $this->Paginator->counter('{{count}}');?> result found</span>
         </div>
         <div class="pull-right btn-areas">
             <?php echo $this->Html->link('New User', ['controller' => 'users', 'action' => 'add'], ['class' => 'btn btn-info']) ?>
@@ -94,13 +94,7 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="paginator pull-right">
-                <ul class="pagination">
-                    <?php echo $this->Paginator->prev(__('«')) ?>
-                    <?php echo $this->Paginator->numbers() ?>
-                    <?php echo $this->Paginator->next(__('»')) ?>
-                </ul>
-            </div>
+            <?php echo $this->element('pagination');?>
         <?php else: ?>
             <?php echo $this->element('not_found'); ?>
         <?php endif; ?>

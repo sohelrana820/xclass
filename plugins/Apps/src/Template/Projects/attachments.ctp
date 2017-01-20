@@ -15,7 +15,7 @@
             <div class="widget-header">
                 <div class="pull-left">
                     <h2>Attachments</h2>
-                    <span>All attachment list of <strong><?php echo $project->name;?></strong> </span>
+                    <span><?php echo $this->Paginator->counter('{{count}}');?> result found</span>
                 </div>
                 <div class="pull-right">
                     <form class="form-inline" action="" method="get">
@@ -50,13 +50,7 @@
                         </div>
                     <?php endforeach;?>
                     <div class="clearfix"></div>
-                    <div class="paginator">
-                        <ul class="pagination">
-                            <?php echo $this->Paginator->prev(__('«')) ?>
-                            <?php echo $this->Paginator->numbers() ?>
-                            <?php echo $this->Paginator->next(__('»')) ?>
-                        </ul>
-                    </div>
+                    <?php echo $this->element('pagination');?>
                 <?php else: ?>
                     <?php echo $this->element('not_found'); ?>
                 <?php endif; ?>

@@ -282,7 +282,7 @@ class ProjectsController extends AppController
 
         $this->paginate = [
             'conditions' => $conditions,
-            'limit' => 10,
+            'limit' => 50,
             'order' => ['Attachments.created' => 'DESC']
         ];
         $attachments = $this->paginate($this->Attachments);
