@@ -1,4 +1,4 @@
-app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, UsersResources, Flash, toastr){
+app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, UsersResources, Flash, toastr, SweetAlert){
 
     $scope.assignUserMode = false;
     var urlDivider = window.location.href.split("/users");
@@ -67,16 +67,30 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
     };
 
     $scope.removeProjectUser = function (projectsUsersId) {
-        var isUsersRemoved = ProjectsResources.removeUser({user_id: projectsUsersId, slug: projectSlug}).$promise;
-        isUsersRemoved.then(function (res) {
-            if(res.result.success){
-                $scope.fetchProjectUsers({slug: projectSlug});
-                $scope.user_query = null;
-                toastr.error(res.result.message);
-            }
-            else{
-                toastr.error(res.result.message);
-            }
-        });
+        SweetAlert.swal({
+                title: "Are you sure?",
+                text: "You want to remove this user from this project",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var isUsersRemoved = ProjectsResources.removeUser({user_id: projectsUsersId, slug: projectSlug}).$promise;
+                    isUsersRemoved.then(function (res) {
+                        if(res.result.success){
+                            $scope.fetchProjectUsers({slug: projectSlug});
+                            $scope.user_query = null;
+                            toastr.error(res.result.message);
+                        }
+                        else{
+                            toastr.error(res.result.message);
+                        }
+                    });
+                }
+            });
     }
 });

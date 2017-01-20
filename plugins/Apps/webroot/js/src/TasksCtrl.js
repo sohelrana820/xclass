@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, ProjectsResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, $timeout, BASE_URL, Upload){
+app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, ProjectsResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, SweetAlert, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
 
     $scope.TaskObj = {};
@@ -442,25 +442,39 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
      * @param id
      */
     $scope.deleteTask = function(id){
-        var deletedTask = TasksResources.delete({id: id}).$promise;
-        deletedTask.then(function (res) {
-            if(res.result.success)
-            {
-                toastr.error(res.result.message);
-                var url = window.location.href.split("view/");
-                if(url[1] != undefined && url[1]){
-                    $timeout(function() {
-                        window.location.href = BASE_URL + "tasks";
-                    }, 1000);
+        SweetAlert.swal({
+                title: "Are you sure?",
+                text: "You want to delete this task",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var deletedTask = TasksResources.delete({id: id}).$promise;
+                    deletedTask.then(function (res) {
+                        if(res.result.success)
+                        {
+                            toastr.error(res.result.message);
+                            var url = window.location.href.split("view/");
+                            if(url[1] != undefined && url[1]){
+                                $timeout(function() {
+                                    window.location.href = BASE_URL + "tasks";
+                                }, 1000);
+                            }
+                            else{
+                                $scope.fetchTaskLists($scope.queryString);
+                            }
+                        }
+                        else{
+                            Flash.create('danger', res.result.message);
+                        }
+                    });
                 }
-                else{
-                    $scope.fetchTaskLists($scope.queryString);
-                }
-            }
-            else{
-                Flash.create('danger', res.result.message);
-            }
-        });
+            });
     };
 
 
