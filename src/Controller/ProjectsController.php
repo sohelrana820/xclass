@@ -6,6 +6,7 @@ use App\Model\Table\ProjectsUsersTable;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Utility\Inflector;
 use Cake\Utility\Text;
+use Composer\Package\Archiver\ZipArchiver;
 
 /**
  * Projects Controller
@@ -287,5 +288,48 @@ class ProjectsController extends AppController
         ];
         $attachments = $this->paginate($this->Attachments);
         $this->set(compact('attachments', 'project'));
+    }
+
+    /**
+     * @param $productSlug
+     */
+    public function downloadAttachments($productSlug)
+    {
+        $this->loadModel('ProjectsUsers');
+        $this->loadModel('Attachments');
+        $this->loadComponent('Paginator');
+        $project = $this->Projects->getProjectBySlug($productSlug);
+        if ($project == null) {
+            throw new BadRequestException();
+        }
+
+        $tasksIds = $this->Projects->Tasks->find('list', [
+            'conditions' => ['Tasks.project_id' => $project->id],
+            'valueField' => 'id'
+        ]);
+        $commentsIds = $this->Tasks->Comments->find('list', [
+            'conditions' => ['Comments.task_id IN' => $tasksIds],
+            'valueField' => 'id'
+        ]);
+
+        $conditions = [
+            'or' => [
+                'Attachments.project_id' => $project->id,
+                'Attachments.task_id IN' => $tasksIds,
+                'Attachments.comment_id IN' => $commentsIds
+            ]
+        ];
+        if (isset($this->request->query['attachment_name']) && $this->request->query['attachment_name']) {
+            $conditions = array_merge($conditions, ['Attachments.name LIKE' => '%' . $this->request->query['attachment_name'] . '%',]);
+        }
+
+        $attachments = $this->Attachments->find('list', [
+            'conditions' => $conditions,
+            'keyField' => 'name',
+            'valueField' => 'path'
+        ]);
+
+        $zipName = strtolower(Text::slug($project->name)) . '.zip';
+        $this->Utilities->zipFilesAndDownload($attachments, $zipName, WWW_ROOT . 'img/attachments/');
     }
 }
