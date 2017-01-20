@@ -10,7 +10,19 @@
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <?php
-    echo $this->Html->css(array('bootstrap.min', 'plugins/morris', 'font-awesome/css/font-awesome', 'angularjs-color-picker.min.css', 'angular-toastr.css', 'kits/kit-9' , 'kits/kit-22', 'kits/kit-19', 'main', 'style.css'));
+    echo $this->Html->css([
+        'bootstrap.min',
+        'plugins/morris',
+        'font-awesome/css/font-awesome',
+        'angularjs-color-picker.min.css',
+        'angular-toastr.css',
+        'kits/kit-9' ,
+        'kits/kit-22',
+        'kits/kit-19',
+        'sweetalert',
+        'main',
+        'style.css'
+    ]);
     echo '<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">';
 
     echo $this->fetch('cssTop');
@@ -73,7 +85,10 @@ echo $this->Html->script([
     'angular-flash.min',
     'angular-toastr.tpls.js',
     'ng-file-upload-shim.min.js',
-    'ng-file-upload.min.js']);
+    'ng-file-upload.min.js',
+    'sweetalert.min',
+    'SweetAlert'
+]);
 echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>

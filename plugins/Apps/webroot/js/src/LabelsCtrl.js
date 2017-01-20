@@ -1,4 +1,4 @@
-app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, toastr) {
+app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, toastr, SweetAlert) {
 
     $scope.create_form = true;
     $scope.edit_form = false;
@@ -102,19 +102,33 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
      * @param id
      */
     $scope.deleteLabel = function (id) {
-        var deletedLabel = LabelResources.delete({id: id}).$promise;
-        deletedLabel.then(function (res) {
-            if (res.result.success) {
-                $scope.label.data = $scope.label.data.filter(function (label) {
-                    return label.id !== id
-                });
-                toastr.error(res.result.message);
-                $scope.fetchLabelLists({});
-            }
-            else {
-                toastr.error(res.result.message);
-            }
-        });
+        SweetAlert.swal({
+                title: "Are you sure?",
+                text: "You want to delete this label",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var deletedLabel = LabelResources.delete({id: id}).$promise;
+                    deletedLabel.then(function (res) {
+                        if (res.result.success) {
+                            $scope.label.data = $scope.label.data.filter(function (label) {
+                                return label.id !== id
+                            });
+                            toastr.error(res.result.message);
+                            $scope.fetchLabelLists({});
+                        }
+                        else {
+                            toastr.error(res.result.message);
+                        }
+                    });
+                }
+            });
     };
 
     /**
