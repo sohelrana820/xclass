@@ -122,11 +122,6 @@ class TasksController extends AppController
                         $q->select(['id', 'task_id']);
                         $q->autoFields(false);
                         return $q;
-                    },
-                    'Attachments' => function($q){
-                        $q->select(['id', 'path', 'name']);
-                        $q->autoFields(false);
-                        return $q;
                     }
                 ]
             );
