@@ -1,13 +1,11 @@
 /vendor/*
 /config/app.php
-/tmp/*
 /logs/*
-/vendor/
 /webroot/img/profiles/*
 /webroot/img/attachments/*
+/webroot/bower_components/*
 /Conf/*
-tmp/*
-.DS_STORE
 /tmp/*
+.DS_STORE
 .idea/*
 .git/*
