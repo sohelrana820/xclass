@@ -2,7 +2,7 @@
 
 <div class="page-header">
     <h2 class="title pull-left">
-        <?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'index'], ['class' => 'link']);?>
+        <?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link']);?>
     </h2>
     <div class="clearfix"></div>
 </div>

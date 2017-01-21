@@ -19,6 +19,7 @@
                 </div>
                 <div class="pull-right">
                     <form class="form-inline" action="" method="get">
+                        <?php echo $this->Html->link('Download Attachment', ['controller' => 'projects', 'action' => 'download_attachments', $project->slug], ['class' => 'btn btn-success']);?>
                         <div class="form-group">
                             <label class="sr-only">Email address</label>
                             <input type="text" name="attachment_name" class="form-control"  placeholder="Search attachment...">
