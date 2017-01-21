@@ -159,6 +159,7 @@ class UtilitiesComponent extends Component
         header("Pragma: no-cache");
         header("Expires: 0");
         readfile("$zipFileName");
+        unlink(WWW_ROOT.$zipFileName);
         exit;
     }
 }

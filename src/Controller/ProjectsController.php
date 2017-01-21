@@ -338,7 +338,7 @@ class ProjectsController extends AppController
             'valueField' => 'path'
         ]);
 
-        $zipName = strtolower(Text::slug($project->name)) . '.zip';
+        $zipName = 'attachment_of_'.strtolower(Text::slug($project->name)) . '.zip';
         $this->Utilities->zipFilesAndDownload($attachments, $zipName, WWW_ROOT . 'img/attachments/');
     }
 }
