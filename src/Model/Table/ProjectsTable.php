@@ -100,7 +100,51 @@ class ProjectsTable extends Table
     {
         $result = $this->find()
             ->where(['slug' => $slug])
-            ->contain(['Labels', 'Users', 'Attachments', 'Tasks'])
+            ->first();
+
+        return $result;
+    }
+
+    public function getProjectDetailsBySlug($slug)
+    {
+        $result = $this->find()
+            ->where(['slug' => $slug])
+            ->contain([
+                'Labels',
+                'Users',
+                'Attachments',
+                'Tasks' => function($q){
+                    $q->select(['id', 'task', 'project_id', 'identity']);
+                    $q->autoFields(false);
+                    $q->limit(5);
+                    return $q;
+                },
+                'Tasks.TasksLabels' => function($q){
+                    $q->select(['id', 'task_id', 'label_id']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+                'Tasks.TasksLabels.Labels' => function($q){
+                    $q->select(['id', 'name', 'color_code']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+                'Tasks.UsersTasks' => function($q){
+                    $q->select(['id', 'task_id', 'user_id']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+                'Tasks.UsersTasks.Users' => function($q){
+                    $q->select(['id', 'username', 'uuid']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+                'Tasks.UsersTasks.Users.Profiles' => function($q){
+                    $q->select(['id', 'first_name', 'last_name']);
+                    $q->autoFields(false);
+                    return $q;
+                }
+            ])
             ->first();
 
         return $result;
@@ -110,7 +154,6 @@ class ProjectsTable extends Table
     {
         $result = $this->find()
             ->where(['slug' => $slug])
-            ->contain(['Labels', 'Users', 'Attachments', 'Tasks'])
             ->first();
 
         if($result){

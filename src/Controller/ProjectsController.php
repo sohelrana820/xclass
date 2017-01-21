@@ -44,7 +44,7 @@ class ProjectsController extends AppController
      */
     public function view($slug = null)
     {
-        $project = $this->Projects->getProjectBySlug($slug);
+        $project = $this->Projects->getProjectDetailsBySlug($slug);
         if($project == null)
         {
             throw new BadRequestException();

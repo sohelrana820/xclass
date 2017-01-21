@@ -14,6 +14,7 @@
     <div class="clearfix"></div>
 </div>
 
+
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-lg-3">
         <div class="app-stats-item bg-orange">
@@ -245,87 +246,39 @@
         <div class="ui-kit-9">
             <div class="col-mob">
                 <h2 class="sm-title">Recent Opened Tasks</h2>
-                <!-- Item -->
+                <?php foreach ($project->tasks as $task):?>
+                <!-- Single Task -->
                 <div class="ui-item">
                     <!-- Heading -->
                     <div class="ui-heading clearfix">
                         <h5>
-                            <a class="task_user_link">Sohel RAna</a>
-                            <label>Not Assigned Yet!</label>
+                            <?php if ($task->users_tasks): ?>
+                                <?php foreach ($task->users_tasks as $taskUsers): ?>
+                                    <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
+                                        'controller' => 'users',
+                                        'action' => 'view',
+                                        $taskUsers->user->uuid
+                                    ]);?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <label>Not Assigned Yet!</label>
+                            <?php endif; ?>
                         </h5>
                     </div>
                     <p>
-                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo, lacinia eget consectetur sed, co
+                        <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
                     </p>
-                    <div>
-                        <a class="label label-sm d-label" style="color: red; border: 1px solid red;">New</a>
-                        <a class="label label-sm d-label" style="color: green; border: 1px solid green;">Hello Bangladesh</a>
-                    </div>
+                    <?php if ($task->tasks_labels): ?>
+                        <div>
+                            <?php foreach ($task->tasks_labels as $taskLabel):?>
+                                <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
+                                    <?php echo $taskLabel->label->name;?>
+                                </a>
+                            <?php endforeach;?>
+                        </div>
+                    <?php endif; ?>
                 </div>
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5>
-                            <a class="task_user_link">Sohel RAna</a>
-                            <label>Not Assigned Yet!</label>
-                        </h5>
-                    </div>
-                    <p>
-                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo, lacinia eget consectetur sed, co
-                    </p>
-                    <div>
-                        <a class="label label-sm d-label" style="color: red; border: 1px solid red;">New</a>
-                        <a class="label label-sm d-label" style="color: green; border: 1px solid green;">Hello Bangladesh</a>
-                    </div>
-                </div>
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5>
-                            <a class="task_user_link">Sohel RAna</a>
-                            <label>Not Assigned Yet!</label>
-                        </h5>
-                    </div>
-                    <p>
-                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo, lacinia eget consectetur sed, co
-                    </p>
-                    <div>
-                        <a class="label label-sm d-label" style="color: red; border: 1px solid red;">New</a>
-                        <a class="label label-sm d-label" style="color: green; border: 1px solid green;">Hello Bangladesh</a>
-                    </div>
-                </div>
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5>
-                            <a class="task_user_link">Sohel RAna</a>
-                            <label>Not Assigned Yet!</label>
-                        </h5>
-                    </div>
-                    <p>
-                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo, lacinia eget consectetur sed, co
-                    </p>
-                    <div>
-                        <a class="label label-sm d-label" style="color: red; border: 1px solid red;">New</a>
-                        <a class="label label-sm d-label" style="color: green; border: 1px solid green;">Hello Bangladesh</a>
-                    </div>
-                </div>
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5>
-                            <a class="task_user_link">Sohel RAna</a>
-                            <label>Not Assigned Yet!</label>
-                        </h5>
-                    </div>
-                    <p>
-                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vivamus magna justo, lacinia eget consectetur sed, co
-                    </p>
-                    <div>
-                        <a class="label label-sm d-label" style="color: red; border: 1px solid red;">New</a>
-                        <a class="label label-sm d-label" style="color: green; border: 1px solid green;">Hello Bangladesh</a>
-                    </div>
-                </div>
+                <?php endforeach;?>
             </div>
         </div>
     </div>

@@ -24,8 +24,10 @@
     font-weight: bold;
 }
 .ui-kit-9 .ui-item .ui-heading h5 a {
-    color: #888;
+    color: #3577a1;
     text-decoration: none;
+    font-weight: 500;
+    font-size: 12px;
 }
 .ui-kit-9 .ui-item span {
     font-size: 12px;
@@ -52,7 +54,7 @@
 .ui-kit-9 .ui-item a {
     line-height: 22px;
     margin-right: 5px;
-    color: #777;
+    color: #999;
 }
 
 .label.bg-red {
