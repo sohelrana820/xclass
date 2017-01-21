@@ -1625,10 +1625,14 @@ Licensed under MIT
     font-weight: 400;
 }
 
-.project_user_nav_list img{
+.project_user_nav_list img {
     width: 32px;
+    height: 30px;
+    object-fit: cover;
     float: left;
     margin-right: 5px;
+    border-radius: 3px;
+    border: 1px solid #EEE;
 }
 
 .project_user_nav_list div{

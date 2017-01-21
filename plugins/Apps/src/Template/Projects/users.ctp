@@ -73,8 +73,8 @@
                 <ul class="project_user_nav_list project_assigned_user_list">
                     <li ng-repeat="projectUser in projectsUsers.users">
                         <div>
-                            <img ng-show="projectUser.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.profile.profile_pic}}"  class="img-rounded img-responsive"/>
-                            <img ng-show="!projectUser.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-rounded img-responsive"/>
+                            <img ng-show="projectUser.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.profile.profile_pic}}"  class="img-responsive"/>
+                            <img ng-show="!projectUser.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-responsive"/>
                             <div>
                                 <strong><a>{{projectUser.profile.first_name}} {{projectUser.profile.last_name}}</a></strong>
                                 <br/>
