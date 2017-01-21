@@ -733,14 +733,23 @@ a {
     border-left: 2px solid #CCC;
 }
 
+.overview_section {
+    border: 1px dashed #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #f8f8f8;
+}
+
 .data-overview {
     padding: 0px;
     list-style: none;
+    margin-top: 10px;
 }
 
-
-.data-overview li{
-    line-height: 32px;
+.data-overview li {
+    line-height: 22px;
+    font-size: 13px;
+    margin-bottom: 10px;
 }
 
 .not-found {
@@ -1711,4 +1720,17 @@ Licensed under MIT
     cursor: default;
     background-color: #273140;
     border-color: #273140;
+}
+
+.sm-title {
+    font-size: 14px !important;
+    line-height: 13px;
+    color: #3c85a6;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.see_more{
+    font-size: 10px;
+    color: #999;
 }
