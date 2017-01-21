@@ -35,8 +35,10 @@
                         <?php
                         echo $this->Form->create($profile,
                             [
-                                'controller' => 'users',
-                                'action' => 'changeProfilePassword',
+                                'url' => [
+                                    'controller' => 'users',
+                                    'action' => 'changeProfilePassword',
+                                ],
                                 'class' => 'login_form'
                             ]
                         );

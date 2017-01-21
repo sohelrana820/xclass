@@ -4,7 +4,7 @@
     <h2 class="text-center">Database Configuration</h2>
     <br/>
 
-    <?php echo $this->Form->create(null, array('controller' => 'installation', 'action' => 'database', 'class' => 'login_form'));?>
+    <?php echo $this->Form->create(null, ['url' => ['controller' => 'installation', 'action' => 'database'], 'class' => 'login_form']);?>
 
     <div class="form-group">
         <label class="text-info">Database Host</label>

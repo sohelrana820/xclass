@@ -33,8 +33,10 @@
                 <?php
                 echo $this->Form->create(null,
                     [
-                        'controller' => 'users',
-                        'action' => 'change_profile_picture',
+                        'url' => [
+                            'controller' => 'users',
+                            'action' => 'change_profile_picture',
+                        ],
                         'enctype' => 'multipart/form-data'
                     ]
                 );

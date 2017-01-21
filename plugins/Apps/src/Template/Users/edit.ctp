@@ -37,7 +37,7 @@
                 </div>
                 <!-- edit form column -->
                 <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
-                    <?php echo $this->Form->create(null, array('controller' => 'users', 'action' => 'edit/'.$user->uuid));?>
+                    <?php echo $this->Form->create(null, ['url' => ['controller' => 'users', 'action' => 'edit/'.$user->uuid]]);?>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">

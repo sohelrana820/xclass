@@ -32,7 +32,7 @@
                 </div>
                 <!-- edit form column -->
                 <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
-                    <?php echo $this->Form->create($profile, array('controller' => 'profile', 'action' => 'update_profile'));?>
+                    <?php echo $this->Form->create($profile, array('url' => ['controller' => 'profile', 'action' => 'update_profile']));?>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">

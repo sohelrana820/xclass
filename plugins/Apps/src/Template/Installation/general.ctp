@@ -4,7 +4,7 @@
     <h2 class="text-center">General Configuration</h2>
     <br/>
 
-    <?php echo $this->Form->create(null, array('controller' => 'installation', 'action' => 'general', 'class' => 'login_form', 'type' => 'file'));?>
+    <?php echo $this->Form->create(null, ['url' => ['controller' => 'installation', 'action' => 'general'], 'class' => 'login_form', 'type' => 'file']);?>
 
     <div class="form-group">
         <label class="text-info">Application Logo</label>

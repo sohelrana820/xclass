@@ -1,6 +1,6 @@
 <?php echo $this->assign('title', 'Forgot Password'); ?>
 
-<?php echo $this->Form->create('User', ['controller' => 'users', 'action' => 'forgot-password', 'class' => 'login_form']);?>
+<?php echo $this->Form->create('User', ['url' => ['controller' => 'users', 'action' => 'forgot-password'], 'class' => 'login_form']);?>
     <div class="form-group">
         <label class="text-info">Email</label>
         <?php echo $this->Form->input('username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email Address', 'label' => false, 'required' => false]);?>

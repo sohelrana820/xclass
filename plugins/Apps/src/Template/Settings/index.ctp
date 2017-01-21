@@ -13,7 +13,7 @@
         <span>Manager your application settings</span>
     </div>
     <div class="widget-body">
-        <?php echo $this->Form->create(null, array('controller' => 'settings', 'action' => 'update', 'type' => 'file'));?>
+        <?php echo $this->Form->create(null, ['url' => ['controller' => 'settings', 'action' => 'update'], 'type' => 'file']);?>
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">

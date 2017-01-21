@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
 </div>
 
-<?php echo $this->Form->create($user, array('controller' => 'users', 'action' => 'add'));?>
+<?php echo $this->Form->create($user, ['url' => ['controller' => 'users', 'action' => 'add']]);?>
 
 <div class="widget">
     <div class="widget-header">

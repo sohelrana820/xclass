@@ -4,7 +4,7 @@
     <h2 class="text-center">Email Configuration</h2>
     <br/>
 
-    <?php echo $this->Form->create(null, array('controller' => 'installation', 'action' => 'email_config', 'class' => 'login_form'));?>
+    <?php echo $this->Form->create(null, ['url' => ['controller' => 'installation', 'action' => 'email_config'], 'class' => 'login_form']);?>
 
     <div class="form-group">
         <label class="text-info">Host</label>

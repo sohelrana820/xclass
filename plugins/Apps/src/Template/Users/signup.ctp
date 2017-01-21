@@ -1,6 +1,6 @@
 <?php echo $this->assign('title', 'Signup'); ?>
 
-<?php echo $this->Form->create($user, array('controller' => 'users', 'action' => 'signup', 'class' => 'login_form'));?>
+<?php echo $this->Form->create($user, ['url' => ['controller' => 'users', 'action' => 'signup'], 'class' => 'login_form']);?>
 
 <div class="form-group">
     <label class="text-info">First Name</label>

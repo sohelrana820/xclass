@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
 </div>
 
-<?php echo $this->Form->create($project, array('controller' => 'projects', 'action' => 'create', 'type' => 'file'));?>
+<?php echo $this->Form->create($project, ['url' => ['controller' => 'projects', 'action' => 'create'], 'type' => 'file']);?>
 
 <div class="widget">
     <div class="widget-header">
