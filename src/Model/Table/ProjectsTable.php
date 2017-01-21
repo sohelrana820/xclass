@@ -110,9 +110,6 @@ class ProjectsTable extends Table
         $result = $this->find()
             ->where(['slug' => $slug])
             ->contain([
-                'Labels',
-                'Users',
-                'Attachments',
                 'Tasks' => function($q){
                     $q->select(['id', 'task', 'project_id', 'identity']);
                     $q->autoFields(false);
@@ -140,7 +137,7 @@ class ProjectsTable extends Table
                     return $q;
                 },
                 'Tasks.UsersTasks.Users.Profiles' => function($q){
-                    $q->select(['id', 'first_name', 'last_name']);
+                    $q->select(['user_id', 'first_name', 'last_name']);
                     $q->autoFields(false);
                     return $q;
                 }

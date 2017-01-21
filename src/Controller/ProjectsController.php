@@ -49,7 +49,21 @@ class ProjectsController extends AppController
         {
             throw new BadRequestException();
         }
+
+        $conditions = ['ProjectsUsers.project_id' => $project->id];
+        $result = $this->Users->ProjectsUsers->find()
+            ->select(['Users.id', 'Users.uuid', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'])
+            ->where($conditions)
+            ->contain(['Users', "Users.Profiles"])
+            ->limit(5);
+
+        $users = [];
+        foreach ($result as $user) {
+            $users[] = $user['Users'];
+        }
+
         $this->set('project', $project);
+        $this->set('users', $users);
         $this->set('_serialize', ['project']);
     }
 

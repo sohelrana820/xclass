@@ -43,12 +43,11 @@ class UsersTable extends Table
             'targetForeignKey' => 'project_id',
             'joinTable' => 'projects_users'
         ]);
-        /*$this->belongsToMany('Projects', [
+        $this->belongsToMany('Projects', [
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'project_id',
             'joinTable' => 'projects_users'
-        ]);*/
-
+        ]);
     }
 
     /**

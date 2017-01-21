@@ -183,59 +183,44 @@
             <div class="col-lg-12">
                 <h2 class="sm-title">Recent Users</h2>
                 <div class="project_user_section">
+                    <?php if($users):?>
                     <ul class="project_user_nav_list project_assigned_user_list">
+                        <?php foreach ($users as $user):?>
                         <li>
                             <div>
-                                <img src="http://localhost/task-manager/img/profiles/aeb3c521-c0d1-448e-a88a-4a13233c01a5/Concurrency-Issues-With-PHP-Session.jpg" class="img-responsive">
+                                <?php
+                                if($user->profile->profile_pic){
+                                    echo $this->Html->image('profiles/' . $user->profile->profile_pic,
+                                        [
+                                            'class' => 'img-thumbnail',
+                                            'alt' => $user->profile->name,
+                                            'url' =>
+                                                [
+                                                    'controller' => 'users',
+                                                    'action' => 'view',
+                                                    $user->uuid
+                                                ]
+                                        ]);
+                                }
+                                else{
+                                    echo $this->Html->image('profile_avatar.jpg', ['class' => 'avatar img-thumbnail', 'alt' => $user->profile->name, 'url' => ['controller' => 'users', 'action' => 'view', $user->uuid]]);
+                                }
+                                ?>
                                 <div>
-                                    <strong><a >Sohel Rana</a></strong>
+                                    <strong>
+                                        <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid])?>
+                                    </strong>
                                     <br>
-                                    <small>me.sohelrana@gmail.com</small>
+                                    <small><?php echo $user->username?></small>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div>
-                                <img src="http://localhost/task-manager/img/profiles/aeb3c521-c0d1-448e-a88a-4a13233c01a5/Concurrency-Issues-With-PHP-Session.jpg" class="img-responsive">
-                                <div>
-                                    <strong><a >Sohel Rana</a></strong>
-                                    <br>
-                                    <small>me.sohelrana@gmail.com</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="http://localhost/task-manager/img/profiles/aeb3c521-c0d1-448e-a88a-4a13233c01a5/Concurrency-Issues-With-PHP-Session.jpg" class="img-responsive">
-                                <div>
-                                    <strong><a >Sohel Rana</a></strong>
-                                    <br>
-                                    <small>me.sohelrana@gmail.com</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="http://localhost/task-manager/img/profiles/aeb3c521-c0d1-448e-a88a-4a13233c01a5/Concurrency-Issues-With-PHP-Session.jpg" class="img-responsive">
-                                <div>
-                                    <strong><a >Sohel Rana</a></strong>
-                                    <br>
-                                    <small>me.sohelrana@gmail.com</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div>
-                                <img src="http://localhost/task-manager/img/profiles/aeb3c521-c0d1-448e-a88a-4a13233c01a5/Concurrency-Issues-With-PHP-Session.jpg" class="img-responsive">
-                                <div>
-                                    <strong><a >Sohel Rana</a></strong>
-                                    <br>
-                                    <small>me.sohelrana@gmail.com</small>
-                                </div>
-                            </div>
-                        </li>
+                        <?php endforeach;; ?>
                     </ul>
-                    <a class="see_more pull-right" style="margin-top: 10px">See More</a>
+                    <div class="pull-right" style="margin-top: 10px">
+                        <?php echo $this->Html->link('See More', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'see_more']);?>
+                    </div>
+                    <?php endif;?>
                     <div class="clearfix"></div>
                 </div>
             </div>
