@@ -39,7 +39,7 @@
                                 <?php elseif ($this->Utility->getExtension($attachment->name) == 'pdf'): ?>
                                     <i class="icon fa fa-file-pdf-o"></i>
                                 <?php else: ?>
-                                    <i class="icon fa fa-question"></i>
+                                    <i class="icon fa fa-file-o"></i>
                                 <?php endif; ?>
                             </div>
 

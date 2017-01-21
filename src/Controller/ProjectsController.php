@@ -14,6 +14,7 @@ use Composer\Package\Archiver\ZipArchiver;
  * @property \App\Model\Table\ProjectsTable $Projects
  * @property \App\Model\Table\ProjectsUsersTable $ProjectsUsers;
  * @property \App\Model\Table\UsersTable $Users;
+ * @property \App\Controller\Component\UtilitiesComponent $Utilities
  */
 class ProjectsController extends AppController
 {
