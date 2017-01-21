@@ -110,6 +110,11 @@ class ProjectsTable extends Table
         $result = $this->find()
             ->where(['slug' => $slug])
             ->contain([
+                'Labels' => function($q){
+                    $q->select(['id', 'project_id', 'name', 'color_code', 'status', 'created']);
+                    $q->autoFields(false);
+                    return $q;
+                },
                 'Tasks' => function($q){
                     $q->select(['id', 'task', 'project_id', 'identity']);
                     $q->autoFields(false);

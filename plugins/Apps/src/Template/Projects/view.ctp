@@ -118,6 +118,7 @@
                         <h2>Recent Labels</h2>
                     </div>
                     <div class="widget-body">
+                        <?php if($project->labels):?>
                         <div>
                             <table class="table label_List">
                                 <thead>
@@ -128,55 +129,33 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php foreach ($project->labels as $label): ?>
                                     <tr>
                                         <td>
-                                            <label class="app_label ng-binding" style="background: #8B5F5C">New Error</label>
+                                            <label class="app_label ng-binding" style="background: <?php echo $label->color_code;?>"><?php echo $label->name?></label>
                                         </td>
                                         <td>
-                                            <span class="status-text test status-text-green">Active</span>
+                                            <?php if ($label->status == 1): ?>
+                                                <span class="status-text test status-text-green">Active</span>
+                                            <?php elseif ($label->status == 2): ?>
+                                                <span class="status-text test status-text-danger">Inactive</span>
+                                            <?php else: ?>
+                                                <span class="status-text test status-text-default">N/A</span>
+                                            <?php endif; ?>
                                         </td>
                                         <td class="text-right">Jan 22, 2017</td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="app_label ng-binding" style="background: #8B5F5C">New Error</label>
-                                        </td>
-                                        <td>
-                                            <span class="status-text test status-text-green">Active</span>
-                                        </td>
-                                        <td class="text-right">Jan 22, 2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="app_label ng-binding" style="background: #8B5F5C">New Error</label>
-                                        </td>
-                                        <td>
-                                            <span class="status-text test status-text-green">Active</span>
-                                        </td>
-                                        <td class="text-right">Jan 22, 2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="app_label ng-binding" style="background: #8B5F5C">New Error</label>
-                                        </td>
-                                        <td>
-                                            <span class="status-text test status-text-green">Active</span>
-                                        </td>
-                                        <td class="text-right">Jan 22, 2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label class="app_label ng-binding" style="background: #8B5F5C">New Error</label>
-                                        </td>
-                                        <td>
-                                            <span class="status-text test status-text-green">Active</span>
-                                        </td>
-                                        <td class="text-right">Jan 22, 2017</td>
-                                    </tr>
+                                <?php endforeach;?>
                                 </tbody>
                             </table>
-                            <a class="see_more pull-right">See More</a>
+                            <?php
+                            if($project->labels >=  5)
+                            {
+                                echo $this->Html->link('Full List', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'see_more pull-right']);
+                            }
+                            ?>
                         </div>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>
@@ -218,7 +197,7 @@
                         <?php endforeach;; ?>
                     </ul>
                     <div class="pull-right" style="margin-top: 10px">
-                        <?php echo $this->Html->link('See More', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'see_more']);?>
+                        <?php echo $this->Html->link('Full List', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'see_more']);?>
                     </div>
                     <?php endif;?>
                     <div class="clearfix"></div>
