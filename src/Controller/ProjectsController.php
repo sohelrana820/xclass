@@ -154,16 +154,23 @@ class ProjectsController extends AppController
             $this->set('_serialize', ['project']);
         } else {
             $limit = null;
+            $project = $this->Projects->getProjectBySlug($slug);
+            $conditions = ['ProjectsUsers.project_id' => $project->id];
+
             if (isset($this->request->query['limit']) && $this->request->query['limit']) {
                 if ($this->request->query['limit'] != 'false') {
                     $limit = (int)$this->request->query['limit'];
                 }
             }
 
-            $project = $this->Projects->getProjectBySlug($slug);
+            if (isset($this->request->query['name']) && $this->request->query['name']) {
+                $name = $this->request->query['name'];
+                $conditions = array_merge($conditions, ['OR' => ['Profiles.first_name LIKE' => '%'.$name.'%', 'Profiles.last_name LIKE' => '%'.$name.'%']]);
+            }
+
             $users = $this->Users->ProjectsUsers->find()
                 ->select(['Users.id', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'])
-                ->where(['ProjectsUsers.project_id' => $project->id])
+                ->where($conditions)
                 ->contain(['Users', "Users.Profiles"])
                 ->limit($limit);
 
@@ -173,7 +180,8 @@ class ProjectsController extends AppController
             }
 
             $countUsers = $this->Users->ProjectsUsers->find()
-                ->where(['ProjectsUsers.project_id' => $project->id])
+                ->where($conditions)
+                ->contain(['Users', "Users.Profiles"])
                 ->count();
 
             $response = [
