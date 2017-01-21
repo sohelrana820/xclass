@@ -74,44 +74,6 @@
                     <div class="pull-right right-side-filter">
                         <div class="filter_block">
                             <div class="dropdown">
-                                <span id="authorList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    Author <b class="caret"></b>
-                                </span>
-                                <div class="dropdown-menu custom-dropdown" id="authorList" aria-labelledby="label">
-                                    <h2> Filter by author
-                                        <a class="quick_task">
-                                            <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
-                                            <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
-                                                <i class="fa fa-refresh grey"></i>
-                                            </span>
-                                        </a>
-                                    </h2>
-
-                                    <div class="label_quick_operation">
-                                        <div class="search_label">
-                                            <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
-                                            <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-
-                                    <ul class="custom_dropdown_list nav nav-list">
-                                        <li ng-repeat="(key, user) in users">
-                                            <a ng-click="chooseFilterAuthor(user, key, user.checked)">
-                                                <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                                <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
-                                                {{user.profile.first_name}} {{user.profile.last_name}}
-                                                <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-center text-uppercase" ng-show="taskLabels.length < 1">Author not found</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="filter_block">
-                            <div class="dropdown">
                                 <span id="labelList" data-target="#" href="http://example.com" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     Labels <b class="caret"></b>
                                 </span>
