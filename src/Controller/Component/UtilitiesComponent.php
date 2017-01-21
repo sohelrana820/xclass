@@ -149,7 +149,7 @@ class UtilitiesComponent extends Component
 
         // Adding every attachments files into the ZIP.
         foreach ($files as $key => $file) {
-            $zip->addFile($filesDirectory . $file, $file);
+            $zip->addFile($filesDirectory . $file, $key);
         }
         $zip->close();
 
