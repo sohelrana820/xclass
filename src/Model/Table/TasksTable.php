@@ -95,9 +95,15 @@ class TasksTable extends Table
      * @param $status
      * @return int
      */
-    public function countTotalTasks($status)
+    public function countTotalTasksByProjectId($projectId, $status = null)
     {
-        $result = $this->find('all', ['conditions' => ['Tasks.status' => $status]])
+        $conditions = ['Tasks.project_id' => $projectId];
+        if($status)
+        {
+            $conditions = array_merge($conditions, ['Tasks.status' => $status]);
+        }
+
+        $result = $this->find('all', ['conditions' => $conditions])
             ->count();
 
         return $result;

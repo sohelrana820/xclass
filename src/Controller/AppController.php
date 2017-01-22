@@ -14,6 +14,7 @@
  */
 namespace App\Controller;
 
+use App\Model\Table\ProjectsUsersTable;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
@@ -25,6 +26,8 @@ use Cake\Routing\Router;
  *
  * Add your application-wide methods in the class below, your controllers
  * will inherit them.
+ *
+ * @property \App\Model\Table\ProjectsUsersTable $ProjectsUsers;
  *
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
@@ -156,5 +159,18 @@ class AppController extends Controller
             $this->Flash->error(_('Sorry, you are not authorised to access this page'));
             $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
         }
+    }
+
+    protected function getProjectOverview($projectId)
+    {
+        $this->loadModel('ProjectsUsers');
+        $this->loadModel('Labels');
+        $overview = [
+            'total_user' => $this->ProjectsUsers->countUserByProjectId($projectId),
+            'total_label' => $this->Labels->countTotalLabelByProjectId($projectId),
+            'total_open_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 1),
+            'total_closed_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 2)
+        ];
+        return $overview;
     }
 }

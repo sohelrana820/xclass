@@ -61,9 +61,11 @@ class ProjectsController extends AppController
         foreach ($result as $user) {
             $users[] = $user['Users'];
         }
+        $overview = $this->getProjectOverview($project->id);
 
         $this->set('project', $project);
         $this->set('users', $users);
+        $this->set('overview', $overview);
         $this->set('_serialize', ['project']);
     }
 

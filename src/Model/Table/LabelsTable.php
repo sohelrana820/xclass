@@ -69,9 +69,9 @@ class LabelsTable extends Table
         return $validator;
     }
 
-    public function countTotalLabel()
+    public function countTotalLabelByProjectId($projectId)
     {
-        $result = $this->find()
+        $result = $this->find('all', ['conditions' => ['Labels.project_id' => $projectId]])
             ->count();
 
         return $result;

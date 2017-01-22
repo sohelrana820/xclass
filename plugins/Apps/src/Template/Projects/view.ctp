@@ -24,7 +24,7 @@
             <div ng-show="!overview_loader" class="">
                 <i class="fa fa-users"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to ng-binding" data-from="0" data-to="1250">4</span>
+                    <span class="count-to ng-binding" data-from="0" data-to="1250"><?php echo $overview['total_user']?></span>
                     <small>Total Users</small>
                 </h3>
             </div>
@@ -38,7 +38,7 @@
             <div ng-show="!overview_loader" class="">
                 <i class="fa fa-tags"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to ng-binding" data-from="0" data-to="5411">0</span>
+                    <span class="count-to ng-binding" data-from="0" data-to="5411"><?php echo $overview['total_label']?></span>
                     <small>Total Label</small>
                 </h3>
             </div>
@@ -52,7 +52,7 @@
             <div ng-show="!overview_loader" class="">
                 <i class="fa fa-bell-slash-o"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to ng-binding" data-from="0" data-to="4151">0</span>
+                    <span class="count-to ng-binding" data-from="0" data-to="4151"><?php echo $overview['total_closed_task']?></span>
                     <small>Total Closed Task</small>
                 </h3>
             </div>
@@ -66,7 +66,7 @@
             <div ng-show="!overview_loader" class="">
                 <i class="fa fa-bell-o"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to ng-binding" data-from="0" data-to="105">0</span>
+                    <span class="count-to ng-binding" data-from="0" data-to="105"><?php echo $overview['total_open_task']?></span>
                     <small>Total Opened Task</small>
                 </h3>
             </div>

@@ -86,6 +86,14 @@ class ProjectsUsersTable extends Table
         return false;
     }
 
+    public function countUserByProjectId($projectId)
+    {
+        $count = $this->find()
+            ->where(['ProjectsUsers.project_id' => $projectId])
+            ->count();
+        return $count;
+    }
+
     public function getProjectUsers($projectId, $limit = 10)
     {
         $users = $this->find();
