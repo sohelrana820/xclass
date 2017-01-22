@@ -1,5 +1,6 @@
 <?php echo $this->assign('title', 'My Dashboard'); ?>
 
+<?php if($projects):?>
 <div class="page-header">
     <h2 class="title pull-left">
         <?php echo $this->Html->link('Dashboard', ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'link']);?>
@@ -11,10 +12,26 @@
 
     <div class="clearfix"></div>
 </div>
+<?php endif;?>
 
-
+<?php if(!$projects):?>
 <div class="row">
-
+    <div class="col-lg-10 col-lg-offset-1">
+        <div class="empty_block">
+            <span class="icon">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+            </span>
+            <br/>
+            <br/>
+            <h2>Welcome to <?php echo $appsName;?>!</h2>
+            <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
+            <br/>
+            <?php echo $this->Html->link('Get Started', ['controller' => 'projects', 'action', 'create'], ['class' => 'btn-lg-theme']);?>
+        </div>
+    </div>
+</div>
+<?php else:?>
+<div class="row">
     <div class="col-lg-3 col-sm-6">
         <a href="<?php echo $baseUrl;?>projects/create">
             <div class="blank_project_overview_widget">
@@ -27,8 +44,7 @@
         </a>
     </div>
 
-    <?php if($projects):?>
-        <?php  foreach ($projects as $project):?>
+    <?php foreach ($projects as $project):?>
         <div class="col-lg-3 col-sm-6">
             <div class="project_overview_widget">
                 <h3><?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug]);?></h3>
@@ -65,9 +81,10 @@
                 </div>
             </div>
         </div>
-        <?php endforeach; ?>
-    <?php endif;?>
+    <?php endforeach; ?>
 </div>
+<?php endif;?>
+
 
 <?php
 echo $this->start('jsBottom');
