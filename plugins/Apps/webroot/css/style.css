@@ -1756,6 +1756,49 @@ Licensed under MIT
     margin-bottom: 15px;
 }
 
+
+.blank_project_overview_widget {
+    width: 100%;
+    background: #f8f8f8;
+    border-radius: 3px;
+    min-height: 340px;
+    margin-bottom: 15px;
+    border: 1px dashed #ccc;
+}
+
+
+
+.blank_project_overview_widget_inner {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    right: 20px;
+    color: white;
+    transform: translateY(-50%);
+    resize: none;
+    overflow: auto;
+    text-align: center;
+}
+
+
+
+.blank_project_overview_widget .icon {
+    font-size: 30px;
+    color: #999;
+    border: 2px solid #999;
+    padding: 13px 15px 12px 15px;
+    border-radius: 50px;
+}
+
+
+
+.blank_project_overview_widget .new {
+    color: #999;
+    margin-top: 14px;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
 .project_overview_widget h3{
     font-size: 14px;
     text-transform: uppercase;

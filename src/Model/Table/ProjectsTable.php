@@ -172,6 +172,7 @@ class ProjectsTable extends Table
             ->select(['id', 'slug', 'name', 'description', 'created'])
             ->where(['Projects.status' => $status])
             ->limit($limit)
+            ->order(['Projects.created' => 'DESC'])
             ->all();
 
         if($result){

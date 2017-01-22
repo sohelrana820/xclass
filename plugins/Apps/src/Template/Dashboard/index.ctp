@@ -14,6 +14,19 @@
 
 
 <div class="row">
+
+    <div class="col-lg-3 col-sm-6">
+        <a href="<?php echo $baseUrl;?>projects/create">
+            <div class="blank_project_overview_widget">
+                <div class="blank_project_overview_widget_inner">
+                    <span class="icon fa fa-plus"></span>
+                    <br/>
+                    <p class="new">Create New Project</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
     <?php if($projects):?>
         <?php  foreach ($projects as $project):?>
         <div class="col-lg-3 col-sm-6">
