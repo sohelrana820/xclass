@@ -38,30 +38,24 @@
                     <ul class="overview_list">
                         <li><strong>User Assigned:</strong>
                             <?php
-                            if($project->overview['total_user'] > 0){
-                                echo '<span class="bg-black">'.$project->overview['total_user'].'</span>';
-                            }
-                            else{
+                            echo '<span class="bg-black">'.$project->overview['total_user'].'</span>';
+                            if($project->overview['total_user'] < 1){
                                 echo $this->Html->link('Assign User', ['controller' => 'projects', 'action' => 'users', $project->slug]);
                             }
                             ?>
                         </li>
                         <li><strong>Total Labels:</strong>
                             <?php
-                            if($project->overview['total_label'] > 0){
-                                echo '<span class="bg-orange">'.$project->overview['total_label'].'</span>';
-                            }
-                            else{
+                            echo '<span class="bg-orange">'.$project->overview['total_label'].'</span>';
+                            if($project->overview['total_label'] < 1){
                                 echo $this->Html->link('Create Label', ['controller' => 'labels', 'action' => 'index', $project->slug]);
                             }
                             ?>
                         </li>
                         <li><strong>Total Tasks:</strong>
                             <?php
-                            if($project->overview['total_task'] > 0){
-                                echo '<span class="bg-green">'.$project->overview['total_task'].'</span>';
-                            }
-                            else{
+                            echo '<span class="bg-green">'.$project->overview['total_task'].'</span>';
+                            if($project->overview['total_task'] < 1){
                                 echo $this->Html->link('Create Task', ['controller' => 'tasks', 'action' => 'index', $project->slug]);
                             }
                             ?>
