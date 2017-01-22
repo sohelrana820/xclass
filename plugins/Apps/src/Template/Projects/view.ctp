@@ -157,7 +157,10 @@
                         }
                         ?>
                     </div>
+                <?php else:?>
+                    <h4 class="sm-not-found">Sorry, label empty</h4>
                 <?php endif;?>
+
             </div>
         </div>
         <div>
@@ -200,6 +203,8 @@
                     <div class="pull-right" style="margin-top: 10px">
                         <?php echo $this->Html->link('Full List', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'see_more']);?>
                     </div>
+                <?php else:?>
+                    <h4 class="sm-not-found">Sorry, user empty</h4>
                 <?php endif;?>
                 <div class="clearfix"></div>
             </div>
@@ -209,40 +214,45 @@
         <div class="recent-task">
             <div class="col-mob">
                 <h2 class="sm-title">Recent Opened Tasks</h2>
-                <?php foreach ($project->tasks as $task):?>
-                <!-- Single Task -->
-                <div class="ui-item">
-                    <!-- Heading -->
-                    <div class="ui-heading clearfix">
-                        <h5>
-                            <?php if ($task->users_tasks): ?>
-                                <strong class="assigned-to">Assigned To:</strong>
-                                <?php foreach ($task->users_tasks as $taskUsers): ?>
-                                    <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
-                                        'controller' => 'users',
-                                        'action' => 'view',
-                                        $taskUsers->user->uuid
-                                    ]);?>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <strong class="no-assigned">Not Assigned Yet!</strong>
-                            <?php endif; ?>
-                        </h5>
-                    </div>
-                    <p>
-                        <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
-                    </p>
-                    <?php if ($task->tasks_labels): ?>
-                        <div>
-                            <?php foreach ($task->tasks_labels as $taskLabel):?>
-                                <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
-                                    <?php echo $taskLabel->label->name;?>
-                                </a>
-                            <?php endforeach;?>
+                <?php if($project->tasks):?>
+                    <?php foreach ($project->tasks as $task):?>
+                    <!-- Single Task -->
+                    <div class="ui-item">
+                        <!-- Heading -->
+                        <div class="ui-heading clearfix">
+                            <h5>
+                                <?php if ($task->users_tasks): ?>
+                                    <strong class="assigned-to">Assigned To:</strong>
+                                    <?php foreach ($task->users_tasks as $taskUsers): ?>
+                                        <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
+                                            'controller' => 'users',
+                                            'action' => 'view',
+                                            $taskUsers->user->uuid
+                                        ]);?>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <strong class="no-assigned">Not Assigned Yet!</strong>
+                                <?php endif; ?>
+                            </h5>
                         </div>
-                    <?php endif; ?>
-                </div>
-                <?php endforeach;?>
+                        <p>
+                            <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
+                        </p>
+                        <?php if ($task->tasks_labels): ?>
+                            <div>
+                                <?php foreach ($task->tasks_labels as $taskLabel):?>
+                                    <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
+                                        <?php echo $taskLabel->label->name;?>
+                                    </a>
+                                <?php endforeach;?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <?php endforeach;?>
+                <?php else:?>
+                    <h4 class="sm-not-found">Sorry, task empty</h4>
+                <?php endif;?>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
