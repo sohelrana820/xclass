@@ -76,138 +76,137 @@
 
 <div class="row">
     <div class="col-lg-7">
-        <div class="overview_section">
-            <h2 class="sm-title">Project Overview</h2>
-            <ul class="data-overview">
-                <li>
-                    <strong>Name of Project: </strong>
-                    <?php
-                    if ($project->name) {
-                        echo $project->name;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </li>
-                <li>
-                    <strong>Description: </strong>
-                    <?php
-                    if ($project->description) {
-                        echo $project->description;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </li>
-                <li>
-                    <strong>Note: </strong>
-                    <?php
-                    if ($project->note) {
-                        echo $project->note;
-                    } else {
-                        echo 'N/A';
-                    }
-                    ?>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="widget">
-                    <div class="widget-header">
-                        <h2>Recent Labels</h2>
-                    </div>
-                    <div class="widget-body">
-                        <?php if($project->labels):?>
-                        <div>
-                            <table class="table label_List">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th class="text-right">Modified</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php foreach ($project->labels as $label): ?>
-                                    <tr>
-                                        <td>
-                                            <label class="app_label ng-binding" style="background: <?php echo $label->color_code;?>"><?php echo $label->name?></label>
-                                        </td>
-                                        <td>
-                                            <?php if ($label->status == 1): ?>
-                                                <span class="status-text test status-text-green">Active</span>
-                                            <?php elseif ($label->status == 2): ?>
-                                                <span class="status-text test status-text-danger">Inactive</span>
-                                            <?php else: ?>
-                                                <span class="status-text test status-text-default">N/A</span>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td class="text-right">Jan 22, 2017</td>
-                                    </tr>
-                                <?php endforeach;?>
-                                </tbody>
-                            </table>
-                            <?php
-                            if($project->labels >=  5)
-                            {
-                                echo $this->Html->link('Full List', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'see_more pull-right']);
-                            }
-                            ?>
-                        </div>
-                        <?php endif;?>
-                    </div>
-                </div>
+        <div class="widget">
+            <div class="widget-header">
+                <h2 class="sm-title">Project Overview</h2>
             </div>
-            <div class="col-lg-12">
-                <h2 class="sm-title">Recent Users</h2>
-                <div class="project_user_section">
-                    <?php if($users):?>
+            <div class="widget-body">
+                <ul class="data-overview">
+                    <li>
+                        <strong>Project Name: </strong>
+                        <?php
+                        if ($project->name) {
+                            echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Description: </strong>
+                        <?php
+                        if ($project->description) {
+                            echo $project->description;
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Note: </strong>
+                        <?php
+                        if ($project->note) {
+                            echo $project->note;
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="widget-header">
+                <h2>Recent Labels</h2>
+            </div>
+            <div class="widget-body">
+                <?php if($project->labels):?>
+                    <div>
+                        <table class="table label_List">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th class="text-right">Modified</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($project->labels as $label): ?>
+                                <tr>
+                                    <td>
+                                        <label class="app_label ng-binding" style="background: <?php echo $label->color_code;?>"><?php echo $label->name?></label>
+                                    </td>
+                                    <td>
+                                        <?php if ($label->status == 1): ?>
+                                            <span class="status-text test status-text-green">Active</span>
+                                        <?php elseif ($label->status == 2): ?>
+                                            <span class="status-text test status-text-danger">Inactive</span>
+                                        <?php else: ?>
+                                            <span class="status-text test status-text-default">N/A</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="text-right">Jan 22, 2017</td>
+                                </tr>
+                            <?php endforeach;?>
+                            </tbody>
+                        </table>
+                        <?php
+                        if($project->labels >=  5)
+                        {
+                            echo $this->Html->link('Full List', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'see_more pull-right']);
+                        }
+                        ?>
+                    </div>
+                <?php endif;?>
+            </div>
+        </div>
+        <div>
+            <h2 class="sm-title">Recent Users</h2>
+            <div class="project_user_section">
+                <?php if($users):?>
                     <ul class="project_user_nav_list project_assigned_user_list">
                         <?php foreach ($users as $user):?>
-                        <li>
-                            <div>
-                                <?php
-                                if($user->profile->profile_pic){
-                                    echo $this->Html->image('profiles/' . $user->profile->profile_pic,
-                                        [
-                                            'class' => 'img-thumbnail',
-                                            'alt' => $user->profile->name,
-                                            'url' =>
-                                                [
-                                                    'controller' => 'users',
-                                                    'action' => 'view',
-                                                    $user->uuid
-                                                ]
-                                        ]);
-                                }
-                                else{
-                                    echo $this->Html->image('profile_avatar.jpg', ['class' => 'avatar img-thumbnail', 'alt' => $user->profile->name, 'url' => ['controller' => 'users', 'action' => 'view', $user->uuid]]);
-                                }
-                                ?>
+                            <li>
                                 <div>
-                                    <strong>
-                                        <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid])?>
-                                    </strong>
-                                    <br>
-                                    <small><?php echo $user->username?></small>
+                                    <?php
+                                    if($user->profile->profile_pic){
+                                        echo $this->Html->image('profiles/' . $user->profile->profile_pic,
+                                            [
+                                                'class' => 'img-thumbnail',
+                                                'alt' => $user->profile->name,
+                                                'url' =>
+                                                    [
+                                                        'controller' => 'users',
+                                                        'action' => 'view',
+                                                        $user->uuid
+                                                    ]
+                                            ]);
+                                    }
+                                    else{
+                                        echo $this->Html->image('profile_avatar.jpg', ['class' => 'avatar img-thumbnail', 'alt' => $user->profile->name, 'url' => ['controller' => 'users', 'action' => 'view', $user->uuid]]);
+                                    }
+                                    ?>
+                                    <div>
+                                        <strong>
+                                            <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid])?>
+                                        </strong>
+                                        <br>
+                                        <small><?php echo $user->username?></small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
                         <?php endforeach;; ?>
                     </ul>
                     <div class="pull-right" style="margin-top: 10px">
                         <?php echo $this->Html->link('Full List', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'see_more']);?>
                     </div>
-                    <?php endif;?>
-                    <div class="clearfix"></div>
-                </div>
+                <?php endif;?>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>
-
     <div class="col-lg-5">
-        <div class="ui-kit-9">
+        <div class="recent-task">
             <div class="col-mob">
                 <h2 class="sm-title">Recent Opened Tasks</h2>
                 <?php foreach ($project->tasks as $task):?>
@@ -217,6 +216,7 @@
                     <div class="ui-heading clearfix">
                         <h5>
                             <?php if ($task->users_tasks): ?>
+                                <strong class="assigned-to">Assigned To:</strong>
                                 <?php foreach ($task->users_tasks as $taskUsers): ?>
                                     <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
                                         'controller' => 'users',
@@ -225,7 +225,7 @@
                                     ]);?>
                                 <?php endforeach; ?>
                             <?php else: ?>
-                                <label>Not Assigned Yet!</label>
+                                <strong class="no-assigned">Not Assigned Yet!</strong>
                             <?php endif; ?>
                         </h5>
                     </div>

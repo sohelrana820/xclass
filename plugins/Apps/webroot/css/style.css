@@ -734,22 +734,30 @@ a {
 }
 
 .overview_section {
-    border: 1px dashed #ddd;
+   /* border: 1px dashed #ddd;*/
+    border-radius: 3px;
     padding: 15px;
     margin-bottom: 15px;
-    background: #f8f8f8;
+     background: #273140;
+    color: #FFF;
 }
 
 .data-overview {
     padding: 0px;
     list-style: none;
     margin-top: 10px;
+    color: #555;
+    font-weight: 400;
 }
 
 .data-overview li {
     line-height: 22px;
     font-size: 13px;
     margin-bottom: 10px;
+}
+
+.bold{
+    font-weight: 600;
 }
 
 .not-found {

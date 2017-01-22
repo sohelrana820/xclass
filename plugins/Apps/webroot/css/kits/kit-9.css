@@ -1,11 +1,11 @@
 
-.ui-kit-9 h2 {
+.recent-task h2 {
     font-size: 20px;
     line-height: 26px;
 }
 
 
-.ui-kit-9 .ui-item {
+.recent-task .ui-item {
     background: #fff;
     border: 1px dashed #ddd;
     padding: 15px 20px;
@@ -14,28 +14,31 @@
 }
 
 
-.ui-kit-9 .ui-item:first-child {
+.recent-task .ui-item:first-child {
     margin-top: 0px;
 }
-.ui-kit-9 .ui-item .ui-heading h5 {
+.recent-task .ui-item .ui-heading h5 {
     font-size: 13px;
     line-height: 23px;
     float: left;
     font-weight: bold;
 }
-.ui-kit-9 .ui-item .ui-heading h5 a {
+.recent-task .ui-item .ui-heading h5 a {
     color: #3577a1;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 12px;
 }
-.ui-kit-9 .ui-item span {
+.recent-task .ui-item .ui-heading h5 a:hover {
+    text-decoration: underline;
+}
+.recent-task .ui-item span {
     font-size: 12px;
     display: block;
     color: #aaa;
     margin-bottom:2px;
 }
-.ui-kit-9 .ui-item span > a.label {
+.recent-task .ui-item span > a.label {
     float: right;
     margin-top: 0px;
     margin-left: 3px;
@@ -45,16 +48,39 @@
     border-radius: 2px;
     padding: 2px 5px 1px 5px;
 }
-.ui-kit-9 .ui-item p {
+.recent-task .ui-item p {
     color: #999;
     font-size: 12px;
     line-height: 22px;
     margin: 3px 0px 10px 0px;
 }
-.ui-kit-9 .ui-item a {
+.recent-task .ui-item a {
     line-height: 22px;
-    margin-right: 5px;
     color: #999;
+}
+
+.recent-task .ui-item a:after {
+    content: ',';
+}
+
+
+.recent-task .ui-item a:last-child:after {
+    content: '';
+}
+
+.recent-task .assigned-to
+{
+    color: #777;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+
+.recent-task .no-assigned
+{
+    color: #555;
+    font-weight: 500;
+    font-size: 12px;
 }
 
 .label.bg-red {
@@ -80,7 +106,7 @@
 
 
 @media (max-width:484px){
-    .ui-kit-9 .col-xs-6{
+    .recent-task .col-xs-6{
         width:100%;
     }
 }
