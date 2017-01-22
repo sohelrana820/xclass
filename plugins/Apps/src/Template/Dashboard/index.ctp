@@ -16,7 +16,7 @@
 <div class="row">
     <?php if($projects):?>
         <?php  foreach ($projects as $project):?>
-        <div class="col-lg-3">
+        <div class="col-lg-3 col-sm-6">
             <div class="project_overview_widget">
                 <h3><?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug]);?></h3>
                 <p><?php echo $this->Text->truncate($project->description, 150);?></p>

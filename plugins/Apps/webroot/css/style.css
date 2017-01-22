@@ -1753,6 +1753,7 @@ Licensed under MIT
     padding: 15px;
     min-height: 340px;
     position: relative;
+    margin-bottom: 15px;
 }
 
 .project_overview_widget h3{
