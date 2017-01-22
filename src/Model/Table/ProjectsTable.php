@@ -113,6 +113,7 @@ class ProjectsTable extends Table
                 'Labels' => function($q){
                     $q->select(['id', 'project_id', 'name', 'color_code', 'status', 'created']);
                     $q->autoFields(false);
+                    $q->limit(5);
                     $q->order(['Labels.created' => 'DESC']);
                     return $q;
                 },

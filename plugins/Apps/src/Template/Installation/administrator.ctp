@@ -2,7 +2,7 @@
 
     <h2 class="text-center">Setup Administrator User</h2>
 
-<?php echo $this->Form->create($user, ['url' => ['controller' => 'users', 'action' => 'administrator'], 'class' => 'login_form']);?>
+<?php echo $this->Form->create($user, ['url' => ['controller' => 'installation', 'action' => 'administrator'], 'class' => 'login_form']);?>
 
 <div class="form-group">
     <label class="text-info">First Name</label>
