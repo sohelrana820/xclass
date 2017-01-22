@@ -1742,3 +1742,17 @@ Licensed under MIT
     font-size: 10px;
     color: #999;
 }
+
+
+
+@media (max-width: 768px) {
+    .page-header .pull-left {
+        clear: both !important;
+        display: block;
+        float: none !important;
+    }
+    .page-header .pull-right{
+        float: left !important;
+        margin-top: 10px;
+    }
+}
