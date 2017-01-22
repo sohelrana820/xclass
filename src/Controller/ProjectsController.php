@@ -99,9 +99,10 @@ class ProjectsController extends AppController
 
             $this->request->data['attachments'] = $allAttachments;
             $project = $this->Projects->patchEntity($project, $this->request->data);
+            $isCreated = $this->Projects->save($project);
             if ($this->Projects->save($project)) {
                 $this->Flash->success(__('The project has been successfully!'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $isCreated->slug]);
             } else {
                 $this->Flash->error(__('The project could not be created. Please, try again.'));
             }
