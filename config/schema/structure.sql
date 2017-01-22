@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 04, 2016 at 09:42 PM
--- Server version: 5.7.16-0ubuntu0.16.04.1
--- PHP Version: 7.0.8-0ubuntu0.16.04.3
+-- Generation Time: Jan 23, 2017 at 03:37 AM
+-- Server version: 5.7.17-0ubuntu0.16.04.1
+-- PHP Version: 7.0.13-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -56,6 +56,7 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `labels` (
   `id` int(3) NOT NULL,
+  `project_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
   `color_code` varchar(24) DEFAULT 'eeeeee',
   `created_by` int(11) NOT NULL,
@@ -111,20 +112,6 @@ CREATE TABLE `projects` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `projects_labels`
---
-
-CREATE TABLE `projects_labels` (
-  `id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL,
-  `label_id` int(11) NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `projects_users`
 --
 
@@ -132,6 +119,7 @@ CREATE TABLE `projects_users` (
   `id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active,  0 = Inactive',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -144,6 +132,7 @@ CREATE TABLE `projects_users` (
 
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL,
+  `identity` int(11) NOT NULL,
   `uuid` varchar(36) NOT NULL,
   `project_id` int(11) NOT NULL,
   `created_by` int(11) NOT NULL,
@@ -228,7 +217,8 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `labels`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `created_by` (`created_by`);
+  ADD KEY `created_by` (`created_by`),
+  ADD KEY `project_id` (`project_id`);
 
 --
 -- Indexes for table `profiles`
@@ -248,20 +238,14 @@ ALTER TABLE `projects`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `projects_labels`
---
-ALTER TABLE `projects_labels`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `project_id` (`project_id`),
-  ADD KEY `label_id` (`label_id`);
-
---
 -- Indexes for table `projects_users`
 --
 ALTER TABLE `projects_users`
   ADD PRIMARY KEY (`id`),
   ADD KEY `project_id` (`project_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `project_id_2` (`project_id`),
+  ADD KEY `user_id_2` (`user_id`);
 
 --
 -- Indexes for table `tasks`
@@ -302,7 +286,7 @@ ALTER TABLE `users_tasks`
 -- AUTO_INCREMENT for table `attachments`
 --
 ALTER TABLE `attachments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `comments`
 --
@@ -312,27 +296,22 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `labels`
 --
 ALTER TABLE `labels`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
---
--- AUTO_INCREMENT for table `projects_labels`
---
-ALTER TABLE `projects_labels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `projects_users`
 --
 ALTER TABLE `projects_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tasks`
 --
@@ -347,7 +326,7 @@ ALTER TABLE `tasks_labels`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 --
 -- AUTO_INCREMENT for table `users_tasks`
 --
