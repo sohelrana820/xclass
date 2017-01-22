@@ -26,7 +26,7 @@
             <h2>Welcome to <?php echo $appsName;?>!</h2>
             <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
             <br/>
-            <?php echo $this->Html->link('Get Started', ['controller' => 'projects', 'action', 'create'], ['class' => 'btn-lg-theme']);?>
+            <?php echo $this->Html->link('Get Started', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']);?>
         </div>
     </div>
 </div>
