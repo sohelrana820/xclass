@@ -1882,6 +1882,13 @@ Licensed under MIT
 
 
 
+.new_option_btn {
+    font-size: 10px;
+    color: #777;
+    text-transform: capitalize;
+    font-weight: 400;
+}
+
 
 
 

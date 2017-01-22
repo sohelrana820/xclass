@@ -117,7 +117,13 @@
         </div>
         <div class="widget">
             <div class="widget-header">
-                <h2>Recent Labels</h2>
+                <h2>Recent Labels
+                    <?php
+                    if(!$project->labels){
+                        echo $this->Html->link('(Create New Label?)', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'new_option_btn']);
+                    }
+                    ?>
+                </h2>
             </div>
             <div class="widget-body">
                 <?php if($project->labels):?>
@@ -164,7 +170,13 @@
             </div>
         </div>
         <div>
-            <h2 class="sm-title">Recent Users</h2>
+            <h2 class="sm-title">Recent Users
+                <?php
+                if(!$users){
+                    echo $this->Html->link('(Assign User?)', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'new_option_btn']);
+                }
+                ?>
+            </h2>
             <div class="project_user_section">
                 <?php if($users):?>
                     <ul class="project_user_nav_list project_assigned_user_list">
@@ -213,7 +225,13 @@
     <div class="col-lg-5">
         <div class="recent-task">
             <div class="col-mob">
-                <h2 class="sm-title">Recent Opened Tasks</h2>
+                <h2 class="sm-title">Recent Opened Tasks
+                    <?php
+                    if(!$project->tasks){
+                        echo $this->Html->link('(Create New Task?)', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'new_option_btn']);
+                    }
+                    ?>
+                </h2>
                 <?php if($project->tasks):?>
                     <?php foreach ($project->tasks as $task):?>
                     <!-- Single Task -->
