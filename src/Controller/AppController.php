@@ -171,6 +171,8 @@ class AppController extends Controller
             'total_open_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 1),
             'total_closed_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 2)
         ];
+
+        $overview['total_task'] = $overview['total_open_task'] + $overview['total_closed_task'];
         return $overview;
     }
 }

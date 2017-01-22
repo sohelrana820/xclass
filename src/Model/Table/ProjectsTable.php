@@ -165,4 +165,18 @@ class ProjectsTable extends Table
         }
         return null;
     }
+
+    public function getProjectListsByStatus($status, $limit = 5)
+    {
+        $result = $this->find()
+            ->select(['id', 'slug', 'name', 'description', 'created'])
+            ->where(['Projects.status' => $status])
+            ->limit($limit)
+            ->all();
+
+        if($result){
+            return $result->toArray();
+        }
+        return null;
+    }
 }
