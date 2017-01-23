@@ -52,6 +52,24 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
         $scope.show_user_search_loader = false;
     };
 
+    $scope.userObj = {};
+    $scope.createUser = function () {
+        var user = UsersResources.save($scope.userObj).$promise;
+        user.then(function (res) {
+            if (res.result.success) {
+                toastr.success(res.result.message);
+                $timeout(function () {
+                    $scope.userObj = {};
+                    $scope.assignProjectUser(res.result.data.id)
+                }, 500);
+            }
+            else {
+                toastr.error(res.result.message);
+                $scope.createUsersErrors = res.result.error_message;
+            }
+        })
+    };
+
     $scope.assignProjectUser = function (userId) {
         var isUsersAssigned = ProjectsResources.assignUser({user_id: userId, slug: projectSlug}).$promise;
         isUsersAssigned.then(function (res) {

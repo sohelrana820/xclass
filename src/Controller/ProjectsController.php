@@ -190,6 +190,7 @@ class ProjectsController extends AppController
             $users = $this->Users->ProjectsUsers->find()
                 ->select(['Users.id', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'])
                 ->where($conditions)
+                ->order(['ProjectsUsers.created' => 'DESC'])
                 ->contain(['Users', "Users.Profiles"])
                 ->limit($limit);
 
