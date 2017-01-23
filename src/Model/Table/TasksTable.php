@@ -164,7 +164,7 @@ class TasksTable extends Table
                     return $q;
                 },
                 'Comments' => function($q){
-                    $q->select(['id', 'user_id', 'task_id', 'comment']);
+                    $q->select(['id', 'user_id', 'task_id', 'comment', 'created']);
                     $q->autoFields(false);
                     return $q;
                 },
