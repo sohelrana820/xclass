@@ -49,6 +49,7 @@ class ProjectsController extends AppController
         {
             throw new BadRequestException();
         }
+        $this->Projects->updateOpenedTime($project->id);
 
         $conditions = ['ProjectsUsers.project_id' => $project->id];
         $result = $this->Users->ProjectsUsers->find()

@@ -2,6 +2,7 @@
 namespace App\Model\Table;
 
 use App\Model\Entity\Project;
+use Cake\I18n\Time;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -167,12 +168,27 @@ class ProjectsTable extends Table
         return null;
     }
 
-    public function getProjectLists($limit = 5)
+    /**
+     * @param $projectId
+     * @return array|null
+     */
+    public function updateOpenedTime($projectId)
+    {
+        $project = $this->get($projectId);
+        $project = $this->patchEntity($project, ['last_opened' => new Time(date('Y-m-d H:i:s'))]);
+        $this->save($project);
+    }
+
+    /**
+     * @param int $limit
+     * @return array|null
+     */
+    public function getProjectsForDashboard($limit = 5)
     {
         $result = $this->find()
             ->select(['id', 'slug', 'name', 'description', 'status', 'created'])
             ->limit($limit)
-            ->order(['Projects.created' => 'DESC'])
+            ->order(['Projects.last_opened' => 'DESC'])
             ->all();
 
         if($result){

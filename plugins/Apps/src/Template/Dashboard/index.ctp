@@ -4,7 +4,7 @@
 <div class="page-header">
     <h2 class="title pull-left">
         <?php echo $this->Html->link('Dashboard', ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'link']);?>
-        <p class="sub-title">Most recent active projects</p>
+        <p class="sub-title">Last opened project lists</p>
     </h2>
     <div class="pull-right btn-areas">
         <?php echo $this->Html->link('Project List', ['controller' => 'projects', 'action' => 'index'], ['class' => 'btn btn-success']);?>
