@@ -36,7 +36,7 @@
                         <td><?php echo $this->Html->link(h($project->name), ['controller' => 'projects', 'action' => 'view', $project->slug]); ?></td>
                         <td>
                             <?php if ($project->status == 1): ?>
-                                <span class="status-text status-text-gray">Progressing</span>
+                                <span class="status-text status-text-info">Progressing</span>
                             <?php elseif ($project->status == 2): ?>
                                 <span class="status-text status-text-orange">Paused</span>
                             <?php elseif ($project->status == 3): ?>
@@ -44,7 +44,7 @@
                             <?php elseif ($project->status == 4): ?>
                                 <span class="status-text status-text-green">Completed</span>
                             <?php else: ?>
-                                N/A
+                                <span class="status-text status-text-gray">N/A</span>
                             <?php endif; ?>
                         </td>
                         <td>

@@ -15,7 +15,7 @@ class DashboardController extends AppController{
 
     public function index(){
         $this->loadModel('Projects');
-        $projects = $this->Projects->getProjectListsByStatus(1, 7);
+        $projects = $this->Projects->getProjectLists(7);
         foreach ($projects as $key => $project)
         {
             $overview = $this->getProjectOverview($project->id);

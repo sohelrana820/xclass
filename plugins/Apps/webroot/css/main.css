@@ -378,6 +378,37 @@ body {
 }
 
 .status-text-info {
+    color: #5bc0de;
+}
+
+.status-text-orange {
+    color: darkorange;
+}
+
+.status-text-green {
+    color: #51d466;
+}
+
+.status-text-success {
+    color: #51d466;
+}
+
+.status-text-danger {
+    color: #d9534f;
+}
+
+/* Status Text classes */
+.status-text {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+.lightslategray {
+    color: lightslategray;
+}
+
+.status-text-info {
     color: #3c85a6;
 }
 

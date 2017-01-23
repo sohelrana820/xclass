@@ -50,7 +50,21 @@
                 <h3><?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug]);?></h3>
                 <p><?php echo $this->Text->truncate($project->description, 150);?></p>
                 <div class="overview_bottom">
-                    <small><i class="fa fa-calendar"></i> Started at <?php echo $this->Time->format($project->created, 'd MMM, Y');?></small>
+                    <?php if ($project->status == 1): ?>
+                        <span class="status-text status-text-info">Status: Progressing</span>
+                    <?php elseif ($project->status == 2): ?>
+                        <span class="status-text status-text-orange">Status: Paused</span>
+                    <?php elseif ($project->status == 3): ?>
+                        <span class="status-text status-text-danger">Status: Invalid</span>
+                    <?php elseif ($project->status == 4): ?>
+                        <span class="status-text status-text-green">Status: Completed</span>
+                    <?php else: ?>
+                        <span class="status-text status-text-gray">Status: N/A</span>
+                    <?php endif; ?>
+                    <br/>
+                    <small>
+                        <i class="fa fa-calendar"></i> Started at <?php echo $this->Time->format($project->created, 'd MMM, Y');?>
+                    </small>
                     <ul class="overview_list">
                         <li><strong>User Assigned:</strong>
                             <?php

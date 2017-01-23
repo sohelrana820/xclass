@@ -167,11 +167,10 @@ class ProjectsTable extends Table
         return null;
     }
 
-    public function getProjectListsByStatus($status, $limit = 5)
+    public function getProjectLists($limit = 5)
     {
         $result = $this->find()
-            ->select(['id', 'slug', 'name', 'description', 'created'])
-            ->where(['Projects.status' => $status])
+            ->select(['id', 'slug', 'name', 'description', 'status', 'created'])
             ->limit($limit)
             ->order(['Projects.created' => 'DESC'])
             ->all();
