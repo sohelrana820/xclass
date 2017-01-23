@@ -1,6 +1,6 @@
 <?php echo $this->assign('title', 'Manage User'); ?>
 
-<div ng-controller="ProjectsCtrl">
+<div ng-controller="ProjectsCtrl" ng-show="test">
     <div class="page-header">
         <h2 class="title pull-left">
             <?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link']); ?>
@@ -91,9 +91,87 @@
     </div>
 </div>
 
+<div ng-controller="UsersCtrl">
+    <form ng-submit="createUser()">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>First name</label>
+                    <div class="input text">
+                        <input type="text" ng-model="userObj.profile.first_name" class="form-control" required placeholder="First name">
+                        <div class="error-message" ng-show="createUsersErrors.profile.first_name">
+                            <span ng-repeat="message in createUsersErrors.profile.first_name">{{message}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Last name</label>
+                    <div class="input text">
+                        <input type="text" ng-model="userObj.profile.last_name" class="form-control" required placeholder="Last name">
+                        <div class="error-message" ng-show="createUsersErrors.profile.last_name">
+                            <span ng-repeat="message in createUsersErrors.profile.last_name">{{message}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Email address</label>
+                    <div class="input text">
+                        <input type="email" ng-model="userObj.username" class="form-control" required placeholder="Email address">
+                        <div class="error-message" ng-show="createUsersErrors.username">
+                            <span ng-repeat="message in createUsersErrors.username">{{message}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Phone number</label>
+                    <div class="input text">
+                        <input type="text" ng-model="userObj.phone" class="form-control" placeholder="Phone number">
+                        <div class="error-message" ng-show="createUsersErrors.phone">
+                            <span ng-repeat="message in createUsersErrors.phone">{{message}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="input password">
+                        <input type="password" ng-model="userObj.password" class="form-control" required placeholder="Password">
+                        <div class="error-message" ng-show="createUsersErrors.password">
+                            <span ng-repeat="message in createUsersErrors.password">{{message}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Confirm password</label>
+                    <div class="input password">
+                        <input type="password" ng-model="userObj.cPassword" class="form-control" required placeholder="Confirm password">
+                        <div class="error-message" ng-show="createUsersErrors.cPassword">
+                            <span ng-repeat="message in createUsersErrors.cPassword">{{message}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Save User</button>
+    </form>
+</div>
+
 <?php
 echo $this->start('jsBottom');
-echo $this->Html->script(['src/ProjectsCtrl']);
+echo $this->Html->script(['src/ProjectsCtrl', 'src/UsersCtrl']);
 echo $this->end();
 ?>
 

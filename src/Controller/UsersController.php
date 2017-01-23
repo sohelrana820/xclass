@@ -281,7 +281,8 @@ class UsersController extends AppController{
     {
         $this->checkPermission($this->isAdmin());
         $user = $this->Users->newEntity();
-        if ($this->request->is('post')) {
+
+        if ($this->request->is('post') && $this->request->params['_ext'] != 'json') {
             $data = $this->request->data;
             $data['uuid'] = Text::uuid();
             $data['profile']['created_by'] = $this->userID;
@@ -309,9 +310,43 @@ class UsersController extends AppController{
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
-
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
+
+        if($this->request->params['_ext'] == 'json'){
+            $response = [
+                'success' => false,
+                'message' => 'Sorry, something went wrong',
+                'error_message' => [],
+            ];
+
+            $data = $this->request->data;
+            $data['uuid'] = Text::uuid();
+            $data['profile']['created_by'] = $this->userID;
+            $entity = $this->Users->newEntity(
+                $data,
+                [
+                    'associated' => ['Profiles']
+                ]
+            );
+
+            if($entity->errors())
+            {
+                $response['error_message'] = $entity->errors();
+            }
+
+            $user = $this->Users->save($entity);
+            if ($user) {
+                $response = [
+                    'success' => true,
+                    'message' => 'New user has been created successfully',
+                    'data' => $user
+                ];
+            }
+
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
     }
 
 
