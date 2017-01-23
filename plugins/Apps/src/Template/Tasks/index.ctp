@@ -122,7 +122,7 @@
                                         </a>
                                     </h2>
 
-                                    <div class="label_quick_operation">
+                                    <div class="label_quick_operation" ng-show="users.length > 0">
                                         <div class="search_label">
                                             <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
                                             <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
@@ -433,7 +433,7 @@
                                                 </a>
                                             </h2>
 
-                                            <div class="label_quick_operation">
+                                            <div class="label_quick_operation" ng-show="users.length > 0">
                                                 <div class="search_label">
                                                     <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
                                                     <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
@@ -722,7 +722,7 @@
                                             </a>
                                         </h2>
 
-                                        <div class="label_quick_operation">
+                                        <div class="label_quick_operation" ng-show="users.length > 0">
                                             <div class="search_label">
                                                 <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
                                                 <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
