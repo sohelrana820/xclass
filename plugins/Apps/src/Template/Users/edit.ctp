@@ -57,7 +57,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Email address</label>
-                                <?php echo $this->Form->input('username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email address', 'label' => false, 'required' => false, 'value' => $user->username]);?>
+                                <?php echo $this->Form->input('username', ['type' => 'email', 'class' => 'form-control', 'placeholder' => 'Email address', 'label' => false, 'required' => false, 'value' => $user->username]);?>
                             </div>
                         </div>
                         <div class="col-lg-6">
