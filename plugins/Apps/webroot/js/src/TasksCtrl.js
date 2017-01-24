@@ -670,4 +670,27 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
             $scope.fetchTaskLists({page: $scope.tasks.currentPage});
         }
     };
+
+    $scope.userObj = {};
+    $scope.createUser = function () {
+        console.log(111);
+        $scope.createUserSubmitted = true;
+        $scope.show_user_create_loader = true;
+        var user = UsersResources.save($scope.userObj).$promise;
+        user.then(function (res) {
+            if (res.result.success) {
+                toastr.success(res.result.message);
+                $timeout(function () {
+                    $scope.userObj = {};
+                    $scope.assignProjectUser(res.result.data.id);
+                    $scope.createUserSubmitted = false;
+                    $scope.show_user_create_loader = false;
+                }, 500);
+            }
+            else {
+                toastr.error(res.result.message);
+                $scope.createUsersErrors = res.result.error_message;
+            }
+        })
+    };
 });

@@ -80,7 +80,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="text" class="form-control" ng-model="userObj.profile.first_name" placeholder="First name" name="first_name" required/>
-                                    <div class="error-message" ng-if="!createUserForm.first_name.$pristine || signupSubmitted">
+                                    <div class="error-message" ng-if="!createUserForm.first_name.$pristine || createUserSubmitted">
                                         <p ng-show="createUserForm.first_name.$error.required">First name is required</p>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                             <div class="col-md-12">
                                 <div class="form-group"">
                                 <input type="text" class="form-control" ng-model="userObj.profile.last_name" placeholder="Last name" name="last_name" required/>
-                                <div class="error-message" ng-if="!createUserForm.last_name.$pristine || signupSubmitted">
+                                <div class="error-message" ng-if="!createUserForm.last_name.$pristine || createUserSubmitted">
                                     <p ng-show="createUserForm.last_name.$error.required">Last name is required</p>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="email" class="form-control" ng-model="userObj.username" ng-model-options="{ debounce: 1000 }" placeholder="Email address" name="username" required email unique-email/>
-                                <div class="error-message" ng-if="!createUserForm.username.$pristine || signupSubmitted">
+                                <div class="error-message" ng-if="!createUserForm.username.$pristine || createUserSubmitted">
                                     <p ng-show="createUserForm.username.$error.required">Email address is required</p>
                                     <p ng-show="createUserForm.username.$error.email">Invalid email address</p>
                                     <p ng-show="createUserForm.username.$error.uniqueEmail">This email is already taken</p>
@@ -109,7 +109,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="password" class="form-control" ng-model="userObj.password" placeholder="Password" name="password" required="required" />
-                                <div class="error-message" ng-if="!createUserForm.password.$pristine || signupSubmitted">
+                                <div class="error-message" ng-if="!createUserForm.password.$pristine || createUserSubmitted">
                                     <p ng-show="createUserForm.password.$error.required">Password is required</p>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <input type="password" class="form-control" name="cPassword" ng-model="userObj.cPassword" placeholder="Confirm password" match-password="userObj.password" required>
-                                <div class="error-message" ng-if="!createUserForm.cPassword.$pristine || signupSubmitted">
+                                <div class="error-message" ng-if="!createUserForm.cPassword.$pristine || createUserSubmitted">
                                     <p ng-show="createUserForm.cPassword.$error.required" >Confirm password is required</p>
                                     <p ng-show="createUserForm.cPassword.$error.matchPassword"  ng-if="!createUserForm.cPassword.$error.required">Confirm password didn't match</p>
                                 </div>
