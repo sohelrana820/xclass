@@ -165,7 +165,7 @@
 
 <?php
 echo $this->start('jsBottom');
-echo $this->Html->script(['src/ProjectsCtrl', 'src/UsersCtrl']);
+echo $this->Html->script(['src/ProjectsCtrl']);
 echo $this->end();
 ?>
 

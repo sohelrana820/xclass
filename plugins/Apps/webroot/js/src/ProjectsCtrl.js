@@ -61,7 +61,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
                 toastr.success(res.result.message);
                 $timeout(function () {
                     $scope.userObj = {};
-                    $scope.assignProjectUser(res.result.data.id)
+                    $scope.assignProjectUser(res.result.data.id);
                     $scope.signupSubmitted = false;
                 }, 500);
             }
