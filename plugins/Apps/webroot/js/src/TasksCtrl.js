@@ -673,7 +673,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
 
     $scope.userObj = {};
     $scope.createUser = function () {
-        console.log(111);
         $scope.createUserSubmitted = true;
         $scope.show_user_create_loader = true;
         var user = UsersResources.save($scope.userObj).$promise;
@@ -683,8 +682,20 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                 $timeout(function () {
                     $scope.userObj = {};
                     $scope.assignProjectUser(res.result.data.id);
+
+                    $scope.createUserForm.$setPristine();
+                    $scope.users.unshift(res.result.data);
+
+                    $scope.users.forEach(function(user,key){
+                        if(user.id == res.result.data.id){
+                            $scope.users[key].checked = true;
+                        }
+                    });
+                    $scope.taskUsers.push(res.result.data);
+
                     $scope.createUserSubmitted = false;
                     $scope.show_user_create_loader = false;
+                    $scope.show_create_new_user_form = false;
                 }, 500);
             }
             else {
@@ -692,5 +703,18 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                 $scope.createUsersErrors = res.result.error_message;
             }
         })
+    };
+
+    $scope.assignProjectUser = function (userId) {
+        var isUsersAssigned = ProjectsResources.assignUser({user_id: userId, slug: projectSlug}).$promise;
+        isUsersAssigned.then(function (res) {
+            if(res.result.success){
+                $scope.user_query = null;
+                toastr.success(res.result.message);
+            }
+            else{
+                toastr.error(res.result.message);
+            }
+        });
     };
 });
