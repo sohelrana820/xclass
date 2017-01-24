@@ -323,9 +323,7 @@
                                             <div class="input text" ng-repeat="key in countAttachments">
                                                 <input type="file" class="form-control attachment_field" ngf-select ng-model="TaskObj.file[key]" name="task_attachments" ngf-max-size="20MB"/>
                                             </div>
-                                            <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add
-                                                More
-                                                Attachment</a>
+                                            <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
                                         </div>
                                     </div>
                                 </div>
@@ -346,11 +344,11 @@
                                                 <a class="quick_task">
                                                     <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                     <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List">
-                                                                        <i class="fa fa-refresh grey"></i>
-                                                                    </span>
-                                                    <span class="add_new_label" ng-click="show_create_new_label_form = true;" title="Create New Title">
-                                                                        <i class="fa fa-plus"></i>
-                                                                    </span>
+                                                        <i class="fa fa-refresh grey"></i>
+                                                    </span>
+                                                    <span class="add_new_label" ng-click="show_create_new_label_form = true;" title="Create New Label">
+                                                        <i class="fa fa-plus"></i>
+                                                    </span>
                                                 </a>
                                             </h2>
                                             <div class="label_quick_operation">
@@ -428,19 +426,18 @@
                                                 <a class="quick_task">
                                                     <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                     <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
-                                                                        <i class="fa fa-refresh grey"></i>
-                                                                    </span>
+                                                        <i class="fa fa-refresh grey"></i>
+                                                    </span>
                                                 </a>
                                             </h2>
 
-                                            <div class="label_quick_operation" ng-show="users.length > 0">
-                                                <div class="search_label">
+                                            <div class="label_quick_operation">
+                                                <div class="search_label" ng-show="users.length > 0">
                                                     <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
                                                     <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                 </div>
                                                 <div class="clearfix"></div>
                                             </div>
-
 
                                             <ul class="custom_dropdown_list nav nav-list">
                                                 <li ng-repeat="(key, user) in users">
