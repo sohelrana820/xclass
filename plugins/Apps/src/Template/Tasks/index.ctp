@@ -515,7 +515,7 @@
                                                     </a>
                                                 </li>
                                             </ul>
-                                            <p style="font-size: 10px; margin-top: 10px;" ng-show="users.length < 1" class="red text-center text-uppercase" ng-show="taskLabels.length < 1">User not found</p>
+                                            <p style="font-size: 10px; margin-top: 10px;" ng-show="show_create_new_user_form && users.length < 1" class="red text-center text-uppercase" ng-show="taskLabels.length < 1">User not found</p>
                                         </div>
                                     </div>
 
