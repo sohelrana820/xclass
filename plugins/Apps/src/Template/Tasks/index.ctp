@@ -438,9 +438,7 @@
 
                                                 <div class="create_new_label" ng-show="show_create_new_user_form">
                                                     <div>
-                                                        <ng-form name="createUserForm" class="login-signup-form" ng-submit="createUser(); createUserForm.$setPristine()" novalidate>
-                                                            {{createUserSubmitted}}
-                                                            dadsad
+                                                        <ng-form name="createUserForm" class="create-user-form" novalidate>
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="form-group">
@@ -490,9 +488,9 @@
                                                             </div>
 
                                                             <div class="col-md-12">
-                                                                <button type="submit" class="btn btn-success">Create User</button>
+                                                                <button type="submit" class="btn btn-success" ng-click="createUser(); createUserForm.$setPristine()">Create User</button>
                                                                 <a class="btn btn-danger" ng-show="!show_label_create_loader" ng-click="show_create_new_user_form = false">Cancel</a>
-                                                                <img ng-show="show_user_create_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                                <img ng-show="show_user_create_loader && !createUserSubmitted" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                             </div>
                                                             </div>
                                                         </ng-form>

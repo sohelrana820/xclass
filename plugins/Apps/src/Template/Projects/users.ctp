@@ -75,7 +75,7 @@
                     <h2>Create & Assign User</h2>
                 </div>
                 <div class="widget-body">
-                    <form name="createUserForm" class="login-signup-form" ng-submit="createUser(); createUserForm.$setPristine()" novalidate>
+                    <form name="createUserForm" class="create-user-form" ng-submit="createUser(); createUserForm.$setPristine()" novalidate>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">

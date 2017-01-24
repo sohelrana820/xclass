@@ -1169,6 +1169,20 @@ a {
     position: relative;
 }
 
+.label_quick_operation .create-user-form .form-group {
+    margin-bottom: 10px !important;
+    clear: both;
+    display: inline-block;
+    width: 100%;
+}
+
+.label_quick_operation .error-message p {
+    font-size: 10px;
+    font-weight: 400;
+    margin-bottom: 0px;
+    text-transform: none;
+}
+
 .label_quick_operation .search_label .form-control,
 .label_quick_operation .search_label .form-control:focus {
     border: 1px solid #EEE;
