@@ -475,6 +475,29 @@ class UsersController extends AppController{
     }
 
     /**
+     *
+     */
+    public function emailAvailability()
+    {
+        $response = [
+            'is_available' => true,
+        ];
+
+        $email = $this->request->data['email'];
+        $result = $this->Users->getUserByEmail($email);
+
+        if($result){
+            $response = [
+                'is_available' => false,
+            ];
+        }
+
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
+    }
+
+
+    /**
      * @param $uuid
      * @return \Cake\Network\Response|void
      */

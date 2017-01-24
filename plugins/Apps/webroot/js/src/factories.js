@@ -12,6 +12,7 @@ app.factory('UsersResources', function ($resource, BASE_URL) {
     return $resource(':id', {id: '@id'}, {
         save: {method: 'POST', url: BASE_URL +  'users/save.json'},
         query: {method: 'GET', url: BASE_URL +  'users.json', isArray: false},
+        email_availability: {method: 'POST', url: BASE_URL +  'users/email_availability.json'},
     });
 });
 

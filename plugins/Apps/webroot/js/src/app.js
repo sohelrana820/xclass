@@ -49,3 +49,46 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
         $scope.taskView = viewMode;
     };
 });
+
+
+app.directive("matchPassword", function () {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=matchPassword"
+        },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.matchPassword = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+});
+
+app.directive('uniqueEmail', function ($http, $q, UsersResources) {
+    return {
+        require: 'ngModel',
+        link: function ($scope, element, attrs, ngModel) {
+            ngModel.$asyncValidators.uniqueEmail = function (modelValue, viewValue) {
+                var $promise = UsersResources.email_availability({email: modelValue});
+                return $promise.$promise.then(function (response) {
+                    return response;
+                }).then(function (response) {
+                    if (response.result.is_available) {
+                        return $q.when();
+                    }
+                    else {
+                        return $q.reject();
+                    }
+                }, function (error) {
+
+                });
+            };
+        }
+    };
+});

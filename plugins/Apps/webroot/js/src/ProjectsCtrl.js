@@ -54,6 +54,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
 
     $scope.userObj = {};
     $scope.createUser = function () {
+        $scope.signupSubmitted = true;
         var user = UsersResources.save($scope.userObj).$promise;
         user.then(function (res) {
             if (res.result.success) {
@@ -61,6 +62,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
                 $timeout(function () {
                     $scope.userObj = {};
                     $scope.assignProjectUser(res.result.data.id)
+                    $scope.signupSubmitted = false;
                 }, 500);
             }
             else {
