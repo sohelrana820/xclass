@@ -60,15 +60,7 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-
-
-            <div class="paginator pull-right">
-                <ul class="pagination">
-                    <?php echo $this->Paginator->prev(__('«')) ?>
-                    <?php echo $this->Paginator->numbers() ?>
-                    <?php echo $this->Paginator->next(__('»')) ?>
-                </ul>
-            </div>
+            <?php echo $this->element('pagination');?>
         <?php else: ?>
             <?php echo $this->element('not_found'); ?>
         <?php endif; ?>

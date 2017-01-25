@@ -29,7 +29,7 @@ class ProjectsController extends AppController
         $conditions = $this->Utilities->buildProjectListConditions($this->request->query);
         $this->paginate = [
             'conditions' => $conditions,
-            'limit' => 10
+            'limit' => 20
         ];
         $this->set('projects', $this->paginate($this->Projects));
         $this->set('_serialize', ['projects']);
