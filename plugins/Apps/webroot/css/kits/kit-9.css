@@ -59,8 +59,9 @@
     color: #999;
 }
 
-.recent-task .ui-item a:after {
+.recent-task .ui-item h5 a:after {
     content: ',';
+    margin-right: 5px;
 }
 
 
