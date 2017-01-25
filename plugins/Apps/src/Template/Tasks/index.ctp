@@ -244,7 +244,7 @@
                                 </small>
                             </td>
                             <td style="width: 10%;">
-                                <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">\
+                                <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
                                     <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}"/>
                                     <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
                                 </span>
@@ -300,7 +300,7 @@
         </div>
         <div class="widget-body">
             <div>
-                <form ng-submit="saveTask()">
+                <form ng-submit="saveTask()" novalidate>
                     <div class="row">
                         <div class="col-lg-8 col-md-8">
                             <div>
