@@ -1919,5 +1919,11 @@ Licensed under MIT
         margin-top: 10px;
     }
 
+    .save_task_btn_section{
+        position: relative;
+    }
 
+    .save_task_content_section{
+
+    }
 }

@@ -299,7 +299,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="widget-body">
-            <div class="row save_task_btn_section">
+            <div class="row save_task_content_section">
                 <div class="col-lg-8 col-md-8">
                     <form ng-submit="saveTask()" novalidate>
                         <div>
@@ -326,7 +326,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group save_task_btn">
+                            <div class="form-group save_task_btn hidden-xs">
                                 <button class="btn btn-success">SAVE TASK</button>
                                 <span class="instance-loader" ng-show="save_task_loader">
                                     <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
@@ -530,6 +530,8 @@
             </div>
         </div>
     </div>
+    <br/>
+    <div ng-show="taskView == 'create'" class="clearfix btn btn-success visible-xs" ng-click="saveTask()">Save Task Bottom</div>
     <!-- /Saving new task -->
 </div>
 
