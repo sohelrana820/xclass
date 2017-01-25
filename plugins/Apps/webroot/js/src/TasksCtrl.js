@@ -1,6 +1,11 @@
 app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, ProjectsResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, SweetAlert, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
 
+    $scope.taskView= 'list';
+    $scope.switchTaskView = function (viewMode) {
+        $scope.taskView = viewMode;
+    };
+
     $scope.TaskObj = {};
 
     $scope.getTaskRelObj = function(){
@@ -32,28 +37,30 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
      * Creating new tasks
      */
     $scope.saveTask = function(){
-        $scope.save_task_loader = true;
         $scope.getTaskRelObj();
         if($scope.TaskObj.task){
+            $scope.save_task_loader = true;
             Upload.upload({
                 url: BASE_URL + projectSlug +'/tasks/create.json',
                 data: $scope.TaskObj
             }).then(function (response) {
                 if(response.data.result.success){
-                    console.log(response.data);
-                    $scope.TaskObj = {};
-                    $scope.taskLabels = [];
-                    $scope.taskUsers = [];
-                    $scope.save_task_loader = false;
-                    $scope.labels.forEach(function(label, key){
-                        $scope.labels[key].checked = false;
-                    });
-                    $scope.users.forEach(function(user, key){
-                        $scope.users[key].checked = false;
-                    });
-                    $scope.countAttachments = [0];
-                    toastr.success(response.data.result.message);
-                    $scope.fetchTaskLists({});
+                    $timeout(function () {
+                        $scope.TaskObj = {};
+                        $scope.taskLabels = [];
+                        $scope.taskUsers = [];
+                        $scope.save_task_loader = false;
+                        $scope.labels.forEach(function(label, key){
+                            $scope.labels[key].checked = false;
+                        });
+                        $scope.users.forEach(function(user, key){
+                            $scope.users[key].checked = false;
+                        });
+                        $scope.countAttachments = [0];
+                        toastr.success(response.data.result.message);
+                        $scope.fetchTaskLists({});
+                        $scope.taskView = 'list';
+                    }, 1000)
                 }
                 else{
                     toastr.error(response.data.result.message);

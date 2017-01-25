@@ -43,11 +43,6 @@ app.controller('MainsCtrl', function($scope, LabelResources, TasksResources, BAS
     $scope.openedView =function (mode) {
         $scope.viewMode = mode;
     }
-
-    $scope.taskView= 'list';
-    $scope.switchTaskView = function (viewMode) {
-        $scope.taskView = viewMode;
-    };
 });
 
 

@@ -525,7 +525,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-success" ng-click="switchTaskView('list')">SAVE TASK</button>
+                        <button class="btn btn-success">SAVE TASK</button>
                         <span class="instance-loader" ng-show="save_task_loader">
                             <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
                         </span>
