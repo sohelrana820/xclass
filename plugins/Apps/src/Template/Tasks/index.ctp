@@ -244,9 +244,9 @@
                                 </small>
                             </td>
                             <td style="width: 10%;">
-                                <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">
-                                        <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}"/>
-                                        <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
+                                <span ng-repeat="user in task.users" title="{{user.profile.first_name}} {{user.profile.last_name}}">\
+                                    <img class="sm_avatar" ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}"/>
+                                    <img class="sm_avatar" ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg"/>
                                 </span>
                             </td>
                             <td style="width: 5%;" class="text-right">
@@ -300,7 +300,7 @@
         </div>
         <div class="widget-body">
             <div>
-                <ng-form ng-submit="saveTask()">
+                <form ng-submit="saveTask()">
                     <div class="row">
                         <div class="col-lg-8 col-md-8">
                             <div>
@@ -438,60 +438,48 @@
 
                                                 <div class="create_new_label" ng-show="show_create_new_user_form">
                                                     <div>
-                                                        <ng-form name="createUserForm" class="create-user-form" novalidate>
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input type="text" class="form-control" ng-model="userObj.profile.first_name" placeholder="First name" name="first_name" required/>
-                                                                        <div class="error-message" ng-if="!createUserForm.first_name.$pristine || createUserSubmitted">
-                                                                            <p ng-show="createUserForm.first_name.$error.required">First name is required</p>
-                                                                        </div>
-                                                                    </div>
+                                                        <ng-form name="createUserForm" class="create-user-form" ng-submit="createUser(); createUserForm.$setPristine()" novalidate>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" ng-model="userObj.profile.first_name" placeholder="First name" name="first_name" required/>
+                                                                <div class="error-message" ng-if="!createUserForm.first_name.$pristine || createUserSubmitted">
+                                                                    <p ng-show="createUserForm.first_name.$error.required">First name is required</p>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input type="text" class="form-control" ng-model="userObj.profile.last_name" placeholder="Last name" name="last_name" required/>
-                                                                        <div class="error-message" ng-if="!createUserForm.last_name.$pristine || createUserSubmitted">
-                                                                            <p ng-show="createUserForm.last_name.$error.required">Last name is required</p>
-                                                                        </div>
-                                                                    </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" ng-model="userObj.profile.last_name" placeholder="Last name" name="last_name" required/>
+                                                                <div class="error-message" ng-if="!createUserForm.last_name.$pristine || createUserSubmitted">
+                                                                    <p ng-show="createUserForm.last_name.$error.required">Last name is required</p>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input type="email" class="form-control" ng-model="userObj.username" ng-model-options="{ debounce: 1000 }" placeholder="Email address" name="username" required email unique-email/>
-                                                                        <div class="error-message" ng-if="!createUserForm.username.$pristine || createUserSubmitted">
-                                                                            <p ng-show="createUserForm.username.$error.required">Email address is required</p>
-                                                                            <p ng-show="createUserForm.username.$error.email">Invalid email address</p>
-                                                                            <p ng-show="createUserForm.username.$error.uniqueEmail">This email is already taken</p>
-                                                                        </div>
-                                                                    </div>
+                                                            <div class="form-group">
+                                                                <input type="email" class="form-control" ng-model="userObj.username" ng-model-options="{ debounce: 1000 }" placeholder="Email address" name="username" required email unique-email/>
+                                                                <div class="error-message" ng-if="!createUserForm.username.$pristine || createUserSubmitted">
+                                                                    <p ng-show="createUserForm.username.$error.required">Email address is required</p>
+                                                                    <p ng-show="createUserForm.username.$error.email">Invalid email address</p>
+                                                                    <p ng-show="createUserForm.username.$error.uniqueEmail">This email is already taken</p>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input type="password" class="form-control" ng-model="userObj.password" placeholder="Password" name="password" required="required" />
-                                                                        <div class="error-message" ng-if="!createUserForm.password.$pristine || createUserSubmitted">
-                                                                            <p ng-show="createUserForm.password.$error.required">Password is required</p>
-                                                                        </div>
-                                                                    </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control" ng-model="userObj.password" placeholder="Password" name="password" required="required" />
+                                                                <div class="error-message" ng-if="!createUserForm.password.$pristine || createUserSubmitted">
+                                                                    <p ng-show="createUserForm.password.$error.required">Password is required</p>
                                                                 </div>
-                                                                <div class="col-md-12">
-                                                                    <div class="form-group">
-                                                                        <input type="password" class="form-control" name="cPassword" ng-model="userObj.cPassword" placeholder="Confirm password" match-password="userObj.password" required>
-                                                                        <div class="error-message" ng-if="!createUserForm.cPassword.$pristine || createUserSubmitted">
-                                                                            <p ng-show="createUserForm.cPassword.$error.required" >Confirm password is required</p>
-                                                                            <p ng-show="createUserForm.cPassword.$error.matchPassword"  ng-if="!createUserForm.cPassword.$error.required">Confirm password didn't match</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            </div>
 
-                                                                <div class="col-md-12">
-                                                                    <button type="submit" class="btn btn-success" ng-click="createUser(); createUserForm.$setPristine()">Create User</button>
-                                                                    <a class="btn btn-danger" ng-show="!show_label_create_loader" ng-click="show_create_new_user_form = false">Cancel</a>
-                                                                    <img ng-show="show_user_create_loader && !createUserSubmitted" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control" name="cPassword" ng-model="userObj.cPassword" placeholder="Confirm password" match-password="userObj.password" required>
+                                                                <div class="error-message" ng-if="!createUserForm.cPassword.$pristine || createUserSubmitted">
+                                                                    <p ng-show="createUserForm.cPassword.$error.required" >Confirm password is required</p>
+                                                                    <p ng-show="createUserForm.cPassword.$error.matchPassword"  ng-if="!createUserForm.cPassword.$error.required">Confirm password didn't match</p>
                                                                 </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <button type="submit" class="btn btn-success">Create User</button>
+                                                                <a class="btn btn-default" ng-click="visible_assign_box = true">Cancel</a>
                                                             </div>
                                                         </ng-form>
                                                     </div>
@@ -542,7 +530,7 @@
                             <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
                         </span>
                     </div>
-                </ng-form>
+                </form>
             </div>
         </div>
     </div>
