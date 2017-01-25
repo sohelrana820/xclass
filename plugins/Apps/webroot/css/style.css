@@ -1908,9 +1908,6 @@ Licensed under MIT
 
 
 
-
-
-
 @media (max-width: 768px) {
     .page-header .pull-left {
         clear: both !important;
@@ -1920,5 +1917,13 @@ Licensed under MIT
     .page-header .pull-right{
         float: left !important;
         margin-top: 10px;
+    }
+
+    .save_task_btn_section{
+        position: relative;
+    }
+
+    .save_task_btn{
+        position: absolute;
     }
 }
