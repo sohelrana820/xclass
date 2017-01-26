@@ -65,6 +65,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                     }, 1000)
                 }
                 else{
+                    $scope.show_center_loader = false;
                     toastr.error(response.data.result.message);
                 }
             });
@@ -351,6 +352,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                     toastr.success(res.result.message);
                 }
                 else{
+                    $scope.show_center_loader = false;
                     toastr.error(res.result.message);
                 }
             }, 1000)
@@ -414,6 +416,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                         $scope.countAttachments = [0];
                     }
                     else{
+                        $scope.show_center_loader = false;
                         toastr.success(response.data.result.message);
                     }
                 }, 1000)
@@ -451,6 +454,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                 $scope.countAttachments = [0];
             }
             else{
+                $scope.show_center_loader = false;
                 toastr.success(response.data.result.message);
             }
         });
@@ -720,6 +724,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                 }, 500);
             }
             else {
+                $scope.show_center_loader = false;
                 toastr.error(res.result.message);
                 $scope.createUsersErrors = res.result.error_message;
             }

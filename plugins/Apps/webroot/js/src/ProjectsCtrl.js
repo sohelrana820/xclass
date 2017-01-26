@@ -6,6 +6,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
     var projectSlug = urlDivider[urlDivider.length - 1];
 
     $scope.fetchProjectUsers = function (data) {
+        $scope.show_center_loader = true;
         var users = ProjectsResources.projects_users(data).$promise;
         users.then(function (res) {
             if (res.result.success) {
@@ -18,6 +19,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
                             limit: res.result.limit*/
                         };
                     }
+                    $scope.show_center_loader = false;
                 }, 1000);
             }
         });
@@ -28,10 +30,12 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
      * Getting application active users.
      */
     $scope.fetchUserLists = function(data){
+        $scope.show_center_loader = true;
         var users = UsersResources.query(data).$promise;
         users.then(function (res) {
             if(res.result.success){
                 $timeout(function() {
+                    $scope.show_center_loader = false;
                     $scope.users = res.result.data;
                     $scope.show_user_search_loader = false;
                     $scope.show_user_refresh_loader = false;
@@ -54,18 +58,21 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
 
     $scope.userObj = {};
     $scope.createUser = function () {
+        $scope.show_center_loader = true;
         $scope.createUserSubmitted = true;
         var user = UsersResources.save($scope.userObj).$promise;
         user.then(function (res) {
             if (res.result.success) {
-                toastr.success(res.result.message);
                 $timeout(function () {
                     $scope.userObj = {};
                     $scope.assignProjectUser(res.result.data.id);
                     $scope.createUserSubmitted = false;
-                }, 500);
+                    $scope.show_center_loader = false;
+                    toastr.success(res.result.message);
+                }, 1000);
             }
             else {
+                $scope.show_center_loader = false;
                 toastr.error(res.result.message);
                 $scope.createUsersErrors = res.result.error_message;
             }
