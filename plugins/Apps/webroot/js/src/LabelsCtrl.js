@@ -12,6 +12,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
 
     $scope.fetchLabelLists = function (data) {
         data.slug = projectSlug;
+        $scope.show_center_loader = true;
         var labels = LabelResources.query(data).$promise;
         labels.then(function (res) {
             if (res.result.success) {
@@ -28,6 +29,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                         $scope.show_crate_form = false;
                     }
                     $scope.hide_page_loader = true;
+                    $scope.show_center_loader = false;
                 }, 1000);
             }
         });
@@ -50,7 +52,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
         $scope.isLabelFormSubmitted = true;
         if ($isValid && $scope.LabelObj.name != undefined) {
             $scope.LabelObj.slug = projectSlug;
-            console.log($scope.LabelObj);
+            $scope.show_center_loader = true;
             var labels = LabelResources.save($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if (res.result.success) {
@@ -62,6 +64,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                     $scope.fetchLabelLists({});
                 }
                 else {
+                    $scope.show_center_loader = false;
                     toastr.error(res.result.message);
                 }
             });
@@ -79,6 +82,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
             delete $scope.LabelObj.created;
             delete $scope.LabelObj.modified;
             delete $scope.LabelObj.tasks;
+            $scope.show_center_loader = true;
             var labels = LabelResources.update($scope.LabelObj).$promise;
             labels.then(function (res) {
                 if (res.result.success) {
@@ -91,6 +95,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                     $scope.fetchLabelLists({});
                 }
                 else {
+                    $scope.show_center_loader = false;
                     toastr.error(res.result.message);
                 }
             });
@@ -115,6 +120,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
             function (isConfirm) {
                 if (isConfirm) {
                     var deletedLabel = LabelResources.delete({id: id}).$promise;
+                    $scope.show_center_loader = true;
                     deletedLabel.then(function (res) {
                         if (res.result.success) {
                             $scope.label.data = $scope.label.data.filter(function (label) {
@@ -124,6 +130,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                             $scope.fetchLabelLists({});
                         }
                         else {
+                            $scope.show_center_loader = false;
                             toastr.error(res.result.message);
                         }
                     });

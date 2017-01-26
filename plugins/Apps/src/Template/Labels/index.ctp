@@ -14,6 +14,9 @@
 
             </div>
             <div class="clearfix"></div>
+            <div class="center_loader" ng-show="show_center_loader">
+                <h4>Please wait...</h4>
+            </div>
         </div>
         <div class="row">
 
