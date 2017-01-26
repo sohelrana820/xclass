@@ -13,7 +13,7 @@
                     <div class="header_task_list" style="display: none;" ng-mouseleave="hideHeaderTaskArea()">
                         <div class="not_found" ng-show="!global_task_loader && globalTaskLists.length < 1"><h4>Sorry, result not found</h4></div>
                         <div class="global_task_loader" ng-show="global_task_loader">
-                            <img src="{{BASE_URL}}/img/loader-sm.gif" class="md_loader">
+                            <img ng-src="{{BASE_URL}}/img/loader-sm.gif" class="md_loader">
                             <h4>Content loading, please wait...</h4>
                         </div>
                         <ul>

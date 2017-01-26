@@ -38,7 +38,7 @@
                         <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
                             <i class="fa fa-refresh grey"></i>
                         </span>
-                            <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                            <img ng-if="show_user_refresh_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                         </a>
 
                         <a class="add_more btn-theme-xs-rev pull-right" ng-click="visible_assign_box = false">
@@ -48,15 +48,15 @@
 
                     <div class="search_project_user">
                         <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
-                        <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                        <img ng-if="show_user_search_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                     </div>
 
                     <div class="project_user_section">
                         <ul class="project_user_nav_list" ng-show="users.length > 0 && user_query">
                             <li ng-repeat="(key, user) in users">
                                 <div ng-click="assignProjectUser(user.id);">
-                                    <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                    <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                    <img ng-if="user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                    <img ng-if="!user.profile.profile_pic" ng-src="{{BASE_URL}}/img/profile_avatar.jpg">
                                     <div>
                                         <strong><a>{{user.profile.first_name}} {{user.profile.last_name}}</a></strong>
                                         <br/>
@@ -135,8 +135,8 @@
                 <ul class="project_user_nav_list project_assigned_user_list">
                     <li ng-repeat="projectUser in projectsUsers.users">
                         <div>
-                            <img ng-show="projectUser.profile.profile_pic" src="{{BASE_URL}}img/profiles/{{projectUser.profile.profile_pic}}"  class="img-responsive"/>
-                            <img ng-show="!projectUser.profile.profile_pic" src="{{BASE_URL}}img/profile_avatar.jpg" class="img-responsive"/>
+                            <img ng-if="projectUser.profile.profile_pic" ng-src="{{BASE_URL}}img/profiles/{{projectUser.profile.profile_pic}}"  class="img-responsive"/>
+                            <img ng-if="!projectUser.profile.profile_pic" ng-src="{{BASE_URL}}img/profile_avatar.jpg" class="img-responsive"/>
                             <div>
                                 <strong><a>{{projectUser.profile.first_name}} {{projectUser.profile.last_name}}</a></strong>
                                 <br/>

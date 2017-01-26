@@ -70,7 +70,7 @@
                                             <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel</a>
                                             <br/>
                                             <span class="instance-loader" ng-show="update_task_loader" >
-                                            <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                            <img ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
                                         </span>
                                         </div>
                                     </form>
@@ -81,8 +81,8 @@
                             <div class="comments" ng-repeat="comment in taskComments">
                                 <div class="media"> <div class="media-left">
                                         <a href="#">
-                                            <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
-                                            <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                            <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
+                                            <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" ng-src="{{BASE_URL}}/img/profile_avatar.jpg">
                                         </a>
                                     </div>
                                     <div class="media-body">
@@ -141,7 +141,7 @@
                                         <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)"></i> Reopen Task</a>
                                         <br/>
                                         <span class="instance-loader" ng-show="task_quick_update_loader" >
-                                        <img src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                        <img ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
                                     </span>
                                     </div>
                                     <div class="clearfix"></div>
@@ -165,7 +165,7 @@
                                         <h2 ng-show="!show_create_new_label_form">
                                             Apply label
                                             <a class="quick_task">
-                                                <img ng-show="show_label_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                <img ng-show="show_label_refresh_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                 <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List"><i class="fa fa-refresh grey"></i></span>
                                                 <span class="add_new_label" ng-click="show_create_new_label_form = true;" title="Create New Title"><i class="fa fa-plus"></i></span>
                                             </a>
@@ -196,14 +196,14 @@
                                                     <div class="form-group">
                                                         <a class="btn btn-success" ng-click="saveLabel(create_label_form.$valid, true)">Save</a>
                                                         <a class="btn btn-danger" ng-show="!show_label_create_loader" ng-click="show_create_new_label_form = false">Cancel</a>
-                                                        <img ng-show="show_label_create_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                                        <img ng-show="show_label_create_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                     </div>
                                                 </form>
                                             </div>
 
                                             <div class="search_label" ng-show="!show_create_new_label_form && taskLabels.length > 0"">
                                             <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
-                                            <img ng-show="show_label_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                            <img ng-show="show_label_search_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -236,7 +236,7 @@
                                     <h2>
                                         Assign task to user
                                         <a class="quick_task">
-                                            <img ng-show="show_user_refresh_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                            <img ng-show="show_user_refresh_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                             <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List"><i class="fa fa-refresh grey"></i></span>
                                         </a>
                                     </h2>
@@ -244,7 +244,7 @@
                                     <div class="label_quick_operation" ng-show="users.length > 0">
                                         <div class="search_label">
                                             <input class="form-control" ng-model="user_query" ng-change="searchUser(user_query)" placeholder="Search user">
-                                            <img ng-show="show_user_search_loader" src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
+                                            <img ng-show="show_user_search_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                         </div>
                                         <div class="clearfix"></div>
                                     </div>
@@ -252,8 +252,8 @@
                                     <ul class="custom_dropdown_list nav nav-list">
                                         <li ng-repeat="(key, user) in users" ng-init="user = hasUserAssigned(taskUsers, user)">
                                             <a ng-click="chooseTaskUsers(user, key, user.checked); quickUpdate('user_event', user.checked)"">
-                                            <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                            <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                            <img ng-if="user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                            <img ng-if="!user.profile.profile_pic" ng-src="{{BASE_URL}}/img/profile_avatar.jpg">
                                             {{user.profile.first_name}} {{user.profile.last_name}} {{user.checked}}
                                             <i ng-show="user.checked" class="fa fa-check pull-right green"></i>
                                             </a>
@@ -267,8 +267,8 @@
                             <div>
                                 <ul class="task_users">
                                     <li ng-repeat="user in taskUsers">
-                                        <img ng-if="user.profile.profile_pic != null" src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
-                                        <img ng-if="!user.profile.profile_pic" src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                        <img ng-if="user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{user.profile.profile_pic}}">
+                                        <img ng-if="!user.profile.profile_pic" ng-src="{{BASE_URL}}/img/profile_avatar.jpg">
                                         {{user.profile.first_name}} {{user.profile.last_name}}
                                         <span class="pull-right red" ng-click="removeTaskUsers(user); quickUpdate('user_event', false)">X</span>
                                     </li>
