@@ -299,34 +299,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         $scope.show_user_search_loader = false;
     };
 
-    $scope.buildTaskObjForShow = function(id){
-        var task = TasksResources.get({id: id}).$promise;
-        task.then(function (res) {
-            $scope.TaskObj.id = res.result.data.id;
-            $scope.TaskObj.task = res.result.data.task;
-            $scope.TaskObj.description = res.result.data.description;
-            $scope.TaskObj.status = res.result.data.status;
-            $scope.taskUsers = res.result.data.users;
-            $scope.taskLabels = res.result.data.labels;
-            $scope.taskComments = res.result.data.comments;
-            $scope.taskAttachments = res.result.data.attachments;
-        });
-    };
 
-    // Task edit and comments area
-    var url = window.location.href.split("edit/");
-    if(url.length == 2)
-    {
-        var id = url[1];
-    }
-    else{
-        var url = window.location.href.split("view/");
-        var id = url[1];
-    }
-    if(id != undefined)
-    {
-        $scope.buildTaskObjForShow(id);
-    }
 
     if(taskIdentity)
     {
@@ -344,7 +317,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         task.then(function (res) {
             $timeout(function () {
                 if(res.result.success){
-                    $scope.buildTaskObjForShow($scope.TaskObj.id);
                     $scope.update_task_loader = false;
                     $scope.show_center_loader = false;
                     $scope.view_task = true;
