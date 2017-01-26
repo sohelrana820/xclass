@@ -40,6 +40,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         $scope.getTaskRelObj();
         if($scope.TaskObj.task){
             $scope.save_task_loader = true;
+            $scope.show_center_loader = true;
             Upload.upload({
                 url: BASE_URL + projectSlug +'/tasks/create.json',
                 data: $scope.TaskObj
@@ -50,6 +51,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                         $scope.taskLabels = [];
                         $scope.taskUsers = [];
                         $scope.save_task_loader = false;
+                        $scope.show_center_loader = false;
                         $scope.labels.forEach(function(label, key){
                             $scope.labels[key].checked = false;
                         });
@@ -134,6 +136,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
      */
     $scope.fetchTaskLists = function(data){
         data.slug = projectSlug;
+        $scope.show_center_loader = true;
         $scope.dashboard_task_loader = true;
         var tasks = TasksResources.query(data).$promise;
         tasks.then(function (res) {
@@ -147,6 +150,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                         limit: res.result.limit
                     };
                     $scope.dashboard_task_loader = false;
+                    $scope.show_center_loader = false;
                     $scope.task_loader = true;
                 }, 1000);
             }
@@ -333,6 +337,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
 
     $scope.updateTask = function(){
         $scope.update_task_loader = true;
+        $scope.show_center_loader = true;
         $scope.getTaskRelObj();
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
@@ -340,6 +345,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                 if(res.result.success){
                     $scope.buildTaskObjForShow($scope.TaskObj.id);
                     $scope.update_task_loader = false;
+                    $scope.show_center_loader = false;
                     $scope.view_task = true;
                     $scope.edit_task_form = false;
                     toastr.success(res.result.message);
@@ -393,20 +399,24 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         if($scope.commentsObj.comment)
         {
             $scope.task_quick_update_loader = true;
+            $scope.show_center_loader = true;
             Upload.upload({
                 url: BASE_URL + 'comments/add.json',
                 data: $scope.commentsObj
             }).then(function (response) {
-                if(response.data.result.success){
-                    $scope.task_quick_update_loader = false;
-                    $scope.commentsObj = {task_id: $scope.TaskObj.id};
-                    $scope.taskComments.push(response.data.result.data);
-                    toastr.success(response.data.result.message);
-                    $scope.countAttachments = [0];
-                }
-                else{
-                    toastr.success(response.data.result.message);
-                }
+                $timeout(function () {
+                    if(response.data.result.success){
+                        $scope.task_quick_update_loader = false;
+                        $scope.show_center_loader = false;
+                        $scope.commentsObj = {task_id: $scope.TaskObj.id};
+                        $scope.taskComments.push(response.data.result.data);
+                        toastr.success(response.data.result.message);
+                        $scope.countAttachments = [0];
+                    }
+                    else{
+                        toastr.success(response.data.result.message);
+                    }
+                }, 1000)
             });
         }
         else{
@@ -416,6 +426,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
 
     $scope.changeStatus = function(status){
         $scope.task_quick_update_loader = true;
+        $scope.show_center_loader = true;
         $scope.TaskObj.status = status;
         $scope.commentsObj.task_id = $scope.TaskObj.id;
         $scope.quickUpdate('change_status', status);
@@ -433,6 +444,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         }).then(function (response) {
             if(response.data.result.success){
                 $scope.task_quick_update_loader = false;
+                $scope.show_center_loader = false;
                 $scope.commentsObj = {task_id: $scope.TaskObj.id};
                 $scope.taskComments.push(response.data.result.data);
                 toastr.success(response.data.result.message);
@@ -681,6 +693,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
     $scope.userObj = {};
     $scope.createUser = function () {
         $scope.createUserSubmitted = true;
+        $scope.show_center_loader = true;
         $scope.show_user_create_loader = true;
         var user = UsersResources.save($scope.userObj).$promise;
         user.then(function (res) {
@@ -701,6 +714,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                     $scope.taskUsers.push(res.result.data);
 
                     $scope.createUserSubmitted = false;
+                    $scope.show_center_loader = false;
                     $scope.show_user_create_loader = false;
                     $scope.show_create_new_user_form = false;
                 }, 500);
