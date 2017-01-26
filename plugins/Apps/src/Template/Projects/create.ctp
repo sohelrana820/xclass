@@ -28,8 +28,27 @@
         </div>
 
         <div class="form-group">
-            <label>Descrition</label>
+            <label>Description</label>
             <?php echo $this->Form->input('description', ['type' => 'textarea', 'class' => 'form-control', 'placeholder' => 'Description', 'label' => false, 'required' => false]);?>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Price</label>
+                    <?php echo $this->Form->input('price', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Project price', 'label' => false, 'required' => false]);?>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <div class="input-group">
+                        <input name="deadline" type="text" class="form-control datepicker" placeholder="Project deadline">
+                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
+                    <?php echo $this->Form->error('deadline');?>
+                </div>
+            </div>
         </div>
 
         <div class="form-group">
@@ -57,7 +76,16 @@
     </div>
 </div>
 
-<?php $this->start('jsBottom'); ?>
+<?php
+$this->start('cssTop');
+echo $this->Html->css(array('datepicker'));
+$this->end();
+?>
+
+<?php
+$this->start('jsBottom');
+echo $this->Html->script(['datepicker']);
+?>
 
 <script type="text/javascript">
     var counterSlider = 1;
@@ -80,8 +108,11 @@
     $("div").on("click", "a.deleteKeywordRow", function (event) {
         $(this).closest("div").remove();
     });
+
+    $('.datepicker').datepicker();
 </script>
 <?php $this->end(); ?>
+
 
 
 

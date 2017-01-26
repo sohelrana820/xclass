@@ -150,6 +150,7 @@ a {
     border-radius: 2px;
     box-shadow: none;
     border: 1px solid #DDD;
+    padding-left: 15px !important;
 }
 
 .form-group > label {

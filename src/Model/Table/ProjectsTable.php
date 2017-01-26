@@ -77,6 +77,15 @@ class ProjectsTable extends Table
             ->add('name', 'unique', ['rule' => 'ValidateUnique', 'provider' => 'table', 'message' => 'Sorry, this project is already created']);
 
         $validator
+            ->requirePresence('price', 'create', 'Price must be required!')
+            ->notEmpty('price', 'Price must be required!')
+            ->add('price', 'money', ['rule' => ['money', 'left'], 'message' => 'Please valid currency value']);
+
+        $validator
+            ->requirePresence('deadline', 'create', 'Deadline must be required!')
+            ->notEmpty('deadline', 'Deadline must be required!');
+
+        $validator
             ->requirePresence('slug', 'create')
             ->notEmpty('slug', 'Slug must be required!')
             ->add('slug', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
