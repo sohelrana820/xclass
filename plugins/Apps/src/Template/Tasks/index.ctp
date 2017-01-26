@@ -13,6 +13,9 @@
             <a class="btn btn-info" ng-show="taskView == 'create' || taskView == 'view'" ng-click="switchTaskView('list')">Tasks List</a>
         </div>
         <div class="clearfix"></div>
+        <div class="center_loader">
+            <h4>Please wait...</h4>
+        </div>
     </div>
 
     <div class="row">
