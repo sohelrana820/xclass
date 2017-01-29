@@ -211,6 +211,17 @@ if(file_exists(ROOT.'/Conf/config.ini')){
 
 if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIGURATION_RESULT']){
     ConnectionManager::config('application', [
+        /*'className' => 'Cake\Database\Connection',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        'persistent' => false,
+        'host' => $iniData['DATABASE_HOST'],
+        'username' => $iniData['DATABASE_USERNAME'],
+        'password' => $iniData['DATABASE_PASSWORD'],
+        'database' => $iniData['DATABASE_NAME'],
+        'encoding' => 'utf8',
+        'timezone' => 'UTC',
+        'cacheMetadata' => true,*/
+
         'className' => 'Cake\Database\Connection',
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
@@ -221,6 +232,10 @@ if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIG
         'encoding' => 'utf8',
         'timezone' => 'UTC',
         'cacheMetadata' => true,
+        'quoteIdentifiers' => false,
+        'log' => false,
+        //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
+        'url' => env('DATABASE_TEST_URL', null),
     ]);
     $conn = ConnectionManager::get('application');
     ConnectionManager::alias('application', 'default');
