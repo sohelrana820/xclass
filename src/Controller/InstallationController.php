@@ -133,7 +133,7 @@ class InstallationController extends AppController{
             }
 
             try {
-                $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/';
+                $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'];
                 ConnectionManager::config('create_database', ['url' => $dsn]);
                 $createDB = ConnectionManager::get('create_database');
                 $createDB->connect();
