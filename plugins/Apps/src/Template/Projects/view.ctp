@@ -115,15 +115,10 @@
                 </ul>
             </div>
         </div>
+        <?php if($project->labels):?>
         <div class="widget">
             <div class="widget-header">
-                <h2>Recent Labels
-                    <?php
-                    if(!$project->labels){
-                        echo $this->Html->link('(Create New Label?)', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'new_option_btn']);
-                    }
-                    ?>
-                </h2>
+                <h2>Recent Labels</h2>
             </div>
             <div class="widget-body">
                 <?php if($project->labels):?>
@@ -169,14 +164,11 @@
 
             </div>
         </div>
-        <div>
-            <h2 class="sm-title">Recent Users
-                <?php
-                if(!$users){
-                    echo $this->Html->link('(Assign User?)', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'new_option_btn']);
-                }
-                ?>
-            </h2>
+        <?php else:?>
+            <?php echo $this->Html->link('Create New Label', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'btn btn-success btn-block']);?>
+        <?php endif;?>
+        <?php if($users):?>
+            <h2 class="sm-title">Recent Users</h2>
             <div class="project_user_section">
                 <?php if($users):?>
                     <ul class="project_user_nav_list project_assigned_user_list">
@@ -220,18 +212,15 @@
                 <?php endif;?>
                 <div class="clearfix"></div>
             </div>
-        </div>
+        <?php else:?>
+            <?php echo $this->Html->link('Assign User', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'btn btn-success btn-block']);?>
+        <?php endif;?>
     </div>
     <div class="col-lg-5">
         <div class="recent-task">
+            <?php if($project->tasks):?>
             <div class="col-mob">
-                <h2 class="sm-title">Recent Opened Tasks
-                    <?php
-                    if(!$project->tasks){
-                        echo $this->Html->link('(Create New Task?)', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'new_option_btn']);
-                    }
-                    ?>
-                </h2>
+                <h2 class="sm-title">Recent Opened Tasks</h2>
                 <?php if($project->tasks):?>
                     <?php foreach ($project->tasks as $task):?>
                     <!-- Single Task -->
@@ -272,6 +261,11 @@
                 <?php endif;?>
                 <div class="clearfix"></div>
             </div>
+            <?php else:?>
+                <?php
+                    echo $this->Html->link('Create First Task', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'btn btn-success btn-block']);
+                ?>
+            <?php endif;?>
         </div>
     </div>
 </div>
