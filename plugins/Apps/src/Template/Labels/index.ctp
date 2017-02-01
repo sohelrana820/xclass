@@ -8,7 +8,7 @@
     <div ng-show="hide_page_loader">
         <div class="page-header" ng-show="label.count > 0  || show_crate_form || searched_labels">
             <h2 class="title pull-left">
-                <?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link']);?>
+                <?php echo $this->Html->link('<i class="fa fa-reply"></i> '.$project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link', 'escape' => false]);?>
             </h2>
             <div class="pull-right btn-areas">
 

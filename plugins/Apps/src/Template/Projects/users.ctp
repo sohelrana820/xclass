@@ -3,7 +3,7 @@
 <div ng-controller="ProjectsCtrl">
     <div class="page-header">
         <h2 class="title pull-left">
-            <?php echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link']); ?>
+            <?php echo $this->Html->link('<i class="fa fa-reply"></i> '.$project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'link', 'escape' => false]);?>
         </h2>
         <div class="clearfix"></div>
         <div class="center_loader" ng-show="show_center_loader">

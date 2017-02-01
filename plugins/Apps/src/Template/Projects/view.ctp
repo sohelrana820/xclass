@@ -36,10 +36,10 @@
                 <img src="http://localhost/task-manager//img/loader-blue.gif" class="md_loader">
             </div>
             <div ng-show="!overview_loader" class="">
-                <i class="fa fa-tags"></i>
+                <i class="fa fa-signal"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to ng-binding" data-from="0" data-to="5411"><?php echo $overview['total_label']?></span>
-                    <small>Total Label</small>
+                    <span class="count-to ng-binding" data-from="0" data-to="5411"><?php echo $overview['total_task']?></span>
+                    <small>Total Task</small>
                 </h3>
             </div>
         </div>
@@ -53,7 +53,7 @@
                 <i class="fa fa-bell-slash-o"></i>
                 <h3 class="app-stats-title">
                     <span class="count-to ng-binding" data-from="0" data-to="4151"><?php echo $overview['total_closed_task']?></span>
-                    <small>Total Closed Task</small>
+                    <small>Closed Task</small>
                 </h3>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <i class="fa fa-bell-o"></i>
                 <h3 class="app-stats-title">
                     <span class="count-to ng-binding" data-from="0" data-to="105"><?php echo $overview['total_open_task']?></span>
-                    <small>Total Opened Task</small>
+                    <small>Opened Task</small>
                 </h3>
             </div>
         </div>
