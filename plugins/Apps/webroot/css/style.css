@@ -482,9 +482,19 @@ a {
     font-size: 11px;
 }
 
-.ta-editor,
-.ta-editor > .ta-bind {
+.ta-editor, .ta-editor > .ta-bind {
     min-height: 300px;
+    outline: none;
+    border-top: none;
+}
+
+.btn-toolbar {
+    background: #EEE;
+    padding: 8px;
+    margin-left: 0px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border: 1px solid #DDD;
 }
 
 .task_sidebar .single_block {

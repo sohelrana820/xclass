@@ -29,52 +29,52 @@
                     <div class="col-lg-9 col-md-8">
                         <div class="">
 
-                            <span ng-show="TaskObj.status != 2" class="status-button status-success">Status: Open</span>
-                            <span ng-show="TaskObj.status == 2" class="status-button status-danger">Status: Closed</span>
-                            <br/>
-                            <br/>
-                            <div class="task_details" ng-init="view_task = true" ng-show="view_task">
-                                <h2>{{TaskObj.task}}</h2>
-                                <small class="author">Created by
-                                    <a href="/users/{{TaskObj.createdUser.uuid}}">{{TaskObj.createdUserProfile.first_name}} {{TaskObj.createdUserProfile.last_name}}</a> at
-                                    {{TaskObj.created | date}}.
-                                    ({{TaskObj.created | date : 'HH:m a'}})
-                                </small>
-                                <div class="description" ng-bind-html="TaskObj.description"></div>
+                            <div ng-show="view_task">
+                                <span ng-show="TaskObj.status != 2" class="status-button status-success">Status: Open</span>
+                                <span ng-show="TaskObj.status == 2" class="status-button status-danger">Status: Closed</span>
+                                <br/>
+                                <br/>
+                                <div class="task_details" ng-init="view_task = true">
+                                    <h2>{{TaskObj.task}}</h2>
+                                    <small class="author">Created by
+                                        <a href="/users/{{TaskObj.createdUser.uuid}}">{{TaskObj.createdUserProfile.first_name}} {{TaskObj.createdUserProfile.last_name}}</a> at
+                                        {{TaskObj.created | date}}.
+                                        ({{TaskObj.created | date : 'HH:m a'}})
+                                    </small>
+                                    <div class="description" ng-bind-html="TaskObj.description"></div>
+                                </div>
+                                <div class="show_attachments" ng-show="taskAttachments.length > 0">
+                                    <h4>Attachments</h4>
+                                    <p ng-repeat="attachment in taskAttachments">
+                                        <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                    </p>
+                                </div>
+                                <br/>
                             </div>
-                            <div class="show_attachments" ng-show="taskAttachments.length > 0">
-                                <h4>Attachments</h4>
-                                <p ng-repeat="attachment in taskAttachments">
-                                    <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                                </p>
-                            </div>
-                            <br/>
 
                             <div class="task_details" ng-show="edit_task_form">
-                                <div class="well">
-                                    <form ng-submit="updateTask()">
-                                        <div class="form-group">
-                                            <label>Title</label>
-                                            <div class="input text">
-                                                <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
-                                            </div>
+                                <form ng-submit="updateTask()">
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <div class="input text">
+                                            <input type="text" ng-model="TaskObj.task" class="form-control" placeholder="Title">
                                         </div>
-                                        <div class="form-group">
-                                            <label>Description</label>
-                                            <div class="input text">
-                                                <text-angular ng-model="TaskObj.description" ta-toolbar="[['redo', 'undo', 'insertLink'], ['p', 'bold','italics', 'underline'], ['ol', 'ul']]" ng-model="htmlVariable"></text-angular>
-                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <div class="input text">
+                                            <text-angular ng-model="TaskObj.description" ta-toolbar="[['redo', 'undo', 'insertLink'], ['p', 'bold','italics', 'underline'], ['ol', 'ul']]" ng-model="htmlVariable"></text-angular>
                                         </div>
-                                        <div class="form-group">
-                                            <button class="btn btn-success">Update Task</button>
-                                            <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel</a>
-                                            <br/>
-                                            <span class="instance-loader" ng-show="update_task_loader" >
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-success">Update Task</button>
+                                        <a class="btn btn-info" ng-show="edit_task_form" ng-click="edit_task_form = false; view_task = true">Cancel</a>
+                                        <br/>
+                                        <span class="instance-loader" ng-show="update_task_loader" >
                                             <img ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
                                         </span>
-                                        </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                </form>
                             </div>
 
                             <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
@@ -92,10 +92,10 @@
                                                     {{comment.user.profile.first_name}} {{comment.user.profile.last_name}}
                                                 </a>
                                             </strong>
-                                            <span>
-                                            commented {{comment.created | date}} at
-                                            ({{comment.created | date : 'HH:m a'}})
-                                        </span>
+                                            <span ng-show="comment.comment">
+                                                commented {{comment.created | date}} at
+                                                ({{comment.created | date : 'HH:m a'}})
+                                            </span>
                                         </h4>
                                         {{comment.comment}}
                                         <div ng-show="comment.changing_status">
