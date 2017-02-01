@@ -100,7 +100,7 @@ class TasksTable extends Table
         $conditions = ['Tasks.project_id' => $projectId];
         if($status)
         {
-            $conditions = array_merge($conditions, ['Tasks.status' => $status]);
+            $conditions = array_merge($conditions, ['Tasks.status IN' => $status]);
         }
 
         $result = $this->find('all', ['conditions' => $conditions])

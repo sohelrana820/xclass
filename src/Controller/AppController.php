@@ -169,7 +169,7 @@ class AppController extends Controller
             'total_user' => $this->ProjectsUsers->countUserByProjectId($projectId),
             'total_label' => $this->Labels->countTotalLabelByProjectId($projectId),
             'total_open_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 1),
-            'total_closed_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 2)
+            'total_closed_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = [2, 3])
         ];
 
         $overview['total_task'] = $overview['total_open_task'] + $overview['total_closed_task'];
