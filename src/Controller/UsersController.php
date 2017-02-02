@@ -394,7 +394,7 @@ class UsersController extends AppController{
         else {
             $users = $this->Users->find('all', [
                 'conditions' => $conditions,
-                'fields' => ['Users.id', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'],
+                'fields' => ['Users.id', 'Users.uuid', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'],
                 'contain' => [
                     'Profiles' => [
                         'fields'=> []

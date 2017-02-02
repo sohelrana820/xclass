@@ -316,7 +316,8 @@ class TasksController extends AppController
                     'project_slug' => $task->project->slug,
                     'edit_type' => $this->request->data['edit_type'],
                     'edit_status' => $this->request->data['edit_status'],
-                    'action_on_label' => $this->request->data['action_on_label']
+                    'action_on_label' => $this->request->data['action_on_label'],
+                    'action_on_user' => $this->request->data['action_on_user']
                 ];
                 $this->Feeds->storeFeeds($task->project_id, 'edit_task', $options);
                 $response = [

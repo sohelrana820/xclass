@@ -119,6 +119,14 @@ class FeedsTable extends Table
                     $data['event'] = 'removed_label_form_task';
                 }
             }
+            elseif($content['edit_type'] == 'user_event'){
+                if($content['edit_status']){
+                    $data['event'] = 'assigned_user';
+                }
+                else{
+                    $data['event'] = 'removed_user';
+                }
+            }
             $this->add($data);
         }
         else{
@@ -172,6 +180,14 @@ class FeedsTable extends Table
                 }
                 else{
                     $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> from";
+                }
+            }
+            elseif($data['edit_type'] == 'user_event'){
+                if($data['edit_status']){
+                    $title .= " has been assigned {} to";
+                }
+                else{
+                    $title .= " has been removed {} from";
                 }
             }
             else{

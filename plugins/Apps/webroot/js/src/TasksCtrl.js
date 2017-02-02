@@ -7,6 +7,8 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
     };
 
     $scope.TaskObj = {};
+    $scope.action_on_label = null;
+    $scope.action_on_user = null;
 
     $scope.getTaskRelObj = function(){
         var usersIDs = [];
@@ -265,6 +267,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
 
     $scope.taskUsers = [];
     $scope.chooseTaskUsers = function(user, key, isChecked){
+        $scope.action_on_user = user;
         if(isChecked == undefined || isChecked == false)
         {
             $scope.users[key].checked = true;
@@ -279,6 +282,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
     };
 
     $scope.removeTaskUsers = function(user){
+        $scope.action_on_user = user;
         $scope.taskUsers = $scope.taskUsers.filter(function(oldUser){
             return oldUser.id !== user.id;
         });
@@ -340,6 +344,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         $scope.TaskObj.edit_type = event;
         $scope.TaskObj.edit_status = value;
         $scope.TaskObj.action_on_label = $scope.action_on_label;
+        $scope.TaskObj.action_on_user = $scope.action_on_user;
 
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
