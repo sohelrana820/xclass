@@ -146,6 +146,11 @@ class FeedsTable extends Table
             $title .= ' has been created new project ';
             $title .= $this->getProjectLink($data['project']);
         }
+        if($event == 'create_label'){
+            $title .= $this->getUserLink($data['user']);
+            $title .= ' has been created new label ';
+            $title .= "<label style='border: 1px solid {$data['label']->color_code}; color: {$data['label']->color_code}'>{$data['label']->name}</label>";
+        }
         elseif($event == 'opened_task'){
             $title .= $this->getUserLink($data['user']);
             $title .= ' has been opened new task ';
@@ -161,7 +166,7 @@ class FeedsTable extends Table
             $labels = $labelTable->findLabels($data['labels']);
             foreach ($labels as $label)
             {
-                $title .= "<label style='border: 1px solid {$label->color_code}; coor: {$label->color_code}'>{$label->name}</label>";
+                $title .= "<label style='border: 1px solid {$label->color_code}; color: {$label->color_code}'>{$label->name}</label>";
             }
             $title .= ' label has been added to ';
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);

@@ -143,7 +143,10 @@ class LabelsController extends AppController
 
             if ($this->request->is('post')) {
                 $label = $this->Labels->patchEntity($label, $this->request->data);
-                if ($this->Labels->save($label)) {
+                $saveLabel = $this->Labels->save($label);
+                if ($saveLabel) {
+                    $this->loadModel('Feeds');
+                    $this->Feeds->storeFeeds($projectId, 'create_label', ['user' => $this->loggedInUser, 'label' => $saveLabel]);
                     $response = [
                         'success' => true,
                         'message' => 'New label has been created successfully',
