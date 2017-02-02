@@ -115,6 +115,59 @@
                 </ul>
             </div>
         </div>
+
+        <div class="recent-task">
+            <?php if($project->tasks):?>
+                <div class="col-mob">
+                    <h2 class="sm-title">Recent Opened Tasks</h2>
+                    <?php if($project->tasks):?>
+                        <?php foreach ($project->tasks as $task):?>
+                            <!-- Single Task -->
+                            <div class="ui-item">
+                                <!-- Heading -->
+                                <div class="ui-heading clearfix">
+                                    <h5>
+                                        <?php if ($task->users_tasks): ?>
+                                            <strong class="assigned-to">Assigned To:</strong>
+                                            <?php foreach ($task->users_tasks as $taskUsers): ?>
+                                                <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
+                                                    'controller' => 'users',
+                                                    'action' => 'view',
+                                                    $taskUsers->user->uuid
+                                                ]);?>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <strong class="no-assigned">Not Assigned Yet!</strong>
+                                        <?php endif; ?>
+                                    </h5>
+                                </div>
+                                <p>
+                                    <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
+                                </p>
+                                <?php if ($task->tasks_labels): ?>
+                                    <div>
+                                        <?php foreach ($task->tasks_labels as $taskLabel):?>
+                                            <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
+                                                <?php echo $taskLabel->label->name;?>
+                                            </a>
+                                        <?php endforeach;?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php endforeach;?>
+                    <?php else:?>
+                        <h4 class="sm-not-found">Sorry, task empty</h4>
+                    <?php endif;?>
+                    <div class="clearfix"></div>
+                </div>
+            <?php else:?>
+                <?php
+                echo $this->Html->link('Create First Task', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'btn btn-success btn-block']);
+                ?>
+            <?php endif;?>
+        </div>
+        <br/>
+
         <?php if($project->labels):?>
         <div class="widget">
             <div class="widget-header">
@@ -217,56 +270,7 @@
         <?php endif;?>
     </div>
     <div class="col-lg-5">
-        <div class="recent-task">
-            <?php if($project->tasks):?>
-            <div class="col-mob">
-                <h2 class="sm-title">Recent Opened Tasks</h2>
-                <?php if($project->tasks):?>
-                    <?php foreach ($project->tasks as $task):?>
-                    <!-- Single Task -->
-                    <div class="ui-item">
-                        <!-- Heading -->
-                        <div class="ui-heading clearfix">
-                            <h5>
-                                <?php if ($task->users_tasks): ?>
-                                    <strong class="assigned-to">Assigned To:</strong>
-                                    <?php foreach ($task->users_tasks as $taskUsers): ?>
-                                        <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
-                                            'controller' => 'users',
-                                            'action' => 'view',
-                                            $taskUsers->user->uuid
-                                        ]);?>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <strong class="no-assigned">Not Assigned Yet!</strong>
-                                <?php endif; ?>
-                            </h5>
-                        </div>
-                        <p>
-                            <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
-                        </p>
-                        <?php if ($task->tasks_labels): ?>
-                            <div>
-                                <?php foreach ($task->tasks_labels as $taskLabel):?>
-                                    <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
-                                        <?php echo $taskLabel->label->name;?>
-                                    </a>
-                                <?php endforeach;?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <?php endforeach;?>
-                <?php else:?>
-                    <h4 class="sm-not-found">Sorry, task empty</h4>
-                <?php endif;?>
-                <div class="clearfix"></div>
-            </div>
-            <?php else:?>
-                <?php
-                    echo $this->Html->link('Create First Task', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'btn btn-success btn-block']);
-                ?>
-            <?php endif;?>
-        </div>
+
     </div>
 </div>
 
