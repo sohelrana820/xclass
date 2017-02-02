@@ -127,6 +127,14 @@ class FeedsTable extends Table
                     $data['event'] = 'removed_user';
                 }
             }
+            elseif($content['edit_type'] == 'change_status'){
+                if($content['edit_status'] == 2){
+                    $data['event'] = 'task_closed';
+                }
+                else{
+                    $data['event'] = 'task_reopened';
+                }
+            }
             $this->add($data);
         }
         else{
@@ -188,6 +196,14 @@ class FeedsTable extends Table
                 }
                 else{
                     $title .= " has been removed {$this->getUserLink($data['action_on_user'])} from";
+                }
+            }
+            elseif($data['edit_type'] == 'change_status'){
+                if($data['edit_status'] == 2){
+                    $title .= " marked task as <strong>closed</strong>";
+                }
+                else{
+                    $title .= " marked task as <strong>reopened</strong>";
                 }
             }
             else{
