@@ -194,6 +194,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
     };
 
     $scope.removeTaskLabels = function(label){
+        $scope.action_on_label = label;
         $scope.taskLabels = $scope.taskLabels.filter(function(oldLabel){
             return oldLabel.id !== label.id;
         });
@@ -242,6 +243,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                         $scope.show_create_new_label_form = false;
 
                         if(assignLabel && assignLabel != undefined){
+                            $scope.TaskObj.action_on_label = res.result.data;
                             $scope.quickUpdate('label_event', true)
                         }
                         toastr.success(res.result.message);
@@ -332,7 +334,12 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
     };
 
     $scope.quickUpdate = function(event, value){
+
         $scope.getTaskRelObj();
+        $scope.TaskObj.edit_type = event;
+        $scope.TaskObj.edit_status = value;
+        $scope.TaskObj.action_on_label = $scope.action_on_label;
+
         var task = TasksResources.update($scope.TaskObj).$promise;
         task.then(function (res) {
             if(res.result.success){
