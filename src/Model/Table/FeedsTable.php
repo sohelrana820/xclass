@@ -111,6 +111,14 @@ class FeedsTable extends Table
         }
         elseif($event == 'edit_task'){
             $data['task_id'] = $content['task']->id;
+            if($content['edit_type'] == 'label_event'){
+                if($content['edit_status']){
+                    $data['event'] = 'added_label_to_task';
+                }
+                else{
+                    $data['event'] = 'removed_label_form_task';
+                }
+            }
             $this->add($data);
         }
         else{
@@ -158,12 +166,12 @@ class FeedsTable extends Table
         }
         elseif($event == 'edit_task'){
             $title .= $this->getUserLink($data['user']);
-            if($data['edit_type']){
+            if($data['edit_type'] == 'label_event'){
                 if($data['edit_status']){
-                    $title .= " has been added <label style='border: 1px solid {$data['action_on_label']->color_code}; color: {$data['action_on_label']->color_code}'>{$data['action_on_label']->name}</label> to";
+                    $title .= " has been added <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> to";
                 }
                 else{
-                    $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']->color_code}; color: {$data['action_on_label']->color_code}'>{$data['action_on_label']->name}</label> from";
+                    $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> from";
                 }
             }
             else{

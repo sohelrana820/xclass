@@ -180,6 +180,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
 
     $scope.taskLabels = [];
     $scope.chooseTaskLabels = function(label, key, isChecked){
+        $scope.action_on_label = label;
         if(isChecked == undefined || isChecked == false)
         {
             $scope.labels[key].checked = true;
@@ -243,7 +244,7 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
                         $scope.show_create_new_label_form = false;
 
                         if(assignLabel && assignLabel != undefined){
-                            $scope.TaskObj.action_on_label = res.result.data;
+                            $scope.action_on_label = res.result.data;
                             $scope.quickUpdate('label_event', true)
                         }
                         toastr.success(res.result.message);
