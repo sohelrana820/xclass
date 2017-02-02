@@ -158,7 +158,17 @@ class FeedsTable extends Table
         }
         elseif($event == 'edit_task'){
             $title .= $this->getUserLink($data['user']);
-            $title .= ' has been edited task';
+            if($data['edit_type']){
+                if($data['edit_status']){
+                    $title .= " has been added <label style='border: 1px solid {$data['action_on_label']->color_code}; color: {$data['action_on_label']->color_code}'>{$data['action_on_label']->name}</label> to";
+                }
+                else{
+                    $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']->color_code}; color: {$data['action_on_label']->color_code}'>{$data['action_on_label']->name}</label> from";
+                }
+            }
+            else{
+                $title .= ' has been edited task';
+            }
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
         elseif($event == 'added_label'){

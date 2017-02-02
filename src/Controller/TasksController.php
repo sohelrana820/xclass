@@ -305,12 +305,20 @@ class TasksController extends AppController
             unset($this->request->data['createdUserProfile']);
             unset($this->request->data['createdUser']);
             unset($this->request->data['created']);
-
             $task = $this->Tasks->patchEntity($task, $this->request->data);
+
             $updateTask = $this->Tasks->save($task);
             if ($updateTask) {
                 $this->loadModel('Feeds');
-                $this->Feeds->storeFeeds($task->project_id, 'edit_task', ['user' => $this->loggedInUser, 'task' => $updateTask, 'project_slug' => $task->project->slug]);
+                $options = [
+                    'user' => $this->loggedInUser,
+                    'task' => $updateTask,
+                    'project_slug' => $task->project->slug,
+                    'edit_type' => $this->request->data['edit_type'],
+                    'edit_status' => $this->request->data['edit_status'],
+                    'action_on_label' => $this->request->data['action_on_label']
+                ];
+                $this->Feeds->storeFeeds($task->project_id, 'edit_task', $options);
                 $response = [
                     'success' => true,
                     'message' => 'Task has been updated successfully',
