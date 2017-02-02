@@ -298,7 +298,7 @@ class TasksController extends AppController
     public function edit($id = null)
     {
         $task = $this->Tasks->get($id, [
-            'contain' => []
+            'contain' => ['Projects']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
 
@@ -307,7 +307,10 @@ class TasksController extends AppController
             unset($this->request->data['created']);
 
             $task = $this->Tasks->patchEntity($task, $this->request->data);
-            if ($this->Tasks->save($task)) {
+            $updateTask = $this->Tasks->save($task);
+            if ($updateTask) {
+                $this->loadModel('Feeds');
+                $this->Feeds->storeFeeds($task->project_id, 'edit_task', ['user' => $this->loggedInUser, 'task' => $updateTask, 'project_slug' => $task->project->slug]);
                 $response = [
                     'success' => true,
                     'message' => 'Task has been updated successfully',

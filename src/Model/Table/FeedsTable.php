@@ -109,6 +109,10 @@ class FeedsTable extends Table
             }
             
         }
+        elseif($event == 'edit_task'){
+            $data['task_id'] = $content['task']->id;
+            $this->add($data);
+        }
         else{
             $this->add($data);
         }
@@ -145,6 +149,11 @@ class FeedsTable extends Table
         elseif($event == 'opened_task'){
             $title .= $this->getUserLink($data['user']);
             $title .= ' has been opened new task ';
+            $title .= $this->getTaskLink($data['project_slug'], $data['task']);
+        }
+        elseif($event == 'edit_task'){
+            $title .= $this->getUserLink($data['user']);
+            $title .= ' has been edited task';
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
         elseif($event == 'added_label'){
