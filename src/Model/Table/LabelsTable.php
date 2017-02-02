@@ -76,4 +76,13 @@ class LabelsTable extends Table
 
         return $result;
     }
+
+    public function findLabels($labelIds)
+    {
+        $labels = $this->find('all', [
+            'conditions' => ['Labels.id IN' => $labelIds],
+            'fields' => ['Labels.color_code', 'Labels.name']
+        ]);
+        return $labels->toArray();
+    }
 }

@@ -298,4 +298,13 @@ class UsersTable extends Table
         return $result;
     }
 
+    public function findUsers($usersIds)
+    {
+        $users = $this->find('all', [
+            'conditions' => ['Users.id IN' => $usersIds],
+            'fields' => ['Users.uuid', 'Profiles.first_name', 'Profiles.last_name'],
+            'contain' => ['Profiles']
+        ]);
+        return $users->toArray();
+    }
 }

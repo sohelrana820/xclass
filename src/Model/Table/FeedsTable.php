@@ -4,6 +4,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
 use Cake\Validation\Validator;
 
@@ -89,8 +90,36 @@ class FeedsTable extends Table
 
         if($event == 'opened_task'){
             $data['task_id'] = $content['task']->id;
-        }
+            $this->add($data);
 
+            if(isset($content['labels']) && sizeof($content['labels']) > 0)
+            {
+                $title = $this->generateTitle('added_label', $content);
+                $data['title'] = $title;
+                $data['event'] = 'added_label';
+                $this->add($data);
+            }
+
+            if(isset($content['users']) && sizeof($content['users']) > 0)
+            {
+                $title = $this->generateTitle('assigned_user', $content);
+                $data['title'] = $title;
+                $data['event'] = 'assigned_user';
+                $this->add($data);
+            }
+            
+        }
+        else{
+            $this->add($data);
+        }
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    public function add($data)
+    {
         $feed = $this->newEntity();
         $feed = $this->patchEntity($feed, $data);
         if ($this->save($feed)) {
@@ -100,7 +129,11 @@ class FeedsTable extends Table
         }
     }
 
-
+    /**
+     * @param $event
+     * @param $data
+     * @return string
+     */
     private function generateTitle($event, $data)
     {
         $title = "";
@@ -112,6 +145,26 @@ class FeedsTable extends Table
         elseif($event == 'opened_task'){
             $title .= $this->getUserLink($data['user']);
             $title .= ' has been opened new task ';
+            $title .= $this->getTaskLink($data['project_slug'], $data['task']);
+        }
+        elseif($event == 'added_label'){
+            $labelTable = TableRegistry::get('Labels');
+            $labels = $labelTable->findLabels($data['labels']);
+            foreach ($labels as $label)
+            {
+                $title .= "<label style='border: 1px solid {$label->color_code}; coor: {$label->color_code}'>{$label->name}</label>";
+            }
+            $title .= ' label has been added to ';
+            $title .= $this->getTaskLink($data['project_slug'], $data['task']);
+        }
+        elseif($event == 'assigned_user'){
+            $userTable = TableRegistry::get('Users');
+            $users = $userTable->findUsers($data['labels']);
+            foreach ($users as $user)
+            {
+                $title .= $this->getUserLink($user);
+            }
+            $title .= ' assigned to ';
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
         return $title;
