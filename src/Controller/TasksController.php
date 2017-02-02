@@ -258,7 +258,10 @@ class TasksController extends AppController
                 $this->request->data['created_by'] = $this->userID;
                 $this->request->data['attachments'] = $allAttachments;
                 $task = $this->Tasks->patchEntity($task, $this->request->data);
-                if ($this->Tasks->save($task)) {
+                $savedTask = $this->Tasks->save($task);
+                if ($savedTask) {
+                    $this->loadModel('Feeds');
+                    $this->Feeds->storeFeeds($projectId, 'opened_task', ['user' => $this->loggedInUser, 'task' => $savedTask, 'project_slug' => $projectSlug]);
                     $response = [
                         'success' => true,
                         'message' => 'New task has been created successfully',
