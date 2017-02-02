@@ -184,10 +184,10 @@ class FeedsTable extends Table
             }
             elseif($data['edit_type'] == 'user_event'){
                 if($data['edit_status']){
-                    $title .= " has been assigned {} to";
+                    $title .= " has been assigned {$this->getUserLink($data['action_on_user'])} to";
                 }
                 else{
-                    $title .= " has been removed {} from";
+                    $title .= " has been removed {$this->getUserLink($data['action_on_user'])} from";
                 }
             }
             else{
@@ -220,7 +220,12 @@ class FeedsTable extends Table
 
     private function getUserLink($user)
     {
-        $link = "<a href='".Router::url('/', true)."users/view/".$user->uuid."'>{$user->profile->first_name} {$user->profile->last_name}</a>";
+        if(is_object($user)){
+            $link = "<a href='".Router::url('/', true)."users/view/".$user->uuid."'>{$user->profile->first_name} {$user->profile->last_name}</a>";
+        }
+        else{
+            $link = "<a href='".Router::url('/', true)."users/view/".$user['uuid']."'>{$user['profile']['first_name']} {$user['profile']['last_name']}</a>";
+        }
         return $link;
     }
 
