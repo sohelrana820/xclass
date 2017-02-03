@@ -16,8 +16,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
         })
     };
 
-
-
+    $scope.fetchFeeds({slug: projectSlug});
 
     $scope.intervalFunction = function(){
         $timeout(function() {
