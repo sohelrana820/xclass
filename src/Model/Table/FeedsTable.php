@@ -223,7 +223,7 @@ class FeedsTable extends Table
         }
         elseif($event == 'assigned_user'){
             $userTable = TableRegistry::get('Users');
-            $users = $userTable->findUsers($data['labels']);
+            $users = $userTable->findUsers($data['users']);
             foreach ($users as $user)
             {
                 $title .= $this->getUserLink($user);
