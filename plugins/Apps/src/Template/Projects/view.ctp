@@ -270,7 +270,8 @@
         <?php endif;?>
     </div>
     <div class="col-lg-5" ng-controller="FeedsCtrl">
-        <div>
+        <div class="timeline-area">
+            <h2 class="sm-title">Project Feeds</h2>
             <ul class="timeline">
                 <li ng-repeat="feed in feeds">
                     <div class="timeline-badge">

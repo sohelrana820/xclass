@@ -237,23 +237,23 @@ class FeedsTable extends Table
     private function getUserLink($user)
     {
         if(is_object($user)){
-            $link = "<a href='".Router::url('/', true)."users/view/".$user->uuid."'>{$user->profile->first_name} {$user->profile->last_name}</a>";
+            $link = "<a class='author_link' href='".Router::url('/', true)."users/view/".$user->uuid."'>{$user->profile->first_name} {$user->profile->last_name}</a>";
         }
         else{
-            $link = "<a href='".Router::url('/', true)."users/view/".$user['uuid']."'>{$user['profile']['first_name']} {$user['profile']['last_name']}</a>";
+            $link = "<a class='author_link' href='".Router::url('/', true)."users/view/".$user['uuid']."'>{$user['profile']['first_name']} {$user['profile']['last_name']}</a>";
         }
         return $link;
     }
 
     private function getProjectLink($project)
     {
-        $link = "<a href='".Router::url('/', true)."projects/view/".$project->slug."'>{$project->name}</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."projects/view/".$project->slug."'>{$project->name}</a>";
         return $link;
     }
 
     private function getTaskLink($projectSlug, $task)
     {
-        $link = "<a href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>{$task->task}</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>{$task->task}</a>";
         return $link;
     }
 
