@@ -270,61 +270,27 @@
         <?php endif;?>
     </div>
     <div class="col-lg-5" ng-controller="FeedsCtrl">
-        <!-- Project Feeds -->
-        <div class="timeline">
-
-            <!-- Line component -->
-            <div class="line text-muted"></div>
-
-            <!-- Each day feed -->
-            <div>
-                <div class="separator text-muted">
-                    <time>26. 3. 2015</time>
-                </div>
-                <article class="panel panel-danger panel-outline">
-
-                    <!-- Icon -->
-                    <div class="panel-heading icon">
-                        <i class="glyphicon glyphicon-heart"></i>
+        <div class="container">
+            <ul class="timeline">
+                <li ng-repeat="feed in feeds">
+                    <div class="timeline-badge">
+                        <i class="fa fa-plus green"></i>
                     </div>
-                    <!-- /Icon -->
-
-                    <!-- Body -->
-                    <div class="panel-body">
-                        <strong>Someone</strong> favourited your photo.
+                    <div class="timeline-panel">
+                        <p class="timeline-time">
+                            <i class="fa fa-clock-o"></i>
+                            {{feed.created | date}}
+                            <span>({{feed.created | date : 'HH:m a'}})</span>
+                        </p>
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">
+                                Mussum ipsum cacilds
+                            </h4>
+                        </div>
+                        <div class="timeline-body" ng-bind-html="feed.title"></div>
                     </div>
-                    <!-- /Body -->
-
-                </article>
-                <article class="panel panel-primary">
-
-                    <!-- Icon -->
-                    <div class="panel-heading icon">
-                        <i class="glyphicon glyphicon-plus"></i>
-                    </div>
-                    <!-- /Icon -->
-
-                    <!-- Heading -->
-                    <div class="panel-heading">
-                        <h2 class="panel-title">New content added</h2>
-                    </div>
-                    <!-- /Heading -->
-
-                    <!-- Body -->
-                    <div class="panel-body">
-                        Some new content has been added.
-                    </div>
-                    <!-- /Body -->
-
-                    <!-- Footer -->
-                    <div class="panel-footer">
-                        <small>Footer is also supported!</small>
-                    </div>
-                    <!-- /Footer -->
-
-                </article>
-            </div>
-
+                </li>
+            </ul>
         </div>
     </div>
 </div>
