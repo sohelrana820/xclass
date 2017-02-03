@@ -44,6 +44,13 @@ app.factory('ProjectsResources', function ($resource, BASE_URL) {
     });
 });
 
+app.factory('FeedsResources', function ($resource, BASE_URL) {
+    return $resource(':id, :slug', {id: '@id', slug: '@slug'}, {
+        query: {method: 'GET', url: BASE_URL +  ':slug/feeds.json', isArray: false},
+        get: {method: 'GET', url: BASE_URL +  'feeds/:id.json'},
+    });
+});
+
 app.factory('DashboardResources', function ($resource, BASE_URL) {
     return $resource(':id', {id: '@id'}, {
         get: {method: 'GET', url: BASE_URL +  'dashboard/overview.json'}

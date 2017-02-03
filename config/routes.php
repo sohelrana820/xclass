@@ -59,6 +59,8 @@ Router::scope('/', function ($routes) {
     $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
     $routes->connect('/:slug/labels/create', ['controller' => 'labels', 'action' => 'add'], ['pass' => ['slug']]);
 
+    $routes->connect('/:slug/feeds', ['controller' => 'feeds', 'action' => 'index'], ['pass' => ['slug']]);
+
     $routes->connect('/users/save', ['controller' => 'users', 'action' => 'add']);
     $routes->connect('/:slug/users', ['controller' => 'projects', 'action' => 'users'], ['pass' => ['slug']]);
     $routes->connect('/:slug/assign_user', ['controller' => 'projects', 'action' => 'assign_user'], ['pass' => ['slug']]);

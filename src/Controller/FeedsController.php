@@ -12,15 +12,45 @@ class FeedsController extends AppController
 {
 
     /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
+     * @param null $projectSlug
      */
-    public function index()
+    public function index($projectSlug = null)
     {
-        $feeds = $this->paginate($this->Feeds);
+        $this->loadModel('Projects');
+        $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
+        $conditions = [];
+        $sortBy = 'Feeds.created';
+        $orderBy = 'DESC';
+        $limit = 10;
+        $page = 1;
 
-        $this->set(compact('feeds'));
-        $this->set('_serialize', ['feeds']);
+        $feeds = $this->Feeds->find();
+        $feeds->where($conditions);
+        $feeds->order([$sortBy => $orderBy]);
+        $feeds->limit($limit);
+        $feeds->page($page);
+        $feeds->contain(
+            [
+                'Projects' => function($q){
+                    $q->select(['name', 'slug']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+            ]
+        );
+        $feeds->all();
+        $countAll = $this->Feeds->find('all', ['conditions' => ['Feeds.project_id' => $projectId]])->count();
+
+        $response = [
+            'success' => true,
+            'message' => 'List of feeds',
+            'count' => $feeds->count(),
+            'data' => $feeds,
+            'count_all' => $countAll,
+            'limit' => $limit,
+            'page' => $page,
+        ];
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 }

@@ -269,176 +269,63 @@
             <?php echo $this->Html->link('Assign User', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'btn btn-success btn-block']);?>
         <?php endif;?>
     </div>
-    <div class="col-lg-5">
-        <div class="container">
+    <div class="col-lg-5" ng-controller="FeedsCtrl">
+        <!-- Project Feeds -->
+        <div class="timeline">
 
-            <!-- Page header -->
-            <div class="page-header">
-                <h2>Timeline <small>using Bootstrap's <code>.panel</code>.</small></h2>
-            </div>
-            <!-- /Page header -->
+            <!-- Line component -->
+            <div class="line text-muted"></div>
 
-            <!-- Timeline -->
-            <div class="timeline">
-
-                <!-- Line component -->
-                <div class="line text-muted"></div>
-
-                <!-- Each day feed -->
-                <div>
-                    <!-- Separator -->
-                    <div class="separator text-muted">
-                        <time>26. 3. 2015</time>
-                    </div>
-                    <!-- /Separator -->
-
-                    <!-- Panel -->
-                    <article class="panel panel-danger panel-outline">
-
-                        <!-- Icon -->
-                        <div class="panel-heading icon">
-                            <i class="glyphicon glyphicon-heart"></i>
-                        </div>
-                        <!-- /Icon -->
-
-                        <!-- Body -->
-                        <div class="panel-body">
-                            <strong>Someone</strong> favourited your photo.
-                        </div>
-                        <!-- /Body -->
-
-                    </article>
-                    <!-- /Panel -->
-
-                    <!-- Panel -->
-                    <article class="panel panel-default panel-outline">
-
-                        <!-- Icon -->
-                        <div class="panel-heading icon">
-                            <i class="glyphicon glyphicon-picture"></i>
-                        </div>
-                        <!-- /Icon -->
-
-                        <!-- Body -->
-                        <div class="panel-body">
-                            <img class="img-responsive img-rounded" src="//placehold.it/350x150" />
-                        </div>
-                        <!-- /Body -->
-
-                    </article>
-                    <!-- /Panel -->
-
-                    <!-- Panel -->
-                    <article class="panel panel-primary">
-
-                        <!-- Icon -->
-                        <div class="panel-heading icon">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </div>
-                        <!-- /Icon -->
-
-                        <!-- Heading -->
-                        <div class="panel-heading">
-                            <h2 class="panel-title">New content added</h2>
-                        </div>
-                        <!-- /Heading -->
-
-                        <!-- Body -->
-                        <div class="panel-body">
-                            Some new content has been added.
-                        </div>
-                        <!-- /Body -->
-
-                        <!-- Footer -->
-                        <div class="panel-footer">
-                            <small>Footer is also supported!</small>
-                        </div>
-                        <!-- /Footer -->
-
-                    </article>
-                    <!-- /Panel -->
+            <!-- Each day feed -->
+            <div>
+                <div class="separator text-muted">
+                    <time>26. 3. 2015</time>
                 </div>
+                <article class="panel panel-danger panel-outline">
 
-                <!-- Each day feed -->
-                <div>
-                    <!-- Separator -->
-                    <div class="separator text-muted">
-                        <time>26. 3. 2015</time>
+                    <!-- Icon -->
+                    <div class="panel-heading icon">
+                        <i class="glyphicon glyphicon-heart"></i>
                     </div>
-                    <!-- /Separator -->
+                    <!-- /Icon -->
 
-                    <!-- Panel -->
-                    <article class="panel panel-danger panel-outline">
+                    <!-- Body -->
+                    <div class="panel-body">
+                        <strong>Someone</strong> favourited your photo.
+                    </div>
+                    <!-- /Body -->
 
-                        <!-- Icon -->
-                        <div class="panel-heading icon">
-                            <i class="glyphicon glyphicon-heart"></i>
-                        </div>
-                        <!-- /Icon -->
+                </article>
+                <article class="panel panel-primary">
 
-                        <!-- Body -->
-                        <div class="panel-body">
-                            <strong>Someone</strong> favourited your photo.
-                        </div>
-                        <!-- /Body -->
+                    <!-- Icon -->
+                    <div class="panel-heading icon">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </div>
+                    <!-- /Icon -->
 
-                    </article>
-                    <!-- /Panel -->
+                    <!-- Heading -->
+                    <div class="panel-heading">
+                        <h2 class="panel-title">New content added</h2>
+                    </div>
+                    <!-- /Heading -->
 
-                    <!-- Panel -->
-                    <article class="panel panel-default panel-outline">
+                    <!-- Body -->
+                    <div class="panel-body">
+                        Some new content has been added.
+                    </div>
+                    <!-- /Body -->
 
-                        <!-- Icon -->
-                        <div class="panel-heading icon">
-                            <i class="glyphicon glyphicon-picture"></i>
-                        </div>
-                        <!-- /Icon -->
+                    <!-- Footer -->
+                    <div class="panel-footer">
+                        <small>Footer is also supported!</small>
+                    </div>
+                    <!-- /Footer -->
 
-                        <!-- Body -->
-                        <div class="panel-body">
-                            <img class="img-responsive img-rounded" src="//placehold.it/350x150" />
-                        </div>
-                        <!-- /Body -->
-
-                    </article>
-                    <!-- /Panel -->
-
-                    <!-- Panel -->
-                    <article class="panel panel-primary">
-
-                        <!-- Icon -->
-                        <div class="panel-heading icon">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </div>
-                        <!-- /Icon -->
-
-                        <!-- Heading -->
-                        <div class="panel-heading">
-                            <h2 class="panel-title">New content added</h2>
-                        </div>
-                        <!-- /Heading -->
-
-                        <!-- Body -->
-                        <div class="panel-body">
-                            Some new content has been added.
-                        </div>
-                        <!-- /Body -->
-
-                        <!-- Footer -->
-                        <div class="panel-footer">
-                            <small>Footer is also supported!</small>
-                        </div>
-                        <!-- /Footer -->
-
-                    </article>
-                    <!-- /Panel -->
-                </div>
-
+                </article>
             </div>
-            <!-- /Timeline -->
 
         </div>
-    </div>
     </div>
 </div>
 
@@ -448,6 +335,7 @@ echo $this->start('jsBottom');
 echo $this->Html->script(['src/LabelsCtrl']);
 echo $this->Html->script(['src/TasksCtrl']);
 echo $this->Html->script(['src/Comments']);
+echo $this->Html->script(['src/FeedsCtrl']);
 echo $this->end();
 ?>
 
