@@ -273,7 +273,7 @@
         <div class="timeline-area">
             <h2 class="sm-title">Project Feeds</h2>
             <ul class="timeline">
-                <li ng-repeat="feed in feeds">
+                <li ng-repeat="feed in feeds.data">
                     <div class="timeline-badge">
                         <i class="fa fa-feed grey"></i>
                     </div>
@@ -287,6 +287,22 @@
                     </div>
                 </li>
             </ul>
+
+            <div class="pagination_area text-center" ng-show="feeds.count > 0">
+                <a class="pull-left previous_page" ng-click="goPreviousPage()">
+                    <span aria-hidden="true">&laquo;</span> Previous
+                </a>
+                <a>
+                    <span>
+                        showing {{((feeds.currentPage - 1) * feeds.limit) + 1}} -
+                        {{feeds.currentPage * feeds.limit > feeds.count ? feeds.count : feeds.currentPage * feeds.limit}}
+                        of {{feeds.count}} records
+                    </span>
+                </a>
+                <a class="pull-right next_page" ng-click="goNextPage()">
+                    Next <span aria-hidden="true">&raquo;</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

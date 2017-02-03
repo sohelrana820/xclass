@@ -24,6 +24,24 @@ class FeedsController extends AppController
         $limit = 10;
         $page = 1;
 
+        if(isset($this->request->query['page']) && $this->request->query['page']){
+            $page = $this->request->query['page'];
+        }
+
+        if (isset($this->request->query['sort_by'])) {
+            if($this->request->query['sort_by'] == 'id'){
+                $sortBy = 'Tasks.id';
+            }
+        }
+
+        if (isset($this->request->query['limit'])) {
+            $limit = $this->request->query['limit'];
+        }
+
+        if (isset($this->request->query['order_by'])) {
+            $orderBy = $this->request->query['order_by'];
+        }
+
         $feeds = $this->Feeds->find();
         $feeds->where($conditions);
         $feeds->order([$sortBy => $orderBy]);
