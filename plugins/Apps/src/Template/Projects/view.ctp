@@ -270,11 +270,11 @@
         <?php endif;?>
     </div>
     <div class="col-lg-5" ng-controller="FeedsCtrl">
-        <div class="container">
+        <div>
             <ul class="timeline">
                 <li ng-repeat="feed in feeds">
                     <div class="timeline-badge">
-                        <i class="fa fa-plus green"></i>
+                        <i class="fa fa-feed grey"></i>
                     </div>
                     <div class="timeline-panel">
                         <p class="timeline-time">
@@ -282,12 +282,7 @@
                             {{feed.created | date}}
                             <span>({{feed.created | date : 'HH:m a'}})</span>
                         </p>
-                        <div class="timeline-heading">
-                            <h4 class="timeline-title">
-                                Mussum ipsum cacilds
-                            </h4>
-                        </div>
-                        <div class="timeline-body" ng-bind-html="feed.title"></div>
+                        <div class="timeline-body" ng-bind-html="trustAsHtml(feed.title)"></div>
                     </div>
                 </li>
             </ul>

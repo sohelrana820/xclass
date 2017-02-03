@@ -1,4 +1,4 @@
-app.controller('FeedsCtrl', function($scope, $timeout, FeedsResources, ProjectsResources, Flash, toastr, SweetAlert){
+app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, ProjectsResources, Flash, toastr, SweetAlert){
 
     $scope.feeds = [];
 
@@ -17,4 +17,8 @@ app.controller('FeedsCtrl', function($scope, $timeout, FeedsResources, ProjectsR
     };
 
     $scope.fetchFeeds({slug: projectSlug});
+
+    $scope.trustAsHtml = function(string) {
+        return $sce.trustAsHtml(string);
+    };
 });
