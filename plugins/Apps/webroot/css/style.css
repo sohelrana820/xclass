@@ -1939,6 +1939,7 @@ Licensed under MIT
     padding: 0 0 20px;
     position: relative;
     margin-top: -15px;
+    margin-bottom: 200px;
     width: 100%;
 }
 
@@ -1958,23 +1959,22 @@ Licensed under MIT
     position: relative
 }
 
-.timeline > li:after, .timeline > li:before {
-    content: " ";
-    display: table
-}
 
 .timeline > li:after {
     clear: both
 }
 
 .timeline > li > .timeline-panel {
-    margin-left: 55px;
+    margin-left: 15px;
     float: left;
     top: 19px;
-    padding: 10px 10px 8px 15px;
-    border: 1px solid #ddd;
+    padding: 10px 10px 8px 0px;
     border-radius: 3px;
-    width: 90%;
+    border-bottom: 1px solid #eee;
+}
+
+.timeline > li > .timeline-panel:last-child {
+    border:none;
 }
 
 .timeline > li > .timeline-badge {
@@ -2097,6 +2097,21 @@ Licensed under MIT
 .timeline-body > h4 {
     margin-bottom: 0 !important
 }
+
+
+
+.right-sidebar {
+    border-left: 1px solid #ddd;
+    margin-top: -30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.right-sidebar .pagination_area {
+    margin-top: 46px;
+    padding-left: 15px;
+}
+
 
 @media (max-width: 768px) {
     .page-header .pull-left {
