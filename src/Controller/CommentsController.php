@@ -67,9 +67,15 @@ class CommentsController extends AppController
                 }
             }
 
+
             $this->request->data['attachments'] = $allAttachments;
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
-            if ($this->Comments->save($comment)) {
+            $saveComment = $this->Comments->save($comment);
+            if ($saveComment) {
+                $this->loadModel('Tasks');
+                $task = $this->Tasks->getTask($this->request->data['task_id']);
+                $this->loadModel('Feeds');
+                $this->Feeds->storeFeeds($task->project_id, 'commented', ['user' => $this->loggedInUser, 'task' => $task, 'comment' => $saveComment, 'project_slug' => $task->project->slug]);
                 $comment->user = $this->loggedInUser;
                 $response = [
                     'success' => true,

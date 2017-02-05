@@ -220,4 +220,12 @@ class TasksTable extends Table
 
         return $task->first();
     }
+
+    public function getTask($id)
+    {
+        $task = $this->find();
+        $task->where(['Tasks.id' => $id]);
+        $task->contain('Projects');
+        return $task->first();
+    }
 }

@@ -6,6 +6,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\ORM\TableRegistry;
 use Cake\Routing\Router;
+use Cake\Utility\Text;
 use Cake\Validation\Validator;
 
 /**
@@ -231,6 +232,11 @@ class FeedsTable extends Table
             $title .= ' assigned to ';
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
+        elseif($event == 'commented'){
+            $title .= $this->getUserLink($data['user']);
+            $title .= ' commented ('.Text::truncate($data['comment']->comment, 50).') on';
+            $title .= $this->getTaskLink($data['project_slug'], $data['task']);
+        }
         return $title;
     }
 
@@ -253,7 +259,7 @@ class FeedsTable extends Table
 
     private function getTaskLink($projectSlug, $task)
     {
-        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>{$task->task}</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>".Text::truncate($task->task, 50)."</a>";
         return $link;
     }
 
