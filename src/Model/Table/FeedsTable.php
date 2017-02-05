@@ -201,10 +201,10 @@ class FeedsTable extends Table
             }
             elseif($data['edit_type'] == 'change_status'){
                 if($data['edit_status'] == 2){
-                    $title .= " marked task as <strong>closed</strong> ";
+                    $title .= " marked task as <strong class='label label-default'>closed</strong> ";
                 }
                 else{
-                    $title .= " marked task as <strong>reopened</strong> ";
+                    $title .= " marked task as <strong class='label label-danger'>reopened</strong> ";
                 }
             }
             else{
@@ -234,7 +234,7 @@ class FeedsTable extends Table
         }
         elseif($event == 'commented'){
             $title .= $this->getUserLink($data['user']);
-            $title .= ' commented ('.Text::truncate($data['comment']->comment, 50).') on';
+            $title .= ' commented ('.Text::truncate($data['comment']->comment, 50).') on ';
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
         return $title;

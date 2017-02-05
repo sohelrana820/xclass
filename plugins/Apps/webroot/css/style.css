@@ -1973,7 +1973,7 @@ Licensed under MIT
     border-bottom: 1px solid #eee;
 }
 
-.timeline > li > .timeline-panel:last-child {
+.timeline > li:last-child >.timeline-panel {
     border:none;
 }
 
