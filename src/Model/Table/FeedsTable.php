@@ -184,30 +184,30 @@ class FeedsTable extends Table
             $title .= $this->getUserLink($data['user']);
             if($data['edit_type'] == 'label_event'){
                 if($data['edit_status']){
-                    $title .= " has been added <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> to";
+                    $title .= " has been added <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> to ";
                 }
                 else{
-                    $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> from";
+                    $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> from ";
                 }
             }
             elseif($data['edit_type'] == 'user_event'){
                 if($data['edit_status']){
-                    $title .= " has been assigned {$this->getUserLink($data['action_on_user'])} to";
+                    $title .= " has been assigned {$this->getUserLink($data['action_on_user'])} to ";
                 }
                 else{
-                    $title .= " has been removed {$this->getUserLink($data['action_on_user'])} from";
+                    $title .= " has been removed {$this->getUserLink($data['action_on_user'])} from ";
                 }
             }
             elseif($data['edit_type'] == 'change_status'){
                 if($data['edit_status'] == 2){
-                    $title .= " marked task as <strong>closed</strong>";
+                    $title .= " marked task as <strong>closed</strong> ";
                 }
                 else{
-                    $title .= " marked task as <strong>reopened</strong>";
+                    $title .= " marked task as <strong>reopened</strong> ";
                 }
             }
             else{
-                $title .= ' has been edited task';
+                $title .= ' has been edited task ';
             }
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
