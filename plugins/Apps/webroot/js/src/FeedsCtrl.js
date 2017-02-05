@@ -30,7 +30,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
         $timeout(function() {
             $scope.fetchFeeds();
             $scope.intervalFunction();
-        }, 50000)
+        }, 5000)
     };
     $scope.intervalFunction();
 

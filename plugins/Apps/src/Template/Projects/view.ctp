@@ -19,6 +19,63 @@
 
 <div class="row">
     <div class="col-lg-9">
+        <?php if(!$project->tasks):?>
+            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['escape' => false]); ?> to create your first task!
+            </div>
+        <?php endif;?>
+        <?php if(!$project->labels):?>
+            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'labels', 'action' => 'index', $project->slug], ['escape' => false]); ?> to create your first task label!
+            </div>
+        <?php endif;?>
+        <?php if(!$users):?>
+            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'projects', 'action' => 'users', $project->slug], ['escape' => false]); ?> assign user to project!
+            </div>
+        <?php endif;?>
+        <div class="widget">
+            <div class="widget-header">
+                <h2 class="sm-title">Project Overview</h2>
+            </div>
+            <div class="widget-body">
+                <ul class="data-overview">
+                    <li>
+                        <strong>Project Name: </strong>
+                        <?php
+                        if ($project->name) {
+                            echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Description: </strong>
+                        <?php
+                        if ($project->description) {
+                            echo $project->description;
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Note: </strong>
+                        <?php
+                        if ($project->note) {
+                            echo $project->note;
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <div class="app-stats-item bg-orange">
@@ -82,45 +139,7 @@
         <br/>
         <div class="row">
             <div class="col-lg-12">
-                <div class="widget">
-                    <div class="widget-header">
-                        <h2 class="sm-title">Project Overview</h2>
-                    </div>
-                    <div class="widget-body">
-                        <ul class="data-overview">
-                            <li>
-                                <strong>Project Name: </strong>
-                                <?php
-                                if ($project->name) {
-                                    echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </li>
-                            <li>
-                                <strong>Description: </strong>
-                                <?php
-                                if ($project->description) {
-                                    echo $project->description;
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </li>
-                            <li>
-                                <strong>Note: </strong>
-                                <?php
-                                if ($project->note) {
-                                    echo $project->note;
-                                } else {
-                                    echo 'N/A';
-                                }
-                                ?>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
 
                 <div class="row">
                     <div class="col-lg-6">
@@ -168,10 +187,6 @@
                                     <?php endif;?>
                                     <div class="clearfix"></div>
                                 </div>
-                            <?php else:?>
-                                <?php
-                                echo $this->Html->link('Create First Task', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'btn btn-success btn-block']);
-                                ?>
                             <?php endif;?>
                         </div>
                     </div>
@@ -225,9 +240,8 @@
 
                                 </div>
                             </div>
-                        <?php else:?>
-                            <?php echo $this->Html->link('Create New Label', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'btn btn-success btn-block']);?>
                         <?php endif;?>
+
                         <?php if($users):?>
                             <h2 class="sm-title">Recent Users</h2>
                             <div class="project_user_section">
@@ -273,8 +287,6 @@
                                 <?php endif;?>
                                 <div class="clearfix"></div>
                             </div>
-                        <?php else:?>
-                            <?php echo $this->Html->link('Assign User', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'btn btn-success btn-block']);?>
                         <?php endif;?>
                     </div>
                 </div>
