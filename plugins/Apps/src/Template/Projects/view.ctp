@@ -14,9 +14,6 @@
     <div class="clearfix"></div>
 </div>
 
-
-
-
 <div class="row">
     <div class="col-lg-9">
         <?php if(!$project->tasks):?>
@@ -37,45 +34,6 @@
                 Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'projects', 'action' => 'users', $project->slug], ['escape' => false]); ?> assign user to project!
             </div>
         <?php endif;?>
-        <div class="widget">
-            <div class="widget-header">
-                <h2 class="sm-title">Project Overview</h2>
-            </div>
-            <div class="widget-body">
-                <ul class="data-overview">
-                    <li>
-                        <strong>Project Name: </strong>
-                        <?php
-                        if ($project->name) {
-                            echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
-                        } else {
-                            echo 'N/A';
-                        }
-                        ?>
-                    </li>
-                    <li>
-                        <strong>Description: </strong>
-                        <?php
-                        if ($project->description) {
-                            echo $project->description;
-                        } else {
-                            echo 'N/A';
-                        }
-                        ?>
-                    </li>
-                    <li>
-                        <strong>Note: </strong>
-                        <?php
-                        if ($project->note) {
-                            echo $project->note;
-                        } else {
-                            echo 'N/A';
-                        }
-                        ?>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <div class="app-stats-item bg-orange">
@@ -132,6 +90,45 @@
                         </h3>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="widget">
+            <div class="widget-header">
+                <h2 class="sm-title">Project Overview</h2>
+            </div>
+            <div class="widget-body">
+                <ul class="data-overview">
+                    <li>
+                        <strong>Project Name: </strong>
+                        <?php
+                        if ($project->name) {
+                            echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Description: </strong>
+                        <?php
+                        if ($project->description) {
+                            echo $project->description;
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                    <li>
+                        <strong>Note: </strong>
+                        <?php
+                        if ($project->note) {
+                            echo $project->note;
+                        } else {
+                            echo 'N/A';
+                        }
+                        ?>
+                    </li>
+                </ul>
             </div>
         </div>
         <img src="https://react.rocks/images/converted/react-chartjs.jpg" style="width: 100%; height: 250px;">
