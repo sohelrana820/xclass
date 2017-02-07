@@ -185,7 +185,6 @@
                                 </div>
                             </div>
                         <?php endif;?>
-
                         <?php if($users):?>
                             <h2 class="sm-title">Recent Users</h2>
                             <div class="project_user_section">
@@ -234,7 +233,6 @@
                         <?php endif;?>
                     </div>
                     <div class="col-lg-6">
-                        <img src="https://react.rocks/images/converted/react-chartjs.jpg" style="width: 100%; height: 250px;">
                         <div class="recent-task">
                             <?php if($project->tasks):?>
                                 <div class="col-mob">
