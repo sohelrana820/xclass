@@ -270,6 +270,11 @@ class ProjectsController extends AppController
         $userId = $this->request->data['user_id'];
         $isRemoved = $this->ProjectsUsers->removeProjectUser($userId, $projectId);
         if ($isRemoved) {
+
+            $this->loadModel('Feeds');
+            $project = $this->Projects->getProjectById($projectId);
+            $users[] = $this->request->data['user_id'];
+            $this->Feeds->storeFeeds($projectId, 'remove_contributor', ['user' => $this->loggedInUser,  'users' => $users, 'project' => $project]);
             $response = [
                 'success' => true,
                 'message' => 'User has been removed successfully',

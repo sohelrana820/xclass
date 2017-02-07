@@ -239,7 +239,17 @@ class FeedsTable extends Table
             {
                 $title .= $this->getUserLink($user);
             }
-            $title .= ' is now contributor of ';
+            $title .= ' has been added to contributor list of ';
+            $title .= $this->getProjectLink($data['project']);
+        }
+        elseif($event == 'remove_contributor'){
+            $userTable = TableRegistry::get('Users');
+            $users = $userTable->findUsers($data['users']);
+            foreach ($users as $user)
+            {
+                $title .= $this->getUserLink($user);
+            }
+            $title .= ' is removed from contributor list of ';
             $title .= $this->getProjectLink($data['project']);
         }
         elseif($event == 'commented'){
