@@ -95,7 +95,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="<?php echo !$project->tasks ? 'col-lg-12': 'col-lg-6'; ?>">
                         <div class="widget">
                             <div class="widget-header">
                                 <h2 class="sm-title">Project Overview</h2>
