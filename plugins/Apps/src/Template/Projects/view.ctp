@@ -17,19 +17,19 @@
 <div class="row">
     <div class="col-lg-9">
         <?php if(!$project->tasks):?>
-            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert">
+            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert" style="text-align: left !important;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['escape' => false]); ?> to create your first task!
             </div>
         <?php endif;?>
         <?php if(!$project->labels):?>
-            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert">
+            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert" style="text-align: left !important;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'labels', 'action' => 'index', $project->slug], ['escape' => false]); ?> to create your first task label!
             </div>
         <?php endif;?>
         <?php if(!$users):?>
-            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert">
+            <div class="alert alert-warning alert-dismissible m-b-5 text-left" role="alert" style="text-align: left !important;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 Please <?php echo $this->Html->link('<strong>Click Here</strong>', ['controller' => 'projects', 'action' => 'users', $project->slug], ['escape' => false]); ?> assign user to project!
             </div>
@@ -92,102 +92,49 @@
                 </div>
             </div>
         </div>
-        <div class="widget">
-            <div class="widget-header">
-                <h2 class="sm-title">Project Overview</h2>
-            </div>
-            <div class="widget-body">
-                <ul class="data-overview">
-                    <li>
-                        <strong>Project Name: </strong>
-                        <?php
-                        if ($project->name) {
-                            echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
-                        } else {
-                            echo 'N/A';
-                        }
-                        ?>
-                    </li>
-                    <li>
-                        <strong>Description: </strong>
-                        <?php
-                        if ($project->description) {
-                            echo $project->description;
-                        } else {
-                            echo 'N/A';
-                        }
-                        ?>
-                    </li>
-                    <li>
-                        <strong>Note: </strong>
-                        <?php
-                        if ($project->note) {
-                            echo $project->note;
-                        } else {
-                            echo 'N/A';
-                        }
-                        ?>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <img src="https://react.rocks/images/converted/react-chartjs.jpg" style="width: 100%; height: 250px;">
-        <br/>
-        <br/>
         <div class="row">
             <div class="col-lg-12">
-
-
                 <div class="row">
                     <div class="col-lg-6">
-                        <div class="recent-task">
-                            <?php if($project->tasks):?>
-                                <div class="col-mob">
-                                    <h2 class="sm-title">Recent Opened Tasks</h2>
-                                    <?php if($project->tasks):?>
-                                        <?php foreach ($project->tasks as $task):?>
-                                            <!-- Single Task -->
-                                            <div class="ui-item">
-                                                <!-- Heading -->
-                                                <div class="ui-heading clearfix">
-                                                    <h5>
-                                                        <?php if ($task->users_tasks): ?>
-                                                            <strong class="assigned-to">Assigned To:</strong>
-                                                            <?php foreach ($task->users_tasks as $taskUsers): ?>
-                                                                <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
-                                                                    'controller' => 'users',
-                                                                    'action' => 'view',
-                                                                    $taskUsers->user->uuid
-                                                                ]);?>
-                                                            <?php endforeach; ?>
-                                                        <?php else: ?>
-                                                            <strong class="no-assigned">Not Assigned Yet!</strong>
-                                                        <?php endif; ?>
-                                                    </h5>
-                                                </div>
-                                                <p>
-                                                    <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
-                                                </p>
-                                                <?php if ($task->tasks_labels): ?>
-                                                    <div>
-                                                        <?php foreach ($task->tasks_labels as $taskLabel):?>
-                                                            <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
-                                                                <?php echo $taskLabel->label->name;?>
-                                                            </a>
-                                                        <?php endforeach;?>
-                                                    </div>
-                                                <?php endif; ?>
-                                            </div>
-                                        <?php endforeach;?>
-                                    <?php else:?>
-                                        <h4 class="sm-not-found">Sorry, task empty</h4>
-                                    <?php endif;?>
-                                    <div class="clearfix"></div>
-                                </div>
-                            <?php endif;?>
+                        <div class="widget">
+                            <div class="widget-header">
+                                <h2 class="sm-title">Project Overview</h2>
+                            </div>
+                            <div class="widget-body">
+                                <ul class="data-overview">
+                                    <li>
+                                        <strong>Project Name: </strong>
+                                        <?php
+                                        if ($project->name) {
+                                            echo $this->Html->link($project->name, ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'text-uppercase bold']);
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li>
+                                        <strong>Description: </strong>
+                                        <?php
+                                        if ($project->description) {
+                                            echo $project->description;
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li>
+                                        <strong>Note: </strong>
+                                        <?php
+                                        if ($project->note) {
+                                            echo $project->note;
+                                        } else {
+                                            echo 'N/A';
+                                        }
+                                        ?>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
                         <?php if($project->labels):?>
                             <div class="widget">
                                 <div class="widget-header">
@@ -285,6 +232,55 @@
                                 <div class="clearfix"></div>
                             </div>
                         <?php endif;?>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="https://react.rocks/images/converted/react-chartjs.jpg" style="width: 100%; height: 250px;">
+                        <div class="recent-task">
+                            <?php if($project->tasks):?>
+                                <div class="col-mob">
+                                    <h2 class="sm-title">Recent Opened Tasks</h2>
+                                    <?php if($project->tasks):?>
+                                        <?php foreach ($project->tasks as $task):?>
+                                            <!-- Single Task -->
+                                            <div class="ui-item">
+                                                <!-- Heading -->
+                                                <div class="ui-heading clearfix">
+                                                    <h5>
+                                                        <?php if ($task->users_tasks): ?>
+                                                            <strong class="assigned-to">Assigned To:</strong>
+                                                            <?php foreach ($task->users_tasks as $taskUsers): ?>
+                                                                <?php echo $this->Html->link($taskUsers->user->profile->first_name. ' '. $taskUsers->user->profile->last_name, [
+                                                                    'controller' => 'users',
+                                                                    'action' => 'view',
+                                                                    $taskUsers->user->uuid
+                                                                ]);?>
+                                                            <?php endforeach; ?>
+                                                        <?php else: ?>
+                                                            <strong class="no-assigned">Not Assigned Yet!</strong>
+                                                        <?php endif; ?>
+                                                    </h5>
+                                                </div>
+                                                <p>
+                                                    <?php echo $this->Html->link($task->task, ['controller' => 'tasks', 'action' => 'view', $project->slug, $task->identity]);?>
+                                                </p>
+                                                <?php if ($task->tasks_labels): ?>
+                                                    <div>
+                                                        <?php foreach ($task->tasks_labels as $taskLabel):?>
+                                                            <a class="label label-sm d-label" style="color: <?php echo $taskLabel->label->color_code;?>; border: 1px solid <?php echo $taskLabel->label->color_code;?>;">
+                                                                <?php echo $taskLabel->label->name;?>
+                                                            </a>
+                                                        <?php endforeach;?>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endforeach;?>
+                                    <?php else:?>
+                                        <h4 class="sm-not-found">Sorry, task empty</h4>
+                                    <?php endif;?>
+                                    <div class="clearfix"></div>
+                                </div>
+                            <?php endif;?>
+                        </div>
                     </div>
                 </div>
             </div>
