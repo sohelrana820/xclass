@@ -239,7 +239,7 @@ class FeedsTable extends Table
             {
                 $title .= $this->getUserLink($user);
             }
-            $title .= ' has been added to contributor list of ';
+            $title .= ' has been added to ';
             $title .= $this->getProjectLink($data['project']);
         }
         elseif($event == 'remove_contributor'){
@@ -249,7 +249,7 @@ class FeedsTable extends Table
             {
                 $title .= $this->getUserLink($user);
             }
-            $title .= ' is removed from contributor list of ';
+            $title .= ' is removed from ';
             $title .= $this->getProjectLink($data['project']);
         }
         elseif($event == 'commented'){
