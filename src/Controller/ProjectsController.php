@@ -236,6 +236,11 @@ class ProjectsController extends AppController
                 $this->loadModel('Users');
                 $isAssigned = $this->ProjectsUsers->assignProjectUser($data);
                 if ($isAssigned) {
+
+                    $this->loadModel('Feeds');
+                    $project = $this->Projects->getProjectById($projectId);
+                    $users[] = $this->request->data['user_id'];
+                    $this->Feeds->storeFeeds($projectId, 'add_contributor', ['user' => $this->loggedInUser,  'users' => $users, 'project' => $project]);
                     $response = [
                         'success' => true,
                         'message' => 'User has been assigned successfully',

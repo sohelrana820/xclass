@@ -115,6 +115,15 @@ class ProjectsTable extends Table
         return $result;
     }
 
+    public function getProjectById($id)
+    {
+        $result = $this->find()
+            ->where(['id' => $id])
+            ->first();
+
+        return $result;
+    }
+
     public function getProjectDetailsBySlug($slug)
     {
         $result = $this->find()

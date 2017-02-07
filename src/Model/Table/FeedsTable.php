@@ -232,6 +232,16 @@ class FeedsTable extends Table
             $title .= ' assigned to ';
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
+        elseif($event == 'add_contributor'){
+            $userTable = TableRegistry::get('Users');
+            $users = $userTable->findUsers($data['users']);
+            foreach ($users as $user)
+            {
+                $title .= $this->getUserLink($user);
+            }
+            $title .= ' is now contributor of ';
+            $title .= $this->getProjectLink($data['project']);
+        }
         elseif($event == 'commented'){
             $title .= $this->getUserLink($data['user']);
             $title .= ' commented ('.Text::truncate($data['comment']->comment, 50).') on ';
