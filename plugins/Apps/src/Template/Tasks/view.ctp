@@ -77,37 +77,39 @@
                                 </form>
                             </div>
 
-                            <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
-                            <div class="comments" ng-repeat="comment in taskComments">
-                                <div class="media"> <div class="media-left">
-                                        <a href="#">
-                                            <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
-                                            <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" ng-src="{{BASE_URL}}/img/profile_avatar.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="media-heading">
-                                            <strong>
-                                                <a href="{{BASE_URL}}users/view/{{comment.user.uuid}}">
-                                                    {{comment.user.profile.first_name}} {{comment.user.profile.last_name}}
-                                                </a>
-                                            </strong>
-                                            <span ng-show="comment.comment">
+                            <div ng-show="!edit_task_form">
+                                <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
+                                <div class="comments" ng-repeat="comment in taskComments">
+                                    <div class="media"> <div class="media-left">
+                                            <a href="#">
+                                                <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
+                                                <img class="user-photo"  ng-if="!comment.user.profile.profile_pic" ng-src="{{BASE_URL}}/img/profile_avatar.jpg">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">
+                                                <strong>
+                                                    <a href="{{BASE_URL}}users/view/{{comment.user.uuid}}">
+                                                        {{comment.user.profile.first_name}} {{comment.user.profile.last_name}}
+                                                    </a>
+                                                </strong>
+                                                <span ng-show="comment.comment">
                                                 commented {{comment.created | date}} at
                                                 ({{comment.created | date : 'HH:m a'}})
                                             </span>
-                                        </h4>
-                                        {{comment.comment}}
-                                        <div ng-show="comment.changing_status">
-                                            - Task marked as
-                                            <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
-                                            <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
-                                        </div>
-                                        <div class="show_attachments" ng-show="comment.attachments.length > 0">
-                                            <h4>Attachments</h4>
-                                            <p ng-repeat="attachment in comment.attachments">
-                                                <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                                            </p>
+                                            </h4>
+                                            {{comment.comment}}
+                                            <div ng-show="comment.changing_status">
+                                                - Task marked as
+                                                <label class="label label-default" ng-show="comment.changing_status == 'closed'">Closed</label>
+                                                <label class="label label-danger" ng-show="comment.changing_status == 'reopened'">Reopened</label>
+                                            </div>
+                                            <div class="show_attachments" ng-show="comment.attachments.length > 0">
+                                                <h4>Attachments</h4>
+                                                <p ng-repeat="attachment in comment.attachments">
+                                                    <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

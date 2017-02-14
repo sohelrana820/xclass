@@ -2,12 +2,14 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Table\FeedsTable;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Utility\Text;
 
 /**
  * Tasks Controller
  *
+ * @property \App\Model\Table\FeedsTable $Feeds;
  * @property \App\Model\Table\TasksTable $Tasks
  */
 class TasksController extends AppController
@@ -322,11 +324,32 @@ class TasksController extends AppController
                     'user' => $this->loggedInUser,
                     'task' => $updateTask,
                     'project_slug' => $task->project->slug,
-                    'edit_type' => $this->request->data['edit_type'],
-                    'edit_status' => $this->request->data['edit_status'],
-                    'action_on_label' => $this->request->data['action_on_label'],
-                    'action_on_user' => $this->request->data['action_on_user']
+                    'edit_type' => null,
+                    'edit_status' => null,
+                    'action_on_label' => null,
+                    'action_on_user' => null
                 ];
+
+                if(isset($this->request->data['edit_type']))
+                {
+                    $options['edit_type'] = $this->request->data['edit_type'];
+                }
+
+                if(isset($this->request->data['edit_status']))
+                {
+                    $options['edit_status'] = $this->request->data['edit_status'];
+                }
+
+                if(isset($this->request->data['action_on_label']))
+                {
+                    $options['action_on_label'] = $this->request->data['action_on_label'];
+                }
+
+                if(isset($this->request->data['action_on_user']))
+                {
+                    $options['action_on_user'] = $this->request->data['action_on_user'];
+                }
+
                 $this->Feeds->storeFeeds($task->project_id, 'edit_task', $options);
                 $response = [
                     'success' => true,
