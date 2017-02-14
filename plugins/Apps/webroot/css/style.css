@@ -2064,13 +2064,8 @@ Licensed under MIT
 }
 
 .timeline-body .author_link{
-    color: #3c85a6;
+    border-bottom: 1px dashed #3c85a6;
     margin-right: 5px;
-}
-
-
-.timeline-body .author_link:after{
-    content: ',';
 }
 
 .timeline-body .author_link:last-child{
