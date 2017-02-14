@@ -182,35 +182,35 @@ class FeedsTable extends Table
             $title .= $this->getTaskLink($data['project_slug'], $data['task']);
         }
         elseif($event == 'edit_task'){
-            $title .= $this->getUserLink($data['user']);
             if($data['edit_type'] == 'label_event'){
                 if($data['edit_status']){
-                    $title .= " has been added <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> to ";
+                    $title .= "  <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> has been added to ";
                 }
                 else{
-                    $title .= " has been removed <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> from ";
+                    $title .= "  <label style='border: 1px solid {$data['action_on_label']['color_code']}; color: {$data['action_on_label']['color_code']}'>{$data['action_on_label']['name']}</label> has been removed from ";
                 }
             }
             elseif($data['edit_type'] == 'user_event'){
                 if($data['edit_status']){
-                    $title .= " has been assigned {$this->getUserLink($data['action_on_user'])} to ";
+                    $title .= " {$this->getUserLink($data['action_on_user'])} has been assigned to ";
                 }
                 else{
-                    $title .= " has been removed {$this->getUserLink($data['action_on_user'])} from ";
+                    $title .= " {$this->getUserLink($data['action_on_user'])} has been removed from ";
                 }
             }
             elseif($data['edit_type'] == 'change_status'){
+                $title .= $this->getUserLink($data['user']);
                 if($data['edit_status'] == 2){
-                    $title .= " marked task as <strong class='label label-default'>closed</strong> ";
+                    $title .= " <strong class='label label-default'>closed</strong> task ";
                 }
                 else{
-                    $title .= " marked task as <strong class='label label-danger'>reopened</strong> ";
+                    $title .= "  <strong class='label label-danger'>reopened</strong> task ";
                 }
             }
             else{
                 $title .= ' has been edited task ';
             }
-            $title .= $this->getTaskLink($data['project_slug'], $data['task']);
+            $title .= $this->getTaskLinkWithID($data['project_slug'], $data['task']);
         }
         elseif($event == 'added_label'){
             $labelTable = TableRegistry::get('Labels');
@@ -254,8 +254,8 @@ class FeedsTable extends Table
         }
         elseif($event == 'commented'){
             $title .= $this->getUserLink($data['user']);
-            $title .= ' commented ('.Text::truncate($data['comment']->comment, 50).') on ';
-            $title .= $this->getTaskLink($data['project_slug'], $data['task']);
+            $title .= ' commented "'.Text::truncate($data['comment']->comment, 50).'"" on ';
+            $title .= $this->getTaskLinkWithID($data['project_slug'], $data['task']);
         }
         return $title;
     }
@@ -280,6 +280,12 @@ class FeedsTable extends Table
     private function getTaskLink($projectSlug, $task)
     {
         $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>".Text::truncate($task->task, 50)."</a>";
+        return $link;
+    }
+
+    private function getTaskLinkWithID($projectSlug, $task)
+    {
+        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>Task #".$task->id."</a>";
         return $link;
     }
 
