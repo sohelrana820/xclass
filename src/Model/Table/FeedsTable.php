@@ -91,24 +91,24 @@ class FeedsTable extends Table
 
         if($event == 'opened_task'){
             $data['task_id'] = $content['task']->id;
-            $this->add($data);
-
-            if(isset($content['labels']) && sizeof($content['labels']) > 0)
+            if($this->add($data))
             {
-                $title = $this->generateTitle('added_label', $content);
-                $data['title'] = $title;
-                $data['event'] = 'added_label';
-                $this->add($data);
-            }
+                if(isset($content['labels']) && sizeof($content['labels']) > 0)
+                {
+                    $title = $this->generateTitle('added_label', $content);
+                    $data['title'] = $title;
+                    $data['event'] = 'added_label';
+                    $this->add($data);
+                }
 
-            if(isset($content['users']) && sizeof($content['users']) > 0)
-            {
-                $title = $this->generateTitle('assigned_user', $content);
-                $data['title'] = $title;
-                $data['event'] = 'assigned_user';
-                $this->add($data);
+                if(isset($content['users']) && sizeof($content['users']) > 0)
+                {
+                    $title = $this->generateTitle('assigned_user', $content);
+                    $data['title'] = $title;
+                    $data['event'] = 'assigned_user';
+                    $this->add($data);
+                }
             }
-            
         }
         elseif($event == 'edit_task'){
             $data['task_id'] = $content['task']->id;

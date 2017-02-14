@@ -19,7 +19,7 @@ class FeedsController extends AppController
         $this->loadModel('Projects');
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
         $conditions = ['Feeds.project_id' => $projectId];
-        $sortBy = 'Feeds.created';
+        $sortBy = 'Feeds.id';
         $orderBy = 'DESC';
         $limit = 10;
         $page = 1;
