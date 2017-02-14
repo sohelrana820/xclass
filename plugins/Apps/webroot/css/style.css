@@ -2063,9 +2063,10 @@ Licensed under MIT
 
 }
 
-.timeline-body .author_link{
+.timeline-body .author_link, .timeline-body .author_link:hover{
     border-bottom: 1px dashed #3c85a6;
     margin-right: 5px;
+    text-decoration: none;
 }
 
 .timeline-body .author_link:last-child{
