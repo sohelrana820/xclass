@@ -208,6 +208,7 @@ class FeedsTable extends Table
                 }
             }
             else{
+                $title .= $this->getUserLink($data['user']);
                 $title .= ' has been edited task ';
             }
             $title .= $this->getTaskLinkWithID($data['project_slug'], $data['task']);
