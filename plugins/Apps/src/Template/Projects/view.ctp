@@ -186,7 +186,7 @@
                             </div>
                         <?php endif;?>
                         <?php if($users):?>
-                            <h2 class="sm-title">Recent Users</h2>
+                            <h2 class="sm-title">Recent Assigned Users</h2>
                             <div class="project_user_section">
                                 <?php if($users):?>
                                     <ul class="project_user_nav_list project_assigned_user_list">
