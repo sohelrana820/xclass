@@ -189,7 +189,7 @@ class TasksTable extends Table
                     return $q;
                 },
                 'Users' => function($q){
-                    $q->select(['uuid', 'username']);
+                    $q->select(['id', 'uuid', 'username']);
                     $q->autoFields(false);
                     return $q;
                 },
