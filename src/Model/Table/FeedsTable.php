@@ -138,6 +138,12 @@ class FeedsTable extends Table
             }
             $this->add($data);
         }
+        elseif($event == 'commented'){
+            if(array_key_exists('comment', $content) && $content['comment']->comment)
+            {
+                $this->add($data);
+            }
+        }
         else{
             $this->add($data);
         }
