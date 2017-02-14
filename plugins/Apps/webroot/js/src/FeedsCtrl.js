@@ -8,6 +8,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
     var projectSlug = urlDivider[urlDivider.length - 1];
 
     $scope.fetchFeeds = function () {
+        $scope.feed_loader = true;
         var conditions = {slug: projectSlug, page: $scope.feeds.currentPage};
         var feeds = FeedsResources.query(conditions).$promise;
         feeds.then(function (res) {
@@ -19,7 +20,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
                     currentPage: res.result.page,
                     limit: res.result.limit
                 };
-                console.log();
+                $scope.feed_loader = false;
             }
         })
     };

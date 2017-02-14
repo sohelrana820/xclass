@@ -287,7 +287,11 @@
     <div class="col-lg-3">
         <div class="right-sidebar">
             <div ng-controller="FeedsCtrl">
-                <div class="timeline-area">
+                <div class="page_loader" ng-show="feed_loader">
+                    <img ng-src="{{BASE_URL}}/img/loader-blue.gif" class="md_loader">
+                    <h4>Content loading, please wait...</h4>
+                </div>
+                <div class="timeline-area" ng-show="!feed_loader">
                     <h2 class="sm-title">Project Feeds</h2>
                     <ul class="timeline">
                         <li ng-repeat="feed in feeds.data">
