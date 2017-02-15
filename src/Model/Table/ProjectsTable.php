@@ -162,6 +162,11 @@ class ProjectsTable extends Table
                     $q->select(['user_id', 'first_name', 'last_name']);
                     $q->autoFields(false);
                     return $q;
+                },
+                'Attachments' => function($q){
+                    $q->select(['uuid', 'id', 'name', 'project_id']);
+                    $q->autoFields(false);
+                    return $q;
                 }
             ])
             ->first();

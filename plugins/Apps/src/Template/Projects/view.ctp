@@ -132,6 +132,14 @@
                                         }
                                         ?>
                                     </li>
+                                    <li>
+                                        <strong>Attachments: </strong>
+                                        <?php foreach($project->attachments as $attachment):?>
+                                            <p>
+                                                <a target="_blank" href="<?php echo $baseUrl;?>tasks/download_attachment/<?php echo $attachment->uuid?>"><i class="fa fa-paperclip"></i> <?php echo $attachment->name?></a>
+                                            </p>
+                                        <?php endforeach;?>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
