@@ -83,7 +83,7 @@ class ProjectsController extends AppController
 
             $this->request->data['user_id'] = $this->userID;
             $this->request->data['slug'] = strtolower(Inflector::slug($this->request->data['name']));
-
+            $this->request->data['deadline'] = date('Y-m-d H:i:s', strtotime($this->request->data['deadline']));
             $allAttachments = [];
             if(isset($this->request->data['attachments'])){
                 $attachments = $this->request->data['attachments'];
@@ -118,20 +118,36 @@ class ProjectsController extends AppController
     /**
      * Edit method
      *
-     * @param string|null $id Project id.
+     * @param string|null $slug Project id.
      * @return void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($slug = null)
     {
-        $project = $this->Projects->get($id, [
-            'contain' => ['Labels', 'Users']
-        ]);
+        $project = $this->Projects->getProjectBySlug($slug);
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $this->request->data['deadline'] = date('Y-m-d H:i:s', strtotime($this->request->data['deadline']));
+            $allAttachments = [];
+            if(isset($this->request->data['attachments'])){
+                $attachments = $this->request->data['attachments'];
+                foreach($attachments as $attachment){
+                    if(isset($attachment['name']) && $attachment['name']){
+                        $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
+                        $allAttachments[] = [
+                            'uuid' => Text::uuid(),
+                            'name' => $attachment['name'],
+                            'path' => $result,
+                        ];
+                    }
+                }
+            }
+
+            $this->request->data['attachments'] = $allAttachments;
             $project = $this->Projects->patchEntity($project, $this->request->data);
             if ($this->Projects->save($project)) {
-                $this->Flash->success(__('The project has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Project has been updated successfully'));
+                return $this->redirect(['action' => 'view', $slug]);
             } else {
                 $this->Flash->error(__('The project could not be saved. Please, try again.'));
             }
