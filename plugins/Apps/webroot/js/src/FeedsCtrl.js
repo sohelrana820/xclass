@@ -9,20 +9,22 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
 
     $scope.fetchFeeds = function () {
         $scope.feed_loader = true;
-        var conditions = {slug: projectSlug, page: $scope.feeds.currentPage};
-        var feeds = FeedsResources.query(conditions).$promise;
-        feeds.then(function (res) {
-            if (res.result.success) {
-                $scope.feeds = {
-                    data: res.result.data,
-                    count: res.result.count,
-                    count_all: res.result.count_all,
-                    currentPage: res.result.page,
-                    limit: res.result.limit
-                };
-                $scope.feed_loader = false;
-            }
-        })
+        $timeout(function () {
+            var conditions = {slug: projectSlug, page: $scope.feeds.currentPage};
+            var feeds = FeedsResources.query(conditions).$promise;
+            feeds.then(function (res) {
+                if (res.result.success) {
+                    $scope.feeds = {
+                        data: res.result.data,
+                        count: res.result.count,
+                        count_all: res.result.count_all,
+                        currentPage: res.result.page,
+                        limit: res.result.limit
+                    };
+                    $scope.feed_loader = false;
+                }
+            })
+        }, 2000)
     };
 
     $scope.fetchFeeds();

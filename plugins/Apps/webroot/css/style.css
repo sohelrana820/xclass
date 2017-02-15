@@ -2118,6 +2118,15 @@ Licensed under MIT
 }
 
 
+.interval-loader {
+    position: absolute;
+    right: 11px;
+}
+
+.interval-loader img{
+    width: 100px;
+}
+
 @media (max-width: 768px) {
     .page-header .pull-left {
         clear: both !important;
