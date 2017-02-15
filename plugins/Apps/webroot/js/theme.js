@@ -4,6 +4,6 @@ $("#menu-toggle").click(function(e) {
 });
 
 $( window ).load(function() {
-    var sideBarHeight = $('#wrapper').height();
+    var sideBarHeight = $('#content-area').height();
     $('.right-sidebar').css('height', sideBarHeight);
 });

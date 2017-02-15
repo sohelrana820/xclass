@@ -308,7 +308,7 @@
                     </ul>
                 </div>
                 <div class="clearfix"></div>
-                <div class="pagination_area text-center" ng-show="feeds.currentPage * feeds.limit < feeds.count">
+                <div class="pagination_area text-center">
                     <a class="pull-left previous_page" ng-click="goPreviousPage()">
                         <span aria-hidden="true">&laquo;</span> Previous
                     </a>
