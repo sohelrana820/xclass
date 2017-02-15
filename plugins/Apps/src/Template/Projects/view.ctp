@@ -134,11 +134,15 @@
                                     </li>
                                     <li>
                                         <strong>Attachments: </strong>
-                                        <?php foreach($project->attachments as $attachment):?>
-                                            <p>
-                                                <a target="_blank" href="<?php echo $baseUrl;?>tasks/download_attachment/<?php echo $attachment->uuid?>"><i class="fa fa-paperclip"></i> <?php echo $attachment->name?></a>
-                                            </p>
-                                        <?php endforeach;?>
+                                        <?php  if(sizeof($project->attachments) < 1){echo 'N/A';}?>
+                                        <div class="show_attachments">
+                                            <?php foreach($project->attachments as $attachment):?>
+                                                <p>
+                                                    <a target="_blank" href="<?php echo $baseUrl;?>tasks/download_attachment/<?php echo $attachment->uuid?>"><i class="fa fa-paperclip"></i> <?php echo $attachment->name?></a>
+                                                    <a class="removed_attachment" href="<?php echo $baseUrl;?>tasks/remove_attachment/<?php echo $attachment->uuid?>"><i class="fa fa-trash-o"></i></a>
+                                                </p>
+                                            <?php endforeach;?>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>

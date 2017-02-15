@@ -409,4 +409,43 @@ class TasksController extends AppController
         ));
         return $this->response;
     }
+
+    public function removeAttachment($uuid)
+    {
+        $this->loadModel('Attachments');
+        $attachment = $this->Attachments->getAttachmentByUUID($uuid);
+        $attachment = $this->Attachments->get($attachment->id);
+
+        $isTrashed = false;
+        if ($this->Attachments->delete($attachment)) {
+            unlink(WWW_ROOT . 'img/attachments/' . $attachment->path);
+            $isTrashed = true;
+        }
+
+        if ($isTrashed) {
+            $response = [
+                'success' => true,
+                'message' => 'Attachment has been deleted successfully',
+            ];
+        }
+        else {
+            $response = [
+                'success' => false,
+                'message' => 'Attachment could not deleted',
+            ];
+        }
+
+        if ($this->request->params['_exe'] == 'json') {
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
+        else {
+            if ($isTrashed) {
+                $this->Flash->success('Attachment has been removed successfully');
+            } else {
+                $this->Flash->error('Attachment could not deleted');
+            }
+            $this->redirect($this->referer());
+        }
+    }
 }
