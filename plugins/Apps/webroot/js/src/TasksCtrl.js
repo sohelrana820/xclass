@@ -445,6 +445,21 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         });
     };
 
+    $scope.removeAttachment = function(uuid){
+        var task = TasksResources.removed_attachment({attachment_uuid: uuid}).$promise;
+        task.then(function (res) {
+            $timeout(function () {
+                console.log(res);
+                if(res.result.success){
+                    toastr.success(res.result.message);
+                }
+                else{
+                    toastr.error(res.result.message);
+                }
+            }, 1000)
+        });
+    };
+
     /**
      *
      * @param id

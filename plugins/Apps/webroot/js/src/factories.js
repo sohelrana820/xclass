@@ -17,12 +17,13 @@ app.factory('UsersResources', function ($resource, BASE_URL) {
 });
 
 app.factory('TasksResources', function ($resource, BASE_URL) {
-    return $resource(':id, :slug :identity', {id: '@id', slug: '@slug', identity: '@identity'}, {
+    return $resource(':id, :attachment_uuid, :slug :identity', {id: '@id', slug: '@slug', identity: '@identity', attachment_uuid: '@attachment_uuid'}, {
         get: {method: 'GET', url: BASE_URL +  ':slug/tasks/:identity.json'},
         save: {method: 'POST', url: BASE_URL +  ':slug/tasks.json'},
         query: {method: 'GET', url: BASE_URL +  ':slug/tasks.json', isArray: false},
         update: {method: 'PUT', url: BASE_URL +  ':slug/tasks/:id.json'},
-        delete: {method: 'DELETE', url: BASE_URL +  ':slug/tasks/:id.json'}
+        delete: {method: 'DELETE', url: BASE_URL +  ':slug/tasks/:id.json'},
+        removed_attachment: {method: 'GET', url: BASE_URL +  'tasks/remove_attachment/:attachment_uuid.json'}
     });
 });
 

@@ -435,17 +435,17 @@ class TasksController extends AppController
             ];
         }
 
-        if ($this->request->params['_exe'] == 'json') {
-            $this->set('result', $response);
-            $this->set('_serialize', ['result']);
-        }
-        else {
+        if( $this->request->params['_ext'] != 'json'){
             if ($isTrashed) {
                 $this->Flash->success('Attachment has been removed successfully');
             } else {
                 $this->Flash->error('Attachment could not deleted');
             }
             $this->redirect($this->referer());
+        }
+        else {
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
         }
     }
 }

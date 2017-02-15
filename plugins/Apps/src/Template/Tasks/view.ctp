@@ -47,6 +47,7 @@
                                     <h4>Attachments</h4>
                                     <p ng-repeat="attachment in taskAttachments">
                                         <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                        <a class="removed_attachment" ng-click="removeAttachment(attachment.uuid)"> <i class="fa fa-trash-o"></i></a>
                                     </p>
                                 </div>
                                 <br/>
@@ -108,6 +109,7 @@
                                                 <h4>Attachments</h4>
                                                 <p ng-repeat="attachment in comment.attachments">
                                                     <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
+                                                    <a class="removed_attachment" ng-click="removeAttachment(attachment.uuid)"> <i class="fa fa-trash-o"></i></a>
                                                 </p>
                                             </div>
                                         </div>
