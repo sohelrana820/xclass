@@ -32,23 +32,13 @@
             <?php echo $this->Form->input('description', ['type' => 'textarea', 'class' => 'form-control', 'placeholder' => 'Description', 'label' => false, 'required' => false]);?>
         </div>
 
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label>Price</label>
-                    <?php echo $this->Form->input('price', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Project price', 'label' => false, 'required' => false]);?>
-                </div>
+        <div class="form-group">
+            <label>Deadline</label>
+            <div class="input-group">
+                <input name="deadline" type="text" class="form-control datepicker" placeholder="Project deadline">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
             </div>
-            <div class="col-lg-6">
-                <div class="form-group">
-                    <label>Deadline</label>
-                    <div class="input-group">
-                        <input name="deadline" type="text" class="form-control datepicker" placeholder="Project deadline">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                    <?php echo $this->Form->error('deadline');?>
-                </div>
-            </div>
+            <?php echo $this->Form->error('deadline');?>
         </div>
 
         <div class="form-group">
