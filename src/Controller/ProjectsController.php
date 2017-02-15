@@ -350,7 +350,7 @@ class ProjectsController extends AppController
     /**
      * @param $productSlug
      */
-    public function downloadAttachments($productSlug)
+    public function downloadAttachmentsZip($productSlug)
     {
         $this->loadModel('ProjectsUsers');
         $this->loadModel('Attachments');
