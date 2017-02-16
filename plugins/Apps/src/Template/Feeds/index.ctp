@@ -24,6 +24,7 @@
                         <span>({{feed.created | date : 'HH:m a'}})</span>
                     </p>
                     <div class="timeline-body" ng-bind-html="trustAsHtml(feed.title)"></div>
+                    <a href="{{BASE_URL}}projects/{{feed.project.slug}}" class="label label-info" style="margin-top: 10px; display: inline-block; padding: 2px 10px">{{feed.project.name}}</a>
                 </div>
             </li>
         </ul>
