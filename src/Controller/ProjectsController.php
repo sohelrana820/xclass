@@ -83,7 +83,7 @@ class ProjectsController extends AppController
 
             $this->request->data['user_id'] = $this->userID;
             $this->request->data['slug'] = strtolower(Inflector::slug($this->request->data['name']));
-            $this->request->data['deadline'] = date('Y-m-d H:i:s', strtotime($this->request->data['deadline']));
+            $this->request->data['deadline'] = $this->request->data['deadline'];
             $allAttachments = [];
             if(isset($this->request->data['attachments'])){
                 $attachments = $this->request->data['attachments'];
@@ -127,7 +127,6 @@ class ProjectsController extends AppController
         $project = $this->Projects->getProjectBySlug($slug);
         if ($this->request->is(['patch', 'post', 'put'])) {
 
-            $this->request->data['deadline'] = date('Y-m-d H:i:s', strtotime($this->request->data['deadline']));
             $allAttachments = [];
             if(isset($this->request->data['attachments'])){
                 $attachments = $this->request->data['attachments'];

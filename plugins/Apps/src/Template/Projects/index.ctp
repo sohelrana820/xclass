@@ -26,7 +26,7 @@
                 <tr>
                     <th><?php echo $this->Paginator->sort('name') ?></th>
                     <th><?php echo $this->Paginator->sort('status') ?></th>
-                    <th><?php echo $this->Paginator->sort('created') ?></th>
+                    <th><?php echo $this->Paginator->sort('deadline') ?></th>
                     <th class="text-right"><?php echo __('Actions') ?></th>
                 </tr>
                 </thead>
@@ -48,8 +48,14 @@
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php echo $project->created->format('M d, Y'); ?>
-                            (<?php echo $project->created->format('h:i A'); ?>)
+                            <?php
+                            if($project->deadline){
+                                echo $this->Time->format($project->deadline, 'dd MMM , Y');
+                            }
+                            else{
+                                echo 'N/A';
+                            }
+                            ?>
                         </td>
                         <td class="text-right">
                             <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $project->slug], ['escape' => false, 'class' => 'icons green']) ?>
