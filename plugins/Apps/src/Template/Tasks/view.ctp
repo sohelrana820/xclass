@@ -18,7 +18,7 @@
                 <span>Details of task ID: #<?php echo $task->identity;?></span>
             </div>
             <div class="pull-right btn-areas">
-                <?php echo $this->Html->link('New Task', ['controller' => 'tasks', 'action' => 'index', $task->project->slug], ['class' => 'btn btn-info'])?>
+                <?php echo $this->Html->link('New Task', ['controller' => 'tasks', 'action' => 'index', $task->project->slug, '?' => ['new' => 'true']], ['class' => 'btn btn-info'])?>
                 <?php echo $this->Html->link('Tasks List', ['controller' => 'tasks', 'action' => 'index', $task->project->slug], ['class' => 'btn btn-info'])?>
             </div>
             <div class="clearfix"></div>

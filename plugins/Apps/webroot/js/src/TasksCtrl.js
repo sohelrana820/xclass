@@ -1,4 +1,4 @@
-app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, ProjectsResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, SweetAlert, $timeout, BASE_URL, Upload){
+app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersResources, ProjectsResources, TasksResources, DashboardResources, CommentsResources, Flash, toastr, SweetAlert, $timeout, BASE_URL, Upload){
     $scope.BASE_URL = BASE_URL;
 
     $scope.taskView= 'list';
@@ -34,6 +34,29 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
 
     var taskIdentity = window.location.href.split('/tasks/');
     var taskIdentity = parseInt(taskIdentity[1]);
+
+
+    function getQueryParams(queryParam, url) {
+        var pageUrl = url || window.location.search.substring(1);
+        var urlVariables = pageUrl.split(/[&||?]/);
+        var response = null;
+
+        for (var i = 0; i < urlVariables.length; i += 1) {
+            var param = urlVariables[i];
+            var paramName = (param || '').split('=');
+
+            if (paramName[0] === queryParam) {
+                response = paramName[1];
+            }
+        }
+
+        return response;
+    }
+
+    $scope.newTask = getQueryParams('new');
+    if($scope.newTask == 'true'){
+        $scope.taskView= 'create';
+    }
 
     /**
      * Creating new tasks
@@ -127,7 +150,6 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
             }
         });
     };
-
 
     /**
      *Getting application active users.
