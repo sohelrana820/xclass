@@ -59,6 +59,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
     $routes->connect('/:slug/labels/create', ['controller' => 'labels', 'action' => 'add'], ['pass' => ['slug']]);
 
+    $routes->connect('/feeds', ['controller' => 'feeds', 'action' => 'index']);
     $routes->connect('/:slug/feeds', ['controller' => 'feeds', 'action' => 'index'], ['pass' => ['slug']]);
 
     $routes->connect('/users/save', ['controller' => 'users', 'action' => 'add']);
@@ -78,6 +79,7 @@ Router::scope('/', function ($routes) {
     $routes->resources('Tasks');
     $routes->resources('Comments');
     $routes->resources('Projects');
+    $routes->resources('Feeds');
 });
 /**
  * Load all plugin routes.  See the Plugin documentation on
