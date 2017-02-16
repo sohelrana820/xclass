@@ -80,7 +80,7 @@
 
                             <div ng-show="!edit_task_form">
                                 <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
-                                <div class="comments" ng-repeat="comment in taskComments">
+                                <div class="comments" ng-repeat="(key, comment) in taskComments">
                                     <div class="media"> <div class="media-left">
                                             <a href="#">
                                                 <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">
@@ -109,7 +109,7 @@
                                                 <h4>Attachments</h4>
                                                 <p ng-repeat="attachment in comment.attachments">
                                                     <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                                                    <a class="removed_attachment" ng-click="removeAttachment(attachment.uuid)"> <i class="fa fa-trash-o"></i></a>
+                                                    <a class="removed_attachment" ng-click="removeCommentAttachment(key, attachment.uuid)"> <i class="fa fa-trash-o"></i></a>
                                                 </p>
                                             </div>
                                         </div>
