@@ -30,6 +30,8 @@
         </ul>
     </div>
     <div class="clearfix"></div>
+    <br/>
+    <br/>
     <div class="pagination_area text-center" ng-show="feeds.count > 0">
         <a class="pull-left previous_page" ng-click="goPreviousPage()">
             <span aria-hidden="true">&laquo;</span> Previous
@@ -45,6 +47,8 @@
             Next <span aria-hidden="true">&raquo;</span>
         </a>
     </div>
+    <br/>
+    <br/>
 </div>
 
 <?php
