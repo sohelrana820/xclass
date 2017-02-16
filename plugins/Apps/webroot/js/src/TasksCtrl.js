@@ -445,16 +445,14 @@ app.controller('TasksCtrl', function($scope, LabelResources, UsersResources, Pro
         });
     };
 
-    $scope.removeAttachment = function(uuid, attachmentType){
+    $scope.removeTaskAttachment = function(uuid){
         var task = TasksResources.removed_attachment({attachment_uuid: uuid}).$promise;
         task.then(function (res) {
             $timeout(function () {
                 if(res.result.success){
-                    if(attachmentType == 'task_attachments'){
-                        $scope.taskAttachments = $scope.taskAttachments.filter(function (attachment) {
-                            return attachment.uuid != uuid;
-                        })
-                    }
+                    $scope.taskAttachments = $scope.taskAttachments.filter(function (attachment) {
+                        return attachment.uuid != uuid;
+                    })
                     toastr.success(res.result.message);
                 }
                 else{
