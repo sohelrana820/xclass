@@ -290,7 +290,7 @@ class FeedsTable extends Table
 
     private function getProjectLink($project)
     {
-        $link = "<a class='project_link' href='".Router::url('/', true)."projects/view/".$project->slug."'>{$project->name}</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."projects/".$project->slug."'>{$project->name}</a>";
         return $link;
     }
 

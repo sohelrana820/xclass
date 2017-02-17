@@ -4,20 +4,32 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
     $scope.feeds.currentPage = 1;
 
     $scope.assignUserMode = false;
-    var projectSlug = null;
+    $scope.$projectSlug = null;
     var urlDivider = window.location.href.split("/projects/");
     if(urlDivider.length > 1)
     {
-        projectSlug = urlDivider[urlDivider.length - 1];
+        $scope.$projectSlug = urlDivider[urlDivider.length - 1];
     }
+
+    $scope.projects = [];
+    $scope.fetchProjets = function () {
+        var projects = ProjectsResources.query({}).$promise;
+        projects.then(function (res) {
+            if (res.projects) {
+                $scope.projects = res.projects;
+            }
+        })
+    };
+
+    $scope.fetchProjets();
 
 
     $scope.fetchFeeds = function () {
         $scope.feed_loader = true;
         $timeout(function () {
             var conditions = {page: $scope.feeds.currentPage};
-            if(projectSlug){
-                conditions.slug = projectSlug;
+            if($scope.$projectSlug){
+                conditions.slug = $scope.$projectSlug;
             }
             var feeds = FeedsResources.query(conditions).$promise;
             feeds.then(function (res) {
