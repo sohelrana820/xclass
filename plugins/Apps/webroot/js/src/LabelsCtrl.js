@@ -42,7 +42,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
     };
 
     $scope.isLabelFormSubmitted = false;
-    $scope.LabelObj = {color_code: '#C00C00'};
+    $scope.LabelObj = {color_code: '#C00C00', status: 1};
 
     /**
      *
@@ -59,7 +59,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                     $scope.isLabelFormSubmitted = false;
                     $scope.labels.unshift(res.result.data);
                     $scope.create_label_form.$setPristine();
-                    $scope.LabelObj = {color_code: '#C00C00'};
+                    $scope.LabelObj = {color_code: '#C00C00', status: 1};
                     toastr.success(res.result.message);
                     $scope.fetchLabelLists({});
                 }
@@ -88,7 +88,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
                 if (res.result.success) {
                     $scope.isLabelFormSubmitted = false;
                     $scope.fetchLabelLists({});
-                    $scope.LabelObj = {color_code: '#C00C00'};
+                    $scope.LabelObj = {color_code: '#C00C00', status: 1};
                     $scope.create_form = true;
                     $scope.edit_form = false;
                     toastr.success(res.result.message);
