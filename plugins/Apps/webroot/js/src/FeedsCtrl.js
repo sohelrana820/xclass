@@ -4,11 +4,11 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
     $scope.feeds.currentPage = 1;
 
     $scope.assignUserMode = false;
-    $scope.$projectSlug = null;
+    $scope.projectSlug = null;
     var urlDivider = window.location.href.split("/projects/");
     if(urlDivider.length > 1)
     {
-        $scope.$projectSlug = urlDivider[urlDivider.length - 1];
+        $scope.projectSlug = urlDivider[urlDivider.length - 1];
     }
 
     $scope.projects = [];
@@ -28,8 +28,8 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
         $scope.feed_loader = true;
         $timeout(function () {
             var conditions = {page: $scope.feeds.currentPage};
-            if($scope.$projectSlug){
-                conditions.slug = $scope.$projectSlug;
+            if($scope.projectSlug){
+                conditions.slug = $scope.projectSlug;
             }
             var feeds = FeedsResources.query(conditions).$promise;
             feeds.then(function (res) {
@@ -52,9 +52,19 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
         $timeout(function() {
             $scope.fetchFeeds();
             $scope.intervalFunction();
-        }, 5000)
+        }, 500000)
     };
     $scope.intervalFunction();
+
+    $scope.chooseProject = function(slug) {
+        if(slug != 'all'){
+            $scope.projectSlug = slug;
+        }
+        else{
+            $scope.projectSlug = null;
+        }
+        $scope.fetchFeeds();
+    };
 
     $scope.trustAsHtml = function(string) {
         return $sce.trustAsHtml(string);

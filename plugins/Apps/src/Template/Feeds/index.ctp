@@ -12,14 +12,20 @@
         </div>
     </div>
 
-    <div>
+    <div class="project-feeds col-lg-12">
         <div class="timeline-area">
             <h2 class="sm-title">
                 Project Feeds
                 <span class="interval-loader" ng-show="feed_loader">
-                <img  ng-src="{{BASE_URL}}/img/loader2.gif">
-            </span>
+                    <img  ng-src="{{BASE_URL}}/img/loader2.gif">
+                </span>
             </h2>
+            <div class="select_profile-feeds">
+                <select ng-change="chooseProject(slug)" ng-model="slug" ng-init="slug = 'all'" class="form-control">
+                    <option value="all">All Project</option>
+                    <option ng-repeat="project in projects" value="{{project.slug}}">{{project.name}}</option>
+                </select>
+            </div>
             <ul class="timeline">
                 <li ng-repeat="feed in feeds.data">
                     <div class="timeline-panel">
