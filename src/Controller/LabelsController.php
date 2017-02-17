@@ -222,6 +222,8 @@ class LabelsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $label = $this->Labels->get($id);
         if ($this->Labels->delete($label)) {
+            $this->loadModel('Feeds');
+            $this->Feeds->storeFeeds($label->project_id, 'delete_label', ['user' => $this->loggedInUser, 'label' => $label]);
             $response = [
                 'success' => true,
                 'message' => 'Label has been deleted successfully',

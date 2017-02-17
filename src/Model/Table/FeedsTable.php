@@ -187,6 +187,11 @@ class FeedsTable extends Table
             $title .= ' has been updated label ';
             $title .= "<label style='border: 1px solid {$data['label']->color_code}; color: {$data['label']->color_code}'>{$data['label']->name}</label>";
         }
+        if($event == 'delete_label'){
+            $title .= $this->getUserLink($data['user']);
+            $title .= ' has been deleted label ';
+            $title .= "<label style='border: 1px solid {$data['label']->color_code}; color: {$data['label']->color_code}'>{$data['label']->name}</label>";
+        }
         elseif($event == 'opened_task'){
             $title .= $this->getUserLink($data['user']);
             $title .= ' has been opened new task ';
