@@ -390,7 +390,7 @@
                                                 </ng-form>
                                             </div>
 
-                                            <div class="search_label" ng-show="!show_create_new_label_form && taskLabels.length > 0">
+                                            <div class="search_label" ng-show="!show_create_new_label_form && labels.length > 0">
                                                 <input class="form-control" ng-model="label_query" ng-change="searchLabel(label_query)" placeholder="Search label">
                                                 <img ng-show="show_label_search_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                             </div>
