@@ -2149,20 +2149,16 @@ Licensed under MIT
 
 }
 
-
 .comments{
     position: relative;
 }
 
 .comments-btn-area{
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
     visibility: hidden;
 }
 
 .comments-btn-area a{
-    font-size: 14px;
+    font-size: 12px;
     margin-left: 2px;
 }
 

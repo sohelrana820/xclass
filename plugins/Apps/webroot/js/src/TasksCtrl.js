@@ -445,6 +445,7 @@ app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersRes
                 data: $scope.editCommentObj
             }).then(function (response) {
                 $timeout(function () {
+                    console.log(response.data.result.data);
                     if(response.data.result.success){
                         $scope.task_quick_update_loader = false;
                         $scope.show_center_loader = false;

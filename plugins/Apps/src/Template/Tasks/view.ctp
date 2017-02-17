@@ -95,9 +95,13 @@
                                                     </a>
                                                 </strong>
                                                 <span ng-show="comment.comment">
-                                                commented {{comment.created | date}} at
-                                                ({{comment.created | date : 'HH:m a'}})
-                                            </span>
+                                                    commented {{comment.created | date}} at
+                                                    ({{comment.created | date : 'HH:m a'}})
+                                                </span>
+                                                <span class="comments-btn-area">
+                                                    <a title="Edit Comment" ng-click="openCommentEditForm(key, comment)"><i class="fa fa-pencil green"></i></a>
+                                                    <a title="Delete Comment" ng-click="deleteComment(key, comment)"><i class="fa fa-trash-o red"></i></a>
+                                                </span>
                                             </h4>
                                             {{comment.comment}}
                                             <div ng-show="comment.changing_status">
@@ -109,15 +113,10 @@
                                                 <h4>Attachments</h4>
                                                 <p ng-repeat="attachment in comment.attachments">
                                                     <a href="{{BASE_URL}}tasks/download_attachment/{{attachment.uuid}}"><i class="fa fa-paperclip"></i> {{attachment.name}}</a>
-                                                    <a class="removed_attachment" ng-click="removeCommentAttachment(key, attachment.uuid)"> <i class="fa fa-trash-o"></i></a>
+                                                    <a title="Remove Attachments" class="removed_attachment" ng-click="removeCommentAttachment(key, attachment.uuid)"> <i class="fa fa-trash-o"></i></a>
                                                 </p>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="comments-btn-area">
-                                        <a><a class="fa fa-pencil gren" ng-click="openCommentEditForm(key, comment)"></a></a>
-                                        <a><a class="fa fa-trash-o red" ng-click="deleteComment(key, comment)"></a></a>
                                     </div>
                                 </div>
                             </div>

@@ -102,20 +102,32 @@ class CommentsController extends AppController
      */
     public function edit($id = null)
     {
-        if(!$id){
-            $id = (int) $this->request->data['id'];
+        if (!$id) {
+            $id = (int)$this->request->data['id'];
         }
-        $comment = $this->Comments->get($id, [
-            'contain' => []
-        ]);
+        $comment = $this->Comments->get($id,
+            [
+                'contain' => [
+                    'Users' => function ($q) {
+                        $q->select(['id', 'uuid', 'username']);
+                        $q->autoFields(false);
+                        return $q;
+                    },
+                    'Users.Profiles' => function ($q) {
+                        $q->select(['first_name', 'last_name', 'profile_pic']);
+                        $q->autoFields(false);
+                        return $q;
+                    }
+                ],
+            ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $allAttachments = [];
-            if(isset($this->request->data['file'])){
+            if (isset($this->request->data['file'])) {
                 $attachments = $this->request->data['file'];
-                foreach($attachments as $attachment){
-                    if(isset($attachment['name']) && $attachment['name']){
+                foreach ($attachments as $attachment) {
+                    if (isset($attachment['name']) && $attachment['name']) {
                         $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
                         $allAttachments[] = [
                             'uuid' => Text::uuid(),
