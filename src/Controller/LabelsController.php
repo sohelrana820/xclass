@@ -187,8 +187,11 @@ class LabelsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $label = $this->Labels->patchEntity($label, $this->request->data);
-            if ($this->Labels->save($label)) {
+            $updateLabel = $this->Labels->save($label);
 
+            if ($updateLabel) {
+                $this->loadModel('Feeds');
+                $this->Feeds->storeFeeds($updateLabel->project_id, 'update_label', ['user' => $this->loggedInUser, 'label' => $updateLabel]);
                 $response = [
                     'success' => true,
                     'message' => 'Label has been updated successfully',
