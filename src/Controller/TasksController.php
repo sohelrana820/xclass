@@ -418,7 +418,9 @@ class TasksController extends AppController
 
         $isTrashed = false;
         if ($this->Attachments->delete($attachment)) {
-            unlink(WWW_ROOT . 'img/attachments/' . $attachment->path);
+            if(file_exists(WWW_ROOT . 'img/attachments/' . $attachment->path)){
+                unlink(WWW_ROOT . 'img/attachments/' . $attachment->path);
+            }
             $isTrashed = true;
         }
 
