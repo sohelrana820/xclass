@@ -143,7 +143,7 @@ class CommentsController extends AppController
             } else {
                 $response = [
                     'success' => false,
-                    'message' => 'Comment could not saved',
+                    'message' => 'Comment could not updated',
                 ];
             }
 
@@ -162,11 +162,25 @@ class CommentsController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $comment = $this->Comments->get($id);
-        if ($this->Comments->delete($comment)) {
-            $this->Flash->success(__('The comment has been deleted.'));
+        $deleteComment = $this->Comments->delete($comment);
+        if ($deleteComment) {
+
+            $this->loadModel('Tasks');
+            $task = $this->Tasks->getTask($comment->task_id);
+            $this->loadModel('Feeds');
+            $this->Feeds->storeFeeds($task->project_id, 'delete_comment', ['user' => $this->loggedInUser, 'task' => $task, 'comment' => $comment, 'project_slug' => $task->project->slug]);
+
+            $response = [
+                'success' => true,
+                'message' => 'Comments has been deleted successfully',
+            ];
         } else {
-            $this->Flash->error(__('The comment could not be deleted. Please, try again.'));
+            $response = [
+                'success' => false,
+                'message' => 'Comment could not deleted',
+            ];
         }
-        return $this->redirect(['action' => 'index']);
+        $this->set('result', $response);
+        $this->set('_serialize', ['result']);
     }
 }

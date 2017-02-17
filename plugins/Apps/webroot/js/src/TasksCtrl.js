@@ -466,6 +466,38 @@ app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersRes
         }
     };
 
+    $scope.deleteComment = function(commentKey, comment){
+        $scope.show_center_loader = true;
+        SweetAlert.swal({
+                title: "Are you sure?",
+                text: "You want to delete this comment",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55", confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "No, cancel plx!",
+                closeOnConfirm: true,
+                closeOnCancel: true
+            },
+            function (isConfirm) {
+                if (isConfirm) {
+                    var removeComment = CommentsResources.delete({id: comment.id}).$promise;
+                    removeComment.then(function (res) {
+                        $timeout(function () {
+                            if(res.result.success){
+                                $scope.show_center_loader = false;
+                                toastr.warning(res.result.message);
+                                delete $scope.taskComments[commentKey];
+                            }
+                            else{
+                                $scope.show_center_loader = false;
+                                toastr.error(res.result.message);
+                            }
+                        }, 1000)
+                    });
+                }
+            });
+    };
+
     $scope.changeStatus = function(status){
         $scope.task_quick_update_loader = true;
         $scope.show_center_loader = true;
