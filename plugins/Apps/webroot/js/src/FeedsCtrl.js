@@ -44,7 +44,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
                     $scope.feed_loader = false;
                 }
             })
-        }, 2000)
+        }, 100)
     };
 
     $scope.fetchFeeds();
@@ -52,7 +52,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
         $timeout(function() {
             $scope.fetchFeeds();
             $scope.intervalFunction();
-        }, 500000)
+        }, 30000)
     };
     $scope.intervalFunction();
 
