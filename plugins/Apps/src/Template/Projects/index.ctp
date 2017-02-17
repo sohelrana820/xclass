@@ -7,6 +7,23 @@
     <div class="clearfix"></div>
 </div>
 
+<?php if($projects->isEmpty()):?>
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="empty_block">
+            <span class="icon">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+            </span>
+                <br/>
+                <br/>
+                <h2>Welcome to <?php echo $appsName;?>!</h2>
+                <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
+                <br/>
+                <?php echo $this->Html->link('Get Started', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']);?>
+            </div>
+        </div>
+    </div>
+<?php else:?>
 <div class="widget">
     <div class="widget-header">
         <div class="pull-left">
@@ -73,6 +90,7 @@
         <div class="clearfix"></div>
     </div>
 </div>
+<?php endif;?>
 
 <div class="modal fade modal-primary" id="searchProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true" style="display: none;">
