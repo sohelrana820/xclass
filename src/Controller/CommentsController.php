@@ -117,6 +117,11 @@ class CommentsController extends AppController
                         $q->select(['first_name', 'last_name', 'profile_pic']);
                         $q->autoFields(false);
                         return $q;
+                    },
+                    'Attachments' => function ($q) {
+                        $q->select(['id', 'uuid', 'name', 'path', 'comment_id']);
+                        $q->autoFields(false);
+                        return $q;
                     }
                 ],
             ]);
