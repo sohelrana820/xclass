@@ -264,6 +264,11 @@ class FeedsTable extends Table
             $title .= ' commented "'.Text::truncate($data['comment']->comment, 50).'"" on ';
             $title .= $this->getTaskLinkWithID($data['project_slug'], $data['task']);
         }
+        elseif($event == 'update_comment'){
+            $title .= $this->getUserLink($data['user']);
+            $title .= ' update comment "'.Text::truncate($data['comment']->comment, 50).'"" on ';
+            $title .= $this->getTaskLinkWithID($data['project_slug'], $data['task']);
+        }
         return $title;
     }
 

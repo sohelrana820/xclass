@@ -78,7 +78,7 @@
                                 </form>
                             </div>
 
-                            <div ng-show="!edit_task_form">
+                            <div ng-show="!edit_task_form && !open_comment_for">
                                 <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
                                 <div class="comments" ng-repeat="(key, comment) in taskComments">
                                     <div class="media"> <div class="media-left">
@@ -114,11 +114,16 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="comments-btn-area">
+                                        <a><a class="fa fa-pencil gren" ng-click="openCommentEditForm(key, comment)"></a></a>
+                                        <a><a class="fa fa-trash-o red" ng-click="deleteComment(key, comment)"></a></a>
+                                    </div>
                                 </div>
                             </div>
-
-
-                            <div class="comment_widget" ng-show="!edit_task_form">
+                            
+                            <!-- Comment Form -->
+                            <div class="comment_widget" ng-show="!edit_task_form && !open_comment_for">
                                 <form ng-submit="doComment()">
                                     <textarea placeholder="Write your comment?" ng-model="commentsObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
                                     <br/>
@@ -143,6 +148,40 @@
                                         <button type="submit" class="btn btn-success" ></i> Comment</button>
                                         <a ng-show="TaskObj.status == 1 || TaskObj.status == 3" class="btn btn-default" ng-click="changeStatus(2)"></i> Comment & Close Task</a>
                                         <a ng-show="TaskObj.status == 2" class="btn btn-danger" ng-click="changeStatus(3)"></i> Reopen Task</a>
+                                        <br/>
+                                        <span class="instance-loader" ng-show="task_quick_update_loader" >
+                                        <img ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...
+                                    </span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div><!-- Widget Area -->
+
+                            <!-- Update Comment Form -->
+                            <div class="comment_widget" ng-show="!edit_task_form && open_comment_for">
+                                <form ng-submit="updateComment()">
+                                    <textarea placeholder="Write your comment?" ng-model="editCommentObj.comment" class="form-control" rows="7" style="resize: none;"></textarea>
+                                    <br/>
+
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Attachments</label>
+                                                <div class="input text" ng-repeat="key in countAttachments">
+                                                    <input type="file" class="form-control attachment_field"
+                                                           ngf-select ng-model="editCommentObj.file[key]"
+                                                           name="task_attachments"
+                                                           ngf-max-size="20MB"
+                                                    />
+                                                </div>
+                                                <a class="btn-theme-xs-rev" ng-click="addMoreAttachment()">Add More Attachment</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="pull-left">
+                                        <button type="submit" class="btn btn-success" >Update</button>
+                                        <a class="btn btn-info">Cancel</a>
                                         <br/>
                                         <span class="instance-loader" ng-show="task_quick_update_loader" >
                                         <img ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader"> Please wait...

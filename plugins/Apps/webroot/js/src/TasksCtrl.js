@@ -434,6 +434,38 @@ app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersRes
         }
     };
 
+    $scope.updateComment = function(){
+        if($scope.editCommentObj.comment)
+        {
+            $scope.task_quick_update_loader = true;
+            $scope.show_center_loader = true;
+            console.log($scope.editCommentObj);
+            Upload.upload({
+                url: BASE_URL + 'comments/edit.json',
+                data: $scope.editCommentObj
+            }).then(function (response) {
+                $timeout(function () {
+                    if(response.data.result.success){
+                        $scope.task_quick_update_loader = false;
+                        $scope.show_center_loader = false;
+                        $scope.open_comment_for = false;
+                        toastr.success(response.data.result.message);
+                        $scope.taskComments[$scope.editCommentObj.comment_key] = response.data.result.data;
+                        $scope.countAttachments = [0];
+                        console.log()
+                    }
+                    else{
+                        $scope.show_center_loader = false;
+                        toastr.success(response.data.result.message);
+                    }
+                }, 1000)
+            });
+        }
+        else{
+            toastr.error('Write something in comments');
+        }
+    };
+
     $scope.changeStatus = function(status){
         $scope.task_quick_update_loader = true;
         $scope.show_center_loader = true;
@@ -499,6 +531,17 @@ app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersRes
                 }
             }, 1000)
         });
+    };
+
+    $scope.open_comment_for = false;
+    $scope.openCommentEditForm = function(key, comment){
+        $scope.open_comment_for = true;
+        $scope.editCommentObj = {
+            id: comment.id,
+            task_id: comment.task_id,
+            comment: comment.comment,
+            comment_key: key
+        };
     };
 
     /**

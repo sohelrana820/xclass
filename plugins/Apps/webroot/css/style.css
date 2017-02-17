@@ -2139,13 +2139,37 @@ Licensed under MIT
 .interval-loader img{
     width: 100px;
 }
+
 .project-btn{
     margin-top: 10px;
     padding: 2px 10px;
     position: absolute;
     top: 6px;
     right: 15px;
+
 }
+
+
+.comments{
+    position: relative;
+}
+
+.comments-btn-area{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    visibility: hidden;
+}
+
+.comments-btn-area a{
+    font-size: 14px;
+    margin-left: 2px;
+}
+
+.comments:hover .comments-btn-area{
+    visibility: visible;
+}
+
 
 @media (max-width: 768px) {
     .page-header .pull-left {

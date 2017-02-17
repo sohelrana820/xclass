@@ -67,7 +67,6 @@ class CommentsController extends AppController
                 }
             }
 
-
             $this->request->data['attachments'] = $allAttachments;
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
             $saveComment = $this->Comments->save($comment);
@@ -103,24 +102,55 @@ class CommentsController extends AppController
      */
     public function edit($id = null)
     {
+        if(!$id){
+            $id = (int) $this->request->data['id'];
+        }
         $comment = $this->Comments->get($id, [
             'contain' => []
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $comment = $this->Comments->patchEntity($comment, $this->request->data);
-            if ($this->Comments->save($comment)) {
-                $this->Flash->success(__('The comment has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The comment could not be saved. Please, try again.'));
-            }
-        }
-        $users = $this->Comments->Users->find('list', ['limit' => 200]);
-        $tasks = $this->Comments->Tasks->find('list', ['limit' => 200]);
-        $this->set(compact('comment', 'users', 'tasks'));
-        $this->set('_serialize', ['comment']);
-    }
 
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $allAttachments = [];
+            if(isset($this->request->data['file'])){
+                $attachments = $this->request->data['file'];
+                foreach($attachments as $attachment){
+                    if(isset($attachment['name']) && $attachment['name']){
+                        $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
+                        $allAttachments[] = [
+                            'uuid' => Text::uuid(),
+                            'name' => $attachment['name'],
+                            'path' => $result,
+                        ];
+                    }
+                }
+            }
+
+            $this->request->data['attachments'] = $allAttachments;
+            $comment = $this->Comments->patchEntity($comment, $this->request->data);
+            $updateComment = $this->Comments->save($comment);
+            if ($updateComment) {
+
+                $this->loadModel('Tasks');
+                $task = $this->Tasks->getTask($this->request->data['task_id']);
+                $this->loadModel('Feeds');
+                $this->Feeds->storeFeeds($task->project_id, 'update_comment', ['user' => $this->loggedInUser, 'task' => $task, 'comment' => $updateComment, 'project_slug' => $task->project->slug]);
+                $response = [
+                    'success' => true,
+                    'message' => 'Comments has been updated successfully',
+                    'data' => $comment,
+                ];
+            } else {
+                $response = [
+                    'success' => false,
+                    'message' => 'Comment could not saved',
+                ];
+            }
+
+            $this->set('result', $response);
+            $this->set('_serialize', ['result']);
+        }
+    }
     /**
      * Delete method
      *
