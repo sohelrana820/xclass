@@ -99,7 +99,7 @@
                                                     ({{comment.created | date : 'HH:m a'}})
                                                 </span>
                                                 <span class="comments-btn-area">
-                                                    <a title="Edit Comment" ng-click="openCommentEditForm(key, comment)"><i class="fa fa-pencil green"></i></a>
+                                                    <a title="Edit Comment" ng-click="openCommentEditForm(key, comment)"><i class="fa fa-pencil lblue"></i></a>
                                                     <a title="Delete Comment" ng-click="deleteComment(key, comment)"><i class="fa fa-trash-o red"></i></a>
                                                 </span>
                                             </h4>
