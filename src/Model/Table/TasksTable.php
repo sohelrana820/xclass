@@ -174,7 +174,7 @@ class TasksTable extends Table
                     return $q;
                 },
                 'Comments.Users.Profiles' => function($q){
-                    $q->select(['user_id', 'first_name', 'last_name']);
+                    $q->select(['user_id', 'first_name', 'last_name', 'profile_pic']);
                     $q->autoFields(false);
                     return $q;
                 },
