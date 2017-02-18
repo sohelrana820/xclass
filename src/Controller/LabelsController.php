@@ -53,6 +53,10 @@ class LabelsController extends AppController
                 $conditions = array_merge($conditions, ['Labels.name LIKE' => '%'.$this->request->query['name'].'%']);
             }
 
+            if (isset($this->request->query['status'])) {
+                $conditions = array_merge($conditions, ['Labels.status' => $this->request->query['status']]);
+            }
+
             if(isset($this->request->query['page']) && $this->request->query['page']){
                 $page = $this->request->query['page'];
             }
