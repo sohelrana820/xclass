@@ -80,7 +80,7 @@
 
                             <div ng-show="!edit_task_form && !open_comment_for">
                                 <h2 class="commom-title" ng-show="taskComments.length > 0">Comments</h2>
-                                <div class="comments" ng-repeat="(key, comment) in taskComments track by $index" ng-show="comment">
+                                <div class="comments" ng-repeat="(key, comment) in taskComments track by $index" ng-show="comment" ng-class="commentUuid == comment.uuid ? 'active_comment' : ''" >
                                     <div class="media"> <div class="media-left">
                                             <a href="#">
                                                 <img class="user-photo"  ng-if="comment.user.profile.profile_pic != null" ng-src="{{BASE_URL}}/img/profiles/{{comment.user.profile.profile_pic}}">

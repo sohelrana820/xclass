@@ -271,7 +271,7 @@ class FeedsTable extends Table
         }
         elseif($event == 'commented'){
             $title .= $this->getUserLink($data['user']);
-            $title .= ' commented "'.Text::truncate($data['comment']->comment, 50).'"" on ';
+            $title .= ' commented "'.$this->getCommentLink($data['project_slug'], $data['task'], $data['comment']).'"" on ';
             $title .= $this->getTaskLinkWithID($data['project_slug'], $data['task']);
         }
         elseif($event == 'update_comment'){
@@ -300,19 +300,25 @@ class FeedsTable extends Table
 
     private function getProjectLink($project)
     {
-        $link = "<a class='project_link' href='".Router::url('/', true)."projects/".$project->slug."'>{$project->name}</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."projects/{$project->slug}'>{$project->name}</a>";
         return $link;
     }
 
     private function getTaskLink($projectSlug, $task)
     {
-        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>".Text::truncate($task->task, 50)."</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/{$task->identity}'>".Text::truncate($task->task, 50)."</a>";
         return $link;
     }
 
     private function getTaskLinkWithID($projectSlug, $task)
     {
-        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/".$task->identity."'>Task #".$task->id."</a>";
+        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/{$task->identity}'>Task #{$task->id}</a>";
+        return $link;
+    }
+
+    private function getCommentLink($projectSlug, $task, $comment)
+    {
+        $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/{$task->identity}#/{$comment->uuid}'>".Text::truncate($comment->comment, 70)."</a>";
         return $link;
     }
 

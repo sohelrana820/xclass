@@ -53,6 +53,15 @@ app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersRes
         return response;
     }
 
+    var commentUuid = window.location.href.split("#/");
+    if(commentUuid.length > 1)
+    {
+        commentUuid = commentUuid[1];
+    }else{
+        commentUuid = null;
+    }
+    $scope.commentUuid = commentUuid;
+
     $scope.newTask = getQueryParams('new');
     if($scope.newTask == 'true'){
         $scope.taskView= 'create';

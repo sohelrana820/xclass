@@ -2174,6 +2174,9 @@ Licensed under MIT
     visibility: visible;
 }
 
+.active_comment{
+    background-color: #dff0d8;
+}
 
 @media (max-width: 768px) {
     .page-header .pull-left {

@@ -51,6 +51,7 @@ class CommentsController extends AppController
     {
         $comment = $this->Comments->newEntity();
         $this->request->data['user_id'] = $this->userID;
+        $this->request->data['uuid'] = Text::uuid();
         if ($this->request->is('post')) {
             $allAttachments = [];
             if(isset($this->request->data['file'])){
