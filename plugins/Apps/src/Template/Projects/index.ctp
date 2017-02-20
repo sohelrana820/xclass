@@ -7,7 +7,7 @@
     <div class="clearfix"></div>
 </div>
 
-<?php if($projects->isEmpty()):?>
+<?php if($projects->isEmpty() && sizeof($searchConditions) < 1):?>
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="empty_block">
@@ -17,9 +17,13 @@
                 <br/>
                 <br/>
                 <h2>Welcome to <?php echo $appsName;?>!</h2>
-                <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
+                <?php if($userInfo->role == 1):?>
+                    <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
+                <?php else:?>
+                    <p class="lead red">You are not assigned any project yet!</p>
+                <?php endif;?>
                 <br/>
-                <?php echo $this->Html->link('Get Started', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']);?>
+                <?php echo $userInfo->role != 2 ? $this->Html->link('Get Started', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']) : '';?>
             </div>
         </div>
     </div>
@@ -30,10 +34,12 @@
             <h2>Lists of Project</h2>
             <span><?php echo $projects->count() ?> result found</span>
         </div>
+        <?php if($userInfo->role == 1):?>
         <div class="pull-right btn-areas">
             <?php echo $this->Html->link('New Project', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn btn-info']) ?>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchProjectModal">Search Project</button>
         </div>
+        <?php endif;?>
         <div class="clearfix"></div>
     </div>
     <div class="widget-body">
