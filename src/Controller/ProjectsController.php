@@ -78,6 +78,8 @@ class ProjectsController extends AppController
      */
     public function create()
     {
+        $this->checkPermission($this->isAdmin());
+
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
 
