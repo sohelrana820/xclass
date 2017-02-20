@@ -40,7 +40,7 @@
 
 <div id="wrapper">
     <!-- Sidebar -->
-    <?php echo $this->element('sidebar');?>
+    <?php echo $userInfo->role == 1 ? $this->element('admin-sidebar') : $this->element('user-sidebar');?>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
