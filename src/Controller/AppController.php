@@ -157,7 +157,7 @@ class AppController extends Controller
         if(!$permission)
         {
             $this->Flash->error(_('Sorry, you are not authorised to access this page'));
-            $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
+            $this->redirect($this->referer());
         }
     }
 
