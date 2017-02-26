@@ -30,16 +30,13 @@ class ProjectsController extends AppController
         $containConditions = [];
 
         if($this->loggedInUser->role == 2){
-            $containConditions = ['UsersProjects.user_id' => $this->loggedInUser->id];
+            $this->loadModel('ProjectsUsers');
+            $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
+            $conditions = array_merge($conditions, ['Projects.id IN' => $projectIds]);
         }
 
         $this->paginate = [
             'conditions' => $conditions,
-            'contain' => [
-                'UsersProjects' => [
-                    'conditions' => $containConditions
-                ]
-            ],
             'limit' => 20,
             'order' => ['Projects.id' => 'DESC']
         ];
