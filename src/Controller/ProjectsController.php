@@ -27,23 +27,25 @@ class ProjectsController extends AppController
     public function index()
     {
         $conditions = $this->Utilities->buildProjectListConditions($this->request->query);
-        $containConditions = [];
 
         if($this->loggedInUser->role == 2){
-            $containConditions = ['ProjectsUsers.user_id' => $this->loggedInUser->id];
+            $conditions = ['ProjectsUsers.user_id' => $this->loggedInUser->id];
         }
 
+        $this->loadModel('ProjectsUsers');
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => [
-                'ProjectsUsers' => [
-                    'conditions' => $containConditions
+                'Projects' => [
+                    'fields' => ['id', 'slug', 'name', 'status', 'deadline']
                 ]
             ],
             'limit' => 20,
             'order' => ['Projects.id' => 'DESC']
         ];
-        $this->set('projects', $this->paginate($this->Projects));
+
+        $this->set('projects',
+            $this->paginate($this->ProjectsUsers));
         $this->set('searchConditions', $conditions);
         $this->set('_serialize', ['projects']);
     }

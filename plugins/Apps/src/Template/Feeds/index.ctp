@@ -39,7 +39,7 @@
             <div class="select_profile-feeds">
                 <select ng-change="chooseProject(slug)" ng-model="slug" ng-init="slug = 'all'" class="form-control">
                     <option value="all">All Project</option>
-                    <option ng-repeat="project in projects" value="{{project.slug}}">{{project.name}}</option>
+                    <option ng-repeat="project in projects" value="{{project.project.slug}}">{{project.project.name}}</option>
                 </select>
             </div>
             <ul class="timeline">
