@@ -20,6 +20,13 @@ class FeedsController extends AppController
             $this->loadModel('Projects');
 
             $conditions = [];
+
+            if($this->loggedInUser->role == 2){
+                $this->loadModel('ProjectsUsers');
+                $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
+                $conditions = array_merge($conditions, ['Feeds.project_id IN' => $projectIds]);
+            }
+
             if($projectSlug)
             {
                 $projectId = $this->Projects->getProjectIDBySlug($projectSlug);

@@ -39,11 +39,7 @@ class UsersTable extends Table
            'foreignKey' => 'created_by'
         ]);
         $this->belongsToMany('ProjectsUsers', [
-            'foreignKey' => 'user_id',
-            'targetForeignKey' => 'project_id',
-            'joinTable' => 'projects_users'
-        ]);
-        $this->belongsToMany('Projects', [
+            'className' => 'ProjectsUsers',
             'foreignKey' => 'user_id',
             'targetForeignKey' => 'project_id',
             'joinTable' => 'projects_users'

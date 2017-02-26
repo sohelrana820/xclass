@@ -12,7 +12,23 @@
         </div>
     </div>
 
-    <div class="project-feeds col-lg-12">
+
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1" ng-show="feeds.count_all < 1">
+            <div class="empty_block">
+            <span class="icon">
+                <i class="fa fa-bell-o" aria-hidden="true"></i>
+            </span>
+                <br/>
+                <br/>
+                <h2>Welcome to Feeds!</h2>
+                <p class="lead red">Sorry, no feeds found!</p>
+                <br/>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-feeds col-lg-12" ng-show="feeds.count_all > 0">
         <div class="timeline-area">
             <h2 class="sm-title">
                 Project Feeds

@@ -125,6 +125,25 @@ class ProjectsUsersTable extends Table
         return $response;
     }
 
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getUsersProjectIds($userId)
+    {
+        $project = $this->find('list', [
+            'conditions' => ['ProjectsUsers.user_id' => $userId],
+            'keyField' => 'id',
+            'valueField' => 'project_id'])
+            ->toArray();
+
+        if(sizeof($project) > 0){
+            return $project;
+        }
+        return [0];
+    }
+
     /**
      * @param $data
      * @return bool
