@@ -56,15 +56,15 @@
                 <tbody>
                 <?php foreach ($projects as $project): ?>
                     <tr>
-                        <td><?php echo $this->Html->link(h($project->project->name), ['controller' => 'projects', 'action' => 'view', $project->project->slug]); ?></td>
+                        <td><?php echo $this->Html->link(h($project->name), ['controller' => 'projects', 'action' => 'view', $project->slug]); ?></td>
                         <td>
-                            <?php if ($project->project->status == 1): ?>
+                            <?php if ($project->status == 1): ?>
                                 <span class="status-text status-text-info">Progressing</span>
-                            <?php elseif ($project->project->status == 2): ?>
+                            <?php elseif ($project->status == 2): ?>
                                 <span class="status-text status-text-orange">Paused</span>
-                            <?php elseif ($project->project->status == 3): ?>
+                            <?php elseif ($project->status == 3): ?>
                                 <span class="status-text status-text-danger">Invalid</span>
-                            <?php elseif ($project->project->status == 4): ?>
+                            <?php elseif ($project->status == 4): ?>
                                 <span class="status-text status-text-green">Completed</span>
                             <?php else: ?>
                                 <span class="status-text status-text-gray">N/A</span>
@@ -72,8 +72,8 @@
                         </td>
                         <td>
                             <?php
-                            if($project->project->deadline){
-                                echo $this->Time->format($project->project->deadline, 'dd MMM , Y');
+                            if($project->deadline){
+                                echo $this->Time->format($project->deadline, 'dd MMM , Y');
                             }
                             else{
                                 echo 'N/A';
@@ -81,9 +81,9 @@
                             ?>
                         </td>
                         <td class="text-right">
-                            <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $project->project->slug], ['escape' => false, 'class' => 'icons green']) ?>
-                            <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $project->project->slug], ['escape' => false, 'class' => 'icons']) ?>
-                            <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $project->project->slug], ['escape' => false, 'class' => 'icons red'], ['confirm' => __('Are you sure you want to delete # {0}?', $project->project->slug)]) ?>
+                            <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $project->slug], ['escape' => false, 'class' => 'icons green']) ?>
+                            <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $project->slug], ['escape' => false, 'class' => 'icons']) ?>
+                            <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $project->slug], ['escape' => false, 'class' => 'icons red'], ['confirm' => __('Are you sure you want to delete # {0}?', $project->slug)]) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
