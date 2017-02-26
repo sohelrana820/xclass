@@ -27,8 +27,6 @@ class ProjectsController extends AppController
     public function index()
     {
         $conditions = $this->Utilities->buildProjectListConditions($this->request->query);
-        $containConditions = [];
-
         if($this->loggedInUser->role == 2){
             $this->loadModel('ProjectsUsers');
             $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
