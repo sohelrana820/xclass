@@ -44,8 +44,7 @@ class ProjectsController extends AppController
             'order' => ['Projects.id' => 'DESC']
         ];
 
-        $this->set('projects',
-            $this->paginate($this->ProjectsUsers));
+        $this->set('projects', $this->paginate($this->ProjectsUsers));
         $this->set('searchConditions', $conditions);
         $this->set('_serialize', ['projects']);
     }
