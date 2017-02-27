@@ -62,7 +62,7 @@ class SettingsController extends AppController
             $iniData['EMAIL_PASSWORD'] = $emilConf['password'];
 
             if(InstallationController::writeToIni($iniData)){
-                $this->Flash->success(__('Configuration has been successfully'));
+                $this->Flash->success(__('Configuration has been updated successfully'));
             }
             else {
                 $this->Flash->error(__('Sorry! something went wrong'));
@@ -77,7 +77,16 @@ class SettingsController extends AppController
     public function email()
     {
         if($this->request->is('post')){
-            var_dump($this->request->data); die();
+            $isModified = $this->Settings->registerMetaValues($this->request->data);
+            if($isModified)
+            {
+                $this->Flash->success('Email notification has been configured successfully');
+            }
+            else{
+                $this->Flash->error('Sorry, something went wrong');
+            }
         }
+        $metas = $this->Settings->retrieveMetas();
+        $this->set('metas', $metas);
     }
 };
