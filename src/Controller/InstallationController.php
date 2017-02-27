@@ -18,14 +18,30 @@ use Cake\Network\Http\Request;
 use Cake\Utility\Text;
 use Phinx\Config\Config;
 
+/**
+ * Class InstallationController
+ * @package App\Controller
+ */
 class InstallationController extends AppController{
 
+    /**
+     * @var string
+     */
     public $name = 'Installation';
 
+    /**
+     * @var bool
+     */
     public $requirementAnalysis = true;
 
+    /**
+     * @var
+     */
     public $iniFile;
 
+    /**
+     * @param Event $event
+     */
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
         $this->viewBuilder()
@@ -40,15 +56,24 @@ class InstallationController extends AppController{
         }
     }
 
+    /**
+     *
+     */
     public function index(){
         $this->redirect(['action' => 'install']);
     }
 
+    /**
+     *
+     */
     public function install()
     {
 
     }
 
+    /**
+     *
+     */
     public function requirements()
     {
         $data = [];
@@ -116,6 +141,9 @@ class InstallationController extends AppController{
         }
     }
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function database()
     {
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
@@ -164,6 +192,9 @@ class InstallationController extends AppController{
     }
 
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function general()
     {
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
@@ -204,6 +235,9 @@ class InstallationController extends AppController{
         }
     }
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function administrator()
     {
         $user = $this->Users->newEntity();
@@ -231,6 +265,9 @@ class InstallationController extends AppController{
         $this->set('_serialize', ['user']);
     }
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function emailConfig()
     {
 
@@ -254,6 +291,11 @@ class InstallationController extends AppController{
     }
 
 
+    /**
+     * @param $path
+     * @param $dir
+     * @return array
+     */
     protected function checkRequireDir($path, $dir){
         if(file_exists($path)){
             $result = [
@@ -272,6 +314,10 @@ class InstallationController extends AppController{
         return $result;
     }
 
+    /**
+     * @param $path
+     * @return array
+     */
     protected function checkPermission($path){
         if(is_writable($path)){
             $result = [
@@ -290,11 +336,19 @@ class InstallationController extends AppController{
         return $result;
     }
 
+    /**
+     * @param $fileName
+     * @return array
+     */
     public static function readIni($fileName)
     {
         return parse_ini_file($fileName);
     }
 
+    /**
+     * @param $array
+     * @return bool
+     */
     public static function writeToIni($array)
     {
         $res = array();
@@ -315,6 +369,11 @@ class InstallationController extends AppController{
     }
 
 
+    /**
+     * @param $fileName
+     * @param $dataToSave
+     * @return bool
+     */
     public static function safeFilereWrite($fileName, $dataToSave)
     {
         if ($fp = fopen($fileName, 'w')) {

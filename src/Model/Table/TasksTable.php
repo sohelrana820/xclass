@@ -115,9 +115,7 @@ class TasksTable extends Table
      */
     public function countTaskByProject($projectId)
     {
-        $result = $this->find('all', ['conditions' => ['Tasks.project_id' => $projectId]])
-            ->count();
-
+        $result = $this->find('all', ['conditions' => ['Tasks.project_id' => $projectId]])->count();
         return $result;
     }
 
@@ -221,6 +219,10 @@ class TasksTable extends Table
         return $task->first();
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getTask($id)
     {
         $task = $this->find();

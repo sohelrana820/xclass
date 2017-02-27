@@ -86,6 +86,10 @@ class ProjectsUsersTable extends Table
         return false;
     }
 
+    /**
+     * @param $projectId
+     * @return int
+     */
     public function countUserByProjectId($projectId)
     {
         $count = $this->find()
@@ -94,6 +98,11 @@ class ProjectsUsersTable extends Table
         return $count;
     }
 
+    /**
+     * @param $projectId
+     * @param int $limit
+     * @return array
+     */
     public function getProjectUsers($projectId, $limit = 10)
     {
         $users = $this->find();

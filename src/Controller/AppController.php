@@ -46,19 +46,41 @@ class AppController extends Controller
 
     public $userID;
 
+    /**
+     * @var
+     */
     public $loggedInUser;
 
+    /**
+     * @var string
+     */
     public $appsName = 'Task Manager';
 
+    /**
+     * @var string
+     */
     public $appsLogo = 'default_logo.png';
 
+    /**
+     * @var null
+     */
     public $baseUrl = null;
 
+    /**
+     * @var string
+     */
     public $emailFrom = 'info@task-manager.com';
 
+    /**
+     * @var string
+     */
     public $currentTheme = 'Apps';
 
+    /**
+     * @var int
+     */
     public $paginationLimit = 50;
+
 
     public function initialize()
     {
@@ -83,6 +105,10 @@ class AppController extends Controller
         $this->loadModel('Tasks');
     }
 
+    /**
+     * @param Event $event
+     * @return \Cake\Network\Response|null
+     */
     public function beforeFilter(Event $event)
     {
         $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'install', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
@@ -136,6 +162,9 @@ class AppController extends Controller
         $this->set('appsLogo', $this->appsLogo);
     }
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function checkAuthentication()
     {
         if($this->Auth->user())
@@ -144,6 +173,9 @@ class AppController extends Controller
         }
     }
 
+    /**
+     * @return bool
+     */
     protected function isAdmin()
     {
         if($this->Auth->user('role') == 1){
@@ -152,6 +184,9 @@ class AppController extends Controller
         return false;
     }
 
+    /**
+     * @param $permission
+     */
     protected function checkPermission($permission)
     {
         if(!$permission)
@@ -161,6 +196,10 @@ class AppController extends Controller
         }
     }
 
+    /**
+     * @param $projectId
+     * @return array
+     */
     protected function getProjectOverview($projectId)
     {
         $this->loadModel('ProjectsUsers');

@@ -10,20 +10,36 @@ namespace App\Controller;
 
 use Cake\Event\Event;
 
+/**
+ * Class SettingsController
+ * @package App\Controller
+ */
 class SettingsController extends AppController
 {
+    /**
+     * @var string
+     */
     public $name = 'Settings';
 
+    /**
+     * @param Event $event
+     */
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
     }
 
+    /**
+     *
+     */
     public function index()
     {
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
         $this->set('settings', $iniData);
     }
 
+    /**
+     * @return \Cake\Network\Response|null
+     */
     public function update()
     {
         if($this->request->is('post')){

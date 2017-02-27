@@ -69,6 +69,10 @@ class LabelsTable extends Table
         return $validator;
     }
 
+    /**
+     * @param $projectId
+     * @return int
+     */
     public function countTotalLabelByProjectId($projectId)
     {
         $result = $this->find('all', ['conditions' => ['Labels.project_id' => $projectId]])
@@ -77,6 +81,10 @@ class LabelsTable extends Table
         return $result;
     }
 
+    /**
+     * @param $labelIds
+     * @return array
+     */
     public function findLabels($labelIds)
     {
         $labels = $this->find('all', [

@@ -73,7 +73,10 @@ class ProfilesTable extends Table
         return $rules;
     }
 
-
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function getProfileByUserID($id)
     {
         $result = $this->find()

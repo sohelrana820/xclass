@@ -12,6 +12,9 @@ use Cake\Routing\Router;
  */
 class LabelsController extends AppController
 {
+    /**
+     *
+     */
     public function initialize()
     {
         parent::initialize();

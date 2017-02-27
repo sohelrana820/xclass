@@ -109,7 +109,10 @@ class UsersTable extends Table
         return $validator;
     }
 
-
+    /**
+     * @param Validator $validator
+     * @return Validator
+     */
     public function validationResetPassword(Validator $validator)
     {
         $validator
@@ -147,6 +150,10 @@ class UsersTable extends Table
         return $validator;
     }
 
+    /**
+     * @param Validator $validator
+     * @return Validator
+     */
     public function validationChangePassword(Validator $validator)
     {
         $validator
@@ -216,6 +223,10 @@ class UsersTable extends Table
         return $rules;
     }
 
+    /**
+     * @param $uuid
+     * @return null
+     */
     public function getIDbyUUID($uuid)
     {
         $result = $this->find()
@@ -229,6 +240,10 @@ class UsersTable extends Table
         return null;
     }
 
+    /**
+     * @param $id
+     * @return mixed|null
+     */
     public function getUserByID($id)
     {
         $result = $this->find()
@@ -244,6 +259,10 @@ class UsersTable extends Table
         return null;
     }
 
+    /**
+     * @param $code
+     * @return mixed|null
+     */
     public function getUserByEmailCode($code)
     {
         $result = $this->find()
@@ -258,6 +277,10 @@ class UsersTable extends Table
         return null;
     }
 
+    /**
+     * @param $code
+     * @return mixed|null
+     */
     public function getUserByForgotCode($code)
     {
         $result = $this->find()
@@ -272,6 +295,10 @@ class UsersTable extends Table
         return null;
     }
 
+    /**
+     * @param $email
+     * @return mixed|null
+     */
     public function getUserByEmail($email)
     {
         $result = $this->find()
@@ -286,6 +313,9 @@ class UsersTable extends Table
         return null;
     }
 
+    /**
+     * @return int
+     */
     public function countTotalUser()
     {
         $result = $this->find()
@@ -294,6 +324,10 @@ class UsersTable extends Table
         return $result;
     }
 
+    /**
+     * @param $usersIds
+     * @return array
+     */
     public function findUsers($usersIds)
     {
         $users = $this->find('all', [

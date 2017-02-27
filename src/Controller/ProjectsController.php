@@ -27,7 +27,7 @@ class ProjectsController extends AppController
     public function index()
     {
         $conditions = $this->Utilities->buildProjectListConditions($this->request->query);
-        if($this->loggedInUser->role == 2){
+        if ($this->loggedInUser->role == 2) {
             $this->loadModel('ProjectsUsers');
             $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
             $conditions = array_merge($conditions, ['Projects.id IN' => $projectIds]);
@@ -53,8 +53,7 @@ class ProjectsController extends AppController
     public function view($slug = null)
     {
         $project = $this->Projects->getProjectDetailsBySlug($slug);
-        if($project == null)
-        {
+        if ($project == null) {
             throw new BadRequestException();
         }
         $this->Projects->updateOpenedTime($project->id);
@@ -94,10 +93,10 @@ class ProjectsController extends AppController
             $this->request->data['slug'] = strtolower(Inflector::slug($this->request->data['name']));
             $this->request->data['deadline'] = $this->request->data['deadline'];
             $allAttachments = [];
-            if(isset($this->request->data['attachments'])){
+            if (isset($this->request->data['attachments'])) {
                 $attachments = $this->request->data['attachments'];
-                foreach($attachments as $attachment){
-                    if(isset($attachment['name']) && $attachment['name']){
+                foreach ($attachments as $attachment) {
+                    if (isset($attachment['name']) && $attachment['name']) {
                         $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
                         $allAttachments[] = [
                             'uuid' => Text::uuid(),
@@ -137,10 +136,10 @@ class ProjectsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             $allAttachments = [];
-            if(isset($this->request->data['attachments'])){
+            if (isset($this->request->data['attachments'])) {
                 $attachments = $this->request->data['attachments'];
-                foreach($attachments as $attachment){
-                    if(isset($attachment['name']) && $attachment['name']){
+                foreach ($attachments as $attachment) {
+                    if (isset($attachment['name']) && $attachment['name']) {
                         $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
                         $allAttachments[] = [
                             'uuid' => Text::uuid(),
@@ -211,7 +210,7 @@ class ProjectsController extends AppController
 
             if (isset($this->request->query['name']) && $this->request->query['name']) {
                 $name = $this->request->query['name'];
-                $conditions = array_merge($conditions, ['OR' => ['Profiles.first_name LIKE' => '%'.$name.'%', 'Profiles.last_name LIKE' => '%'.$name.'%']]);
+                $conditions = array_merge($conditions, ['OR' => ['Profiles.first_name LIKE' => '%' . $name . '%', 'Profiles.last_name LIKE' => '%' . $name . '%']]);
             }
 
             $users = $this->Users->ProjectsUsers->find()
@@ -265,7 +264,7 @@ class ProjectsController extends AppController
                     $this->loadModel('Feeds');
                     $project = $this->Projects->getProjectById($projectId);
                     $users[] = $this->request->data['user_id'];
-                    $this->Feeds->storeFeeds($projectId, 'add_contributor', ['user' => $this->loggedInUser,  'users' => $users, 'project' => $project]);
+                    $this->Feeds->storeFeeds($projectId, 'add_contributor', ['user' => $this->loggedInUser, 'users' => $users, 'project' => $project]);
                     $response = [
                         'success' => true,
                         'message' => 'User has been assigned successfully',
@@ -299,7 +298,7 @@ class ProjectsController extends AppController
             $this->loadModel('Feeds');
             $project = $this->Projects->getProjectById($projectId);
             $users[] = $this->request->data['user_id'];
-            $this->Feeds->storeFeeds($projectId, 'remove_contributor', ['user' => $this->loggedInUser,  'users' => $users, 'project' => $project]);
+            $this->Feeds->storeFeeds($projectId, 'remove_contributor', ['user' => $this->loggedInUser, 'users' => $users, 'project' => $project]);
             $response = [
                 'success' => true,
                 'message' => 'User has been removed successfully',
@@ -341,8 +340,7 @@ class ProjectsController extends AppController
                 'Attachments.comment_id IN' => $commentsIds
             ]
         ];
-        if(isset($this->request->query['attachment_name']) && $this->request->query['attachment_name'])
-        {
+        if (isset($this->request->query['attachment_name']) && $this->request->query['attachment_name']) {
             $conditions = array_merge($conditions, ['Attachments.name LIKE' => '%' . $this->request->query['attachment_name'] . '%',]);
         }
 
@@ -394,7 +392,7 @@ class ProjectsController extends AppController
             'valueField' => 'path'
         ]);
 
-        $zipName = 'attachment_of_'.strtolower(Text::slug($project->name)) . '.zip';
+        $zipName = 'attachment_of_' . strtolower(Text::slug($project->name)) . '.zip';
         $this->Utilities->zipFilesAndDownload($attachments, $zipName, WWW_ROOT . 'img/attachments/');
     }
 }

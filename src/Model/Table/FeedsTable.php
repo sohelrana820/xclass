@@ -287,6 +287,10 @@ class FeedsTable extends Table
         return $title;
     }
 
+    /**
+     * @param $user
+     * @return string
+     */
     private function getUserLink($user)
     {
         if(is_object($user)){
@@ -298,24 +302,44 @@ class FeedsTable extends Table
         return $link;
     }
 
+    /**
+     * @param $project
+     * @return string
+     */
     private function getProjectLink($project)
     {
         $link = "<a class='project_link' href='".Router::url('/', true)."projects/{$project->slug}'>{$project->name}</a>";
         return $link;
     }
 
+    /**
+     * @param $projectSlug
+     * @param $task
+     * @return string
+     */
     private function getTaskLink($projectSlug, $task)
     {
         $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/{$task->identity}'>".Text::truncate($task->task, 50)."</a>";
         return $link;
     }
 
+    /**
+     * @param $projectSlug
+     * @param $task
+     * @return string
+     */
     private function getTaskLinkWithID($projectSlug, $task)
     {
         $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/{$task->identity}'>Task #{$task->id}</a>";
         return $link;
     }
 
+    /**
+     * @param $projectSlug
+     * @param $task
+     * @param $comment
+     * @return string
+     */
     private function getCommentLink($projectSlug, $task, $comment)
     {
         $link = "<a class='project_link' href='".Router::url('/', true)."{$projectSlug}/tasks/{$task->identity}#/{$comment->uuid}'>".Text::truncate($comment->comment, 70)."</a>";

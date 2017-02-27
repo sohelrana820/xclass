@@ -10,8 +10,15 @@ use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
 use Cake\Utility\Text;
 
+/**
+ * Class UsersController
+ * @package App\Controller
+ */
 class UsersController extends AppController{
 
+    /**
+     * @var string
+     */
     public $name = 'Users';
 
     /**
@@ -33,6 +40,9 @@ class UsersController extends AppController{
         }
     }
 
+    /**
+     * @param Event $event
+     */
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
     }
@@ -557,6 +567,11 @@ class UsersController extends AppController{
         return $this->redirect($this->Auth->logout());
     }
 
+    /**
+     * @param $userID
+     * @param $uuid
+     * @return bool
+     */
     private function changeProfilePhoto($userID, $uuid)
     {
         $rootDir = WWW_ROOT . 'img/profiles';

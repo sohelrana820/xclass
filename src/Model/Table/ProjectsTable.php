@@ -102,6 +102,10 @@ class ProjectsTable extends Table
         return $rules;
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
     public function getProjectBySlug($slug)
     {
         $result = $this->find()
@@ -111,6 +115,10 @@ class ProjectsTable extends Table
         return $result;
     }
 
+    /**
+     * @param $id
+     * @return mixed
+     */
     public function getProjectById($id)
     {
         $result = $this->find()
@@ -120,6 +128,10 @@ class ProjectsTable extends Table
         return $result;
     }
 
+    /**
+     * @param $slug
+     * @return mixed
+     */
     public function getProjectDetailsBySlug($slug)
     {
         $result = $this->find()
@@ -175,6 +187,10 @@ class ProjectsTable extends Table
         return $result;
     }
 
+    /**
+     * @param $slug
+     * @return null
+     */
     public function getProjectIDBySlug($slug)
     {
         $result = $this->find()
