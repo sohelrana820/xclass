@@ -14,6 +14,32 @@ class EmailComponent extends Component
 {
     public $name = 'Email';
 
+    public function generalEmail($to)
+    {
+        $app = new AppController();
+        $subject = 'Create Account Confirmation - '.$app->appsName;
+        $email = new Email('default');
+
+        $user = array(
+            'to' => $to,
+            'name' => 'Sohel Rana'
+        );
+
+        $data = array(
+            'user' => $user,
+            'appName'=> $app->appsName,
+        );
+
+        $email->from([$app->emailFrom => $app->appsName])
+            ->to($user['to'])
+            ->subject($subject)
+            ->theme($app->currentTheme)
+            ->template('general')
+            ->emailFormat('html')
+            ->set(['data' => $data])
+            ->send();
+    }
+
     /**
      * @param $data
      * @param $code

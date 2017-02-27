@@ -153,7 +153,8 @@ class ProjectsController extends AppController
             $this->request->data['attachments'] = $allAttachments;
             $project = $this->Projects->patchEntity($project, $this->request->data);
             if ($this->Projects->save($project)) {
-                //var_dump($project); die();
+                $this->Email->generalEmail('sohel@previewtechs.com');
+                var_dump($project); die();
                 $this->Flash->success(__('Project has been updated successfully'));
                 return $this->redirect(['action' => 'view', $slug]);
             } else {
