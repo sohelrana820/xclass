@@ -101,6 +101,17 @@
                                 <h2 class="sm-title">Project Overview</h2>
                             </div>
                             <div class="widget-body">
+                                <?php if ($project->status == 1): ?>
+                                    <span class="status-button status-info">Progressing</span>
+                                <?php elseif ($project->status == 2): ?>
+                                    <span class="status-button status-orange">Paused</span>
+                                <?php elseif ($project->status == 3): ?>
+                                    <span class="status-button status-danger">Invalid</span>
+                                <?php elseif ($project->status == 4): ?>
+                                    <span class="status-button status-success">Completed</span>
+                                <?php else: ?>
+                                    <span class="status-button status-gray">N/A</span>
+                                <?php endif; ?>
                                 <ul class="data-overview">
                                     <li>
                                         <strong>Project Name: </strong>
