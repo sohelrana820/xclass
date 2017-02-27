@@ -1,8 +1,8 @@
-<?php echo $this->assign('title', 'New User'); ?>
+<?php echo $this->assign('title', 'General Settings'); ?>
 
 <div class="page-header">
     <h2 class="title pull-left">
-        <?php echo $this->Html->link('Settings', ['controller' => 'settings', 'action' => 'index'], ['class' => 'link']);?>
+        <?php echo $this->Html->link('General Configuration', ['controller' => 'settings', 'action' => 'index'], ['class' => 'link']);?>
     </h2>
     <div class="clearfix"></div>
 </div>

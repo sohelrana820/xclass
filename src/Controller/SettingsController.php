@@ -76,6 +76,8 @@ class SettingsController extends AppController
      */
     public function email()
     {
-
+        if($this->request->is('post')){
+            var_dump($this->request->data); die();
+        }
     }
 };
