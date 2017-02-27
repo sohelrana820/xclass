@@ -6,6 +6,7 @@
         <p class="sub-title">Project started at <?php echo $this->Time->format($project->created, 'd MMM, Y'); ?></p>
     </h2>
     <div class="pull-right">
+        <?php echo $this->Html->link('Update Project', ['controller' => 'projects', 'action' => 'edit', $project->slug], ['class' => 'btn btn-info']);?>
         <?php echo $this->Html->link('Manage Task', ['controller' => 'tasks', 'action' => 'index', $project->slug], ['class' => 'btn btn-success']);?>
         <?php echo $this->Html->link('Manage Label', ['controller' => 'labels', 'action' => 'index', $project->slug], ['class' => 'btn btn-success']);?>
         <?php echo $this->Html->link('Manage Users', ['controller' => 'projects', 'action' => 'users', $project->slug], ['class' => 'btn btn-success']);?>
@@ -139,6 +140,17 @@
                                         if ($project->note) {
                                             echo $project->note;
                                         } else {
+                                            echo 'N/A';
+                                        }
+                                        ?>
+                                    </li>
+                                    <li>
+                                        <strong>Deadline: </strong>
+                                        <?php
+                                        if($project->deadline){
+                                            echo $this->Time->format($project->deadline, 'dd MMM , Y');
+                                        }
+                                        else{
                                             echo 'N/A';
                                         }
                                         ?>

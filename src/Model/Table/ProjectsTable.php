@@ -79,7 +79,8 @@ class ProjectsTable extends Table
 
         $validator
             ->requirePresence('deadline', 'create', 'Deadline must be required!')
-            ->notEmpty('deadline', 'Deadline must be required!');
+            ->notEmpty('deadline', 'Deadline must be required!')
+            ->allowEmpty('deadline', 'edit');
 
         $validator
             ->requirePresence('slug', 'create')
