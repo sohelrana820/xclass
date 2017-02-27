@@ -52,7 +52,7 @@ class ProjectsTable extends Table
         $this->hasMany('Tasks', [
             'foreignKey' => 'project_id',
         ]);
-        $this->belongsToMany('ProjectsUser', [
+        $this->belongsToMany('ProjectsUsers', [
             'className' => 'ProjectsUsers',
             'foreignKey' => 'project_id',
             'targetForeignKey' => 'user_id',
@@ -205,25 +205,19 @@ class ProjectsTable extends Table
      */
     public function getProjectsForDashboard($user, $limit = 5)
     {
-        $result = $this->find();
-        $result->select(['id', 'slug', 'name', 'description', 'status', 'created']);
+        $projects = $this->find();
+        $projects->select(['id', 'slug', 'name', 'description', 'status', 'created']);
         if($user->role == 2){
-            $result->contain([
-                'Users' => function($query) use ($user)
-                {
-                    $query->select(['id', 'username']);
-                    $query->where(['Users.id' => $user->id]);
-                    return $query;
-                }
-            ]);
+            $projectIds = $this->ProjectsUsers->getUsersProjectIds($user->id);
+            $projects->where(['Projects.id IN' => $projectIds]);
         }
 
-        $result->limit($limit);
-        $result->order(['Projects.last_opened' => 'DESC']);
-        $result->all();
+        $projects->limit($limit);
+        $projects->order(['Projects.last_opened' => 'DESC']);
+        $projects->all();
 
-        if($result){
-            return $result->toArray();
+        if($projects){
+            return $projects->toArray();
         }
         return null;
     }
