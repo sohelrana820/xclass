@@ -21,27 +21,25 @@ class SettingsController extends AppController
      */
     public $name = 'Settings';
 
-    /**
-     * @param Event $event
-     */
+
     public function beforeFilter(Event $event){
         parent::beforeFilter($event);
     }
 
-    /**
-     *
-     */
+
     public function index()
     {
-        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-        $this->set('settings', $iniData);
+        $this->redirect(['action' => 'general']);
     }
 
     /**
      * @return \Cake\Network\Response|null
      */
-    public function update()
+    public function general()
     {
+        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        $this->set('settings', $iniData);
+
         if($this->request->is('post')){
             $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
             $appName = $iniData['APPLICATION_NAME'];
@@ -71,5 +69,13 @@ class SettingsController extends AppController
             }
             return $this->redirect(['controller' => 'settings', 'action' => 'index']);
         }
+    }
+
+    /**
+     * @return \Cake\Network\Response|null
+     */
+    public function email()
+    {
+
     }
 };
