@@ -5,6 +5,7 @@
  * @description: This component is creating doing the some extra work.
  */
 namespace App\Controller\Component;
+use Aura\Intl\Exception;
 use Cake\Controller\Component;
 use Cake\Mailer\Email;
 use Cake\ORM\TableRegistry;
@@ -18,7 +19,7 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Create Account Confirmation - '.$app->appsName;
-        $email = new Email('default');
+        $email = new Email('smtp_transporter');
 
         $user = array(
             'to' => $to,
@@ -30,14 +31,20 @@ class EmailComponent extends Component
             'appName'=> $app->appsName,
         );
 
-        $email->from([$app->emailFrom => $app->appsName])
-            ->to($user['to'])
-            ->subject($subject)
-            ->theme($app->currentTheme)
-            ->template('general')
-            ->emailFormat('html')
-            ->set(['data' => $data])
-            ->send();
+        try{
+            $email->from([$app->emailFrom => $app->appsName])
+                ->to($user['to'])
+                ->subject($subject)
+                ->theme($app->currentTheme)
+                ->template('general')
+                ->emailFormat('html')
+                ->set(['data' => $data])
+                ->send();
+        }
+        catch (\Exception $e)
+        {
+            var_dump($e->getMessage()); die();
+        }
     }
 
     /**
