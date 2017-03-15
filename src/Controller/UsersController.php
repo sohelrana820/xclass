@@ -29,6 +29,7 @@ class UsersController extends AppController{
     {
         $this->checkAuthentication();
         $this->viewBuilder()->layout('login');
+        var_dump($this->Email->generalEmail('me.sohelrana@gmail.com')); die();
 
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();

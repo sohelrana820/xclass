@@ -240,21 +240,20 @@ if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIG
     $conn = ConnectionManager::get('application');
     ConnectionManager::alias('application', 'default');
 
-    Email::config('smtp_transporter', [
-        'className' => 'Smtp',
-        'host' => 'ssl://smtp.gmail.com',
-        'port' => 465,
-        'timeout' => 30,
-        'username' => 'sohel@previewtechs.com',
-        'password' => 'runwithlight',
-        'client' => null,
-        'tls' => null,
-        'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
-    ]);
+    /*if(array_key_exists('SMTP_HOST', $iniData) && array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData)){
+        Email::config('smtp_transporter', [
+            'className' => 'Smtp',
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => 465,
+            'timeout' => 30,
+            'username' => 'sohel@previewtechs.com',
+            'password' => 'runwithlight',
+            'client' => null,
+            'tls' => null,
+            'url' => env('SMTP_TRANSPORT_DEFAULT_URL', null),
+        ]);
+    }*/
 
 
-    //$email = Email::configured();
-    //var_dump($email);
-   //die();
 }
 Configure::write('Security.salt', 'gfbdfgdfg2695965gf6d2gv6df5g9565fs6df5sd6f5s6df5s6df596');

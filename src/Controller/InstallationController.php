@@ -14,6 +14,7 @@ use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
 use Cake\Filesystem\File;
 use Cake\Filesystem\Folder;
+use Cake\Mailer\Email;
 use Cake\Network\Http\Request;
 use Cake\Utility\Text;
 use Phinx\Config\Config;
@@ -274,14 +275,20 @@ class InstallationController extends AppController{
         if($this->request->is('post')){
             $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
             $emilConf = $this->request->data['email'];
-            $iniData['EMAIL_HOST'] = $emilConf['host'];
-            $iniData['EMAIL_PORT'] = $emilConf['port'];
-            $iniData['EMAIL_USERNAME'] = $emilConf['username'];
-            $iniData['EMAIL_PASSWORD'] = $emilConf['password'];
-            $iniData['EMAIL_CONFIGURATION_RESULT'] = true;
+            $iniData['SMTP_HOST'] = $emilConf['host'];
+            $iniData['SMTP_PORT'] = $emilConf['port'];
+            $iniData['SMTP_USERNAME'] = $emilConf['username'];
+            $iniData['SMTP_PASSWORD'] = $emilConf['password'];
+            if(array_key_exists('host', $emilConf) && array_key_exists('port', $emilConf) && array_key_exists('username', $emilConf) && array_key_exists('password', $emilConf)){
+                $iniData['SMTP_CONFIGURATION_RESULT'] = true;
+            }
             $iniData['INSTALLATION_RESULT'] = true;
             if(InstallationController::writeToIni($iniData)){
+                $this->Email->welcomeEmail();
                 $this->Flash->success(__('Installation has been completed successfully'));
+                /**
+                 * @TODO need to send email to adminstrator user
+                 */
                 return $this->redirect(['controller' => 'users', 'action' => 'login']);
             }
             else{
