@@ -11,6 +11,7 @@ use Cake\Core\Configure;
 use Cake\Mailer\Email;
 use Cake\ORM\TableRegistry;
 use App\Controller\AppController;
+use Cake\Routing\Router;
 
 class EmailComponent extends Component
 {
@@ -62,8 +63,10 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Create Account Confirmation - '.$app->appsName;
-        $email = new Email('default');
-        $link = $app->baseUrl.'/users/verify_email?code='.$code;
+        $transporter = $this->setEmailTransporter();
+        $email = new Email();
+        $email->transport($transporter);
+        $link = Router::url('/', true).'/users/verify_email?code='.$code;
 
         $user = array(
             'to' => $data['username'],
@@ -94,8 +97,10 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Forgot Password Link - '.$app->appsName;
-        $email = new Email('default');
-        $link = $app->baseUrl.'/users/reset_password?code='.$code;
+        $transporter = $this->setEmailTransporter();
+        $email = new Email();
+        $email->transport($transporter);
+        $link = Router::url('/', true).'users/reset_password?code='.$code;
 
         $user = array(
             'to' => $data['username'],
@@ -125,7 +130,9 @@ class EmailComponent extends Component
     {
         $app = new AppController();
         $subject = 'Password Changed - '.$app->appsName;
-        $email = new Email('default');
+        $transporter = $this->setEmailTransporter();
+        $email = new Email();
+        $email->transport($transporter);
 
         $user = array(
             'to' => $data['username'],
