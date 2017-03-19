@@ -211,17 +211,6 @@ if(file_exists(ROOT.'/Conf/config.ini')){
 
 if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIGURATION_RESULT']){
     ConnectionManager::config('application', [
-        /*'className' => 'Cake\Database\Connection',
-        'driver' => 'Cake\Database\Driver\Mysql',
-        'persistent' => false,
-        'host' => $iniData['DATABASE_HOST'],
-        'username' => $iniData['DATABASE_USERNAME'],
-        'password' => $iniData['DATABASE_PASSWORD'],
-        'database' => $iniData['DATABASE_NAME'],
-        'encoding' => 'utf8',
-        'timezone' => 'UTC',
-        'cacheMetadata' => true,*/
-
         'className' => 'Cake\Database\Connection',
         'driver' => 'Cake\Database\Driver\Mysql',
         'persistent' => false,
@@ -234,26 +223,9 @@ if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIG
         'cacheMetadata' => true,
         'quoteIdentifiers' => false,
         'log' => false,
-        //'init' => ['SET GLOBAL innodb_stats_on_metadata = 0'],
         'url' => env('DATABASE_TEST_URL', null),
     ]);
     $conn = ConnectionManager::get('application');
     ConnectionManager::alias('application', 'default');
-
-    /*if(array_key_exists('SMTP_HOST', $iniData) && array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData)){
-        Email::config('smtp_transporter', [
-            'className' => 'Smtp',
-            'host' => 'ssl://smtp.gmail.com',
-            'port' => 465,
-            'timeout' => 30,
-            'username' => 'sohel@previewtechs.com',
-            'password' => 'runwithlight',
-            'client' => null,
-            'tls' => null,
-            'url' => env('SMTP_TRANSPORT_DEFAULT_URL', null),
-        ]);
-    }*/
-
-
 }
 Configure::write('Security.salt', 'gfbdfgdfg2695965gf6d2gv6df5g9565fs6df5sd6f5s6df5s6df596');

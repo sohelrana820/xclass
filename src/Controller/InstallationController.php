@@ -283,12 +283,10 @@ class InstallationController extends AppController{
                 $iniData['SMTP_CONFIGURATION_RESULT'] = true;
             }
             $iniData['INSTALLATION_RESULT'] = true;
+
             if(InstallationController::writeToIni($iniData)){
                 $this->Email->welcomeEmail();
                 $this->Flash->success(__('Installation has been completed successfully'));
-                /**
-                 * @TODO need to send email to adminstrator user
-                 */
                 return $this->redirect(['controller' => 'users', 'action' => 'login']);
             }
             else{
