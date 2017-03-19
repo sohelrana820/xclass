@@ -46,14 +46,14 @@ class SettingsController extends AppController
             $appLogo = $iniData['APPLICATION_LOGO'];
 
             if(isset($this->request->data['application']['logo']['name']) && $this->request->data['application']['logo']['name']){
-                $appLogo = $this->Utilities->uploadFile(WWW_ROOT.'img', $this->request->data['application']['logo'], 'logo');
+                $appLogo = $this->Utilities->uploadFile(WWW_ROOT.'img/attachments', $this->request->data['application']['logo'], 'logo');
             }
             if($this->request->data['application']['name']){
                 $appName = $this->request->data['application']['name'];
             }
 
             $iniData['APPLICATION_NAME'] = $appName;
-            $iniData['APPLICATION_LOGO'] = $appLogo;
+            $iniData['APPLICATION_LOGO'] = 'attachments/'.$appLogo;
 
             $emilConf = $this->request->data['email'];
             $iniData['EMAIL_HOST'] = $emilConf['host'];

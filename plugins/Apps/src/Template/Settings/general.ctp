@@ -32,22 +32,22 @@
 
                 <div class="form-group">
                     <label class="text-info">Host</label>
-                    <?php echo $this->Form->input('email.host', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Host', 'label' => false, 'required' => false, 'value' => $settings['EMAIL_HOST']]);?>
+                    <?php echo $this->Form->input('email.host', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Host', 'label' => false, 'required' => false, 'value' => $settings['SMTP_HOST']]);?>
                 </div>
 
                 <div class="form-group">
                     <label class="text-info">Port</label>
-                    <?php echo $this->Form->input('email.port', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Port', 'label' => false, 'required' => false, 'value' => $settings['EMAIL_PORT']]);?>
+                    <?php echo $this->Form->input('email.port', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Port', 'label' => false, 'required' => false, 'value' => $settings['SMTP_PORT']]);?>
                 </div>
 
                 <div class="form-group">
                     <label class="text-info">Username</label>
-                    <?php echo $this->Form->input('email.username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Username', 'label' => false, 'required' => false, 'value' => $settings['EMAIL_USERNAME']]);?>
+                    <?php echo $this->Form->input('email.username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Username', 'label' => false, 'required' => false, 'value' => $settings['SMTP_USERNAME']]);?>
                 </div>
 
                 <div class="form-group">
                     <label class="text-info">Password</label>
-                    <?php echo $this->Form->input('email.password', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false, 'value' => $settings['EMAIL_PASSWORD']]);?>
+                    <?php echo $this->Form->input('email.password', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false, 'value' => $settings['SMTP_PASSWORD']]);?>
                 </div>
             </div>
         </div>
