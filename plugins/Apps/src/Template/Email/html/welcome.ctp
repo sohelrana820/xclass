@@ -21,9 +21,8 @@
         <td valign="top" style="width: 100%;padding: 20px 50px;">
             <p style="color: #3E4651;font-weight: normal;font-size: 14px;">
                 Dear <?php echo $data['user']['name'];?>, <br/><br/>
-                You password has been changed successfully!
+                Application has been installed successfully!
             </p>
-
             <br/>
         </td>
     </tr>

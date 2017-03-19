@@ -27,5 +27,6 @@
     </div>
 
     <button type="submit" class="btn btn-lg-theme">Submit</button>
+    <button type="submit" class="btn btn-lg-black">Skip</button>
     <?php echo $this->Form->end();?>
 </div>

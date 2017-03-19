@@ -26,9 +26,11 @@ class EmailComponent extends Component
         $email = new Email();
         $email->transport($transporter);
 
+        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+
         $user = array(
-            'to' => 'me.sohelrana@gmail.com',
-            'name' => 'Sohel Rana'
+            'to' => $iniData['ADMIN_EMAIL'],
+            'name' => $iniData['ADMIN_NAME']
         );
 
         $data = array(
@@ -41,7 +43,7 @@ class EmailComponent extends Component
                 ->to($user['to'])
                 ->subject($subject)
                 ->theme($app->currentTheme)
-                ->template('general')
+                ->template('welcome')
                 ->emailFormat('html')
                 ->set(['data' => $data])
                 ->send();

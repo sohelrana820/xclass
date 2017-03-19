@@ -212,8 +212,8 @@ class InstallationController extends AppController{
             ];
 
             if($this->request->data['application']['logo']['name']){
-                $logo = $this->Utilities->uploadFile(WWW_ROOT.'img', $this->request->data['application']['logo'], 'logo');
-                $general['application_logo'] = $logo;
+                $logo = $this->Utilities->uploadFile(WWW_ROOT.'img/attachments', $this->request->data['application']['logo'], 'logo');
+                $general['application_logo'] = 'attachments/'.$logo;
             }
 
             if($this->request->data['application']['name']){
@@ -255,6 +255,10 @@ class InstallationController extends AppController{
             );
 
             if ($this->Users->save($user)) {
+                $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+                $iniData['ADMIN_NAME'] = $data['profile']['first_name'] . ' ' .$data['profile']['last_name'];
+                $iniData['ADMIN_EMAIL'] = $data['username'];
+                InstallationController::writeToIni($iniData);
                 $this->Flash->success(__('Administrator setup completed successfully'));
                 return $this->redirect(['action' => 'email_config']);
             }

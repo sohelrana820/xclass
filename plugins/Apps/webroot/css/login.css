@@ -143,6 +143,15 @@ body{
     border-radius: 3px;
 }
 
+.btn-lg-black, .btn-lg-black:hover  {
+    background: #555;
+    color: #FFF;
+    padding: 10px 29px;
+    font-weight: 500;
+    font-size: 19px;
+    border-radius: 3px;
+}
+
 .text-theme{
     color: #1ab394;
 }

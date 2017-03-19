@@ -103,6 +103,13 @@ class AppController extends Controller
         $this->loadModel('Users');
         $this->loadModel('Labels');
         $this->loadModel('Tasks');
+
+        if(file_exists(ROOT.'/Conf/config.ini')){
+            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+            if(isset($iniData['APPLICATION_NAME']) && $iniData['APPLICATION_NAME']){
+                $this->appsName = $iniData['APPLICATION_NAME'];
+            }
+        }
     }
 
     /**
