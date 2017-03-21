@@ -355,12 +355,15 @@
                                                 <img ng-show="show_label_refresh_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                 <span class="add_new_label" ng-click="refreshLabelList()" title="Refresh Label List">
                                                 <i class="fa fa-refresh grey"></i>
-                                            </span>
+                                                </span>
+                                                <?php if($userInfo->role == 1):?>
                                                 <span class="add_new_label" ng-click="show_create_new_label_form = true;" title="Create New Label">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                                <?php endif;?>
                                             </a>
                                         </h2>
+                                        <?php if($userInfo->role == 1):?>
                                         <div class="label_quick_operation">
                                             <div class="create_new_label" ng-show="show_create_new_label_form">
                                                 <ng-form name="create_label_form" novalidate>
@@ -395,8 +398,8 @@
                                                 <img ng-show="show_label_search_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                             </div>
                                             <div class="clearfix"></div>
-
                                         </div>
+                                        <?php endif;?>
 
                                         <ul class="custom_dropdown_list nav nav-list" ng-show="!show_create_new_label_form">
                                             <li ng-repeat="(key, label) in labels">
@@ -435,10 +438,12 @@
                                                 <img ng-show="show_user_refresh_loader" ng-src="{{BASE_URL}}/img/loader-blue.gif" class="sm_loader">
                                                 <span class="add_new_label" ng-click="refreshUserList()" title="Refresh User List">
                                                 <i class="fa fa-refresh grey"></i>
-                                            </span>
+                                                </span>
+                                                <?php if($userInfo->role == 1):?>
                                                 <span class="add_new_label" ng-click="show_create_new_user_form = true;" title="Create New User">
-                                                <i class="fa fa-plus"></i>
-                                            </span>
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                                <?php endif;?>
                                             </a>
                                         </h2>
 
