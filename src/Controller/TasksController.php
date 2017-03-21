@@ -31,7 +31,7 @@ class TasksController extends AppController
     /**
      * @param $projectSlug
      */
-    public function index($projectSlug)
+    public function index($projectSlug = null)
     {
         //$this->checkPermission($this->isAdmin());
         $conditions = [];
@@ -41,11 +41,15 @@ class TasksController extends AppController
         $page = 1;
 
         $this->loadModel('Projects');
-        $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
-
-        if(!$projectId)
+        if($projectSlug)
         {
-            throw new BadRequestException();
+            $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
+            $conditions = array_merge($conditions, ['Tasks.project_id' => $projectId]);
+        }
+        elseif($this->loggedInUser->role == 2){
+            $this->loadModel('ProjectsUsers');
+            $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
+            $conditions = array_merge($conditions, ['Tasks.project_id IN' => $projectIds]);
         }
 
         if( $this->request->params['_ext'] != 'json'){
@@ -60,7 +64,7 @@ class TasksController extends AppController
         else {
 
             if(isset($projectId) && $projectId){
-                $conditions = array_merge($conditions, ['Tasks.project_id' => $projectId]);
+
             }
 
             if(isset($this->request->query['page']) && $this->request->query['page']){
@@ -175,7 +179,7 @@ class TasksController extends AppController
 
             $tasks->group(['Tasks.id']);
             $tasks->all();
-            $countAll = $this->Tasks->find('all', ['conditions' => ['Tasks.project_id' => $projectId]])->count();
+            $countAll = $this->Tasks->find('all', ['conditions' => $conditions])->count();
 
             $response = [
                 'success' => true,
