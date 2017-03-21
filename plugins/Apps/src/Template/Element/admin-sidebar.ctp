@@ -32,15 +32,7 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#settings"><i class="fa fa-gears"></i> Settings <i class="fa fa-caret-down"></i></a>
-            <ul id="settings" class="submenu collapse">
-                <li>
-                    <?php echo $this->Html->link('General', ['controller' => 'settings', 'action' => 'general'], ['escape' => false]); ?>
-                </li>
-                <li>
-                    <?php echo $this->Html->link('Email', ['controller' => 'settings', 'action' => 'email'], ['escape' => false]); ?>
-                </li>
-            </ul>
+            <?php echo $this->Html->link('<i class="fa fa-gears"></i>  General Settings', ['controller' => 'settings', 'action' => 'general'], ['escape' => false]); ?>
         </li>
     </ul>
 
