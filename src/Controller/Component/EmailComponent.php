@@ -154,11 +154,14 @@ class EmailComponent extends Component
             ->send();
     }
 
+    /**
+     * @return string
+     */
     protected function setEmailTransporter()
     {
-        $randName = md5(rand(1, 999));
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
         if(array_key_exists('SMTP_HOST', $iniData) && array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData)){
+            $randName = md5(rand(1, 999));
             Email::configTransport($randName, [
                 'className' => 'Smtp',
                 'host' => $iniData['SMTP_HOST'],
@@ -167,7 +170,9 @@ class EmailComponent extends Component
                 'username' => $iniData['SMTP_USERNAME'],
                 'password' => $iniData['SMTP_PASSWORD'],
             ]);
+            return $randName;
         }
-        return $randName;
+
+        return 'default';
     }
 }
