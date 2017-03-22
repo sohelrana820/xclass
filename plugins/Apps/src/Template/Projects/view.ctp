@@ -319,7 +319,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-3 hidden-xs hidden-sm">
         <div class="right-sidebar">
             <div ng-controller="FeedsCtrl">
                 <div class="timeline-area">
