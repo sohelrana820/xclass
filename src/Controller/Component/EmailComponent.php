@@ -24,6 +24,7 @@ class EmailComponent extends Component
         $app = new AppController();
         $subject = 'Installation Completed - '.$app->appsName;
         $transporter = $this->setEmailTransporter();
+
         $email = new Email();
         $email->transport($transporter);
 
@@ -64,6 +65,7 @@ class EmailComponent extends Component
         $app = new AppController();
         $subject = 'Create Account Confirmation - '.$app->appsName;
         $transporter = $this->setEmailTransporter();
+
         $email = new Email();
         $email->transport($transporter);
         $link = Router::url('/', true).'/users/verify_email?code='.$code;
@@ -160,7 +162,8 @@ class EmailComponent extends Component
     protected function setEmailTransporter()
     {
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-        if(array_key_exists('SMTP_HOST', $iniData) && array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData)){
+        if(array_key_exists('SMTP_HOST', $iniData) &&  array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData) && $iniData['SMTP_HOST'] && $iniData['SMTP_PORT'] && $iniData['SMTP_USERNAME'] && $iniData['SMTP_PASSWORD']){
+        var_dump('I am here'); die();
             $randName = md5(rand(1, 999));
             Email::configTransport($randName, [
                 'className' => 'Smtp',
