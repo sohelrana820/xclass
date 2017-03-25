@@ -19,8 +19,8 @@ body{
 
 .login-widget {
     padding: 20px 50px 50px 50px;
-    background: #fff;
     border-radius: 3px;
+    color: #FFF;
 }
 
 .login-widget img{
