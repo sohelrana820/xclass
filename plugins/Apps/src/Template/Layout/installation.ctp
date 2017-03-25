@@ -31,10 +31,10 @@
         <div class="container">
             <div class="row ">
                 <div class="col-md-8 col-md-offset-2 margin-top-125">
-                    <?php echo $this->Flash->render() ?>
                     <div class="login-widget">
                         <div style="text-align: center; ">
                             <?php echo $this->Html->image('logo.png', ['controller' => 'users', 'action' => 'installation'], ['class' => 'title']);;?>
+                            <?php echo $this->Flash->render() ?>
                         </div>
                         <br>
                         <?php echo $this->fetch('content'); ?>
