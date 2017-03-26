@@ -163,7 +163,6 @@ class EmailComponent extends Component
     {
         $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
         if(array_key_exists('SMTP_HOST', $iniData) &&  array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData) && $iniData['SMTP_HOST'] && $iniData['SMTP_PORT'] && $iniData['SMTP_USERNAME'] && $iniData['SMTP_PASSWORD']){
-        var_dump('I am here'); die();
             $randName = md5(rand(1, 999));
             Email::configTransport($randName, [
                 'className' => 'Smtp',
