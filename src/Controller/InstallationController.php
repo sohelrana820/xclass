@@ -17,6 +17,7 @@ use Cake\Filesystem\Folder;
 use Cake\Mailer\Email;
 use Cake\Network\Http\Request;
 use Cake\Utility\Text;
+use Composer\Package\RootAliasPackage;
 use Phinx\Config\Config;
 
 /**
@@ -77,8 +78,12 @@ class InstallationController extends AppController{
      */
     public function requirements()
     {
-        $data = [];
+        $folder = new Folder();
+        $folder->create(ROOT.'/Conf', 755);
+        $folder->create(ROOT.'/webroot/img/profiles', 755);
+        $folder->create(ROOT.'/webroot/img/attachments', 755);
 
+        $data = [];
         $isConfExists = $this->checkRequireDir(ROOT.'/Conf', 'Conf');
         $data[] = $isConfExists;
         if($isConfExists['result'] == 'success'){
