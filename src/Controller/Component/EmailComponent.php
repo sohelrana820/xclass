@@ -52,7 +52,7 @@ class EmailComponent extends Component
         }
         catch (\Exception $e)
         {
-            return false;
+            return null;
         }
     }
 
@@ -81,19 +81,26 @@ class EmailComponent extends Component
             'link'=> $link
         );
 
-        $email->from([$app->emailFrom => $app->appsName])
-            ->to($user['to'])
-            ->subject($subject)
-            ->theme($app->currentTheme)
-            ->template('signup_confirmation')
-            ->emailFormat('html')
-            ->set(['data' => $data])
-            ->send();
+        try{
+            $email->from([$app->emailFrom => $app->appsName])
+                ->to($user['to'])
+                ->subject($subject)
+                ->theme($app->currentTheme)
+                ->template('signup_confirmation')
+                ->emailFormat('html')
+                ->set(['data' => $data])
+                ->send();
+        }
+        catch (\Exception $e)
+        {
+            return null;
+        }
     }
 
     /**
      * @param $data
      * @param $code
+     * @return bool
      */
     public function forgotPassEmail($data, $code)
     {
@@ -115,18 +122,25 @@ class EmailComponent extends Component
             'link'=> $link
         );
 
-        $email->from([$app->emailFrom => $app->appsName])
-            ->to($user['to'])
-            ->subject($subject)
-            ->theme($app->currentTheme)
-            ->template('forgot_password')
-            ->emailFormat('html')
-            ->set(['data' => $data])
-            ->send();
+        try{
+            $email->from([$app->emailFrom => $app->appsName])
+                ->to($user['to'])
+                ->subject($subject)
+                ->theme($app->currentTheme)
+                ->template('forgot_password')
+                ->emailFormat('html')
+                ->set(['data' => $data])
+                ->send();
+        }
+        catch (\Exception $e)
+        {
+            return null;
+        }
     }
 
     /**
      * @param $data
+     * @return bool
      */
     public function passwordChangedEmail($data)
     {
@@ -146,14 +160,20 @@ class EmailComponent extends Component
             'appName'=> $app->appsName,
         );
 
-        $email->from([$app->emailFrom => $app->appsName])
-            ->to($user['to'])
-            ->subject($subject)
-            ->theme($app->currentTheme)
-            ->template('changed_password')
-            ->emailFormat('html')
-            ->set(['data' => $data])
-            ->send();
+        try{
+            $email->from([$app->emailFrom => $app->appsName])
+                ->to($user['to'])
+                ->subject($subject)
+                ->theme($app->currentTheme)
+                ->template('changed_password')
+                ->emailFormat('html')
+                ->set(['data' => $data])
+                ->send();
+        }
+        catch (\Exception $e)
+        {
+            return null;
+        }
     }
 
     /**
