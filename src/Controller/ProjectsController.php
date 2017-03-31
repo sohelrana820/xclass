@@ -314,12 +314,12 @@ class ProjectsController extends AppController
         $this->set('_serialize', ['result']);
     }
 
-    public function attachments($productSlug)
+    public function attachments($projectSlug)
     {
         $this->loadModel('ProjectsUsers');
         $this->loadModel('Attachments');
         $this->loadComponent('Paginator');
-        $project = $this->Projects->getProjectBySlug($productSlug);
+        $project = $this->Projects->getProjectBySlug($projectSlug);
         if ($project == null) {
             throw new BadRequestException();
         }
@@ -354,14 +354,14 @@ class ProjectsController extends AppController
     }
 
     /**
-     * @param $productSlug
+     * @param $projectSlug
      */
-    public function downloadAttachmentsZip($productSlug)
+    public function downloadAttachments($projectSlug)
     {
         $this->loadModel('ProjectsUsers');
         $this->loadModel('Attachments');
         $this->loadComponent('Paginator');
-        $project = $this->Projects->getProjectBySlug($productSlug);
+        $project = $this->Projects->getProjectBySlug($projectSlug);
         if ($project == null) {
             throw new BadRequestException();
         }
