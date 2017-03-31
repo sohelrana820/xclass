@@ -7,6 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
+    <?php echo $this->Html->meta('favicon.ico','/favicon.ico', ['type' => 'icon']);?>
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <!-- Bootstrap core CSS -->

@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <?php echo $this->Html->meta('favicon.ico','/favicon.ico', ['type' => 'icon']);?>
     <title><?php echo $this->fetch('title');?> - <?php echo $title; ?></title>
 
     <?php
