@@ -7,7 +7,7 @@
     <?php echo $this->Form->create(null, ['url' => ['controller' => 'installation', 'action' => 'general'], 'class' => 'login_form', 'type' => 'file']);?>
 
     <div class="form-group">
-        <label class="text-info">Application Logo</label>
+        <label>Application Logo</label>
         <?php echo $this->Form->input('application.logo', ['type' => 'file', 'class' => 'form-control', 'label' => false, 'required' => false]);?>
     </div>
 
