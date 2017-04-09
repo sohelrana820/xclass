@@ -5,6 +5,7 @@
  * @description: This component is creating doing the some extra work.
  */
 namespace App\Controller\Component;
+
 use Cake\Controller\Component;
 use Cake\Mailer\Email;
 use Cake\ORM\TableRegistry;
@@ -71,23 +72,19 @@ class UtilitiesComponent extends Component
     public function buildProjectListConditions($query)
     {
         $conditions = [];
-        if(isset($query['name']) && $query['name'])
-        {
-            $conditions = array_merge($conditions, ['Projects.name Like' => '%'.$query['name'].'%']);
+        if (isset($query['name']) && $query['name']) {
+            $conditions = array_merge($conditions, ['Projects.name Like' => '%' . $query['name'] . '%']);
         }
 
-        if(isset($query['status']) && $query['status']){
+        if (isset($query['status']) && $query['status']) {
             $status = $query['status'];
-            if($status == 'progressing'){
+            if ($status == 'progressing') {
                 $conditions = array_merge($conditions, ['Projects.status' => 1]);
-            }
-            elseif($status == 'paused'){
+            } elseif ($status == 'paused') {
                 $conditions = array_merge($conditions, ['Projects.status' => 2]);
-            }
-            elseif($status == 'invalid'){
+            } elseif ($status == 'invalid') {
                 $conditions = array_merge($conditions, ['Projects.status' => 3]);
-            }
-            elseif($status == 'completed'){
+            } elseif ($status == 'completed') {
                 $conditions = array_merge($conditions, ['Projects.status' => 4]);
             }
         }
@@ -115,7 +112,7 @@ class UtilitiesComponent extends Component
     {
         $temp = explode(".", $documents["name"]);
         $newName = $customName . '.' . end($temp);
-        if (move_uploaded_file($documents["tmp_name"], $path.'/' . $newName)) {
+        if (move_uploaded_file($documents["tmp_name"], $path . '/' . $newName)) {
             return $newName;
         }
         return false;
@@ -128,7 +125,7 @@ class UtilitiesComponent extends Component
     public function getProjectSlug($url)
     {
         $explodedUrl = explode('projects/', $url);
-        if(isset($explodedUrl[1]) && $explodedUrl[1]){
+        if (isset($explodedUrl[1]) && $explodedUrl[1]) {
             return $explodedUrl[1];
         }
         return false;
@@ -143,7 +140,7 @@ class UtilitiesComponent extends Component
     {
         // Create instance of ZipArchive. and open the zip folder.
         $zip = new \ZipArchive();
-        if ($zip->open($zipFileName, \ZipArchive::CREATE) !== TRUE) {
+        if ($zip->open($zipFileName, \ZipArchive::CREATE) !== true) {
             exit("cannot open <$zipFileName>\n");
         }
 
@@ -159,7 +156,7 @@ class UtilitiesComponent extends Component
         header("Pragma: no-cache");
         header("Expires: 0");
         readfile("$zipFileName");
-        unlink(WWW_ROOT.$zipFileName);
+        unlink(WWW_ROOT . $zipFileName);
         exit;
     }
 }

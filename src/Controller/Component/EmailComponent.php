@@ -5,6 +5,7 @@
  * @description: This component is creating doing the some extra work.
  */
 namespace App\Controller\Component;
+
 use Aura\Intl\Exception;
 use Cake\Controller\Component;
 use Cake\Core\Configure;
@@ -17,18 +18,18 @@ class EmailComponent extends Component
 {
     public $name = 'Email';
 
-    protected $configuration ;
+    protected $configuration;
 
     public function welcomeEmail()
     {
         $app = new AppController();
-        $subject = 'Installation Completed - '.$app->appsName;
+        $subject = 'Installation Completed - ' . $app->appsName;
         $transporter = $this->setEmailTransporter();
 
         $email = new Email();
         $email->transport($transporter);
 
-        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
 
         $user = array(
             'to' => $iniData['ADMIN_EMAIL'],
@@ -37,10 +38,10 @@ class EmailComponent extends Component
 
         $data = array(
             'user' => $user,
-            'appName'=> $app->appsName,
+            'appName' => $app->appsName,
         );
 
-        try{
+        try {
             $email->from([$app->emailFrom => $app->appsName])
                 ->to($user['to'])
                 ->subject($subject)
@@ -49,9 +50,7 @@ class EmailComponent extends Component
                 ->emailFormat('html')
                 ->set(['data' => $data])
                 ->send();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return null;
         }
     }
@@ -63,25 +62,25 @@ class EmailComponent extends Component
     public function signupConfirmEmail($data, $code)
     {
         $app = new AppController();
-        $subject = 'Create Account Confirmation - '.$app->appsName;
+        $subject = 'Create Account Confirmation - ' . $app->appsName;
         $transporter = $this->setEmailTransporter();
 
         $email = new Email();
         $email->transport($transporter);
-        $link = Router::url('/', true).'/users/verify_email?code='.$code;
+        $link = Router::url('/', true) . '/users/verify_email?code=' . $code;
 
         $user = array(
             'to' => $data['username'],
-            'name' => $data['profile']['first_name']. ' '.$data['profile']['last_name']
+            'name' => $data['profile']['first_name'] . ' ' . $data['profile']['last_name']
         );
 
         $data = array(
             'user' => $user,
-            'appName'=> $app->appsName,
-            'link'=> $link
+            'appName' => $app->appsName,
+            'link' => $link
         );
 
-        try{
+        try {
             $email->from([$app->emailFrom => $app->appsName])
                 ->to($user['to'])
                 ->subject($subject)
@@ -90,9 +89,7 @@ class EmailComponent extends Component
                 ->emailFormat('html')
                 ->set(['data' => $data])
                 ->send();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return null;
         }
     }
@@ -105,24 +102,24 @@ class EmailComponent extends Component
     public function forgotPassEmail($data, $code)
     {
         $app = new AppController();
-        $subject = 'Forgot Password Link - '.$app->appsName;
+        $subject = 'Forgot Password Link - ' . $app->appsName;
         $transporter = $this->setEmailTransporter();
         $email = new Email();
         $email->transport($transporter);
-        $link = Router::url('/', true).'users/reset_password?code='.$code;
+        $link = Router::url('/', true) . 'users/reset_password?code=' . $code;
 
         $user = array(
             'to' => $data['username'],
-            'name' => $data['profile']['first_name']. ' '.$data['profile']['last_name']
+            'name' => $data['profile']['first_name'] . ' ' . $data['profile']['last_name']
         );
 
         $data = array(
             'user' => $user,
-            'appName'=> $app->appsName,
-            'link'=> $link
+            'appName' => $app->appsName,
+            'link' => $link
         );
 
-        try{
+        try {
             $email->from([$app->emailFrom => $app->appsName])
                 ->to($user['to'])
                 ->subject($subject)
@@ -131,9 +128,7 @@ class EmailComponent extends Component
                 ->emailFormat('html')
                 ->set(['data' => $data])
                 ->send();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return null;
         }
     }
@@ -145,22 +140,22 @@ class EmailComponent extends Component
     public function passwordChangedEmail($data)
     {
         $app = new AppController();
-        $subject = 'Password Changed - '.$app->appsName;
+        $subject = 'Password Changed - ' . $app->appsName;
         $transporter = $this->setEmailTransporter();
         $email = new Email();
         $email->transport($transporter);
 
         $user = array(
             'to' => $data['username'],
-            'name' => $data['profile']['first_name']. ' '.$data['profile']['last_name']
+            'name' => $data['profile']['first_name'] . ' ' . $data['profile']['last_name']
         );
 
         $data = array(
             'user' => $user,
-            'appName'=> $app->appsName,
+            'appName' => $app->appsName,
         );
 
-        try{
+        try {
             $email->from([$app->emailFrom => $app->appsName])
                 ->to($user['to'])
                 ->subject($subject)
@@ -169,9 +164,7 @@ class EmailComponent extends Component
                 ->emailFormat('html')
                 ->set(['data' => $data])
                 ->send();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             return null;
         }
     }
@@ -181,8 +174,8 @@ class EmailComponent extends Component
      */
     protected function setEmailTransporter()
     {
-        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-        if(array_key_exists('SMTP_HOST', $iniData) &&  array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData) && $iniData['SMTP_HOST'] && $iniData['SMTP_PORT'] && $iniData['SMTP_USERNAME'] && $iniData['SMTP_PASSWORD']){
+        $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
+        if (array_key_exists('SMTP_HOST', $iniData) && array_key_exists('SMTP_PORT', $iniData) && array_key_exists('SMTP_USERNAME', $iniData) && array_key_exists('SMTP_PASSWORD', $iniData) && $iniData['SMTP_HOST'] && $iniData['SMTP_PORT'] && $iniData['SMTP_USERNAME'] && $iniData['SMTP_PASSWORD']) {
             $randName = md5(rand(1, 999));
             Email::configTransport($randName, [
                 'className' => 'Smtp',
