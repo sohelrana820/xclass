@@ -33,54 +33,48 @@ class LabelsController extends AppController
         $this->loadModel('Projects');
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
 
-        if(!$projectId)
-        {
+        if (!$projectId) {
             throw new BadRequestException();
         }
 
-        if( $this->request->params['_ext'] != 'json'){
+        if ($this->request->params['_ext'] != 'json') {
             $project = $this->Projects->getProjectBySlug($projectSlug);
-            if($project == null)
-            {
+            if ($project == null) {
                 throw new BadRequestException();
             }
             $this->set('project', $project);
             $this->set('_serialize', ['project']);
-        }
-        else{
+        } else {
             if (isset($projectId) && $projectId) {
                 $conditions = array_merge($conditions, ['Labels.project_id' => $projectId]);
             }
 
             if (isset($this->request->query['name'])) {
-                $conditions = array_merge($conditions, ['Labels.name LIKE' => '%'.$this->request->query['name'].'%']);
+                $conditions = array_merge($conditions, ['Labels.name LIKE' => '%' . $this->request->query['name'] . '%']);
             }
 
             if (isset($this->request->query['status'])) {
                 $conditions = array_merge($conditions, ['Labels.status' => $this->request->query['status']]);
             }
 
-            if(isset($this->request->query['page']) && $this->request->query['page']){
+            if (isset($this->request->query['page']) && $this->request->query['page']) {
                 $page = $this->request->query['page'];
             }
 
-            if(isset($this->request->query['limit']) && $this->request->query['limit']){
-                if($this->request->query['limit'] == 'false'){
+            if (isset($this->request->query['limit']) && $this->request->query['limit']) {
+                if ($this->request->query['limit'] == 'false') {
                     $limit = null;
-                }
-                else{
-                    $limit = (int) $this->request->query['limit'];
+                } else {
+                    $limit = (int)$this->request->query['limit'];
                 }
             }
 
-            $labels = $this->Labels->find('all',
-                [
+            $labels = $this->Labels->find('all', [
                     'conditions' => $conditions,
                     'order' => 'created DESC',
                     'limit' => $limit,
                     'page' => $page
-                ]
-            );
+                ]);
 
             $count = $this->Labels->find('all', ['conditions' => $conditions])->count();
             $response = [
@@ -110,15 +104,13 @@ class LabelsController extends AppController
             'contain' => ['Tasks']
         ]);
 
-        if($label)
-        {
+        if ($label) {
             $response = [
                 'success' => true,
                 'message' => 'Details of label',
                 'data' => $label,
             ];
-        }
-        else{
+        } else {
             $response = [
                 'success' => false,
                 'message' => 'Record not found',
@@ -137,13 +129,11 @@ class LabelsController extends AppController
         $this->loadModel('Projects');
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
 
-        if(!$projectId)
-        {
+        if (!$projectId) {
             throw new BadRequestException();
         }
 
-        if(isset($projectId) && $projectId)
-        {
+        if (isset($projectId) && $projectId) {
             $this->request->data['created_by'] = $this->userID;
             $this->request->data['project_id'] = $projectId;
             $label = $this->Labels->newEntity();
@@ -167,8 +157,7 @@ class LabelsController extends AppController
                     ];
                 }
             }
-        }
-        else{
+        } else {
             $response = [
                 'success' => false,
                 'message' => 'Label could not created',
@@ -204,7 +193,6 @@ class LabelsController extends AppController
                     'message' => 'Label has been updated successfully',
                     'data' => $label,
                 ];
-
             } else {
                 $response = [
                     'success' => false,
