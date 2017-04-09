@@ -8,7 +8,6 @@
 
 namespace App\Controller;
 
-
 use Cake\Core\Exception\Exception;
 use Cake\Datasource\ConnectionManager;
 use Cake\Event\Event;
@@ -24,7 +23,8 @@ use Phinx\Config\Config;
  * Class InstallationController
  * @package App\Controller
  */
-class InstallationController extends AppController{
+class InstallationController extends AppController
+{
 
     /**
      * @var string
@@ -44,15 +44,16 @@ class InstallationController extends AppController{
     /**
      * @param Event $event
      */
-    public function beforeFilter(Event $event){
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
         $this->viewBuilder()
             ->layout('installation')
             ->theme($this->currentTheme);
 
-        if(file_exists(ROOT.'/Conf/config.ini')){
-            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-            if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
+        if (file_exists(ROOT . '/Conf/config.ini')) {
+            $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
+            if (isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']) {
                 $this->redirect($this->referer());
             }
         }
@@ -61,7 +62,8 @@ class InstallationController extends AppController{
     /**
      *
      */
-    public function index(){
+    public function index()
+    {
         $this->redirect(['action' => 'install']);
     }
 
@@ -70,7 +72,6 @@ class InstallationController extends AppController{
      */
     public function install()
     {
-
     }
 
     /**
@@ -79,48 +80,47 @@ class InstallationController extends AppController{
     public function requirements()
     {
         $folder = new Folder();
-        $folder->create(ROOT.'/Conf', 755);
-        $folder->create(ROOT.'/webroot/img/profiles', 755);
-        $folder->create(ROOT.'/webroot/img/attachments', 755);
+        $folder->create(ROOT . '/Conf', 755);
+        $folder->create(ROOT . '/webroot/img/profiles', 755);
+        $folder->create(ROOT . '/webroot/img/attachments', 755);
 
         $data = [];
-        $isConfExists = $this->checkRequireDir(ROOT.'/Conf', 'Conf');
+        $isConfExists = $this->checkRequireDir(ROOT . '/Conf', 'Conf');
         $data[] = $isConfExists;
-        if($isConfExists['result'] == 'success'){
-            $data[] = $this->checkPermission(ROOT.'/Conf');
+        if ($isConfExists['result'] == 'success') {
+            $data[] = $this->checkPermission(ROOT . '/Conf');
         }
 
-        $isTmpExists = $this->checkRequireDir(ROOT.'/tmp', 'tmp');
+        $isTmpExists = $this->checkRequireDir(ROOT . '/tmp', 'tmp');
         $data[] = $isTmpExists;
-        if($isTmpExists['result'] == 'success'){
-            $data[] = $this->checkPermission(ROOT.'/tmp');
+        if ($isTmpExists['result'] == 'success') {
+            $data[] = $this->checkPermission(ROOT . '/tmp');
         }
 
-        $isLogsExists = $this->checkRequireDir(ROOT.'/logs', 'logs');
+        $isLogsExists = $this->checkRequireDir(ROOT . '/logs', 'logs');
         $data[] = $isLogsExists;
-        if($isLogsExists['result'] == 'success'){
-            $data[] = $this->checkPermission(ROOT.'/logs');
+        if ($isLogsExists['result'] == 'success') {
+            $data[] = $this->checkPermission(ROOT . '/logs');
         }
 
-        $isProfilesExists = $this->checkRequireDir(ROOT.'/webroot/img/profiles', 'profiles');
+        $isProfilesExists = $this->checkRequireDir(ROOT . '/webroot/img/profiles', 'profiles');
         $data[] = $isProfilesExists;
-        if($isProfilesExists['result'] == 'success'){
-            $data[] = $this->checkPermission(ROOT.'/webroot/img/profiles');
+        if ($isProfilesExists['result'] == 'success') {
+            $data[] = $this->checkPermission(ROOT . '/webroot/img/profiles');
         }
 
-        $isAttachmentsExists = $this->checkRequireDir(ROOT.'/webroot/img/attachments', 'attachments');
+        $isAttachmentsExists = $this->checkRequireDir(ROOT . '/webroot/img/attachments', 'attachments');
         $data[] = $isAttachmentsExists;
-        if($isAttachmentsExists['result'] == 'success'){
-            $data[] = $this->checkPermission(ROOT.'/webroot/img/attachments');
+        if ($isAttachmentsExists['result'] == 'success') {
+            $data[] = $this->checkPermission(ROOT . '/webroot/img/attachments');
         }
 
-        if(extension_loaded('intl')){
+        if (extension_loaded('intl')) {
             $result = [
                 'mgs' => 'PHP INTL EXTENSION is enabled',
                 'result' => 'success'
             ];
-        }
-        else{
+        } else {
             $result = [
                 'mgs' => 'PHP INTL EXTENSION is disabled or missing',
                 'result' => 'success'
@@ -134,8 +134,8 @@ class InstallationController extends AppController{
         ];
         $this->set('requirements', $requirements);
 
-        if($this->requirementAnalysis){
-            $iniCreated = new File(ROOT.'/Conf/config.ini', true, 0755);
+        if ($this->requirementAnalysis) {
+            $iniCreated = new File(ROOT . '/Conf/config.ini', true, 0755);
             $iniData['REQUIREMENT_ANALYSIS_RESULT'] = $this->requirementAnalysis;
             $iniData['DATABASE_CONFIGURATION_RESULT'] = false;
             $iniData['DATABASE_HOST'] = false;
@@ -152,13 +152,13 @@ class InstallationController extends AppController{
      */
     public function database()
     {
-        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-        if(!$iniData['REQUIREMENT_ANALYSIS_RESULT'] == 1){
+        $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
+        if (!$iniData['REQUIREMENT_ANALYSIS_RESULT'] == 1) {
             $this->Flash->error(__('Sorry, Requirement analysis failed'));
             return $this->redirect(['action' => 'requirements']);
         }
 
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $dbConf = $this->request->data['database'];
 
             if (strpos($dbConf['database_name'], '-') !== false) {
@@ -167,30 +167,30 @@ class InstallationController extends AppController{
             }
 
             try {
-                $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/';
+                $dsn = 'mysql://' . $dbConf['username'] . ':' . $dbConf['password'] . '@' . $dbConf['host'] . '/';
                 ConnectionManager::config('create_database', ['url' => $dsn]);
                 $createDB = ConnectionManager::get('create_database');
                 $createDB->connect();
-                $createDB->query('CREATE DATABASE IF NOT EXISTS '.$dbConf['database_name']);
+                $createDB->query('CREATE DATABASE IF NOT EXISTS ' . $dbConf['database_name']);
 
                 $dsn = 'mysql://'.$dbConf['username'].':'.$dbConf['password'].'@'.$dbConf['host'].'/'.$dbConf['database_name'].'';
                 ConnectionManager::config('execute_tables', ['url' => $dsn]);
                 $connection = ConnectionManager::get('execute_tables');
                 $connection->connect();
 
-                $structureSql = new File(CONFIG.'schema/structure.sql');
+                $structureSql = new File(CONFIG . 'schema/structure.sql');
                 $connection->query($structureSql->read());
 
                 $iniData['DATABASE_HOST'] = $dbConf['host'];
                 $iniData['DATABASE_USERNAME'] = $dbConf['username'];
                 $iniData['DATABASE_PASSWORD'] = $dbConf['password'];
                 $iniData['DATABASE_NAME'] = $dbConf['database_name'];
-                $iniData['DATABASE_CONFIGURATION_RESULT'] = true;;
+                $iniData['DATABASE_CONFIGURATION_RESULT'] = true;
+
                 InstallationController::writeToIni($iniData);
                 $this->Flash->success(__('Database configuration completed successfully'));
                 return $this->redirect(['action' => 'general']);
-            }
-            catch(Exception $e){
+            } catch (Exception $e) {
                 $this->Flash->error(__('Sorry, Invalid database configuration'));
                 return $this->redirect(['action' => 'database']);
             }
@@ -203,25 +203,24 @@ class InstallationController extends AppController{
      */
     public function general()
     {
-        $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-        if(!$iniData['DATABASE_CONFIGURATION_RESULT'] == 1){
+        $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
+        if (!$iniData['DATABASE_CONFIGURATION_RESULT'] == 1) {
             $this->Flash->error(__('Sorry, database configuration invalid'));
             return $this->redirect(['action' => 'requirements']);
         }
 
-        if($this->request->is('post')){
-
+        if ($this->request->is('post')) {
             $general = [
                 'application_name' => $this->appsName,
                 'application_logo' => $this->appsLogo
             ];
 
-            if($this->request->data['application']['logo']['name']){
-                $logo = $this->Utilities->uploadFile(WWW_ROOT.'img/attachments', $this->request->data['application']['logo'], 'logo');
-                $general['application_logo'] = 'attachments/'.$logo;
+            if ($this->request->data['application']['logo']['name']) {
+                $logo = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $this->request->data['application']['logo'], 'logo');
+                $general['application_logo'] = 'attachments/' . $logo;
             }
 
-            if($this->request->data['application']['name']){
+            if ($this->request->data['application']['name']) {
                 $name = $this->request->data['application']['name'];
                 $general['application_name'] = $name;
             }
@@ -231,11 +230,10 @@ class InstallationController extends AppController{
              */
             $iniData['APPLICATION_NAME'] = $general['application_name'];
             $iniData['APPLICATION_LOGO'] = $general['application_logo'];
-            if(InstallationController::writeToIni($iniData)){
+            if (InstallationController::writeToIni($iniData)) {
                 $this->Flash->success(__('General configuration completed successfully'));
                 return $this->redirect(['action' => 'administrator']);
-            }
-            else {
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
@@ -260,14 +258,13 @@ class InstallationController extends AppController{
             );
 
             if ($this->Users->save($user)) {
-                $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-                $iniData['ADMIN_NAME'] = $data['profile']['first_name'] . ' ' .$data['profile']['last_name'];
+                $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
+                $iniData['ADMIN_NAME'] = $data['profile']['first_name'] . ' ' . $data['profile']['last_name'];
                 $iniData['ADMIN_EMAIL'] = $data['username'];
                 InstallationController::writeToIni($iniData);
                 $this->Flash->success(__('Administrator setup completed successfully'));
                 return $this->redirect(['action' => 'email_config']);
-            }
-            else {
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
@@ -281,24 +278,23 @@ class InstallationController extends AppController{
     public function emailConfig()
     {
 
-        if($this->request->is('post')){
-            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        if ($this->request->is('post')) {
+            $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
             $emilConf = $this->request->data['email'];
             $iniData['SMTP_HOST'] = $emilConf['host'];
             $iniData['SMTP_PORT'] = $emilConf['port'];
             $iniData['SMTP_USERNAME'] = $emilConf['username'];
             $iniData['SMTP_PASSWORD'] = $emilConf['password'];
-            if(array_key_exists('host', $emilConf) && array_key_exists('port', $emilConf) && array_key_exists('username', $emilConf) && array_key_exists('password', $emilConf)){
+            if (array_key_exists('host', $emilConf) && array_key_exists('port', $emilConf) && array_key_exists('username', $emilConf) && array_key_exists('password', $emilConf)) {
                 $iniData['SMTP_CONFIGURATION_RESULT'] = true;
             }
             $iniData['INSTALLATION_RESULT'] = true;
 
-            if(InstallationController::writeToIni($iniData)){
+            if (InstallationController::writeToIni($iniData)) {
                 $this->Email->welcomeEmail();
                 $this->Flash->success(__('Installation has been completed successfully'));
                 return $this->redirect(['controller' => 'users', 'action' => 'login']);
-            }
-            else{
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
@@ -310,17 +306,17 @@ class InstallationController extends AppController{
      * @param $dir
      * @return array
      */
-    protected function checkRequireDir($path, $dir){
-        if(file_exists($path)){
+    protected function checkRequireDir($path, $dir)
+    {
+        if (file_exists($path)) {
             $result = [
-                'mgs' => $path. ' directory is exists',
+                'mgs' => $path . ' directory is exists',
                 'result' => 'success'
             ];
-        }
-        else{
+        } else {
             $this->requirementAnalysis = false;
             $result = [
-                'mgs' => $dir. ' directory does not exists. Please create '. $dir . ' directory inside ' .str_replace($dir, '', $path),
+                'mgs' => $dir . ' directory does not exists. Please create ' . $dir . ' directory inside ' . str_replace($dir, '', $path),
                 'result' => 'failed'
             ];
         }
@@ -332,17 +328,17 @@ class InstallationController extends AppController{
      * @param $path
      * @return array
      */
-    protected function checkPermission($path){
-        if(is_writable($path)){
+    protected function checkPermission($path)
+    {
+        if (is_writable($path)) {
             $result = [
-                'mgs' => $path. ' directory is writable',
+                'mgs' => $path . ' directory is writable',
                 'result' => 'success'
             ];
-        }
-        else{
+        } else {
             $this->requirementAnalysis = false;
             $result = [
-                'mgs' => $path. ' directory isn\'t writable',
+                'mgs' => $path . ' directory isn\'t writable',
                 'result' => 'failed'
             ];
         }
@@ -376,7 +372,7 @@ class InstallationController extends AppController{
                 $res[] = "$key = " . (is_numeric($val) ? $val : '"' . $val . '"');
             }
         }
-        if (InstallationController::safeFilereWrite(ROOT.'/Conf/config.ini', implode("\r\n", $res))) {
+        if (InstallationController::safeFilereWrite(ROOT . '/Conf/config.ini', implode("\r\n", $res))) {
             return true;
         }
         return false;
@@ -397,7 +393,7 @@ class InstallationController extends AppController{
                 if (!$canWrite) {
                     usleep(round(rand(0, 100) * 1000));
                 }
-            } while ((!$canWrite)and((microtime() - $startTime) < 1000));
+            } while ((!$canWrite) and ((microtime() - $startTime) < 1000));
             if ($canWrite) {
                 fwrite($fp, $dataToSave);
                 flock($fp, LOCK_UN);
@@ -407,4 +403,4 @@ class InstallationController extends AppController{
         }
         return false;
     }
-} 
+}
