@@ -16,19 +16,18 @@ class FeedsController extends AppController
      */
     public function index($projectSlug = null)
     {
-        if( $this->request->params['_ext'] == 'json'){
+        if ($this->request->params['_ext'] == 'json') {
             $this->loadModel('Projects');
 
             $conditions = [];
 
-            if($this->loggedInUser->role == 2){
+            if ($this->loggedInUser->role == 2) {
                 $this->loadModel('ProjectsUsers');
                 $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
                 $conditions = array_merge($conditions, ['Feeds.project_id IN' => $projectIds]);
             }
 
-            if($projectSlug)
-            {
+            if ($projectSlug) {
                 $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
                 $conditions = array_merge($conditions, ['Feeds.project_id' => $projectId]);
             }
@@ -38,12 +37,12 @@ class FeedsController extends AppController
             $limit = 10;
             $page = 1;
 
-            if(isset($this->request->query['page']) && $this->request->query['page']){
+            if (isset($this->request->query['page']) && $this->request->query['page']) {
                 $page = $this->request->query['page'];
             }
 
             if (isset($this->request->query['sort_by'])) {
-                if($this->request->query['sort_by'] == 'id'){
+                if ($this->request->query['sort_by'] == 'id') {
                     $sortBy = 'Tasks.id';
                 }
             }
@@ -63,7 +62,7 @@ class FeedsController extends AppController
             $feeds->page($page);
             $feeds->contain(
                 [
-                    'Projects' => function($q){
+                    'Projects' => function ($q) {
                         $q->select(['name', 'slug']);
                         $q->autoFields(false);
                         return $q;
@@ -84,8 +83,7 @@ class FeedsController extends AppController
             ];
             $this->set('result', $response);
             $this->set('_serialize', ['result']);
-        }
-        else{
+        } else {
             $this->paginate = [
                 'limit' => 20,
                 'order' => ['Feeds.id' => 'DESC']
