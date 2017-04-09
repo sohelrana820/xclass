@@ -71,14 +71,12 @@ class SettingsTable extends Table
     {
         $countMeta = sizeof($data);
         $counter = 0;
-        foreach ($data as $key => $value)
-        {
-            if($this->registerMetaValue($key, $value)){
+        foreach ($data as $key => $value) {
+            if ($this->registerMetaValue($key, $value)) {
                 $counter++;
             }
         }
-        if($countMeta == $counter)
-        {
+        if ($countMeta == $counter) {
             return true;
         }
 

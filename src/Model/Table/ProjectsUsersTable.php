@@ -81,8 +81,11 @@ class ProjectsUsersTable extends Table
         $hasUser = $this->find()
             ->where(['ProjectsUsers.project_id' => $projectId, 'ProjectsUsers.user_id' => $userId])
             ->first();
-        if($hasUser)
+
+        if ($hasUser) {
             return true;
+        }
+
         return false;
     }
 
@@ -108,12 +111,12 @@ class ProjectsUsersTable extends Table
         $users = $this->find();
         $users->where(['ProjectsUsers.project_id' => $projectId]);
         $users->contain([
-            'Users' => function($q){
+            'Users' => function ($q) {
                 $q->select(['id', 'username', 'uuid']);
                 $q->autoFields(false);
                 return $q;
             },
-            'Users.Profiles' => function($q){
+            'Users.Profiles' => function ($q) {
                 $q->select(['first_name', 'last_name', 'phone', 'profile_pic',]);
                 $q->autoFields(false);
                 return $q;
@@ -147,7 +150,7 @@ class ProjectsUsersTable extends Table
             'valueField' => 'project_id'])
             ->toArray();
 
-        if(sizeof($project) > 0){
+        if (sizeof($project) > 0) {
             return $project;
         }
         return [0];
@@ -161,11 +164,9 @@ class ProjectsUsersTable extends Table
     {
         $projectUser = $this->newEntity($data);
         $isAssigned = $this->save($projectUser);
-        if($isAssigned)
-        {
+        if ($isAssigned) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -180,7 +181,7 @@ class ProjectsUsersTable extends Table
         $projectUser = $this->find()
             ->where(['ProjectsUsers.user_id' => $userId, 'ProjectsUsers.project_id' => $projectId])
             ->first();
-        if($this->delete($projectUser)){
+        if ($this->delete($projectUser)) {
             return true;
         }
         return false;

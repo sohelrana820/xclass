@@ -36,7 +36,7 @@ class UsersTable extends Table
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Projects', [
-           'foreignKey' => 'created_by'
+            'foreignKey' => 'created_by'
         ]);
         $this->belongsToMany('ProjectsUsers', [
             'className' => 'ProjectsUsers',
@@ -95,15 +95,14 @@ class UsersTable extends Table
                 [
                     'rule' => function ($value, $context) {
 
-                            if (isset($context['data']['password']) && $value == $context['data']['password']) {
-                                return true;
-                            }
-                            return false;
-                        },
+                        if (isset($context['data']['password']) && $value == $context['data']['password']) {
+                            return true;
+                        }
+                        return false;
+                    },
                     'message' => 'Sorry, password and confirm password does not matched'
                 ]
             );
-
 
 
         return $validator;
@@ -188,7 +187,7 @@ class UsersTable extends Table
             ->notEmpty('new_cPassword', 'Confirm password must be required!');
 
         $validator
-            ->notEmpty('current_password' ,  'Current password must be required!')
+            ->notEmpty('current_password', 'Current password must be required!')
             ->add('current_password', 'custom', [
                 'rule' =>
 
@@ -233,8 +232,7 @@ class UsersTable extends Table
             ->where(['Users.uuid' => $uuid])
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result->id;
         }
         return null;
@@ -252,8 +250,7 @@ class UsersTable extends Table
             ->contain('Profiles')
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result;
         }
         return null;
@@ -270,8 +267,7 @@ class UsersTable extends Table
             ->contain('Profiles')
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result;
         }
         return null;
@@ -288,8 +284,7 @@ class UsersTable extends Table
             ->contain('Profiles')
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result;
         }
         return null;
@@ -306,8 +301,7 @@ class UsersTable extends Table
             ->contain('Profiles')
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result;
         }
         return null;

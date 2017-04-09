@@ -94,8 +94,7 @@ class AttachmentsTable extends Table
             ->where(['Attachments.uuid' => $uuid])
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result;
         }
         return null;

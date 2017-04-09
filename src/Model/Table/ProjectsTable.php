@@ -138,46 +138,46 @@ class ProjectsTable extends Table
         $result = $this->find()
             ->where(['slug' => $slug])
             ->contain([
-                'Labels' => function($q){
+                'Labels' => function ($q) {
                     $q->select(['id', 'project_id', 'name', 'color_code', 'status', 'created']);
                     $q->autoFields(false);
                     $q->limit(5);
                     $q->order(['Labels.created' => 'DESC']);
                     return $q;
                 },
-                'Tasks' => function($q){
+                'Tasks' => function ($q) {
                     $q->select(['id', 'task', 'project_id', 'identity']);
                     $q->autoFields(false);
                     $q->limit(5);
                     $q->order(['Tasks.created' => 'DESC']);
                     return $q;
                 },
-                'Tasks.TasksLabels' => function($q){
+                'Tasks.TasksLabels' => function ($q) {
                     $q->select(['id', 'task_id', 'label_id']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Tasks.TasksLabels.Labels' => function($q){
+                'Tasks.TasksLabels.Labels' => function ($q) {
                     $q->select(['id', 'name', 'color_code']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Tasks.UsersTasks' => function($q){
+                'Tasks.UsersTasks' => function ($q) {
                     $q->select(['id', 'task_id', 'user_id']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Tasks.UsersTasks.Users' => function($q){
+                'Tasks.UsersTasks.Users' => function ($q) {
                     $q->select(['id', 'username', 'uuid']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Tasks.UsersTasks.Users.Profiles' => function($q){
+                'Tasks.UsersTasks.Users.Profiles' => function ($q) {
                     $q->select(['user_id', 'first_name', 'last_name']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Attachments' => function($q){
+                'Attachments' => function ($q) {
                     $q->select(['uuid', 'id', 'name', 'project_id']);
                     $q->autoFields(false);
                     return $q;
@@ -198,7 +198,7 @@ class ProjectsTable extends Table
             ->where(['slug' => $slug])
             ->first();
 
-        if($result){
+        if ($result) {
             return $result->id;
         }
         return null;
@@ -224,7 +224,7 @@ class ProjectsTable extends Table
     {
         $projects = $this->find();
         $projects->select(['id', 'slug', 'name', 'description', 'status', 'created']);
-        if($user->role == 2){
+        if ($user->role == 2) {
             $projectIds = $this->ProjectsUsers->getUsersProjectIds($user->id);
             $projects->where(['Projects.id IN' => $projectIds]);
         }
@@ -233,7 +233,7 @@ class ProjectsTable extends Table
         $projects->order(['Projects.last_opened' => 'DESC']);
         $projects->all();
 
-        if($projects){
+        if ($projects) {
             return $projects->toArray();
         }
         return null;

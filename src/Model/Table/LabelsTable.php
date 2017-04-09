@@ -39,7 +39,6 @@ class LabelsTable extends Table
         $this->belongsTo('Projects', [
             'foreignKey' => 'project_id',
         ]);
-
     }
 
     /**

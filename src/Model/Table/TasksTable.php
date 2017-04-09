@@ -59,7 +59,7 @@ class TasksTable extends Table
             'foreignKey' => 'task_id'
         ]);
         $this->belongsTo("Projects", [
-           'foreign_key' => 'project_id'
+            'foreign_key' => 'project_id'
         ]);
     }
 
@@ -98,8 +98,7 @@ class TasksTable extends Table
     public function countTotalTasksByProjectId($projectId, $status = null)
     {
         $conditions = ['Tasks.project_id' => $projectId];
-        if($status)
-        {
+        if ($status) {
             $conditions = array_merge($conditions, ['Tasks.status IN' => $status]);
         }
 
@@ -129,10 +128,10 @@ class TasksTable extends Table
             'fields' => ['id', 'uuid', 'task', 'description', 'created'],
             'contain' => [
                 'Labels' => [
-                    'fields' => ['id', 'TasksLabels.task_id','name', 'color_code']
+                    'fields' => ['id', 'TasksLabels.task_id', 'name', 'color_code']
                 ],
                 'Users' => [
-                    'fields' => ['id', 'UsersTasks.task_id','uuid']
+                    'fields' => ['id', 'UsersTasks.task_id', 'uuid']
                 ],
                 'Users.Profiles' => [
                     'fields' => ['id', 'UsersTasks.task_id', 'first_name', 'last_name', 'profile_pic']
@@ -153,50 +152,50 @@ class TasksTable extends Table
     {
         $task = $this->find();
         $task->where(['Tasks.project_id' => $projectId, 'Tasks.identity' => $identity]);
-        $task->select(['id', 'task', 'identity', 'description', 'created', 'status',  'createdUser.id', 'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+        $task->select(['id', 'task', 'identity', 'description', 'created', 'status', 'createdUser.id', 'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
         $task->contain(
             [
-                'Projects' => function($q){
+                'Projects' => function ($q) {
                     $q->select(['name', 'slug']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Comments' => function($q){
+                'Comments' => function ($q) {
                     $q->select(['id', 'uuid', 'user_id', 'task_id', 'comment', 'created']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Comments.Users' => function($q){
+                'Comments.Users' => function ($q) {
                     $q->select(['id', 'uuid']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Comments.Users.Profiles' => function($q){
+                'Comments.Users.Profiles' => function ($q) {
                     $q->select(['user_id', 'first_name', 'last_name', 'profile_pic']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Comments.Attachments' => function($q){
+                'Comments.Attachments' => function ($q) {
                     $q->select(['uuid', 'comment_id', 'name']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Labels' => function($q){
+                'Labels' => function ($q) {
                     $q->select(['id', 'name', 'color_code']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Users' => function($q){
+                'Users' => function ($q) {
                     $q->select(['id', 'uuid', 'username']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Users.Profiles' => function($q){
+                'Users.Profiles' => function ($q) {
                     $q->select(['first_name', 'last_name', 'profile_pic']);
                     $q->autoFields(false);
                     return $q;
                 },
-                'Attachments' => function($q){
+                'Attachments' => function ($q) {
                     $q->select(['uuid', 'task_id', 'name']);
                     $q->autoFields(false);
                     return $q;

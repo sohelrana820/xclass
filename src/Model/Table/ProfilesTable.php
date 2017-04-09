@@ -84,8 +84,7 @@ class ProfilesTable extends Table
             ->where(['Profiles.user_id' => $id])
             ->first();
 
-        if($result)
-        {
+        if ($result) {
             return $result;
         }
         return null;
