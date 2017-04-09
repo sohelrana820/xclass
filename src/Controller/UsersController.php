@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use Cake\Event\Event;
 use Cake\Network\Exception\BadRequestException;
 use Cake\Network\Exception\ForbiddenException;
@@ -14,7 +15,8 @@ use Cake\Utility\Text;
  * Class UsersController
  * @package App\Controller
  */
-class UsersController extends AppController{
+class UsersController extends AppController
+{
 
     /**
      * @var string
@@ -43,7 +45,8 @@ class UsersController extends AppController{
     /**
      * @param Event $event
      */
-    public function beforeFilter(Event $event){
+    public function beforeFilter(Event $event)
+    {
         parent::beforeFilter($event);
     }
 
@@ -58,7 +61,6 @@ class UsersController extends AppController{
         $user = $this->Users->newEntity();
 
         if ($this->request->is('post')) {
-
             $data = $this->request->data;
             $data['uuid'] = Text::uuid();
             $verifyCode = substr(Text::uuid(), 0, 32);
@@ -75,8 +77,7 @@ class UsersController extends AppController{
                 $this->Flash->success(__('Signup successful! Please check your email to verify your email address'));
                 $this->Email->signupConfirmEmail($data, $verifyCode);
                 return $this->redirect($this->Auth->redirectUrl());
-            }
-            else {
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
@@ -91,30 +92,26 @@ class UsersController extends AppController{
      */
     public function verifyEmail()
     {
-        if(!isset($this->request->query['code']) && !$this->request->query['code'])
-        {
+        if (!isset($this->request->query['code']) && !$this->request->query['code']) {
             throw new BadRequestException;
         }
 
         $code = $this->request->query['code'];
         $userInfo = $this->Users->getUserByEmailCode($code);
-        if(!$userInfo)
-        {
+        if (!$userInfo) {
             throw new BadRequestException;
         }
 
-        if($userInfo->email_verify != 1){
+        if ($userInfo->email_verify != 1) {
             $user = $this->Users->find('all')->where(['id' => $userInfo->id])->first();
             $user->email_verify = 1;
             $user->email_verifying_code = null;
-            if($this->Users->save($user)){
+            if ($this->Users->save($user)) {
                 $this->Flash->success(__('Your email address has been verified successfully'));
-            }
-            else{
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
-        }
-        else{
+        } else {
             $this->Flash->success(__('Your email is already verified'));
         }
         return $this->redirect(['controller' => 'users', 'action' => 'login']);
@@ -130,30 +127,26 @@ class UsersController extends AppController{
             ->layout('login');
 
         if ($this->request->is('post')) {
-
-            if(!$this->request->data['username'])
-            {
+            if (!$this->request->data['username']) {
                 $this->Flash->error(__('Please enter valid email address'));
                 return $this->redirect(['controller' => 'users', 'action' => 'forgot-password']);
             }
 
             $userInfo = $this->Users->getUserByEmail($this->request->data['username']);
-            if(!$userInfo)
-            {
+            if (!$userInfo) {
                 $this->Flash->error(__('Sorry! this email is not registered'));
                 return $this->redirect(['controller' => 'users', 'action' => 'forgot-password']);
             }
 
             $user = $this->Users->find('all')->where(['id' => $userInfo->id])->first();
-            $forgotPassCode = substr(Text::uuid(), 0, 32);;
+            $forgotPassCode = substr(Text::uuid(), 0, 32);
             $user->forgot_pass_code = $forgotPassCode;
 
-            if($this->Users->save($user)){
+            if ($this->Users->save($user)) {
                 $this->Email->forgotPassEmail($userInfo, $forgotPassCode);
                 $this->Flash->success(__('A reset password link has been sent to your email'));
                 return $this->redirect(['controller' => 'users', 'action' => 'forgot-password']);
-            }
-            else{
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
@@ -174,14 +167,12 @@ class UsersController extends AppController{
 
         $code = $this->request->query['code'];
         $userInfo = $this->Users->getUserByForgotCode($code);
-        if(!$userInfo)
-        {
+        if (!$userInfo) {
             throw new BadRequestException;
         }
 
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
-
             $user = $this->Users->newEntity(
                 $this->request->data,
                 [
@@ -299,8 +290,7 @@ class UsersController extends AppController{
             $verifyCode = substr(Text::uuid(), 0, 32);
             $data['email_verifying_code'] = $verifyCode;
 
-            if(isset($data['profile']['birthday']) && $data['profile']['birthday'])
-            {
+            if (isset($data['profile']['birthday']) && $data['profile']['birthday']) {
                 $data['profile']['birthday'] = date('Y-m-d', strtotime($data['profile']['birthday']));
             }
 
@@ -315,15 +305,14 @@ class UsersController extends AppController{
                 $this->Email->signupConfirmEmail($data, $verifyCode);
                 $this->Flash->success(__('New user has been created successfully'));
                 return $this->redirect(['controller' => 'users', 'action' => 'index']);
-            }
-            else {
+            } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
 
-        if($this->request->params['_ext'] == 'json'){
+        if ($this->request->params['_ext'] == 'json') {
             $response = [
                 'success' => false,
                 'message' => 'Sorry, something went wrong',
@@ -340,8 +329,7 @@ class UsersController extends AppController{
                 ]
             );
 
-            if($entity->errors())
-            {
+            if ($entity->errors()) {
                 $response['error_message'] = $entity->errors();
             }
 
@@ -370,28 +358,26 @@ class UsersController extends AppController{
         $limit = $this->paginationLimit;
         $conditions = [];
 
-        if(isset($this->request->query) && $this->request->query)
-        {
+        if (isset($this->request->query) && $this->request->query) {
             $response = $this->Utilities->buildUsesrListConditions($this->request->query);
             $conditions = array_merge($conditions, $response);
         }
 
-        if(isset($this->request->query['limit']) && $this->request->query['limit']){
-            if($this->request->query['limit'] == 'false'){
+        if (isset($this->request->query['limit']) && $this->request->query['limit']) {
+            if ($this->request->query['limit'] == 'false') {
                 $limit = null;
-            }
-            else{
-                $limit = (int) $this->request->query['limit'];
+            } else {
+                $limit = (int)$this->request->query['limit'];
             }
         }
 
-        if($this->request->params['_ext'] != 'json'){
+        if ($this->request->params['_ext'] != 'json') {
             $this->paginate = [
                 'conditions' => $conditions,
-                'fields' => ['Users.id', 'Users.uuid',  'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
+                'fields' => ['Users.id', 'Users.uuid', 'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
                 'contain' => [
                     'Profiles' => [
-                        'fields'=> []
+                        'fields' => []
                     ]
                 ],
                 'limit' => $limit,
@@ -400,14 +386,13 @@ class UsersController extends AppController{
             $users = $this->paginate($this->Users);
             $this->set('users', $users);
             $this->set('_serialize', ['users']);
-        }
-        else {
+        } else {
             $users = $this->Users->find('all', [
                 'conditions' => $conditions,
                 'fields' => ['Users.id', 'Users.uuid', 'Users.username', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.profile_pic'],
                 'contain' => [
                     'Profiles' => [
-                        'fields'=> []
+                        'fields' => []
                     ]
                 ],
                 'limit' => $limit,
@@ -431,15 +416,13 @@ class UsersController extends AppController{
     public function view($uuid)
     {
         $this->checkPermission($this->isAdmin());
-        if(empty($uuid))
-        {
+        if (empty($uuid)) {
             throw new NotFoundException;
         }
 
-        if(!is_numeric($uuid)){
+        if (!is_numeric($uuid)) {
             $userID = $this->Users->getIDbyUUID($uuid);
-        }
-        else{
+        } else {
             $userID = $uuid;
         }
 
@@ -496,7 +479,7 @@ class UsersController extends AppController{
         $email = $this->request->data['email'];
         $result = $this->Users->getUserByEmail($email);
 
-        if($result){
+        if ($result) {
             $response = [
                 'is_available' => false,
             ];
