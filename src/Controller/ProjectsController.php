@@ -88,7 +88,6 @@ class ProjectsController extends AppController
 
         $project = $this->Projects->newEntity();
         if ($this->request->is('post')) {
-
             $this->request->data['user_id'] = $this->userID;
             $this->request->data['slug'] = strtolower(Inflector::slug($this->request->data['name']));
             $this->request->data['deadline'] = $this->request->data['deadline'];
@@ -134,7 +133,6 @@ class ProjectsController extends AppController
     {
         $project = $this->Projects->getProjectBySlug($slug);
         if ($this->request->is(['patch', 'post', 'put'])) {
-
             $allAttachments = [];
             if (isset($this->request->data['attachments'])) {
                 $attachments = $this->request->data['attachments'];
@@ -260,7 +258,6 @@ class ProjectsController extends AppController
                 $this->loadModel('Users');
                 $isAssigned = $this->ProjectsUsers->assignProjectUser($data);
                 if ($isAssigned) {
-
                     $this->loadModel('Feeds');
                     $project = $this->Projects->getProjectById($projectId);
                     $users[] = $this->request->data['user_id'];
@@ -294,7 +291,6 @@ class ProjectsController extends AppController
         $userId = $this->request->data['user_id'];
         $isRemoved = $this->ProjectsUsers->removeProjectUser($userId, $projectId);
         if ($isRemoved) {
-
             $this->loadModel('Feeds');
             $project = $this->Projects->getProjectById($projectId);
             $users[] = $this->request->data['user_id'];
