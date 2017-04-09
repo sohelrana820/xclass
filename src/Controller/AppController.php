@@ -81,7 +81,6 @@ class AppController extends Controller
      */
     public $paginationLimit = 50;
 
-
     public function initialize()
     {
         parent::initialize();
@@ -90,23 +89,22 @@ class AppController extends Controller
         $this->loadComponent('Utilities');
         $this->loadComponent('Email');
         $this->loadComponent('Auth', [
-                'loginRedirect' => [
-                    'controller' => 'Dashboard',
-                    'action' => 'index'
-                ],
-                'logoutRedirect' => [
-                    'controller' => 'Users',
-                    'action' => 'login',
-                ]
+            'loginRedirect' => [
+                'controller' => 'Dashboard',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login',
             ]
-        );
+        ]);
         $this->loadModel('Users');
         $this->loadModel('Labels');
         $this->loadModel('Tasks');
 
-        if(file_exists(ROOT.'/Conf/config.ini')){
-            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-            if(isset($iniData['APPLICATION_NAME']) && $iniData['APPLICATION_NAME']){
+        if (file_exists(ROOT . '/Conf/config.ini')) {
+            $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
+            if (isset($iniData['APPLICATION_NAME']) && $iniData['APPLICATION_NAME']) {
                 $this->appsName = $iniData['APPLICATION_NAME'];
             }
         }
@@ -118,19 +116,29 @@ class AppController extends Controller
      */
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['signup', 'verifyEmail', 'forgotPassword', 'install', 'resetPassword', 'requirements', 'database', 'general', 'administrator', 'emailConfig']);
+        $this->Auth->allow([
+            'signup',
+            'verifyEmail',
+            'forgotPassword',
+            'install',
+            'resetPassword',
+            'requirements',
+            'database',
+            'general',
+            'administrator',
+            'emailConfig'
+        ]);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
 
-        if(file_exists(ROOT.'/Conf/config.ini')){
-            $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
+        if (file_exists(ROOT . '/Conf/config.ini')) {
+            $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
         }
 
-        if(isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']){
+        if (isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']) {
             $this->loggedInUser = $this->Users->getUserByID($this->userID);
-        }
-        else {
-            if($this->request->param('controller') != 'Installation'){
+        } else {
+            if ($this->request->param('controller') != 'Installation') {
                 return $this->redirect(['controller' => 'installation', 'action' => 'install']);
             }
         }
@@ -139,11 +147,11 @@ class AppController extends Controller
             ->layout('application')
             ->theme($this->currentTheme);
 
-        if(isset($iniData['APPLICATION_NAME'])){
+        if (isset($iniData['APPLICATION_NAME'])) {
             $this->appsName = $iniData['APPLICATION_NAME'];
         }
 
-        if(isset($iniData['APPLICATION_LOGO'])){
+        if (isset($iniData['APPLICATION_LOGO'])) {
             $this->appsLogo = $iniData['APPLICATION_LOGO'];
         }
     }
@@ -174,8 +182,7 @@ class AppController extends Controller
      */
     public function checkAuthentication()
     {
-        if($this->Auth->user())
-        {
+        if ($this->Auth->user()) {
             return $this->redirect($this->referer());
         }
     }
@@ -185,7 +192,7 @@ class AppController extends Controller
      */
     protected function isAdmin()
     {
-        if($this->Auth->user('role') == 1){
+        if ($this->Auth->user('role') == 1) {
             return true;
         }
         return false;
@@ -196,8 +203,7 @@ class AppController extends Controller
      */
     protected function checkPermission($permission)
     {
-        if(!$permission)
-        {
+        if (!$permission) {
             $this->Flash->error(_('Sorry, you are not authorised to access this page'));
             $this->redirect($this->referer());
         }
