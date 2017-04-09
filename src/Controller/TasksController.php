@@ -41,38 +41,29 @@ class TasksController extends AppController
         $page = 1;
 
         $this->loadModel('Projects');
-        if($projectSlug)
-        {
+        if ($projectSlug) {
             $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
             $conditions = array_merge($conditions, ['Tasks.project_id' => $projectId]);
-        }
-        elseif($this->loggedInUser->role == 2){
+        } elseif ($this->loggedInUser->role == 2) {
             $this->loadModel('ProjectsUsers');
             $projectIds = $this->ProjectsUsers->getUsersProjectIds($this->loggedInUser->id);
             $conditions = array_merge($conditions, ['Tasks.project_id IN' => $projectIds]);
         }
 
-        if( $this->request->params['_ext'] != 'json'){
+        if ($this->request->params['_ext'] != 'json') {
             $project = $this->Projects->getProjectBySlug($projectSlug);
-            if($project == null)
-            {
+            if ($project == null) {
                 throw new BadRequestException();
             }
             $this->set('project', $project);
             $this->set('_serialize', ['project']);
-        }
-        else {
-
-            if(isset($projectId) && $projectId){
-
-            }
-
-            if(isset($this->request->query['page']) && $this->request->query['page']){
+        } else {
+            if (isset($this->request->query['page']) && $this->request->query['page']) {
                 $page = $this->request->query['page'];
             }
 
             if (isset($this->request->query['sort_by'])) {
-                if($this->request->query['sort_by'] == 'id'){
+                if ($this->request->query['sort_by'] == 'id') {
                     $sortBy = 'Tasks.id';
                 }
             }
@@ -88,9 +79,9 @@ class TasksController extends AppController
             if (isset($this->request->query['query'])) {
                 $conditions = array_merge($conditions, [
                     'or' => [
-                        'Tasks.task LIKE' => '%'.$this->request->query['query'].'%',
+                        'Tasks.task LIKE' => '%' . $this->request->query['query'] . '%',
                         'Tasks.id' => $this->request->query['query']
-                        ]
+                    ]
                 ]);
             }
 
@@ -103,34 +94,34 @@ class TasksController extends AppController
             }
 
             $tasks = $this->Tasks->find();
-            $tasks->select(['id', 'identity', 'task', 'created', 'status',  'createdUser.id',   'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
+            $tasks->select(['id', 'identity', 'task', 'created', 'status', 'createdUser.id', 'createdUser.uuid', 'createdUser.username', 'createdUserProfile.first_name', 'createdUserProfile.last_name', 'createdUserProfile.profile_pic']);
             $tasks->where($conditions);
             $tasks->order([$sortBy => $orderBy]);
             $tasks->limit($limit);
             $tasks->page($page);
             $tasks->contain(
                 [
-                    'Projects' => function($q){
+                    'Projects' => function ($q) {
                         $q->select(['name', 'slug']);
                         $q->autoFields(false);
                         return $q;
                     },
-                    'Users' => function($q){
+                    'Users' => function ($q) {
                         $q->select(['uuid', 'username']);
                         $q->autoFields(false);
                         return $q;
                     },
-                    'Users.Profiles' => function($q){
+                    'Users.Profiles' => function ($q) {
                         $q->select(['first_name', 'last_name', 'profile_pic']);
                         $q->autoFields(false);
                         return $q;
                     },
-                    'Labels' => function($q){
+                    'Labels' => function ($q) {
                         $q->select(['name', 'color_code']);
                         $q->autoFields(false);
                         return $q;
                     },
-                    'Comments' => function($q){
+                    'Comments' => function ($q) {
                         $q->select(['id', 'task_id']);
                         $q->autoFields(false);
                         return $q;
@@ -204,7 +195,6 @@ class TasksController extends AppController
      */
     public function create($slug = null)
     {
-
     }
 
     /**
@@ -217,15 +207,13 @@ class TasksController extends AppController
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
         $details = $this->Tasks->getDetails($projectId, $identity);
 
-        if( $this->request->params['_ext'] != 'json'){
-            if($details == null)
-            {
+        if ($this->request->params['_ext'] != 'json') {
+            if ($details == null) {
                 throw new BadRequestException();
             }
             $this->set('task', $details);
             $this->set('_serialize', ['project']);
-        }
-        else{
+        } else {
             $response = [
                 'success' => true,
                 'message' => 'Task details',
@@ -246,13 +234,12 @@ class TasksController extends AppController
         $projectId = $this->Projects->getProjectIDBySlug($projectSlug);
         $task = $this->Tasks->newEntity();
         if ($this->request->is('post')) {
-            if(isset($projectId) && $projectId)
-            {
+            if (isset($projectId) && $projectId) {
                 $allAttachments = [];
-                if(isset($this->request->data['file'])){
+                if (isset($this->request->data['file'])) {
                     $attachments = $this->request->data['file'];
-                    foreach($attachments as $attachment){
-                        if(isset($attachment['name']) && $attachment['name']){
+                    foreach ($attachments as $attachment) {
+                        if (isset($attachment['name']) && $attachment['name']) {
                             $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
                             $allAttachments[] = [
                                 'uuid' => Text::uuid(),
@@ -264,9 +251,9 @@ class TasksController extends AppController
                 }
 
                 $identity = ($this->Tasks->countTaskByProject($projectId) + 1);
-                $this->request->data['uuid'] =  Text::uuid();
+                $this->request->data['uuid'] = Text::uuid();
                 $this->request->data['project_id'] = $projectId;
-                $this->request->data['identity'] =  $identity;
+                $this->request->data['identity'] = $identity;
                 $this->request->data['created_by'] = $this->userID;
                 $this->request->data['attachments'] = $allAttachments;
                 $task = $this->Tasks->patchEntity($task, $this->request->data);
@@ -274,14 +261,14 @@ class TasksController extends AppController
                 if ($savedTask) {
                     $this->loadModel('Feeds');
                     $labels = [];
-                    if(isset($this->request->data['labels'])){
+                    if (isset($this->request->data['labels'])) {
                         $labels = $this->request->data['labels']['_ids'];
                     }
                     $users = [];
-                    if(isset($this->request->data['users'])){
+                    if (isset($this->request->data['users'])) {
                         $users = $this->request->data['users']['_ids'];
                     }
-                    $this->Feeds->storeFeeds($projectId, 'opened_task', ['user' => $this->loggedInUser, 'task' => $savedTask, 'labels' => $labels,  'users' => $users, 'project_slug' => $projectSlug]);
+                    $this->Feeds->storeFeeds($projectId, 'opened_task', ['user' => $this->loggedInUser, 'task' => $savedTask, 'labels' => $labels, 'users' => $users, 'project_slug' => $projectSlug]);
                     $response = [
                         'success' => true,
                         'message' => 'New task has been created successfully',
@@ -294,8 +281,7 @@ class TasksController extends AppController
                         'data' => null,
                     ];
                 }
-            }
-            else{
+            } else {
                 $response = [
                     'success' => false,
                     'message' => 'Task could not created',
@@ -321,7 +307,6 @@ class TasksController extends AppController
             'contain' => ['Projects']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-
             unset($this->request->data['createdUserProfile']);
             unset($this->request->data['createdUser']);
             unset($this->request->data['created']);
@@ -340,23 +325,19 @@ class TasksController extends AppController
                     'action_on_user' => null
                 ];
 
-                if(isset($this->request->data['edit_type']))
-                {
+                if (isset($this->request->data['edit_type'])) {
                     $options['edit_type'] = $this->request->data['edit_type'];
                 }
 
-                if(isset($this->request->data['edit_status']))
-                {
+                if (isset($this->request->data['edit_status'])) {
                     $options['edit_status'] = $this->request->data['edit_status'];
                 }
 
-                if(isset($this->request->data['action_on_label']))
-                {
+                if (isset($this->request->data['action_on_label'])) {
                     $options['action_on_label'] = $this->request->data['action_on_label'];
                 }
 
-                if(isset($this->request->data['action_on_user']))
-                {
+                if (isset($this->request->data['action_on_user'])) {
                     $options['action_on_user'] = $this->request->data['action_on_user'];
                 }
 
@@ -416,7 +397,7 @@ class TasksController extends AppController
         $this->autoRender = false;
         $this->loadModel('Attachments');
         $attachments = $this->Attachments->getAttachmentByUUID($uuid);
-        $path = WWW_ROOT.'img/attachments/'.$attachments->path;
+        $path = WWW_ROOT . 'img/attachments/' . $attachments->path;
         $this->response->file($path, array(
             'download' => true,
             'name' => $attachments->name
@@ -435,7 +416,7 @@ class TasksController extends AppController
 
         $isTrashed = false;
         if ($this->Attachments->delete($attachment)) {
-            if(file_exists(WWW_ROOT . 'img/attachments/' . $attachment->path)){
+            if (file_exists(WWW_ROOT . 'img/attachments/' . $attachment->path)) {
                 unlink(WWW_ROOT . 'img/attachments/' . $attachment->path);
             }
             $isTrashed = true;
@@ -446,23 +427,21 @@ class TasksController extends AppController
                 'success' => true,
                 'message' => 'Attachment has been deleted successfully',
             ];
-        }
-        else {
+        } else {
             $response = [
                 'success' => false,
                 'message' => 'Attachment could not deleted',
             ];
         }
 
-        if( $this->request->params['_ext'] != 'json'){
+        if ($this->request->params['_ext'] != 'json') {
             if ($isTrashed) {
                 $this->Flash->success('Attachment has been removed successfully');
             } else {
                 $this->Flash->error('Attachment could not deleted');
             }
             $this->redirect($this->referer());
-        }
-        else {
+        } else {
             $this->set('result', $response);
             $this->set('_serialize', ['result']);
         }
