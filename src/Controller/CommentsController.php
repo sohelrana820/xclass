@@ -54,10 +54,10 @@ class CommentsController extends AppController
         $this->request->data['uuid'] = Text::uuid();
         if ($this->request->is('post')) {
             $allAttachments = [];
-            if(isset($this->request->data['file'])){
+            if (isset($this->request->data['file'])) {
                 $attachments = $this->request->data['file'];
-                foreach($attachments as $attachment){
-                    if(isset($attachment['name']) && $attachment['name']){
+                foreach ($attachments as $attachment) {
+                    if (isset($attachment['name']) && $attachment['name']) {
                         $result = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $attachment, Text::uuid());
                         $allAttachments[] = [
                             'uuid' => Text::uuid(),
@@ -75,7 +75,12 @@ class CommentsController extends AppController
                 $this->loadModel('Tasks');
                 $task = $this->Tasks->getTask($this->request->data['task_id']);
                 $this->loadModel('Feeds');
-                $this->Feeds->storeFeeds($task->project_id, 'commented', ['user' => $this->loggedInUser, 'task' => $task, 'comment' => $saveComment, 'project_slug' => $task->project->slug]);
+                $this->Feeds->storeFeeds($task->project_id, 'commented', [
+                    'user' => $this->loggedInUser,
+                    'task' => $task,
+                    'comment' => $saveComment,
+                    'project_slug' => $task->project->slug
+                ]);
                 $comment->user = $this->loggedInUser;
                 $response = [
                     'success' => true,
@@ -106,29 +111,27 @@ class CommentsController extends AppController
         if (!$id) {
             $id = (int)$this->request->data['id'];
         }
-        $comment = $this->Comments->get($id,
-            [
-                'contain' => [
-                    'Users' => function ($q) {
-                        $q->select(['id', 'uuid', 'username']);
-                        $q->autoFields(false);
-                        return $q;
-                    },
-                    'Users.Profiles' => function ($q) {
-                        $q->select(['first_name', 'last_name', 'profile_pic']);
-                        $q->autoFields(false);
-                        return $q;
-                    },
-                    'Attachments' => function ($q) {
-                        $q->select(['id', 'uuid', 'name', 'path', 'comment_id']);
-                        $q->autoFields(false);
-                        return $q;
-                    }
-                ],
-            ]);
+        $comment = $this->Comments->get($id, [
+            'contain' => [
+                'Users' => function ($q) {
+                    $q->select(['id', 'uuid', 'username']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+                'Users.Profiles' => function ($q) {
+                    $q->select(['first_name', 'last_name', 'profile_pic']);
+                    $q->autoFields(false);
+                    return $q;
+                },
+                'Attachments' => function ($q) {
+                    $q->select(['id', 'uuid', 'name', 'path', 'comment_id']);
+                    $q->autoFields(false);
+                    return $q;
+                }
+            ],
+        ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-
             $allAttachments = [];
             if (isset($this->request->data['file'])) {
                 $attachments = $this->request->data['file'];
@@ -148,11 +151,15 @@ class CommentsController extends AppController
             $comment = $this->Comments->patchEntity($comment, $this->request->data);
             $updateComment = $this->Comments->save($comment);
             if ($updateComment) {
-
                 $this->loadModel('Tasks');
                 $task = $this->Tasks->getTask($this->request->data['task_id']);
                 $this->loadModel('Feeds');
-                $this->Feeds->storeFeeds($task->project_id, 'update_comment', ['user' => $this->loggedInUser, 'task' => $task, 'comment' => $updateComment, 'project_slug' => $task->project->slug]);
+                $this->Feeds->storeFeeds($task->project_id, 'update_comment', [
+                    'user' => $this->loggedInUser,
+                    'task' => $task,
+                    'comment' => $updateComment,
+                    'project_slug' => $task->project->slug
+                ]);
                 $response = [
                     'success' => true,
                     'message' => 'Comments has been updated successfully',
@@ -169,6 +176,7 @@ class CommentsController extends AppController
             $this->set('_serialize', ['result']);
         }
     }
+
     /**
      * Delete method
      *
@@ -182,11 +190,15 @@ class CommentsController extends AppController
         $comment = $this->Comments->get($id);
         $deleteComment = $this->Comments->delete($comment);
         if ($deleteComment) {
-
             $this->loadModel('Tasks');
             $task = $this->Tasks->getTask($comment->task_id);
             $this->loadModel('Feeds');
-            $this->Feeds->storeFeeds($task->project_id, 'delete_comment', ['user' => $this->loggedInUser, 'task' => $task, 'comment' => $comment, 'project_slug' => $task->project->slug]);
+            $this->Feeds->storeFeeds($task->project_id, 'delete_comment', [
+                'user' => $this->loggedInUser,
+                'task' => $task,
+                'comment' => $comment,
+                'project_slug' => $task->project->slug
+            ]);
 
             $response = [
                 'success' => true,
