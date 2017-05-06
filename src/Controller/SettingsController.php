@@ -42,6 +42,13 @@ class SettingsController extends AppController
         $this->set('settings', $iniData);
 
         if ($this->request->is('post')) {
+
+            if($this->mode == 'demo')
+            {
+                $this->Flash->error(__('You can\'t update configuretion on demo environment'));
+                return $this->redirect($this->referer());
+            }
+
             $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
             $appName = $iniData['APPLICATION_NAME'];
             $appLogo = $iniData['APPLICATION_LOGO'];
