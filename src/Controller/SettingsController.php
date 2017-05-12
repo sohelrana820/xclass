@@ -52,6 +52,7 @@ class SettingsController extends AppController
             $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
             $appName = $iniData['APPLICATION_NAME'];
             $appLogo = $iniData['APPLICATION_LOGO'];
+            $appLogo = str_replace('attachments/', '', $appLogo);
 
             if (isset($this->request->data['application']['logo']['name']) && $this->request->data['application']['logo']['name']) {
                 $appLogo = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $this->request->data['application']['logo'], 'logo');

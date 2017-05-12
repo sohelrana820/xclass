@@ -44,6 +44,7 @@ class AppController extends Controller
      * @return void
      */
 
+    // $mode = live | demo
     public $mode = 'demo';
 
     public $userID;
