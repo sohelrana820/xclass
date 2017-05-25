@@ -1,0 +1,60 @@
+############ Common #############
+msgid "first_name"
+msgstr "First name"
+
+msgid "last_name"
+msgstr "Last name"
+
+msgid "email_address"
+msgstr "Email Address"
+
+msgid "password"
+msgstr "Password"
+
+msgid "confirm_password"
+msgstr "Conform password"
+
+msgid "create_account"
+msgstr "Create Account"
+
+###########Login Page ###########
+msgid "login_page_title"
+msgstr "Signin"
+
+msgid "login_btn"
+msgstr "Signin"
+
+msgid "do_not_have_account"
+msgstr "Don't have account"
+
+msgid "click_to_create_account"
+msgstr "click here to create account"
+
+msgid "forgot_password"
+msgstr "Forgot password"
+
+###########Signup Page ###########
+msgid "signup_page_title"
+msgstr "Create Account"
+
+msgid "already_have_account"
+msgstr "Already have account"
+
+msgid "click_to_login"
+msgstr "click here to signin"
+
+###########Forgot Password Page ###########
+msgid "forgot_password_page_title"
+msgstr "Forgot Password"
+
+msgid "send_me_email"
+msgstr "Send me Email"
+
+###########Reset Password Page ###########
+msgid "reset_password_page_title"
+msgstr "Reset Password"
+
+msgid "reset_password_btn"
+msgstr "Reset Password"
+
+

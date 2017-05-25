@@ -18,6 +18,7 @@ use App\Model\Table\ProjectsUsersTable;
 use Cake\Controller\Controller;
 use Cake\Core\Configure;
 use Cake\Event\Event;
+use Cake\I18n\I18n;
 use Cake\Network\Session;
 use Cake\Routing\Router;
 
@@ -87,6 +88,7 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
+        I18n::locale('en_US');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Utilities');

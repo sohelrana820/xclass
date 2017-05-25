@@ -1,4 +1,4 @@
-<?php echo $this->assign('title', 'Login'); ?>
+<?php echo $this->assign('title', __('login_page_title')); ?>
 
 <?php echo $this->Form->create('User', ['url' => ['controller' => 'users', 'action' => 'login'], 'class' => 'login_form']);?>
 <div class="form-group">
@@ -9,11 +9,11 @@
     <label class="text-info">Password</label>
     <?php echo $this->Form->input('password', ['type' => 'password', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false]);?>
 </div>
-    <button type="submit" class="btn btn-primary login-button">Signin</button>
+    <button type="submit" class="btn btn-primary login-button"><?php echo __('login_btn')?></button>
     <span class="pull-right message text-right">
-        Don't have account
-    <?php echo $this->Html->link('click here to create account', ['controller' => 'users', 'action' => 'signup']);?>
+        <?php echo __('do_not_have_account');?>
+    <?php echo $this->Html->link(__('click_to_create_account'), ['controller' => 'users', 'action' => 'signup']);?>
     <br/>
-    <?php echo $this->Html->link('Forgot password', ['controller' => 'users', 'action' => 'forgot_password']);?>
+    <?php echo $this->Html->link(__('forgot_password'), ['controller' => 'users', 'action' => 'forgot_password']);?>
     </span>
 <?php echo $this->Form->end();?>
