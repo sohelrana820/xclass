@@ -41,6 +41,17 @@ msgstr "Tablero"
 msgid "project_list_text"
 msgstr "Lista de proyectos"
 
+msgid "create_project"
+msgstr "Crear proyecto"
+
+msgid "manage_project"
+msgstr "Gestionar proyecto"
+
+msgid "attachment_text"
+msgstr "Adjunto archivo"
+
+msgid "name"
+msgstr "Nombre"
 
 ###########Login Page ###########
 msgid "login_page_title"
@@ -128,3 +139,38 @@ msgstr "Gestionar proyecto"
 
 msgid "get_started"
 msgstr "Empezar"
+
+
+###########Create Project Page ###########
+msgid "create_project_page_title"
+msgstr "Nuevo proyecto"
+
+msgid "new_project"
+msgstr "Nuevo proyecto"
+
+msgid "provide_info_to_create_project"
+msgstr "Proporcionar toda la información válida para crear un nuevo proyecto"
+
+msgid "project_name"
+msgstr "Nombre del proyecto"
+
+msgid "name_of_project"
+msgstr "Nombre del proyecto"
+
+msgid "description"
+msgstr "Descripción"
+
+msgid "deadline"
+msgstr "Fecha tope"
+
+msgid "project_deadline"
+msgstr "Fecha límite del proyecto"
+
+msgid "note"
+msgstr "Nota"
+
+msgid "project_note"
+msgstr "Nota del proyecto"
+
+msgid "add_more_attachment"
+msgstr "Añadir más accesorio"
