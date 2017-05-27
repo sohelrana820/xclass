@@ -14,6 +14,33 @@ msgstr "Contraseña"
 msgid "confirm_password"
 msgstr "Confirmar contraseña"
 
+msgid "create_account"
+msgstr "Crear una cuenta"
+
+msgid "user_assigned"
+msgstr "Asignado por el usuario"
+
+msgid "total_labels"
+msgstr "Total de etiquetas"
+
+msgid "total_tasks"
+msgstr "Tareas totales"
+
+msgid "assign_user"
+msgstr "Asignar usuario"
+
+msgid "create_label"
+msgstr "Crear etiqueta"
+
+msgid "create_task"
+msgstr "Crear tarea"
+
+msgid "dashboard_text"
+msgstr "Tablero"
+
+msgid "project_list_text"
+msgstr "Lista de proyectos"
+
 
 ###########Login Page ###########
 msgid "login_page_title"
@@ -59,3 +86,45 @@ msgid "reset_password_btn"
 msgstr "Restablecer la contraseña"
 
 
+###########Dashboard Page ###########
+msgid "dashboard_page_title"
+msgstr "Mi tablero"
+
+msgid "last_opened_project"
+msgstr "Últimas listas de proyectos abiertas"
+
+msgid "welcome_to"
+msgstr "Bienvenido a"
+
+msgid "create_project_to_get_started"
+msgstr "Cree su proyecto para empezar. Esta aplicación es para asignar al usuario al proyecto, gestionar la tarea del proyecto, las etiquetas del proyecto del administrador. Sentir comodidad para administrar su proyecto"
+
+msgid "your_not_assigned_any_project"
+msgstr "Todavía no se ha asignado ningún proyecto!"
+
+msgid "create_new_project"
+msgstr "Crear nuevo proyecto"
+
+msgid "status_processing"
+msgstr "Estado: Progreso"
+
+msgid "status_paused"
+msgstr "Estado: en pausa"
+
+msgid "status_invalid"
+msgstr "Estado: No válido"
+
+msgid "status_completed"
+msgstr "Estado: Completado"
+
+msgid "status_na"
+msgstr "Estado: N / A"
+
+msgid "started_at"
+msgstr "Empezó a las"
+
+msgid "manage_project"
+msgstr "Gestionar proyecto"
+
+msgid "get_started"
+msgstr "Empezar"
