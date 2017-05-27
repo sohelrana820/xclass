@@ -1,13 +1,13 @@
-<?php echo $this->assign('title', 'My Dashboard'); ?>
+<?php echo $this->assign('title', __('dashboard_page_title')); ?>
 
 <?php if($projects):?>
 <div class="page-header">
     <h2 class="title pull-left">
-        <?php echo $this->Html->link('Dashboard', ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'link']);?>
-        <p class="sub-title">Last opened project lists</p>
+        <?php echo $this->Html->link(__('dashboard_text'), ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'link']);?>
+        <p class="sub-title"><?php echo __('last_opened_project');?></p>
     </h2>
     <div class="pull-right btn-areas">
-        <?php echo $this->Html->link('Project List', ['controller' => 'projects', 'action' => 'index'], ['class' => 'btn btn-success']);?>
+        <?php echo $this->Html->link(__('project_list_text'), ['controller' => 'projects', 'action' => 'index'], ['class' => 'btn btn-success']);?>
     </div>
 
     <div class="clearfix"></div>
@@ -24,14 +24,14 @@
             </span>
             <br/>
             <br/>
-            <h2>Welcome to <?php echo $appsName;?>!</h2>
+            <h2><?php echo __('welcome_to');?> <?php echo $appsName;?>!</h2>
             <?php if($userInfo->role == 1):?>
-                <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
+                <p class="lead"><?php echo __('create_project_to_get_started');?></p>
             <?php else:?>
-                <p class="lead red">You are not assigned any project yet!</p>
+                <p class="lead red"><?php echo __('your_not_assigned_any_project');?></p>
             <?php endif;?>
             <br/>
-            <?php echo $userInfo->role != 2 ? $this->Html->link('Get Started', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']) : '';?>
+            <?php echo $userInfo->role != 2 ? $this->Html->link(__('get_started'), ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']) : '';?>
         </div>
     </div>
 </div>
@@ -44,7 +44,7 @@
                     <div class="blank_project_overview_widget_inner">
                         <span class="icon fa fa-plus"></span>
                         <br/>
-                        <p class="new">Create New Project</p>
+                        <p class="new"><?php echo __('create_new_project');?></p>
                     </div>
                 </div>
             </a>
@@ -57,47 +57,47 @@
                 <p><?php echo $this->Text->truncate($project->description, 150);?></p>
                 <div class="overview_bottom">
                     <?php if ($project->status == 1): ?>
-                        <span class="status-text status-text-info">Status: Progressing</span>
+                        <span class="status-text status-text-info"><?php echo __('status_processing');?></span>
                     <?php elseif ($project->status == 2): ?>
-                        <span class="status-text status-text-orange">Status: Paused</span>
+                        <span class="status-text status-text-orange"><?php echo __('status_paused');?></span>
                     <?php elseif ($project->status == 3): ?>
-                        <span class="status-text status-text-danger">Status: Invalid</span>
+                        <span class="status-text status-text-danger"><?php echo __('status_invalid');?></span>
                     <?php elseif ($project->status == 4): ?>
-                        <span class="status-text status-text-green">Status: Completed</span>
+                        <span class="status-text status-text-green"><?php echo __('status_completed');?></span>
                     <?php else: ?>
-                        <span class="status-text status-text-gray">Status: N/A</span>
+                        <span class="status-text status-text-gray"><?php echo __('status_na');?></span>
                     <?php endif; ?>
                     <br/>
                     <small>
-                        <i class="fa fa-calendar"></i> Started at <?php echo $this->Time->format($project->created, 'd MMM, Y');?>
+                        <i class="fa fa-calendar"></i> <?php echo __('started_at');?> <?php echo $this->Time->format($project->created, 'd MMM, Y');?>
                     </small>
                     <ul class="overview_list">
-                        <li><strong>User Assigned:</strong>
+                        <li><strong><?php echo __('user_assigned');?>:</strong>
                             <?php
                             echo '<span class="bg-black">'.$project->overview['total_user'].'</span>';
                             if($project->overview['total_user'] < 1){
-                                echo $this->Html->link('Assign User', ['controller' => 'projects', 'action' => 'users', $project->slug]);
+                                echo $this->Html->link(__('assign_user'), ['controller' => 'projects', 'action' => 'users', $project->slug]);
                             }
                             ?>
                         </li>
-                        <li><strong>Total Labels:</strong>
+                        <li><strong><?php echo __('total_labels');?>:</strong>
                             <?php
                             echo '<span class="bg-orange">'.$project->overview['total_label'].'</span>';
                             if($project->overview['total_label'] < 1){
-                                echo $this->Html->link('Create Label', ['controller' => 'labels', 'action' => 'index', $project->slug]);
+                                echo $this->Html->link(__('create_label'), ['controller' => 'labels', 'action' => 'index', $project->slug]);
                             }
                             ?>
                         </li>
-                        <li><strong>Total Tasks:</strong>
+                        <li><strong><?php echo __('total_tasks');?>:</strong>
                             <?php
                             echo '<span class="bg-green">'.$project->overview['total_task'].'</span>';
                             if($project->overview['total_task'] < 1){
-                                echo $this->Html->link('Create Task', ['controller' => 'tasks', 'action' => 'index', $project->slug]);
+                                echo $this->Html->link(__('create_task'), ['controller' => 'tasks', 'action' => 'index', $project->slug]);
                             }
                             ?>
                         </li>
                     </ul>
-                    <?php echo $this->Html->link('Manage Project', ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'btn btn-success btn-block']);?>
+                    <?php echo $this->Html->link(__('manage_project'), ['controller' => 'projects', 'action' => 'view', $project->slug], ['class' => 'btn btn-success btn-block']);?>
                 </div>
             </div>
         </div>

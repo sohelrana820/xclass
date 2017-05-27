@@ -17,6 +17,36 @@ msgstr "Conform password"
 msgid "create_account"
 msgstr "Create Account"
 
+msgid "user_assigned"
+msgstr "User Assigned"
+
+msgid "total_labels"
+msgstr "Total Labels"
+
+msgid "total_tasks"
+msgstr "Total Tasks"
+
+msgid "assign_user"
+msgstr "Assign User"
+
+msgid "create_label"
+msgstr "Create Label"
+
+msgid "create_task"
+msgstr "Create Task"
+
+msgid "dashboard_text"
+msgstr "Dashboard"
+
+msgid "project_list_text"
+msgstr "Project List"
+###
+
+msgid "manage_project"
+msgstr "Manage Project"
+
+
+
 ###########Login Page ###########
 msgid "login_page_title"
 msgstr "Signin"
@@ -56,5 +86,48 @@ msgstr "Reset Password"
 
 msgid "reset_password_btn"
 msgstr "Reset Password"
+
+###########Dashboard Page ###########
+msgid "dashboard_page_title"
+msgstr "My Dashboard"
+
+msgid "last_opened_project"
+msgstr "Last opened project lists"
+
+msgid "welcome_to"
+msgstr "Welcome to"
+
+msgid "create_project_to_get_started"
+msgstr "Create your project to get started. This application is for assign user to project, manage project's task, manager project's labels. Feel comfort to manage your project"
+
+msgid "your_not_assigned_any_project"
+msgstr "You are not assigned any project yet!"
+
+msgid "create_new_project"
+msgstr "Create New Project"
+
+msgid "status_processing"
+msgstr "Status: Progressing"
+
+msgid "status_paused"
+msgstr "Status: Paused"
+
+msgid "status_invalid"
+msgstr "Status: Invalid"
+
+msgid "status_completed"
+msgstr "Status: Completed"
+
+msgid "status_na"
+msgstr "Status: N/A"
+
+msgid "started_at"
+msgstr "Started at"
+
+msgid "manage_project"
+msgstr "Manage Project"
+
+msgid "get_started"
+msgstr "Get Started"
 
 
