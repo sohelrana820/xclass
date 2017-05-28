@@ -226,3 +226,16 @@ msgstr "Listas de proyectos"
 
 msgid "search_project"
 msgstr "Buscar proyecto"
+
+###########Update project Page ###########
+msgid "update_project_page_title"
+msgstr "Actualizar proyecto"
+
+msgid "update_project"
+msgstr "Actualizar proyecto"
+
+msgid "provide_valid_value_to_update_project"
+msgstr "Proporcionar toda la información válida para actualizar el proyecto"
+
+msgid "update_project_btn"
+msgstr "Actualizar proyecto"

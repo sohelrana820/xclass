@@ -225,6 +225,19 @@ msgstr "Lists of Project"
 msgid "search_project"
 msgstr "Search Project"
 
+###########Update project Page ###########
+msgid "update_project_page_title"
+msgstr "Update Project"
+
+msgid "update_project"
+msgstr "Update Project"
+
+msgid "provide_valid_value_to_update_project"
+msgstr "Provide all valid information to update project"
+
+msgid "update_project_btn"
+msgstr "Update Project"
+
 
 
 
