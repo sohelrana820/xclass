@@ -53,6 +53,48 @@ msgstr "Adjunto archivo"
 msgid "name"
 msgstr "Nombre"
 
+msgid "result_found"
+msgstr "Resultado encontrado"
+
+msgid "status"
+msgstr "Estado"
+
+msgid "actions"
+msgstr "Comportamiento"
+
+msgid "progressing"
+msgstr "Progresando"
+
+msgid "paused"
+msgstr "En pausa"
+
+msgid "invalid"
+msgstr "Inválido"
+
+msgid "completed"
+msgstr "Terminado"
+
+msgid "n_a"
+msgstr "N/A"
+
+msgid "task_status"
+msgstr "Estado de la tarea"
+
+msgid "reset"
+msgstr "Reiniciar"
+
+msgid "search"
+msgstr "Buscar"
+
+msgid "showing"
+msgstr "demostración"
+
+msgid "records_out_of"
+msgstr "registros de"
+
+msgid "total"
+msgstr "total"
+
 ###########Login Page ###########
 msgid "login_page_title"
 msgstr "Registrarse"
@@ -174,3 +216,13 @@ msgstr "Nota del proyecto"
 
 msgid "add_more_attachment"
 msgstr "Añadir más accesorio"
+
+###########Project List Page ###########
+msgid "project_list_page_title"
+msgstr "Listas de proyectos"
+
+msgid "lists_of_project"
+msgstr "Listas de proyectos"
+
+msgid "search_project"
+msgstr "Buscar proyecto"

@@ -1,8 +1,8 @@
-<?php echo $this->assign('title', 'Project Lists'); ?>
+<?php echo $this->assign('title', __('project_list_page_title')); ?>
 
 <div class="page-header">
     <h2 class="title pull-left">
-        <?php echo $this->Html->link('Manage Project', ['controller' => 'projects', 'action' => 'index'], ['class' => 'link']);?>
+        <?php echo $this->Html->link(__('manage_project'), ['controller' => 'projects', 'action' => 'index'], ['class' => 'link']);?>
     </h2>
     <div class="clearfix"></div>
 </div>
@@ -16,14 +16,14 @@
             </span>
                 <br/>
                 <br/>
-                <h2>Welcome to <?php echo $appsName;?>!</h2>
+                <h2><?php echo __('welcome_to')?> <?php echo $appsName;?>!</h2>
                 <?php if($userInfo->role == 1):?>
-                    <p class="lead">Create your project to get started. This application is for assign user to project, manage project's task, manage project's labels. Fell comfort to manage your project</p>
+                    <p class="lead"><?php echo __('create_project_to_get_started');?></p>
                 <?php else:?>
-                    <p class="lead red">You are not assigned any project yet!</p>
+                    <p class="lead red"><?php echo __('your_not_assigned_any_project');?>!</p>
                 <?php endif;?>
                 <br/>
-                <?php echo $userInfo->role != 2 ? $this->Html->link('Get Started', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']) : '';?>
+                <?php echo $userInfo->role != 2 ? $this->Html->link(__('get_started'), ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn-lg-theme']) : '';?>
             </div>
         </div>
     </div>
@@ -31,13 +31,13 @@
 <div class="widget">
     <div class="widget-header">
         <div class="pull-left">
-            <h2>Lists of Project</h2>
-            <span><?php echo $projects->count() ?> result found</span>
+            <h2><?php echo __('lists_of_project')?></h2>
+            <span><?php echo $projects->count() ?> <?php echo __('result_found');?></span>
         </div>
         <?php if($userInfo->role == 1):?>
         <div class="pull-right btn-areas">
-            <?php echo $this->Html->link('New Project', ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn btn-info']) ?>
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchProjectModal">Search Project</button>
+            <?php echo $this->Html->link(__('new_project'), ['controller' => 'projects', 'action' => 'create'], ['class' => 'btn btn-info']) ?>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchProjectModal"><?php echo __('search_project')?></button>
         </div>
         <?php endif;?>
         <div class="clearfix"></div>
@@ -47,10 +47,10 @@
             <table class="table theme-table">
                 <thead>
                 <tr>
-                    <th><?php echo $this->Paginator->sort('name') ?></th>
-                    <th><?php echo $this->Paginator->sort('status') ?></th>
-                    <th><?php echo $this->Paginator->sort('deadline') ?></th>
-                    <th class="text-right"><?php echo __('Actions') ?></th>
+                    <th><?php echo $this->Paginator->sort(__('name')) ?></th>
+                    <th><?php echo $this->Paginator->sort(__('status')) ?></th>
+                    <th><?php echo $this->Paginator->sort(__('deadline')) ?></th>
+                    <th class="text-right"><?php echo __(__('actions')) ?></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,15 +59,15 @@
                         <td><?php echo $this->Html->link(h($project->name), ['controller' => 'projects', 'action' => 'view', $project->slug]); ?></td>
                         <td>
                             <?php if ($project->status == 1): ?>
-                                <span class="status-text status-text-info">Progressing</span>
+                                <span class="status-text status-text-info"><?php echo __('progressing')?></span>
                             <?php elseif ($project->status == 2): ?>
-                                <span class="status-text status-text-orange">Paused</span>
+                                <span class="status-text status-text-orange"><?php echo __('paused')?></span>
                             <?php elseif ($project->status == 3): ?>
-                                <span class="status-text status-text-danger">Invalid</span>
+                                <span class="status-text status-text-danger"><?php echo __('invalid')?></span>
                             <?php elseif ($project->status == 4): ?>
-                                <span class="status-text status-text-green">Completed</span>
+                                <span class="status-text status-text-green"><?php echo __('completed')?></span>
                             <?php else: ?>
-                                <span class="status-text status-text-gray">N/A</span>
+                                <span class="status-text status-text-gray"><?php echo __('n_a')?></span>
                             <?php endif; ?>
                         </td>
                         <td>
@@ -117,43 +117,43 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <h4 class="modal-title text-center text-uppercase" id="myModalLabel">Search Project</h4>
+                <h4 class="modal-title text-center text-uppercase" id="myModalLabel"><?php echo __('search_project');?></h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Name</label>
+                    <label><?php echo __('name')?></label>
                     <div class="input text">
-                        <input type="text" name="name" class="form-control" placeholder="Name" value="<?php echo $this->request->query('name') != '' ? $this->request->query('name') : '' ?>">
+                        <input type="text" name="name" class="form-control" placeholder="<?php echo __('name')?>" value="<?php echo $this->request->query('name') != '' ? $this->request->query('name') : '' ?>">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label>Task Status</label>
+                    <label><?php echo __('task_status');?></label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="status" value="progressing" <?php if($this->request->query('status') && $this->request->query('status') == 1) {echo 'checked';}?>>Progressing
+                            <input type="radio" name="status" value="progressing" <?php if($this->request->query('status') && $this->request->query('status') == 1) {echo 'checked';}?>><?php echo __('progressing');?>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="status" value="paused" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Paused
+                            <input type="radio" name="status" value="paused" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>><?php echo __('paused');?>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="status" value="invalid" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Invalid
+                            <input type="radio" name="status" value="invalid" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>><?php echo __('invalid');?>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="status" value="completed" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Completed
+                            <input type="radio" name="status" value="completed" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>><?php echo __('completed');?>
                         </label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="submit" class="btn btn-primary" value="search">
-                <?php echo $this->Html->link('Reset', ['controller' => 'projects' , 'action' => 'index'], ['class' => 'btn btn-danger']);?>
+                <input type="submit" class="btn btn-primary" value="<?php echo __('search')?>">
+                <?php echo $this->Html->link(__('reset'), ['controller' => 'projects' , 'action' => 'index'], ['class' => 'btn btn-danger']);?>
             </div>
         </div>
         <?php echo $this->Form->end();?>

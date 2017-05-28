@@ -53,6 +53,51 @@ msgstr "Attachment"
 msgid "name"
 msgstr "name"
 
+msgid "result_found"
+msgstr "result found"
+
+msgid "status"
+msgstr "Status"
+
+msgid "status"
+msgstr "Status"
+
+msgid "actions"
+msgstr "Actions"
+
+msgid "progressing"
+msgstr "Progressing"
+
+msgid "paused"
+msgstr "Paused"
+
+msgid "invalid"
+msgstr "Invalid"
+
+msgid "completed"
+msgstr "Completed"
+
+msgid "n_a"
+msgstr "N/A"
+
+msgid "task_status"
+msgstr "Task Status"
+
+msgid "reset"
+msgstr "Reset"
+
+msgid "search"
+msgstr "Search"
+
+msgid "showing"
+msgstr "showing"
+
+msgid "records_out_of"
+msgstr "records out of"
+
+msgid "total"
+msgstr "total"
+
 ###########Login Page ###########
 msgid "login_page_title"
 msgstr "Signin"
@@ -167,9 +212,18 @@ msgstr "Note"
 msgid "project_note"
 msgstr "Project note"
 
-
 msgid "add_more_attachment"
 msgstr "Add More Attachment"
+
+###########Project List Page ###########
+msgid "project_list_page_title"
+msgstr "Project Lists"
+
+msgid "lists_of_project"
+msgstr "Lists of Project"
+
+msgid "search_project"
+msgstr "Search Project"
 
 
 
