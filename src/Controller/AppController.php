@@ -88,7 +88,7 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-        I18n::locale('es_ES');
+        I18n::locale('en_US');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Utilities');
