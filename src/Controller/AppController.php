@@ -127,11 +127,6 @@ class AppController extends Controller
             'forgotPassword',
             'install',
             'resetPassword',
-            'requirements',
-            'database',
-            'general',
-            'administrator',
-            'emailConfig'
         ]);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);

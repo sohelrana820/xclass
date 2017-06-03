@@ -46,6 +46,14 @@ class InstallationController extends AppController
      */
     public function beforeFilter(Event $event)
     {
+        $this->Auth->allow([
+            'requirements',
+            'database',
+            'general',
+            'administrator',
+            'emailConfig'
+        ]);
+
         parent::beforeFilter($event);
         $this->viewBuilder()
             ->layout('installation')
