@@ -8,6 +8,7 @@ app.controller('LabelsCtrl', function ($scope, $timeout, LabelResources, Flash, 
     var urlDivider = window.location.href.split("/labels");
     urlDivider = urlDivider[0].split("/");
     var projectSlug = urlDivider[urlDivider.length - 1];
+    projectSlug = decodeURIComponent(projectSlug);
 
 
     $scope.fetchLabelLists = function (data) {

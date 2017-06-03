@@ -4,6 +4,7 @@ app.controller('ProjectsCtrl', function($scope, $timeout, ProjectsResources, Use
     var urlDivider = window.location.href.split("/users");
     urlDivider = urlDivider[0].split("/");
     var projectSlug = urlDivider[urlDivider.length - 1];
+    projectSlug = decodeURIComponent(projectSlug);
 
     $scope.fetchProjectUsers = function (data) {
         $scope.show_center_loader = true;

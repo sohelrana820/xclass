@@ -9,6 +9,7 @@ app.controller('FeedsCtrl', function($scope, $sce, $timeout, FeedsResources, Pro
     if(urlDivider.length > 1)
     {
         $scope.projectSlug = urlDivider[urlDivider.length - 1];
+        $scope.projectSlug = decodeURIComponent($scope.projectSlug);
     }
 
     $scope.projects = [];

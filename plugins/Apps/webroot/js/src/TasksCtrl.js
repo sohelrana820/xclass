@@ -31,6 +31,7 @@ app.controller('TasksCtrl', function($scope, $location, LabelResources, UsersRes
     var urlDivider = window.location.href.split("/tasks");
     urlDivider = urlDivider[0].split("/");
     var projectSlug = urlDivider[urlDivider.length - 1];
+    projectSlug = decodeURIComponent(projectSlug);
 
     var taskIdentity = window.location.href.split('/tasks/');
     var taskIdentity = parseInt(taskIdentity[1]);
