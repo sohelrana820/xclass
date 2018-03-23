@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
-            <?php echo $this->Html->image($appsLogo, ['class' => 'logo', 'url' => ['controller' => 'dashboard', 'action' => 'index'], ['class' => 'navbar-brand']]);?>
+            <?php echo $this->Html->image($appsLogo, ['class' => 'logo', 'url' => ['controller' => 'dashboard', 'action' => 'index']]);?>
         </li>
         <li class="active">
             <?php echo $this->Html->link('<i class="fa fa-dashboard"></i> Dashboard', ['controller' => 'dashboard', 'action' => 'index'], ['escape' => false]); ?>
@@ -14,20 +14,6 @@
                 </li>
                 <li>
                     <?php echo $this->Html->link('List', ['controller' => 'users', 'action' => 'index'], ['escape' => false]); ?>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <?php echo $this->Html->link('<i class="fa fa-feed"></i> Feeds', ['controller' => 'feeds', 'action' => 'index'], ['escape' => false]); ?>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#projects"><i class="fa fa-leaf"></i> Projects <i class="fa fa-caret-down"></i></a>
-            <ul id="projects" class="submenu collapse">
-                <li>
-                    <?php echo $this->Html->link('Create', ['controller' => 'projects', 'action' => 'create'], ['escape' => false]); ?>
-                </li>
-                <li>
-                    <?php echo $this->Html->link('List', ['controller' => 'projects', 'action' => 'index'], ['escape' => false]); ?>
                 </li>
             </ul>
         </li>

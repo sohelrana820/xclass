@@ -126,6 +126,7 @@ class AppController extends Controller
         ]);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
+        $this->loggedInUser = $this->Users->getUserByID($this->userID);
 
         $this->viewBuilder()
             ->setLayout('application')
