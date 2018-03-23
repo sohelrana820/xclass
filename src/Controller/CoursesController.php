@@ -50,6 +50,7 @@ class CoursesController extends AppController
     {
         $course = $this->Courses->newEntity();
         if ($this->request->is('post')) {
+            $this->request->data['created_by'] = $this->userID;
             $course = $this->Courses->patchEntity($course, $this->request->data);
             if ($this->Courses->save($course)) {
                 $this->Flash->success(__('The course has been saved.'));

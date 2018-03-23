@@ -2157,6 +2157,13 @@ Licensed under MIT
 
 }
 
+.widget .widget-header h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-top: 0px;
+}
+
 .comments{
     position: relative;
 }
