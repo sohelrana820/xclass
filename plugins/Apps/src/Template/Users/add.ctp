@@ -131,10 +131,18 @@
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="role" value="2">General User
+                            <input type="radio" name="role" value="2">Student User
                         </label>
                     </div>
                     <?php echo $this->Form->error('role')?>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Postal Code</label>
+                    <?php echo $this->Form->input('courses._ids', ['type' => 'select', 'class' => 'form-control', 'options' => $courses, 'multiple' => 'multiple', 'label' => false, 'required' => false]);?>
                 </div>
             </div>
             <div class="clearfix"></div>

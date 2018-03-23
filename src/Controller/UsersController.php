@@ -297,19 +297,21 @@ class UsersController extends AppController
             $user = $this->Users->newEntity(
                 $data,
                 [
-                    'associated' => ['Profiles']
+                    'associated' => ['Profiles', 'Courses']
                 ]
             );
 
             if ($this->Users->save($user)) {
-                $this->Email->signupConfirmEmail($data, $verifyCode);
+                //$this->Email->signupConfirmEmail($data, $verifyCode);
                 $this->Flash->success(__('New user has been created successfully'));
                 return $this->redirect(['controller' => 'users', 'action' => 'index']);
             } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
             }
         }
-        $this->set(compact('user'));
+
+        $courses = $this->Users->Courses->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'courses'));
         $this->set('_serialize', ['user']);
 
         if ($this->request->params['_ext'] == 'json') {
@@ -450,7 +452,7 @@ class UsersController extends AppController
         }
 
         $user = $this->Users->get($userID, [
-            'contain' => ['Profiles']
+            'contain' => ['Profiles', 'Courses']
         ]);
 
 
@@ -463,7 +465,8 @@ class UsersController extends AppController
                 $this->Flash->error(__('Sorry, something went wrong'));
             }
         }
-        $this->set(compact('user'));
+        $courses = $this->Users->Courses->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'courses'));
         $this->set('_serialize', ['user']);
     }
 
