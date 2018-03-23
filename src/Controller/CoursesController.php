@@ -12,9 +12,7 @@ class CoursesController extends AppController
 {
 
     /**
-     * Index method
      *
-     * @return \Cake\Network\Response|null
      */
     public function index()
     {
@@ -22,23 +20,6 @@ class CoursesController extends AppController
 
         $this->set(compact('courses'));
         $this->set('_serialize', ['courses']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Course id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $course = $this->Courses->get($id, [
-            'contain' => ['Users']
-        ]);
-
-        $this->set('course', $course);
-        $this->set('_serialize', ['course']);
     }
 
     /**
@@ -60,8 +41,7 @@ class CoursesController extends AppController
                 $this->Flash->error(__('The course could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Courses->Users->find('list', ['limit' => 200]);
-        $this->set(compact('course', 'users'));
+        $this->set(compact('course'));
         $this->set('_serialize', ['course']);
     }
 
@@ -74,9 +54,7 @@ class CoursesController extends AppController
      */
     public function edit($id = null)
     {
-        $course = $this->Courses->get($id, [
-            'contain' => ['Users']
-        ]);
+        $course = $this->Courses->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $course = $this->Courses->patchEntity($course, $this->request->data);
             if ($this->Courses->save($course)) {
@@ -87,17 +65,13 @@ class CoursesController extends AppController
                 $this->Flash->error(__('The course could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Courses->Users->find('list', ['limit' => 200]);
         $this->set(compact('course', 'users'));
         $this->set('_serialize', ['course']);
     }
 
     /**
-     * Delete method
-     *
-     * @param string|null $id Course id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     * @param null $id
+     * @return \Cake\Http\Response|null
      */
     public function delete($id = null)
     {

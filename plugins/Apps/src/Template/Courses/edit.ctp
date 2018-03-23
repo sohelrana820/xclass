@@ -1,29 +1,49 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $course->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $course->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Courses'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="courses form large-9 medium-8 columns content">
-    <?= $this->Form->create($course) ?>
-    <fieldset>
-        <legend><?= __('Edit Course') ?></legend>
-        <?php
-            echo $this->Form->input('created_by');
-            echo $this->Form->input('name');
-            echo $this->Form->input('description');
-            echo $this->Form->input('status');
-            echo $this->Form->input('users._ids', ['options' => $users]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+<div class="page-header">
+    <h2 class="title pull-left">
+        <?php echo $this->Html->link('Manage Courses', ['controller' => 'courses', 'action' => 'index'], ['class' => 'link']);?>
+    </h2>
+    <div class="clearfix"></div>
+</div>
+
+<div class="widget">
+    <div class="widget-header">
+        <div class="pull-left">
+            <h2>Update Course</h2>
+            <span>Provide all valid information to update course</span>
+        </div>
+        <div class="pull-right btn-areas">
+            <?php echo $this->Html->link('New Course', ['controller' => 'courses', 'action' => 'add'], ['class' => 'btn btn-info'])?>
+            <?php echo $this->Html->link('Back to List', ['controller' => 'courses', 'action' => 'index'], ['class' => 'btn btn-info'])?>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="widget-body">
+        <?php echo $this->Form->create($course);?>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Course name</label>
+                    <?php echo $this->Form->input('name', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Course name', 'label' => false, 'required' => false]);?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="form-group">
+                    <label>Description</label>
+                    <?php echo $this->Form->input('description', ['type' => 'textarea', 'rows' => '10', 'class' => 'form-control', 'placeholder' => 'Write description', 'label' => false, 'required' => false]);?>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Status</label>
+                    <?php echo $this->Form->input('status', ['type' => 'select', 'class' => 'form-control', 'options' => ['0' => 'Inactive', '1' => 'Active'], 'label' => false, 'required' => false]);?>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Update Course</button>
+        <?php echo $this->Form->end();?>
+    </div>
 </div>

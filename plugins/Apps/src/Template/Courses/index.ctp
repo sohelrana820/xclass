@@ -17,12 +17,14 @@
         <div class="clearfix"></div>
     </div>
     <div class="widget-body">
+        <?php if(!$courses->isEmpty()):?>
         <table class="table theme-table">
             <thead>
             <tr>
                 <th scope="col"><?php echo $this->Paginator->sort('id', 'Course ID') ?></th>
                 <th scope="col"><?php echo $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?php echo $this->Paginator->sort('status') ?></th>
+                <th scope="col"><?php echo $this->Paginator->sort('created', 'Last Modified') ?></th>
                 <th scope="col"><?php echo $this->Paginator->sort('modified', 'Last Modified') ?></th>
                 <th scope="col" class="text-right"><?php echo __('Actions') ?></th>
             </tr>
@@ -41,16 +43,19 @@
                             N/A
                         <?php endif; ?>
                     </td>
+                    <td><?php echo $this->Time->format($course->created, 'MMM d, Y') ?></td>
                     <td><?php echo $this->Time->format($course->modified, 'MMM d, Y') ?></td>
                     <td class="text-right">
-                        <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $course->id], ['escape' => false, 'class' => 'icons green']) ?>
                         <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $course->id], ['escape' => false, 'class' => 'icons']) ?>
-                        <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $course->id], ['escape' => false, 'class' => 'icons red'], ['confirm' => __('Are you sure you want to delete # {0}?', $course->id)]) ?>
+                        <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $course->id], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $course->name)]) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
         <?php echo $this->element('pagination');?>
+        <?php else: ?>
+            <?php echo $this->element('not_found'); ?>
+        <?php endif; ?>
     </div>
 </div>
