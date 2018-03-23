@@ -34,7 +34,13 @@
                 <div class="col-md-6 col-md-offset-3 margin-top-125">
                     <div class="login-widget">
                         <div style="text-align: center; ">
-                            <?php echo $this->Html->image($appsLogo, ['controller' => 'users', 'action' => 'login'], ['class' => 'title']);?>
+                            <?php
+                            if($appsLogo) {
+                                echo $this->Html->image($appsLogo, ['alt' => 'logo', 'class' => 'title', 'url' => ['controller' => 'users', 'action' => 'login']]);
+                            } else {
+                                echo $this->Html->image('logo.png', ['alt' => 'logo', 'class' => 'title', 'url' => ['controller' => 'users', 'action' => 'login']]);
+                            }
+                            ?>
                             <?php echo $this->Flash->render() ?>
                         </div>
                         <br>

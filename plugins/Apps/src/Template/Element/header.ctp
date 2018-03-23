@@ -10,23 +10,6 @@
                         </button>
                     </span>
                     <input type="text" class="form-control" ng-model="task_query" ng-change="searchGlobalTask(task_query)"  placeholder="Search..." >
-                    <div class="header_task_list" style="display: none;" ng-mouseleave="hideHeaderTaskArea()">
-                        <div class="not_found" ng-show="!global_task_loader && globalTaskLists.length < 1"><h4>Sorry, result not found</h4></div>
-                        <div class="global_task_loader" ng-show="global_task_loader">
-                            <img ng-src="{{BASE_URL}}/img/loader-sm.gif" class="md_loader">
-                            <h4>Content loading, please wait...</h4>
-                        </div>
-                        <ul>
-                            <li ng-repeat="task in globalTaskLists">
-                                <p><a href="{{BASE_URL}}tasks/view/{{task.id}}" ng-show="task.task">(Task ID #{{task.id}}) {{task.task}}</a></p>
-                                <small>Opened by {{task.createdUserProfile.first_name}}
-                                    {{task.createdUserProfile.first_name}} at
-                                    {{task.created | date}}.
-                                    ({{task.created | date : 'HH:m a'}})
-                                </small>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

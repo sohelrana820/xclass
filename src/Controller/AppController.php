@@ -63,7 +63,7 @@ class AppController extends Controller
     /**
      * @var string
      */
-    public $appsLogo = 'default_logo.png';
+    public $appsLogo = 'logo.png';
 
     /**
      * @var null
