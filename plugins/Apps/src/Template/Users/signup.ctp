@@ -1,4 +1,3 @@
-<?php echo $this->assign('title', __('signup_page_title')); ?>
 
 <?php echo $this->Form->create($user, ['url' => ['controller' => 'users', 'action' => 'signup'], 'class' => 'login_form']);?>
 

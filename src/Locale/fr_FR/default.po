@@ -1,3 +1,0 @@
-msgid "login_btn"
-msgstr "Se Connecter"
-

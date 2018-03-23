@@ -1,5 +1,3 @@
-<?php echo $this->assign('title', 'General Settings'); ?>
-
 <div class="page-header">
     <h2 class="title pull-left">
         <?php echo $this->Html->link('General Configuration', ['controller' => 'settings', 'action' => 'index'], ['class' => 'link']);?>
@@ -56,15 +54,3 @@
 
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,3 @@
-<?php echo $this->assign('title', __('login_page_title')); ?>
-
 <?php echo $this->Form->create('User', ['url' => ['controller' => 'users', 'action' => 'login'], 'class' => 'login_form']);?>
 <div class="form-group">
     <label class="text-info">Email</label>

@@ -1,4 +1,3 @@
-<?php echo $this->assign('title', 'Users Lists'); ?>
 
 <div class="page-header">
     <h2 class="title pull-left">

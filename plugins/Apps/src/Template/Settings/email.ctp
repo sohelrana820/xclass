@@ -1,5 +1,3 @@
-<?php echo $this->assign('title', 'Email Setting'); ?>
-
 <div class="page-header">
     <h2 class="title pull-left">
         <?php echo $this->Html->link('Email Settings', ['controller' => 'settings', 'action' => 'index'], ['class' => 'link']);?>

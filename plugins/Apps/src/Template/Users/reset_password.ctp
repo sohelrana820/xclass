@@ -1,5 +1,3 @@
-<?php echo $this->assign('title', __('reset_password_page_title')); ?>
-
 <?php echo $this->Form->create($user, ['class' => 'login_form']);?>
     <div class="form-group">
         <label class="text-info"><?php echo __('password');?></label>

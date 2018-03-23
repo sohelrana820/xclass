@@ -1,5 +1,3 @@
-<?php echo $this->assign('title', __('forgot_password_page_title')); ?>
-
 <?php echo $this->Form->create('User', ['url' => ['controller' => 'users', 'action' => 'forgot-password'], 'class' => 'login_form']);?>
     <div class="form-group">
         <label class="text-info"><?php echo __('email_address');?></label>
