@@ -1,5 +1,3 @@
-<?php echo $this->assign('title', 'New User'); ?>
-
 <div class="page-header">
     <h2 class="title pull-left">
         <?php echo $this->Html->link('Manage User', ['controller' => 'users', 'action' => 'index'], ['class' => 'link']);?>
