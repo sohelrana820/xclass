@@ -30,11 +30,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="body-color" ng-controller="MainsCtrl" ng-cloak>
+<body class="body-color">
 
 <div id="wrapper">
     <!-- Sidebar -->
-    <?php echo $userInfo->role == 1 ? $this->element('admin-sidebar') : $this->element('user-sidebar');?>
+    <?php /*echo $userInfo->role == 1 ? $this->element('admin-sidebar') : $this->element('user-sidebar');*/?>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->

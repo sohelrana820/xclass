@@ -42,45 +42,9 @@ use Cake\Routing\Router;
 Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
-    $routes->extensions(['json', 'xml', 'html']);
-
-    $routes->connect('/', ['controller' => 'dashboard', 'action' => 'index', 'home']);
-
-    $routes->connect('/profile', ['controller' => 'users', 'action' => 'profile']);
-    $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'updateProfile']);
-    $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
-    $routes->connect('/projects/create', ['controller' => 'projects', 'action' => 'create']);
-    $routes->connect('/projects/:slug', ['controller' => 'projects', 'action' => 'view'], ['pass' => ['slug']]);
-
-    $routes->connect('/:slug/tasks', ['controller' => 'tasks', 'action' => 'index'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/tasks/create', ['controller' => 'tasks', 'action' => 'add'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/tasks/:id', ['controller' => 'tasks', 'action' => 'view'], ['pass' => ['slug', 'id']]);
-
-    $routes->connect('/:slug/labels', ['controller' => 'labels', 'action' => 'index'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/labels/create', ['controller' => 'labels', 'action' => 'add'], ['pass' => ['slug']]);
-
-    $routes->connect('/feeds', ['controller' => 'feeds', 'action' => 'index']);
-    $routes->connect('/:slug/feeds', ['controller' => 'feeds', 'action' => 'index'], ['pass' => ['slug']]);
-
-    $routes->connect('/users/save', ['controller' => 'users', 'action' => 'add']);
-    $routes->connect('/:slug/users', ['controller' => 'projects', 'action' => 'users'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/assign_user', ['controller' => 'projects', 'action' => 'assign_user'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/remove_user', ['controller' => 'projects', 'action' => 'remove_user'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/attachments', ['controller' => 'projects', 'action' => 'attachments'], ['pass' => ['slug']]);
-    $routes->connect('/:slug/download_attachments', ['controller' => 'projects', 'action' => 'download_attachments_zip'], ['pass' => ['slug']]);
-
     $routes->fallbacks('DashedRoute');
 });
 
-
-Router::scope('/', function ($routes) {
-    $routes->extensions(['json']);
-    $routes->resources('Labels');
-    $routes->resources('Tasks');
-    $routes->resources('Comments');
-    $routes->resources('Projects');
-    $routes->resources('Feeds');
-});
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.

@@ -18,15 +18,15 @@
                 <div class="profile-overview">
                     <div class="dropdown customm-dropdown">
                         <?php
-                            if($userInfo->profile->profile_pic){
+/*                            if($userInfo->profile->profile_pic){
                                 echo $this->Html->image('profiles/'.$userInfo->profile->profile_pic, ['class' => 'profile-pic', 'alt' => $userInfo->profile->name]);
                             }
                         else{
                             echo $this->Html->image('profile_avatar.jpg', ['class' => 'profile-pic', 'alt' => $userInfo->profile->name]);
                         }
-                        ?>
+                        */?>
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            <?php echo 'Hi, ', $userInfo->profile->name?>
+                           <!-- --><?php /*echo 'Hi, ', $userInfo->profile->name*/?>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
