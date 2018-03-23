@@ -106,13 +106,6 @@ class AppController extends Controller
         $this->loadModel('Users');
         $this->loadModel('Labels');
         $this->loadModel('Tasks');
-
-        if (file_exists(ROOT . '/Conf/config.ini')) {
-            $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
-            if (isset($iniData['APPLICATION_NAME']) && $iniData['APPLICATION_NAME']) {
-                $this->appsName = $iniData['APPLICATION_NAME'];
-            }
-        }
     }
 
     /**
@@ -131,29 +124,9 @@ class AppController extends Controller
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
 
-        if (file_exists(ROOT . '/Conf/config.ini')) {
-            $iniData = parse_ini_file(ROOT . '/Conf/config.ini');
-        }
-
-        if (isset($iniData['INSTALLATION_RESULT']) && $iniData['INSTALLATION_RESULT']) {
-            $this->loggedInUser = $this->Users->getUserByID($this->userID);
-        } else {
-            if ($this->request->param('controller') != 'Installation') {
-                return $this->redirect(['controller' => 'installation', 'action' => 'install']);
-            }
-        }
-
         $this->viewBuilder()
             ->layout('application')
             ->theme($this->currentTheme);
-
-        if (isset($iniData['APPLICATION_NAME'])) {
-            $this->appsName = $iniData['APPLICATION_NAME'];
-        }
-
-        if (isset($iniData['APPLICATION_LOGO'])) {
-            $this->appsLogo = $iniData['APPLICATION_LOGO'];
-        }
     }
 
     /**

@@ -203,30 +203,4 @@ Type::build('date')->useLocaleParser();
 Type::build('datetime')->useLocaleParser();
 Plugin::loadAll();
 
-
-ConnectionManager::drop('application');
-if(file_exists(ROOT.'/Conf/config.ini')){
-    $iniData = parse_ini_file(ROOT.'/Conf/config.ini');
-}
-
-if(isset($iniData['DATABASE_CONFIGURATION_RESULT']) && $iniData['DATABASE_CONFIGURATION_RESULT']){
-    ConnectionManager::config('application', [
-        'className' => 'Cake\Database\Connection',
-        'driver' => 'Cake\Database\Driver\Mysql',
-        'persistent' => false,
-        'host' => $iniData['DATABASE_HOST'],
-        'username' => $iniData['DATABASE_USERNAME'],
-        'password' => $iniData['DATABASE_PASSWORD'],
-        'database' => $iniData['DATABASE_NAME'],
-        'encoding' => 'utf8',
-        'timezone' => 'UTC',
-        'cacheMetadata' => true,
-        'quoteIdentifiers' => false,
-        'log' => false,
-        'url' => env('DATABASE_TEST_URL', null),
-    ]);
-    $conn = ConnectionManager::get('application');
-    ConnectionManager::alias('application', 'default');
-}
-
 Configure::write('Security.salt', 'gfbdfgdfg2695965gf6d2gv6df5g9565fs6df5sd6f5s6df5s6df596');
