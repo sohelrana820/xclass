@@ -48,6 +48,9 @@ class AppController extends Controller
     // $mode = live | demo
     public $mode = 'demo';
 
+    /**
+     * @var
+     */
     public $userID;
 
     /**
@@ -58,7 +61,7 @@ class AppController extends Controller
     /**
      * @var string
      */
-    public $appsName = 'Task Manager';
+    public $appsName = 'xClass';
 
     /**
      * @var string
@@ -73,7 +76,7 @@ class AppController extends Controller
     /**
      * @var string
      */
-    public $emailFrom = 'info@task-manager.com';
+    public $emailFrom = 'info@xclass.com';
 
     /**
      * @var string
@@ -85,10 +88,13 @@ class AppController extends Controller
      */
     public $paginationLimit = 50;
 
+    /**
+     *
+     */
     public function initialize()
     {
         parent::initialize();
-        I18n::locale('en_US');
+        I18n::setLocale('en_US');
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Utilities');
@@ -104,13 +110,11 @@ class AppController extends Controller
             ]
         ]);
         $this->loadModel('Users');
-        $this->loadModel('Labels');
-        $this->loadModel('Tasks');
     }
 
     /**
      * @param Event $event
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Http\Response|null|void
      */
     public function beforeFilter(Event $event)
     {
@@ -118,15 +122,14 @@ class AppController extends Controller
             'signup',
             'verifyEmail',
             'forgotPassword',
-            'install',
             'resetPassword',
         ]);
         $this->userID = $this->Auth->user('id');
         $this->baseUrl = Router::url('/', true);
 
         $this->viewBuilder()
-            ->layout('application')
-            ->theme($this->currentTheme);
+            ->setLayout('application')
+            ->setTheme($this->currentTheme);
     }
 
     /**
@@ -180,24 +183,5 @@ class AppController extends Controller
             $this->Flash->error(_('Sorry, you are not authorised to access this page'));
             $this->redirect($this->referer());
         }
-    }
-
-    /**
-     * @param $projectId
-     * @return array
-     */
-    protected function getProjectOverview($projectId)
-    {
-        $this->loadModel('ProjectsUsers');
-        $this->loadModel('Labels');
-        $overview = [
-            'total_user' => $this->ProjectsUsers->countUserByProjectId($projectId),
-            'total_label' => $this->Labels->countTotalLabelByProjectId($projectId),
-            'total_open_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = 1),
-            'total_closed_task' => $this->Tasks->countTotalTasksByProjectId($projectId, $status = [2, 3])
-        ];
-
-        $overview['total_task'] = $overview['total_open_task'] + $overview['total_closed_task'];
-        return $overview;
     }
 }

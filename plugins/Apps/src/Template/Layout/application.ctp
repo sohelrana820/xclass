@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  ng-app="Application" >
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -67,7 +67,6 @@
 
 <?php
 echo $this->Html->script(array('jquery', 'bootstrap.min', 'theme'));
-echo $this->Html->script(['src/app', 'src/factories']);
 echo $this->fetch('jsBottom');
 ?>
 </body>
