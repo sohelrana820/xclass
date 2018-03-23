@@ -26,23 +26,20 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('users');
-        $this->displayField('id');
-        $this->primaryKey('id');
+        $this->setTable('users');
+        $this->setDisplayField('id');
+        $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
         $this->hasOne('Profiles', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Projects', [
-            'foreignKey' => 'created_by'
-        ]);
-        $this->belongsToMany('ProjectsUsers', [
-            'className' => 'ProjectsUsers',
+
+        $this->belongsToMany('Courses', [
             'foreignKey' => 'user_id',
-            'targetForeignKey' => 'project_id',
-            'joinTable' => 'projects_users'
+            'targetForeignKey' => 'course_id',
+            'joinTable' => 'courses_users'
         ]);
     }
 
