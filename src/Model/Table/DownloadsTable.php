@@ -95,9 +95,23 @@ class DownloadsTable extends Table
      * @param int $limit
      * @return $this
      */
-    public function recentDocuments($limit = 5)
+    public function recentDownloads($limit = 5)
     {
         $downloads = $this->find()
+            ->contain(['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'])
+            ->limit($limit);
+        return $downloads;
+    }
+
+
+    /**
+     * @param int $limit
+     * @return $this
+     */
+    public function recentDownloadsByStudent($limit = 5, $userId)
+    {
+        $downloads = $this->find()
+            ->where(['Downloads.user_id' => $userId])
             ->contain(['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'])
             ->limit($limit);
         return $downloads;

@@ -25,9 +25,10 @@ class DashboardController extends AppController
             $this->set('overview', $this->getAdminOverview());
             $this->set('students', $this->Users->recentStudents());
             $this->set('documents', $this->Documents->recentDocuments());
-            $this->set('downloads', $this->Downloads->recentDocuments(10));
+            $this->set('downloads', $this->Downloads->recentDownloads(10));
         } else {
             $this->set('overview', $this->getStudentOverview());
+            $this->set('downloads', $this->Downloads->recentDownloadsByStudent(10, $this->userID));
         }
     }
 
