@@ -1,7 +1,7 @@
 <?php echo $this->Form->create('User', ['url' => ['controller' => 'users', 'action' => 'login'], 'class' => 'login_form']);?>
 <div class="form-group">
     <label class="text-info">Email</label>
-    <?php echo $this->Form->input('username', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email Address or Student ID', 'label' => false, 'required' => false]);?>
+    <?php echo $this->Form->input('email_or_student_id', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Email Address or Student ID', 'label' => false, 'required' => false]);?>
 </div>
 <div class="form-group">
     <label class="text-info">Password</label>

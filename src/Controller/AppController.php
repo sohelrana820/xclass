@@ -107,6 +107,14 @@ class AppController extends Controller
             'logoutRedirect' => [
                 'controller' => 'Users',
                 'action' => 'login',
+            ],
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email_or_student_id'
+                    ],
+                    'finder' => 'auth'
+                ]
             ]
         ]);
         $this->loadModel('Users');

@@ -44,6 +44,25 @@ class UsersTable extends Table
     }
 
     /**
+     * @param Query $query
+     * @param array $options
+     * @return $this
+     */
+    public function findAuth(\Cake\ORM\Query $query, array $options)
+    {
+        return $query->where(
+            [
+                'OR' => [
+                    $this->aliasField('username') => $options['username'],
+                    $this->aliasField('student_id') => $options['username'],
+                ]
+            ],
+            [],
+            true
+        );
+    }
+
+    /**
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.

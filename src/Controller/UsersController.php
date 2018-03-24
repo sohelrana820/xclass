@@ -24,13 +24,12 @@ class UsersController extends AppController
     public $name = 'Users';
 
     /**
-     * @return \Cake\Network\Response|void
-     * With this function user will login into the application.
+     * @return \Cake\Http\Response|null
      */
     public function login()
     {
         $this->checkAuthentication();
-        $this->viewBuilder()->layout('login');
+        $this->viewBuilder()->setLayout('login');
 
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -57,7 +56,7 @@ class UsersController extends AppController
     public function signup()
     {
         $this->viewBuilder()
-            ->layout('login');
+            ->setLayout('login');
         $user = $this->Users->newEntity();
 
         if ($this->request->is('post')) {
