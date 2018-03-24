@@ -37,6 +37,14 @@
             <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
                 <?php echo $this->Form->create(null, ['url' => ['controller' => 'users', 'action' => 'edit/'.$user->uuid]]);?>
                 <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Student ID</label>
+                            <?php echo $this->Form->input('student_id', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Student ID', 'label' => false, 'required' => false, 'value' => $user->student_id]);?>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>First name</label>
@@ -151,7 +159,7 @@
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="role" value="2" <?php if($user->role == 2){echo 'checked';}?>>General User
+                                    <input type="radio" name="role" value="2" <?php if($user->role == 2){echo 'checked';}?>>Student User
                                 </label>
                             </div>
                             <?php echo $this->Form->error('role')?>

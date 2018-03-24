@@ -69,6 +69,20 @@ class UsersTable extends Table
             ->requirePresence('username', 'create', 'Email address must be required!')
             ->notEmpty('username', 'Email address must be required!');
 
+        $validator
+            ->add(
+                'student_id',
+                [
+                    'unique' => [
+                        'message' => 'This ID is already used!',
+                        'provider' => 'table',
+                        'rule' => 'validateUnique'
+                    ]
+                ]
+            )
+            ->requirePresence('student_id', 'create', 'Student ID must be required!')
+            ->notEmpty('student_id', 'Student ID must be required!');
+
 
         $validator
             ->add(

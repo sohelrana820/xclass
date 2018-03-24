@@ -22,6 +22,14 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="form-group">
+                    <label>Student ID</label>
+                    <?php echo $this->Form->input('student_id', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'Student ID', 'label' => false, 'required' => false]);?>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
                     <label>First name</label>
                     <?php echo $this->Form->input('profile.first_name', ['type' => 'text', 'class' => 'form-control', 'placeholder' => 'First name', 'label' => false, 'required' => false]);?>
                 </div>

@@ -33,7 +33,7 @@
             <!-- edit form column -->
             <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
                 <?php  if($user->role == 2):?>
-                   <!-- <span class="status-button status-gray">Type: General User</span>-->
+                    <span class="status-button status-gray">ID: <?php echo $user->student_id;?></span>
                 <?php elseif($user->role == 1):?>
                     <span class="status-button status-success">Type: Admin User</span>
                 <?php endif;?>
