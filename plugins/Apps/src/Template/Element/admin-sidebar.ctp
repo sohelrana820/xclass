@@ -42,7 +42,7 @@
         </li>
 
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#documents"><i class="fa fa-book"></i> Manage Documents <i class="fa fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#documents"><i class="fa fa-file"></i> Manage Documents <i class="fa fa-caret-down"></i></a>
             <ul id="documents" class="submenu collapse">
                 <li>
                     <?php echo $this->Html->link('Add', ['controller' => 'documents', 'action' => 'add'], ['escape' => false]); ?>
@@ -60,7 +60,11 @@
         </li>
 
         <li>
-            <?php echo $this->Html->link('<i class="fa fa-gears"></i>  General Settings', ['controller' => 'settings', 'action' => 'general'], ['escape' => false]); ?>
+            <?php echo $this->Html->link('<i class="fa fa-download"></i>  Download Histories', ['controller' => 'documents', 'action' => 'download-histories'], ['escape' => false]); ?>
+        </li>
+
+        <li>
+            <?php echo $this->Html->link('<i class="fa fa-gears"></i>  General Settings', ['controller' => 'documents', 'action' => 'download-histories'], ['escape' => false]); ?>
         </li>
     </ul>
 
