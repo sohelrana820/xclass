@@ -14,6 +14,14 @@
         </li>
 
         <li class="active">
+            <?php echo $this->Html->link('<i class="fa fa-user"></i> My Profile', ['controller' => 'profile', 'action' => 'index'], ['escape' => false]); ?>
+        </li>
+
+        <li class="active">
+            <?php echo $this->Html->link('<i class="fa fa-user"></i> My Courses', ['controller' => 'profile', 'action' => 'courses'], ['escape' => false]); ?>
+        </li>
+
+        <li class="active">
             <?php echo $this->Html->link('<i class="fa fa-book"></i> Available Course', ['controller' => 'courses', 'action' => 'index'], ['escape' => false]); ?>
         </li>
 
