@@ -22,7 +22,7 @@ class CoursesController extends AppController
         }
         $this->paginate = [
             'conditions' => $conditions,
-            'order' => ['Documents.id' => 'desc']
+            'order' => ['Courses.id' => 'desc']
         ];
         $courses = $this->paginate($this->Courses);
         $this->set(compact('courses'));
