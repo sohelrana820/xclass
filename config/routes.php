@@ -50,6 +50,8 @@ Router::scope('/', function ($routes) {
     $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'updateProfile']);
     $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
     $routes->connect('/profile/courses', ['controller' => 'users', 'action' => 'userCourses']);
+
+    $routes->connect('/settings', ['controller' => 'homes', 'action' => 'setting']);
 });
 
 /**
