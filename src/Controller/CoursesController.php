@@ -16,8 +16,15 @@ class CoursesController extends AppController
      */
     public function index()
     {
+        $conditions = [];
+        if(!$this->isAdmin()) {
+            $conditions = array_merge(['Courses.status' => 1], $conditions);
+        }
+        $this->paginate = [
+            'conditions' => $conditions,
+            'order' => ['Documents.id' => 'desc']
+        ];
         $courses = $this->paginate($this->Courses);
-
         $this->set(compact('courses'));
         $this->set('_serialize', ['courses']);
     }
@@ -29,6 +36,7 @@ class CoursesController extends AppController
      */
     public function add()
     {
+        $this->checkPermission($this->isAdmin());
         $course = $this->Courses->newEntity();
         if ($this->request->is('post')) {
             $this->request->data['created_by'] = $this->userID;
@@ -54,6 +62,7 @@ class CoursesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->checkPermission($this->isAdmin());
         $course = $this->Courses->get($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $course = $this->Courses->patchEntity($course, $this->request->data);
@@ -75,6 +84,7 @@ class CoursesController extends AppController
      */
     public function delete($id = null)
     {
+        $this->checkPermission($this->isAdmin());
         $this->request->allowMethod(['post', 'delete']);
         $course = $this->Courses->get($id);
         if ($this->Courses->delete($course)) {

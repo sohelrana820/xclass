@@ -12,6 +12,10 @@
         <li class="active">
             <?php echo $this->Html->link('<i class="fa fa-dashboard"></i> Dashboard', ['controller' => 'dashboard', 'action' => 'index'], ['escape' => false]); ?>
         </li>
+
+        <li class="active">
+            <?php echo $this->Html->link('<i class="fa fa-book"></i> Available Course', ['controller' => 'courses', 'action' => 'index'], ['escape' => false]); ?>
+        </li>
     </ul>
 
     <!-- Copyright area -->
