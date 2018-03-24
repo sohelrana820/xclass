@@ -37,7 +37,7 @@ CREATE TABLE `courses` (
 
 CREATE TABLE `courses_users` (
   `id` int(11) NOT NULL,
-  `cource_id` int(11) NOT NULL,
+  `course_id` int(11) NOT NULL,
   `user_id` int(3) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
@@ -153,7 +153,7 @@ ALTER TABLE `courses`
 --
 ALTER TABLE `courses_users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `cource_id` (`cource_id`),
+  ADD KEY `course_id` (`course_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -239,7 +239,7 @@ ALTER TABLE `users`
 -- Constraints for table `courses_users`
 --
 ALTER TABLE `courses_users`
-  ADD CONSTRAINT `course_student` FOREIGN KEY (`cource_id`) REFERENCES `courses` (`id`),
+  ADD CONSTRAINT `course_student` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`),
   ADD CONSTRAINT `student_course` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --

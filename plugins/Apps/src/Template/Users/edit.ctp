@@ -159,6 +159,43 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>User Status</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="status" value="1" <?php if($user->status == 1){echo 'checked';}?>>Active
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="status" value="0" <?php if($user->status == 0){echo 'checked';}?>>Inactive
+                                </label>
+                            </div>
+                            <?php echo $this->Form->error('status')?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <label>Choose Courses</label>
+                        <select name="courses[_ids][]" multiple="multiple" class="form-control" id="courses-ids">
+                            <?php foreach ($courses as $key => $value):?>
+                            <option value="<?php echo $key;?>"
+                                    <?php
+                                    foreach ($user->courses as $userCourse) {
+                                        if($key == $userCourse->id) {echo 'selected="selected"';}
+                                    }
+                                    ?>
+                            ><?php echo $value;?></option>
+                            <?php endforeach;?>
+                        </select>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
                 <button type="submit" class="btn btn-success">Update Profile</button>
                 <?php echo $this->Form->end();?>
             </div>

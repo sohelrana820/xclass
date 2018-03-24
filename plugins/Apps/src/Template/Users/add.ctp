@@ -139,9 +139,28 @@
             </div>
             <div class="clearfix"></div>
 
+
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label>Postal Code</label>
+                    <label>User Status</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="1" <?php if($user->status == 1){echo 'checked';}?>>Active
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="0" <?php if($user->status == 0){echo 'checked';}?>>Inactive
+                        </label>
+                    </div>
+                    <?php echo $this->Form->error('status')?>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Choose Courses</label>
                     <?php echo $this->Form->input('courses._ids', ['type' => 'select', 'class' => 'form-control', 'options' => $courses, 'multiple' => 'multiple', 'label' => false, 'required' => false]);?>
                 </div>
             </div>
@@ -153,6 +172,7 @@
                     <?php echo $this->Form->input('password', ['type' => 'password', 'class' => 'form-control', 'placeholder' => 'Password', 'label' => false, 'required' => false]);?>
                 </div>
             </div>
+
             <div class="col-lg-4">
                 <div class="form-group">
                     <label>Confirm password</label>

@@ -455,7 +455,6 @@ class UsersController extends AppController
             'contain' => ['Profiles', 'Courses']
         ]);
 
-
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($this->Users->save($user)) {

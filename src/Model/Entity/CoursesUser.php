@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * CoursesUser Entity
  *
  * @property int $id
- * @property int $cource_id
+ * @property int $course_id
  * @property int $user_id
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
