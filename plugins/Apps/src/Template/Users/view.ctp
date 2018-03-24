@@ -147,6 +147,13 @@
                         ?>
                     </li>
                 </ul>
+
+                <br/>
+                <h3 class="semi-title">Courses</h3>
+                <hr/>
+                <?php foreach ($user->courses as $key => $course):?>
+                    <p class="text-muted"><?php echo '(' . ($key + 1) .') ' .$course->name;?></p>
+                <?php endforeach;;?>
             </div>
         </div>
     </div>
