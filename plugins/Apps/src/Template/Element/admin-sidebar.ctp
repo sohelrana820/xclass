@@ -19,7 +19,13 @@
                     <?php echo $this->Html->link('Add', ['controller' => 'users', 'action' => 'add'], ['escape' => false]); ?>
                 </li>
                 <li>
-                    <?php echo $this->Html->link('List', ['controller' => 'users', 'action' => 'index'], ['escape' => false]); ?>
+                    <?php echo $this->Html->link('All List', ['controller' => 'users', 'action' => 'index'], ['escape' => false]); ?>
+                </li>
+                <li>
+                    <?php echo $this->Html->link('Active List', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '1']], ['escape' => false]); ?>
+                </li>
+                <li>
+                    <?php echo $this->Html->link('Inactive List', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '0']], ['escape' => false]); ?>
                 </li>
             </ul>
         </li>
@@ -42,7 +48,13 @@
                     <?php echo $this->Html->link('Add', ['controller' => 'documents', 'action' => 'add'], ['escape' => false]); ?>
                 </li>
                 <li>
-                    <?php echo $this->Html->link('List', ['controller' => 'documents', 'action' => 'index'], ['escape' => false]); ?>
+                    <?php echo $this->Html->link('All List', ['controller' => 'documents', 'action' => 'index'], ['escape' => false]); ?>
+                </li>
+                <li>
+                    <?php echo $this->Html->link('Active List', ['controller' => 'documents', 'action' => 'index', '?' => ['status' => 'active']], ['escape' => false]); ?>
+                </li>
+                <li>
+                    <?php echo $this->Html->link('Inactive List', ['controller' => 'documents', 'action' => 'index', '?' => ['status' => 'inactive']], ['escape' => false]); ?>
                 </li>
             </ul>
         </li>
