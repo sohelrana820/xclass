@@ -2189,7 +2189,7 @@ Licensed under MIT
     padding: 15px;
     border: 1px solid #ddd;
     margin-bottom: 30px;
-    height: 120px;
+    height: 130px;
     position: relative;
 }
 
@@ -2213,7 +2213,13 @@ Licensed under MIT
     font-size: 12px;
     line-height: 25px;
     color: #777;
-    height: 40px;
+    height: 25px;
+}
+
+.document-list .media-body .doc-sourse{
+    font-size: 12px;
+    line-height: 25px;
+    color: #777;
 }
 
 .document-list .media-body .status{

@@ -22,6 +22,7 @@
         <?php if(!$documents->isEmpty()):?>
             <div class="row">
                 <?php foreach ($documents as $document): ?>
+
                     <div class="col-lg-6">
                         <div class="media document-list">
                             <div class="media-left">
@@ -37,7 +38,8 @@
                                 <h4 class="media-heading">
                                     <?php echo $this->Html->link($this->Text->truncate($document->title, 80), ['action' => $document->id])?>
                                 </h4>
-                                <p><?php echo $this->Text->truncate($document->description, 180)?></p>
+                                <p><?php echo $this->Text->truncate($document->description, 100)?></p>
+                                <div class="doc-sourse">Course: <?php echo $document->course ? $document->course->name : 'N/A';?></div>
                                 <div class="status">
                                     <?php if ($document->status == 1): ?>
                                         <strong>Status:</strong> <span class="status-text status-text-success">Active</span>
