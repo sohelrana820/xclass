@@ -32,12 +32,12 @@
                                 if($document->image != '') {
                                     $image = $document->image;
                                 }
-                                echo $this->Html->image($image, ['class' => 'doc-list-img', 'alt' => $document->title]);
+                                echo $this->Html->image($image, ['class' => 'doc-list-img', 'alt' => $document->title, 'url' => ['action' => 'view', $document->id]]);
                                 ?>
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">
-                                    <?php echo $this->Html->link($this->Text->truncate($document->title, 80), ['action' => $document->id])?>
+                                    <?php echo $this->Html->link($this->Text->truncate($document->title, 80), ['action' => 'view', $document->id])?>
                                 </h4>
                                 <p><?php echo $this->Text->truncate($document->description, 100)?></p>
                                 <div class="doc-sourse">Course: <?php echo $document->course ? $document->course->name : 'N/A';?></div>
