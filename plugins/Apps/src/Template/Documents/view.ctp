@@ -78,8 +78,8 @@
                             <table class="table theme-table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Downloaded</th>
-                                    <th scope="col"><?php echo __('Created', 'Download Time') ?></th>
+                                    <th scope="col">Student Name</th>
+                                    <th scope="col">Download Time</th>
                                     <th scope="col" class="actions"><?php echo __('Actions') ?></th>
                                 </tr>
                                 </thead>

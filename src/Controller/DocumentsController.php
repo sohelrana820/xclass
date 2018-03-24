@@ -204,4 +204,26 @@ class DocumentsController extends AppController
         unlink(WWW_ROOT . $document->path);
         exit;
     }
+
+    /**
+     *
+     */
+    public function downloadHistories()
+    {
+        $conditions = [];
+        $this->paginate = [
+            'conditions' => $conditions,
+            'contain' => ['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'],
+            'order' => ['Downloads.id' => 'desc'],
+            'limit' => 1
+        ];
+        $this->loadModel('Downloads');
+        $this->loadModel('Users');
+        $downloads = $this->paginate($this->Downloads);
+
+        $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
+        $users = $this->Users->find('list', ['limit' => 200]);
+        $this->set(compact('downloads', 'courses', 'users'));
+        $this->set('_serialize', ['downloads']);
+    }
 }

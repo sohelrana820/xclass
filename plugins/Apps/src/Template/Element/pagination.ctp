@@ -1,7 +1,7 @@
 <div class="paginator pagination_full">
     <div>
         <small class="text-muted">
-            <?php echo $this->Paginator->counter(__('showing').' {{current}} '.__('records_out_of').' {{count}} '. __('total')); ?>
+            <?php echo $this->Paginator->counter(__('showing').' {{current}} '.__('records out of').' {{count}} '. __('total')); ?>
         </small>
     </div>
     <ul class="pagination">
