@@ -15,6 +15,7 @@
         <div class="pull-right btn-areas">
             <?php echo $this->Html->link('New Document', ['controller' => 'documents', 'action' => 'add'], ['class' => 'btn btn-info'])?>
             <?php echo $this->Html->link('Back to List', ['controller' => 'documents', 'action' => 'index'], ['class' => 'btn btn-info'])?>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchDocumentsModal">Search Documents</button>
         </div>
         <div class="clearfix"></div>
     </div>
@@ -65,5 +66,58 @@
         <?php else: ?>
             <?php echo $this->element('not_found'); ?>
         <?php endif; ?>
+    </div>
+</div>
+
+
+
+<div class="modal fade modal-primary" id="searchDocumentsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <?php
+        echo $this->Form->create(null,
+            [
+                'type' => 'get',
+                'url' =>
+                    [
+                        'controller' => 'documents',
+                        'action' => 'index',
+                    ]
+            ]
+        );
+        ?>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title text-center text-uppercase" id="myModalLabel">Search Documents</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Title</label>
+                    <div class="input text">
+                        <input type="text" name="title" class="form-control" placeholder="Document title" value="<?php echo $this->request->query('title') != '' ? $this->request->query('title') : '' ?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="1" <?php if($this->request->query('status') && $this->request->query('status') == '1') {echo 'checked';}?>>Active
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="status" value="0" <?php if($this->request->query('status') && $this->request->query('status') == '0') {echo 'checked';}?>>Inactive
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="search">
+                <?php echo $this->Html->link('Reset', ['controller' => 'documents' , 'action' => 'index'], ['class' => 'btn btn-danger']);?>
+            </div>
+        </div>
+        <?php echo $this->Form->end();?>
     </div>
 </div>

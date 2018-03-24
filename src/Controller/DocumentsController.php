@@ -19,8 +19,26 @@ class DocumentsController extends AppController
      */
     public function index()
     {
+        $query = $this->request->getQuery();
+        $conditions = [];
+
+        if (isset($query['title']) && $query['title']) {
+            $conditions = array_merge(
+                $conditions,
+                [
+                    'Documents.title LIKE' => '%' . $query['title'] . '%',
+                ]
+            );
+        }
+
+        if (isset($query['status'])) {
+            $conditions = array_merge($conditions, ['Documents.status' => $query['status']]);
+        }
+
         $this->paginate = [
-            'contain' => ['Courses']
+            'conditions' => $conditions,
+            'contain' => ['Courses'],
+            'order' => ['Documents.id' => 'desc']
         ];
         $documents = $this->paginate($this->Documents);
 
