@@ -11,6 +11,9 @@
         <div class="pull-left">
             <h2>Download Histories</h2>
         </div>
+        <div class="pull-right btn-areas">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchDownloadModal">Search Download</button>
+        </div>
         <div class="clearfix"></div>
     </div>
     <div class="widget-body">
@@ -48,3 +51,56 @@
 </div>
 
 
+<div class="modal fade modal-primary" id="searchDownloadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <?php
+        echo $this->Form->create(null,
+            [
+                'type' => 'get',
+                'url' =>
+                    [
+                        'controller' => 'documents',
+                        'action' => 'download-histories',
+                    ]
+            ]
+        );
+        ?>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title text-center text-uppercase" id="myModalLabel">Search Download</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Courses</label>
+                    <div class="input text">
+                        <select type="text" name="course_id" class="form-control">
+                            <option value="">Choose Course</option>
+                            <?php foreach ($courses as $key => $value): ?>
+                                <option value="<?php echo $key;?>" <?php if($this->request->query('course_id') == $key) {echo 'selected="selected';}?>><?php echo $value;?></option>
+                            <?php endforeach;; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Users</label>
+                    <div class="input text">
+                        <select type="text" name="user_id" class="form-control">
+                            <option value="">Choose User</option>
+                            <?php foreach ($users as $key => $value): ?>
+                                <option value="<?php echo $key;?>" <?php if($this->request->query('user_id') == $key) {echo 'selected="selected';}?>><?php echo $value;?></option>
+                            <?php endforeach;; ?>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="btn btn-primary" value="search">
+                <?php echo $this->Html->link('Reset', ['controller' => 'documents' , 'action' => 'download-histories'], ['class' => 'btn btn-danger']);?>
+            </div>
+        </div>
+        <?php echo $this->Form->end();?>
+    </div>
+</div>

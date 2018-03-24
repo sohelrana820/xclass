@@ -211,18 +211,41 @@ class DocumentsController extends AppController
     public function downloadHistories()
     {
         $conditions = [];
+        $query = $this->request->getQuery();
+
+        if (isset($query['course_id']) && $query['course_id']) {
+            $conditions = array_merge($conditions, ['Documents.course_id' => (int) $query['course_id']]);
+        }
+
+        if (isset($query['user_id']) && $query['user_id']) {
+            $conditions = array_merge($conditions, ['Downloads.user_id' => (int) $query['user_id']]);
+        }
+
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => ['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'],
             'order' => ['Downloads.id' => 'desc'],
-            'limit' => 1
+            'limit' => 50
         ];
         $this->loadModel('Downloads');
         $this->loadModel('Users');
         $downloads = $this->paginate($this->Downloads);
 
         $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
-        $users = $this->Users->find('list', ['limit' => 200]);
+        $users = $this->Users
+            ->find('list', [
+                'keyField' => 'id',
+                'valueField' => 'concatenated',
+                'contain' => ['Profiles']
+            ]);
+        $users->select([
+                'id',
+                'concatenated' => $users->func()->concat([
+                    'Profiles.first_name' => 'literal',
+                    ' ',
+                    'Profiles.last_name' => 'literal'
+                ])
+            ]);
         $this->set(compact('downloads', 'courses', 'users'));
         $this->set('_serialize', ['downloads']);
     }
