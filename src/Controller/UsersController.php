@@ -237,7 +237,7 @@ class UsersController extends AppController
      */
     public function changeProfilePassword()
     {
-        $profile = $this->Users->get($this->userID);
+        $profile = $this->Users->get($this->userID, ['contain' => ['Profiles']]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $profile = $this->Users->patchEntity(
                 $profile,
@@ -254,6 +254,19 @@ class UsersController extends AppController
                 $this->Flash->error(__('Sorry, something went wrong'));
             }
         }
+        $this->set(compact('profile'));
+        $this->set('_serialize', ['profile']);
+    }
+
+
+    /**
+     * @return \Cake\Network\Response|void
+     *
+     * This is user change password
+     */
+    public function userCourses()
+    {
+        $profile = $this->Users->get($this->userID, ['contain' => ['Profiles', 'Courses']]);
         $this->set(compact('profile'));
         $this->set('_serialize', ['profile']);
     }

@@ -361,4 +361,18 @@ class UsersTable extends Table
         ]);
         return $users->toArray();
     }
+
+    /**
+     * @param $userId
+     * @return array
+     */
+    public function getCourses($userId)
+    {
+        $user = $this->find()
+            ->where(['Users.id' => $userId])
+            ->contain(['Courses'])
+            ->first();
+
+        return $user->courses;
+    }
 }

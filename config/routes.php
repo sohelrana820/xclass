@@ -49,8 +49,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/profile', ['controller' => 'users', 'action' => 'profile']);
     $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'updateProfile']);
     $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
-    $routes->connect('/projects/create', ['controller' => 'projects', 'action' => 'create']);
-    $routes->connect('/projects/:slug', ['controller' => 'projects', 'action' => 'view'], ['pass' => ['slug']]);
+    $routes->connect('/profile/courses', ['controller' => 'users', 'action' => 'userCourses']);
 });
 
 /**
