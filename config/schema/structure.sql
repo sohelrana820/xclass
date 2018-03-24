@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2018 at 01:30 AM
+-- Generation Time: Mar 24, 2018 at 11:26 AM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -57,7 +57,8 @@ CREATE TABLE `documents` (
   `course_id` int(4) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `desctiotion` text,
+  `description` text,
+  `name` varchar(255) DEFAULT NULL,
   `path` varchar(255) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active, 0 = inactive',
   `created` datetime NOT NULL,
@@ -229,7 +230,7 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `users`
 --
