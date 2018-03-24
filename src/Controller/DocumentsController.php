@@ -148,4 +148,23 @@ class DocumentsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * @param null $id
+     */
+    public function download($id = null)
+    {
+        $document = $this->Documents->get($id);
+        if(!$document) {
+            $this->redirect($this->referer());
+        }
+
+        //header("Content-type: application/zip");
+        header("Content-Disposition: attachment; filename = $document->title");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+        readfile("$document->path");
+        unlink(WWW_ROOT . $document->path);
+        exit;
+    }
 }
