@@ -103,13 +103,25 @@
                     <label>Status</label>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="status" value="1" <?php if($this->request->query('status') && $this->request->query('status') == '1') {echo 'checked';}?>>Active
+                            <input type="radio" name="status" value="active" <?php if($this->request->query('status') && $this->request->query('status') == 'active') {echo 'checked';}?>>Active
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="status" value="0" <?php if($this->request->query('status') && $this->request->query('status') == '0') {echo 'checked';}?>>Inactive
+                            <input type="radio" name="status" value="inactive" <?php if($this->request->query('status') && $this->request->query('status') == 'inactive') {echo 'checked';}?>>Inactive
                         </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Courses</label>
+                    <div class="input text">
+                        <select type="text" name="course_id" class="form-control">
+                            <option value="">Choose Course</option>
+                            <?php foreach ($courses as $key => $value): ?>
+                                <option value="<?php echo $key;?>" <?php if($this->request->query('course_id') == $key) {echo 'selected="selected';}?>><?php echo $value;?></option>
+                            <?php endforeach;; ?>
+                        </select>
                     </div>
                 </div>
             </div>

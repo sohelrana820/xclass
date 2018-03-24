@@ -32,7 +32,15 @@ class DocumentsController extends AppController
         }
 
         if (isset($query['status'])) {
-            $conditions = array_merge($conditions, ['Documents.status' => $query['status']]);
+            if($query['status']  == 'active') {
+                $conditions = array_merge($conditions, ['Documents.status' => 1]);
+            } else {
+                $conditions = array_merge($conditions, ['Documents.status' => 0]);
+            }
+        }
+
+        if (isset($query['course_id']) && $query['course_id']) {
+            $conditions = array_merge($conditions, ['Documents.course_id' => (int) $query['course_id']]);
         }
 
         $this->paginate = [
@@ -42,7 +50,8 @@ class DocumentsController extends AppController
         ];
         $documents = $this->paginate($this->Documents);
 
-        $this->set(compact('documents'));
+        $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
+        $this->set(compact('documents', 'courses'));
         $this->set('_serialize', ['documents']);
     }
 
