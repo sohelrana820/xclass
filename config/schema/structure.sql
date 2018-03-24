@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 23, 2018 at 10:12 PM
+-- Generation Time: Mar 24, 2018 at 01:30 AM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `courses` (
   `id` int(4) NOT NULL,
+  `created_by` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `status` int(1) NOT NULL DEFAULT '1' COMMENT 'status: 1 = active, 0 = inactive',
@@ -37,8 +38,8 @@ CREATE TABLE `courses` (
 
 CREATE TABLE `courses_users` (
   `id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `user_id` int(3) NOT NULL,
+  `course_id` int(4) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -53,6 +54,7 @@ CREATE TABLE `documents` (
   `id` int(11) NOT NULL,
   `uuid` varchar(36) NOT NULL,
   `created_by` int(11) NOT NULL,
+  `course_id` int(4) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
   `desctiotion` text,
@@ -146,14 +148,15 @@ CREATE TABLE `users` (
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `name` (`name`);
+  ADD KEY `name` (`name`),
+  ADD KEY `created_by` (`created_by`);
 
 --
 -- Indexes for table `courses_users`
 --
 ALTER TABLE `courses_users`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `course_id` (`course_id`),
+  ADD KEY `cource_id` (`course_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -190,7 +193,8 @@ ALTER TABLE `settings`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `student_id` (`student_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -200,12 +204,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `courses_users`
 --
 ALTER TABLE `courses_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `documents`
 --
@@ -220,7 +224,7 @@ ALTER TABLE `download`
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- AUTO_INCREMENT for table `settings`
 --
@@ -230,10 +234,16 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `courses`
+--
+ALTER TABLE `courses`
+  ADD CONSTRAINT `course_created_by` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `courses_users`
