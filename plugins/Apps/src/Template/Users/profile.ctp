@@ -13,6 +13,8 @@
         </div>
         <div class="pull-right btn-areas btn-margin">
             <?php
+            echo $this->Html->link('My Courses', ['controller' => 'profile', 'action' => 'courses'], ['class' => 'btn btn-info', 'escape' => false]);
+
             echo $this->Html->link('My Profile', ['controller' => 'profile', 'action' => 'index'], ['class' => 'btn btn-info', 'escape' => false]);
 
             echo $this->Html->link('Update Profile', ['controller' => 'profile', 'action' => 'update'], ['class' => 'btn btn-info', 'escape' => false]);
