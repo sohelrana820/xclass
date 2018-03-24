@@ -147,13 +147,61 @@
                         ?>
                     </li>
                 </ul>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <br/>
-                <h3 class="semi-title">Courses</h3>
-                <hr/>
-                <?php foreach ($user->courses as $key => $course):?>
-                    <p class="text-muted"><?php echo '(' . ($key + 1) .') ' .$course->name;?></p>
-                <?php endforeach;;?>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <div class="widget-header">
+                <h2>Courses</h2>
+            </div>
+            <div class="widget-body">
+                <?php if($user->courses):?>
+                    <?php foreach ($user->courses as $key => $course):?>
+                        <p class="text-muted"><?php echo '(' . ($key + 1) .') ' .$course->name;?></p>
+                    <?php endforeach;?>
+                <?php else:?>
+                    <?php echo $this->element('not_found')?>
+                <?php endif?>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <div class="widget-header">
+                <h2>Download Documents</h2>
+            </div>
+            <div class="widget-body">
+                <?php if (!empty($user->downloads)): ?>
+                    <table class="table theme-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Document Name</th>
+                            <th scope="col">Download Time</th>
+                            <th scope="col" class="actions"><?php echo __('Actions') ?></th>
+                        </tr>
+                        </thead>
+                        <?php foreach ($user->downloads as $download): ?>
+                            <tr>
+                                <td><?php echo $download->document->course ? $download->document->course->name : 'N/A'; ?></td>
+                                <td><?php echo $download->document->title ? $this->Text->truncate($download->document->title, 50) : 'N/A'; ?></td>
+                                <td>
+                                    <?php echo $this->Time->format($download->created, 'MMM d, Y') ?>
+                                    <span class="sm-time">(<?php echo date('H:i A', strtotime($download->created)) ?>)</span>
+                                </td>
+                                <td class="actions">
+                                    <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['controller' => 'Download', 'action' => 'delete', $download->id], ['class' => 'icons red', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $download->id)]) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else: ?>
+                    <?php echo $this->element('not_found'); ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

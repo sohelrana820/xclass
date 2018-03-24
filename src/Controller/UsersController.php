@@ -446,7 +446,7 @@ class UsersController extends AppController
             $userID = $uuid;
         }
 
-        $user = $this->Users->get($userID, ['contain' => ['Profiles', 'Courses']]);
+        $user = $this->Users->get($userID, ['contain' => ['Profiles', 'Courses', 'Downloads', 'Downloads.Documents', 'Downloads.Documents.Courses']]);
         $this->set(compact('user'));
         $this->set('_serialize', ['user']);
     }
