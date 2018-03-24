@@ -17,6 +17,7 @@ class GeneralController extends AppController
 
     public function setting()
     {
+        $this->checkPermission($this->isAdmin());
         $this->loadModel('Settings');
         $settings = $this->Settings->retrieveMetas();
         $appLogo = $this->appsLogo;
