@@ -58,6 +58,10 @@ class UtilitiesComponent extends Component
             $conditions = array_merge($conditions, ['Users.status' => $query['status']]);
         }
 
+        if (isset($query['role'])) {
+            $conditions = array_merge($conditions, ['Users.role' => $query['role']]);
+        }
+
         if (isset($query['email_verify'])) {
             $conditions = array_merge($conditions, ['Users.email_verify' => $query['email_verify']]);
         }

@@ -394,7 +394,7 @@ class UsersController extends AppController
         if ($this->request->params['_ext'] != 'json') {
             $this->paginate = [
                 'conditions' => $conditions,
-                'fields' => ['Users.id', 'Users.uuid', 'Users.username', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
+                'fields' => ['Users.id', 'Users.uuid', 'Users.username', 'Users.student_id', 'Users.status', 'Users.role', 'Profiles.first_name', 'Profiles.last_name', 'Profiles.phone', 'Profiles.city', 'Profiles.gender'],
                 'contain' => [
                     'Profiles' => [
                         'fields' => []

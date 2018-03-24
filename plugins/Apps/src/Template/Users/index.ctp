@@ -24,6 +24,7 @@
             <table class="table theme-table">
                 <thead>
                 <tr>
+                    <th>Student ID</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -36,6 +37,9 @@
                 <tbody>
                 <?php foreach ($users as $user): ?>
                     <tr>
+                        <td>
+                            <?php echo $user->student_id ? $user->student_id : 'N/A'; ?>
+                        </td>
                         <td>
                             <?php echo $this->Html->link($user->profile->name, ['controller' => 'users', 'action' => 'view', $user->uuid]); ?>
                         </td>
@@ -65,7 +69,7 @@
                             <?php if ($user->role == 1): ?>
                         <strong class="text-muted">Admin</strong>
                     <?php elseif ($user->role == 2): ?>
-                        <span class="text-muted"">General</span>
+                        <span class="text-muted"">Student</span>
                     <?php else: ?>
                         N/A
                     <?php endif; ?>
@@ -144,6 +148,20 @@
                     </div>
 
                     <div class="form-group">
+                        <label>User Type</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="role" value="1" <?php if($this->request->query('role') && $this->request->query('role') == 1) {echo 'checked';}?>>Admin User
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="role" value="2" <?php if($this->request->query('role') && $this->request->query('role') == 2) {echo 'checked';}?>>Student User
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label>User Status</label>
                         <div class="radio">
                             <label>
@@ -152,7 +170,7 @@
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="status" value="0" <?php if($this->request->query('status') && $this->request->query('status') == 0) {echo 'checked';}?>>Inactive
+                                <input type="radio" name="status" value="0" <?php if($this->request->query('status') && $this->request->query('status') == '0') {echo 'checked';}?>>Inactive
                             </label>
                         </div>
                     </div>
