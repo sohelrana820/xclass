@@ -80,7 +80,7 @@ class UsersController extends AppController
 
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Signup successful! Please check your email to verify your email address'));
-                $this->Email->signupConfirmEmail($data, $verifyCode);
+                //$this->Email->signupConfirmEmail($data, $verifyCode);
                 return $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error(__('Sorry! something went wrong'));
@@ -148,7 +148,7 @@ class UsersController extends AppController
             $user->forgot_pass_code = $forgotPassCode;
 
             if ($this->Users->save($user)) {
-                $this->Email->forgotPassEmail($userInfo, $forgotPassCode);
+                //$this->Email->forgotPassEmail($userInfo, $forgotPassCode);
                 $this->Flash->success(__('A reset password link has been sent to your email'));
                 return $this->redirect(['controller' => 'users', 'action' => 'forgot-password']);
             } else {
@@ -189,7 +189,7 @@ class UsersController extends AppController
             $user->forgot_pass_code = null;
 
             if ($this->Users->save($user)) {
-                $this->Email->passwordChangedEmail($userInfo);
+                //$this->Email->passwordChangedEmail($userInfo);
                 $this->Flash->success(__('Password has been changed successfully'));
                 return $this->redirect(['controller' => 'users', 'action' => 'login']);
             } else {
@@ -375,7 +375,7 @@ class UsersController extends AppController
     {
         $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
-        $limit = $this->settings['users_per_page'] ? intval($this->settings['users_per_page']) : 50;;
+        $limit = isset($this->settings['users_per_page']) ? intval($this->settings['users_per_page']) : 50;;
         $conditions = [];
 
         if (isset($this->request->query) && $this->request->query) {

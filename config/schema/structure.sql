@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2018 at 11:26 AM
+-- Generation Time: Mar 24, 2018 at 11:05 PM
 -- Server version: 5.7.21-0ubuntu0.16.04.1
 -- PHP Version: 7.0.28-0ubuntu0.16.04.1
 
@@ -68,10 +68,10 @@ CREATE TABLE `documents` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `download`
+-- Table structure for table `downloads`
 --
 
-CREATE TABLE `download` (
+CREATE TABLE `downloads` (
   `id` int(11) NOT NULL,
   `document_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -168,9 +168,9 @@ ALTER TABLE `documents`
   ADD KEY `created_by` (`created_by`);
 
 --
--- Indexes for table `download`
+-- Indexes for table `downloads`
 --
-ALTER TABLE `download`
+ALTER TABLE `downloads`
   ADD PRIMARY KEY (`id`),
   ADD KEY `document_id` (`document_id`),
   ADD KEY `user_id` (`user_id`);
@@ -205,27 +205,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `courses_users`
 --
 ALTER TABLE `courses_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `download`
+-- AUTO_INCREMENT for table `downloads`
 --
-ALTER TABLE `download`
+ALTER TABLE `downloads`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `profiles`
 --
 ALTER TABLE `profiles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `settings`
 --
@@ -235,7 +235,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Constraints for dumped tables
 --
@@ -260,9 +260,9 @@ ALTER TABLE `documents`
   ADD CONSTRAINT `document_created` FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
 
 --
--- Constraints for table `download`
+-- Constraints for table `downloads`
 --
-ALTER TABLE `download`
+ALTER TABLE `downloads`
   ADD CONSTRAINT `download_docuement` FOREIGN KEY (`document_id`) REFERENCES `documents` (`id`),
   ADD CONSTRAINT `download_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 

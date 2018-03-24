@@ -103,9 +103,7 @@ class UsersTable extends Table
                         'rule' => 'validateUnique'
                     ]
                 ]
-            )
-            ->requirePresence('student_id', 'create', 'Student ID must be required!')
-            ->notEmpty('student_id', 'Student ID must be required!');
+            );
 
 
         $validator

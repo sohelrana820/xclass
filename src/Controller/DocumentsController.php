@@ -67,7 +67,7 @@ class DocumentsController extends AppController
             $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
         }
 
-        $limit = $this->settings['documents_per_page'] ? intval($this->settings['documents_per_page']) : 50;
+        $limit = isset($this->settings['documents_per_page']) ? intval($this->settings['documents_per_page']) : 50;
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => ['Courses'],
@@ -281,7 +281,7 @@ class DocumentsController extends AppController
                 ])
             ]);
 
-        $limit = $this->settings['history_per_page'] ? intval($this->settings['history_per_page']) : 50;
+        $limit = isset($this->settings['history_per_page']) ? intval($this->settings['history_per_page']) : 50;
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => ['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'],

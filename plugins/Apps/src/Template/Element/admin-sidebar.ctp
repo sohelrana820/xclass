@@ -72,7 +72,7 @@
     <footer class="copyright">
         <div class="container-fluid">
             <p class="copy-text">
-                <?php echo $settings['copyright'] ? $settings['copyright'] : 'Copyright ' . date('Y')?>
+                <?php echo isset($settings['copyright']) ? $settings['copyright'] : 'Copyright ' . date('Y')?>
             </p>
         </div>
     </footer>

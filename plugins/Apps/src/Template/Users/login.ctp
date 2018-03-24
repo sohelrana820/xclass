@@ -12,6 +12,6 @@
         <?php echo __('Do not have account?');?>
     <?php echo $this->Html->link(__('Click to create account'), ['controller' => 'users', 'action' => 'signup']);?>
     <br/>
-    <?php echo $this->Html->link(__('Forgot password'), ['controller' => 'users', 'action' => 'forgot_password']);?>
+    <?php /*echo $this->Html->link(__('Forgot password'), ['controller' => 'users', 'action' => 'forgot_password']);*/?>
     </span>
 <?php echo $this->Form->end();?>
