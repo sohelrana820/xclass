@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Utility\Text;
 
 /**
  * Documents Controller
@@ -53,10 +54,26 @@ class DocumentsController extends AppController
     {
         $document = $this->Documents->newEntity();
         if ($this->request->is('post')) {
-            $document = $this->Documents->patchEntity($document, $this->request->data);
+            $data = $this->request->data;
+            $uuid = Text::uuid();
+            $data['uuid'] = $uuid;
+            $data['created_by'] = $this->userID;
+            // Upload image
+            if(isset($data['image'])) {
+                $uploadedImage = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $data['image'], Text::uuid() . '_img');
+                $data['image'] = 'img/attachments/' . $uploadedImage['name'];
+            }
+
+            // Upload document
+            $uploadedDoc = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $data['document'], Text::uuid() . '_doc');
+            if($uploadedDoc) {
+                $data['name'] = $data['document']['name'];
+                $data['path'] = $uploadedDoc['path'];
+            }
+
+            $document = $this->Documents->patchEntity($document, $data);
             if ($this->Documents->save($document)) {
                 $this->Flash->success(__('The document has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The document could not be saved. Please, try again.'));

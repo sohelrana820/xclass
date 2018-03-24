@@ -86,7 +86,11 @@ class UtilitiesComponent extends Component
         $temp = explode(".", $documents["name"]);
         $newName = $customName . '.' . end($temp);
         if (move_uploaded_file($documents["tmp_name"], $path . '/' . $newName)) {
-            return $newName;
+            $return = [
+                'name' => $newName,
+                'path' => $path . '/' . $newName
+            ];
+            return $return;
         }
         return false;
     }
