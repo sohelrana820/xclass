@@ -80,4 +80,18 @@ class CoursesUsersTable extends Table
 
         return $rules;
     }
+
+    /**
+     * @param $userId
+     * @return Query
+     */
+    public function getCourseIdsByUserId($userId)
+    {
+        $list = $this->find('list', ['conditions' => ['user_id' => $userId], 'keyField' => 'id', 'valueField' => 'course_id']);
+        if($list) {
+            return $list->toArray();
+        }
+
+        return [];
+    }
 }

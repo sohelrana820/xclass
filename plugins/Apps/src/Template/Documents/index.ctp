@@ -13,8 +13,10 @@
             <span><span><?php echo $this->Paginator->counter('{{count}}');?> result found</span></span>
         </div>
         <div class="pull-right btn-areas">
-            <?php echo $this->Html->link('New Document', ['controller' => 'documents', 'action' => 'add'], ['class' => 'btn btn-info'])?>
-            <?php echo $this->Html->link('Back to List', ['controller' => 'documents', 'action' => 'index'], ['class' => 'btn btn-info'])?>
+            <?php if($userInfo->role == 1):?>
+                <?php echo $this->Html->link('New Document', ['controller' => 'documents', 'action' => 'add'], ['class' => 'btn btn-info'])?>
+                <?php echo $this->Html->link('Back to List', ['controller' => 'documents', 'action' => 'index'], ['class' => 'btn btn-info'])?>
+            <?php endif;?>
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#searchDocumentsModal">Search Documents</button>
         </div>
         <div class="clearfix"></div>
@@ -50,11 +52,13 @@
                                         <strong>Status:</strong> N/A
                                     <?php endif; ?>
                                 </div>
+                                <?php if($userInfo->role == 1):?>
                                 <div class="doc-buttons">
                                     <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $document->id], ['escape' => false, 'class' => 'icons green']) ?>
                                     <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $document->id], ['escape' => false, 'class' => 'icons']) ?>
                                     <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $document->id], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $document->id)]) ?>
                                 </div>
+                                <?php endif;?>
                             </div>
                             <div class="media-right">
                                 <?php echo $this->Html->link('<i class="fa fa-download"></i>', ['action' => 'download', $document->id], ['class' => 'doc-download', 'escape' => false])?>
@@ -99,19 +103,21 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Status</label>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="status" value="active" <?php if($this->request->query('status') && $this->request->query('status') == 'active') {echo 'checked';}?>>Active
-                        </label>
+                <?php if($userInfo->role == 1):?>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" value="active" <?php if($this->request->query('status') && $this->request->query('status') == 'active') {echo 'checked';}?>>Active
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="status" value="inactive" <?php if($this->request->query('status') && $this->request->query('status') == 'inactive') {echo 'checked';}?>>Inactive
+                            </label>
+                        </div>
                     </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="status" value="inactive" <?php if($this->request->query('status') && $this->request->query('status') == 'inactive') {echo 'checked';}?>>Inactive
-                        </label>
-                    </div>
-                </div>
+                <?php endif;?>
 
                 <div class="form-group">
                     <label>Courses</label>

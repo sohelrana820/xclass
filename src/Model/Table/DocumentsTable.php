@@ -42,7 +42,7 @@ class DocumentsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Courses', [
-            'foreignKey' => 'course_id'
+            'foreignKey' => 'course_id',
         ]);
         $this->hasMany('Downloads', [
             'foreignKey' => 'document_id'

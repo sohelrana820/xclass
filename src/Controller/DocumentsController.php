@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Table\CoursesUsersTable;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Utility\Text;
 
@@ -43,7 +44,27 @@ class DocumentsController extends AppController
         }
 
         if(!$this->isAdmin()) {
+            $this->loadModel('CoursesUsers');
+            $ids = $this->CoursesUsers->getCourseIdsByUserId($this->userID);
+            $courses = $this->Documents->Courses->find('list',
+                [
+                    'conditions' => [
+                        'id IN' => $ids
+                    ],
+                    'limit' => 200]
+            );
+
             $conditions = array_merge($conditions, ['Documents.status' => 1]);
+            $conditions = array_merge($conditions, [
+                'OR' =>
+                    [
+                        'Documents.course_id IN' => $ids,
+                        'Documents.course_id' => NULL
+                    ]
+                ]
+            );
+        } else {
+            $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
         }
 
         $this->paginate = [
@@ -53,7 +74,6 @@ class DocumentsController extends AppController
         ];
         $documents = $this->paginate($this->Documents);
 
-        $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
         $this->set(compact('documents', 'courses'));
         $this->set('_serialize', ['documents']);
     }
