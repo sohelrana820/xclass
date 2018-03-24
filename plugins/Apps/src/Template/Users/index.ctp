@@ -90,7 +90,7 @@
                             <?php
                             echo $this->Html->link('<i class="fa fa-gear"></i>', ['controller' => 'users', 'action' => 'view', $user->uuid], ['escape' => false, 'class' => 'icons green']);
                             echo $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'users', 'action' => 'edit', $user->uuid], ['escape' => false, 'class' => 'icons']);
-                            echo $this->Html->link('<i class="fa fa-trash"></i>', ['controller' => 'users', 'action' => 'delete', $user->uuid], ['escape' => false, 'class' => 'icons red']);
+                            echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $user->uuid], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $user->profile->first_name . ' ' . $user->profile->last_name)]);
                             ?>
                         </td>
                     </tr>
