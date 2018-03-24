@@ -20,6 +20,10 @@
         <li class="active">
             <?php echo $this->Html->link('<i class="fa fa-file"></i> Available Documents', ['controller' => 'documents', 'action' => 'index'], ['escape' => false]); ?>
         </li>
+
+        <li class="active">
+            <?php echo $this->Html->link('<i class="fa fa-file"></i> My Download History', ['controller' => 'documents', 'action' => 'download-histories'], ['escape' => false]); ?>
+        </li>
     </ul>
 
     <!-- Copyright area -->

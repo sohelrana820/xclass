@@ -238,7 +238,6 @@ class DocumentsController extends AppController
      */
     public function downloadHistories()
     {
-        $this->checkPermission($this->isAdmin());
         $conditions = [];
         $query = $this->request->getQuery();
 
@@ -250,17 +249,21 @@ class DocumentsController extends AppController
             $conditions = array_merge($conditions, ['Downloads.user_id' => (int) $query['user_id']]);
         }
 
-        $this->paginate = [
-            'conditions' => $conditions,
-            'contain' => ['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'],
-            'order' => ['Downloads.id' => 'desc'],
-            'limit' => 50
-        ];
-        $this->loadModel('Downloads');
-        $this->loadModel('Users');
-        $downloads = $this->paginate($this->Downloads);
+        if(!$this->isAdmin()) {
+            $this->loadModel('CoursesUsers');
+            $ids = $this->CoursesUsers->getCourseIdsByUserId($this->userID);
+            $courses = $this->Documents->Courses->find('list',
+                [
+                    'conditions' => [
+                        'id IN' => $ids
+                    ],
+                    'limit' => 200]
+            );
+            $conditions = array_merge($conditions, ['Downloads.user_id' => (int) $this->userID]);
+        } else {
+            $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
+        }
 
-        $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
         $users = $this->Users
             ->find('list', [
                 'keyField' => 'id',
@@ -275,6 +278,16 @@ class DocumentsController extends AppController
                     'Profiles.last_name' => 'literal'
                 ])
             ]);
+
+        $this->paginate = [
+            'conditions' => $conditions,
+            'contain' => ['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'],
+            'order' => ['Downloads.id' => 'desc'],
+            'limit' => 50
+        ];
+        $this->loadModel('Downloads');
+        $this->loadModel('Users');
+        $downloads = $this->paginate($this->Downloads);
         $this->set(compact('downloads', 'courses', 'users'));
         $this->set('_serialize', ['downloads']);
     }

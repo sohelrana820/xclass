@@ -25,7 +25,9 @@
                     <th scope="col">Document Name</th>
                     <th scope="col">Course Name</th>
                     <th scope="col">Download Time</th>
-                    <th scope="col" class="actions"><?php echo __('Actions') ?></th>
+                    <?php if($userInfo->role == 1):?>
+                        <th scope="col" class="actions"><?php echo __('Actions') ?></th>
+                    <?php endif;?>
                 </tr>
                 </thead>
                 <?php foreach ($downloads as $download): ?>
@@ -37,9 +39,11 @@
                             <?php echo $this->Time->format($download->created, 'MMM d, Y') ?>
                             <span class="sm-time">(<?php echo date('H:i A', strtotime($download->created)) ?>)</span>
                         </td>
+                        <?php if($userInfo->role == 1):?>
                         <td class="actions">
                             <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['controller' => 'Download', 'action' => 'delete', $download->id], ['class' => 'icons red', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $download->id)]) ?>
                         </td>
+                        <?php endif;?>
                     </tr>
                 <?php endforeach; ?>
             </table>
@@ -84,6 +88,7 @@
                     </div>
                 </div>
 
+                <?php if($userInfo->role == 1):?>
                 <div class="form-group">
                     <label>Users</label>
                     <div class="input text">
@@ -95,6 +100,7 @@
                         </select>
                     </div>
                 </div>
+                <?php endif;?>
             </div>
             <div class="modal-footer">
                 <input type="submit" class="btn btn-primary" value="search">
