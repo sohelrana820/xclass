@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Network\Exception\NotFoundException;
 use Cake\Utility\Text;
 
 /**
@@ -13,9 +14,7 @@ class DocumentsController extends AppController
 {
 
     /**
-     * Index method
      *
-     * @return \Cake\Network\Response|null
      */
     public function index()
     {
@@ -79,6 +78,8 @@ class DocumentsController extends AppController
      */
     public function add()
     {
+        $this->checkPermission($this->isAdmin());
+
         $document = $this->Documents->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->data;
@@ -120,6 +121,8 @@ class DocumentsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->checkPermission($this->isAdmin());
+
         $document = $this->Documents->get($id, [
             'contain' => []
         ]);
@@ -165,6 +168,7 @@ class DocumentsController extends AppController
      */
     public function delete($id = null)
     {
+        $this->checkPermission($this->isAdmin());
         $this->request->allowMethod(['post', 'delete']);
         $document = $this->Documents->get($id);
         if ($this->Documents->delete($document)) {
@@ -210,6 +214,7 @@ class DocumentsController extends AppController
      */
     public function downloadHistories()
     {
+        $this->checkPermission($this->isAdmin());
         $conditions = [];
         $query = $this->request->getQuery();
 
