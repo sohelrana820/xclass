@@ -2239,6 +2239,40 @@ Licensed under MIT
     color: #6cd466;
 }
 
+.documents-details {
+    background: #f3f5f7;
+    padding: 25px;
+    margin-bottom: 25px;
+    border: 1px solid #d9d9d9;
+}
+
+.documents .title{
+    margin: 0px;
+    margin-bottom: 25px;
+}
+
+.documents-details table{
+    font-size: 13px;
+}
+
+.sm-time{
+    color: #777;
+    font-size: 11px;
+    font-style: italic;
+}
+
+.documents-details th:first-child {
+    width: 150px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #565e6a !important;
+    padding-bottom: 12px;
+}
+
+.documents-details .time {
+    font-size: 11px;
+}
+
 .comments{
     position: relative;
 }
