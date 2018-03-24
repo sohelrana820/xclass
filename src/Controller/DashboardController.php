@@ -20,9 +20,11 @@ class DashboardController extends AppController
     {
         $this->loadModel('Users');
         $this->loadModel('Documents');
+        $this->loadModel('Downloads');
         $this->set('overview', $this->getAdminOverview());
         $this->set('students', $this->Users->recentStudents());
         $this->set('documents', $this->Documents->recentDocuments());
+        $this->set('downloads', $this->Downloads->recentDocuments(10));
     }
 
     /**

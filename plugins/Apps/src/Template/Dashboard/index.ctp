@@ -162,3 +162,48 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="widget">
+            <div class="widget-header">
+                <h2>Recent Downloads</h2>
+            </div>
+            <div class="widget-body">
+                <?php if (!$downloads->isEmpty()): ?>
+                    <table class="table theme-table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Student Name</th>
+                            <th scope="col">Document Name</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">Download Time</th>
+                            <?php if($userInfo->role == 1):?>
+                                <th scope="col" class="actions"><?php echo __('Actions') ?></th>
+                            <?php endif;?>
+                        </tr>
+                        </thead>
+                        <?php foreach ($downloads as $download): ?>
+                            <tr>
+                                <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->first_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
+                                <td><?php echo $this->Html->link($download->document->title, ['controller' => 'documents', 'action' => 'view', $download->document->uuid] ) ; ?></td>
+                                <td><?php echo $download->document->course ? $download->document->course->name : 'N/A' ?></td>
+                                <td>
+                                    <?php echo $this->Time->format($download->created, 'MMM d, Y') ?>
+                                    <span class="sm-time">(<?php echo date('H:i A', strtotime($download->created)) ?>)</span>
+                                </td>
+                                <?php if($userInfo->role == 1):?>
+                                    <td class="actions">
+                                        <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['controller' => 'Download', 'action' => 'delete', $download->id], ['class' => 'icons red', 'escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $download->id)]) ?>
+                                    </td>
+                                <?php endif;?>
+                            </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php else: ?>
+                    <?php echo $this->element('not_found'); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

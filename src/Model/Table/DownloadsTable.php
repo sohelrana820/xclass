@@ -90,4 +90,16 @@ class DownloadsTable extends Table
             ->count();
         return $count;
     }
+
+    /**
+     * @param int $limit
+     * @return $this
+     */
+    public function recentDocuments($limit = 5)
+    {
+        $downloads = $this->find()
+            ->contain(['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'])
+            ->limit($limit);
+        return $downloads;
+    }
 }
