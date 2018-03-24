@@ -42,6 +42,10 @@ class DocumentsController extends AppController
             $conditions = array_merge($conditions, ['Documents.course_id' => (int) $query['course_id']]);
         }
 
+        if(!$this->isAdmin()) {
+            $conditions = array_merge($conditions, ['Documents.status' => 1]);
+        }
+
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => ['Courses'],

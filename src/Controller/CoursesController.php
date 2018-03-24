@@ -18,7 +18,7 @@ class CoursesController extends AppController
     {
         $conditions = [];
         if(!$this->isAdmin()) {
-            $conditions = array_merge(['Courses.status' => 1], $conditions);
+            $conditions = array_merge($conditions, ['Courses.status' => 1]);
         }
         $this->paginate = [
             'conditions' => $conditions,
