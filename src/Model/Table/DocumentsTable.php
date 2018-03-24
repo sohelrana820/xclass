@@ -78,7 +78,10 @@ class DocumentsTable extends Table
             ->allowEmpty('image');
 
         $validator
-            ->allowEmpty('desctiotion');
+            ->allowEmpty('description');
+
+        $validator
+            ->allowEmpty('name');
 
         $validator
             ->requirePresence('path', 'create')

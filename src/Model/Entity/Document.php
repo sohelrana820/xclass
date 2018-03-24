@@ -12,7 +12,8 @@ use Cake\ORM\Entity;
  * @property int $course_id
  * @property string $title
  * @property string $image
- * @property string $desctiotion
+ * @property string $description
+ * @property string $name
  * @property string $path
  * @property int $status
  * @property \Cake\I18n\Time $created

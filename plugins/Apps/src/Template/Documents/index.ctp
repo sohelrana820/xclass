@@ -1,10 +1,13 @@
-<div class="page-header">
-    <h2 class="title pull-left">
-        <?php echo $this->Html->link('Manage Documents', ['controller' => 'documents', 'action' => 'index'], ['class' => 'link']);?>
-    </h2>
-    <div class="clearfix"></div>
-</div>
-
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('New Document'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Courses'), ['controller' => 'Courses', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Course'), ['controller' => 'Courses', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Download'), ['controller' => 'Download', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Download'), ['controller' => 'Download', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
 <div class="documents index large-9 medium-8 columns content">
     <h3><?= __('Documents') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -16,6 +19,7 @@
                 <th scope="col"><?= $this->Paginator->sort('course_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('title') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('image') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('path') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -32,6 +36,7 @@
                 <td><?= $document->has('course') ? $this->Html->link($document->course->name, ['controller' => 'Courses', 'action' => 'view', $document->course->id]) : '' ?></td>
                 <td><?= h($document->title) ?></td>
                 <td><?= h($document->image) ?></td>
+                <td><?= h($document->name) ?></td>
                 <td><?= h($document->path) ?></td>
                 <td><?= $this->Number->format($document->status) ?></td>
                 <td><?= h($document->created) ?></td>
