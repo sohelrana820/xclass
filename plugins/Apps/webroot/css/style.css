@@ -2171,6 +2171,10 @@ Licensed under MIT
     margin-top: 0px;
 }
 
+.current-img{
+    width: 100px;
+}
+
 .comments{
     position: relative;
 }

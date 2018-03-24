@@ -61,7 +61,7 @@ class DocumentsController extends AppController
             // Upload image
             if(isset($data['image'])) {
                 $uploadedImage = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $data['image'], Text::uuid() . '_img');
-                $data['image'] = 'img/attachments/' . $uploadedImage['name'];
+                $data['image'] = 'attachments/' . $uploadedImage['name'];
             }
 
             // Upload document
@@ -97,7 +97,25 @@ class DocumentsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $document = $this->Documents->patchEntity($document, $this->request->data);
+
+            $data = $this->request->data;
+            var_dump($data);
+            // Upload image
+            if(isset($data['image']) && $data['image']['size'] > 0) {
+                $uploadedImage = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $data['image'], Text::uuid() . '_img');
+                $data['image'] = 'attachments/' . $uploadedImage['name'];
+            } else {
+                $data['image'] = $document->image;
+            }
+
+            // Upload document
+            if(isset($data['document']) && $data['document']['size'] > 0) {
+                $uploadedDoc = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $data['document'], Text::uuid() . '_doc');
+                $data['name'] = $data['document']['name'];
+                $data['path'] = $uploadedDoc['path'];
+            }
+
+            $document = $this->Documents->patchEntity($document, $data);
             if ($this->Documents->save($document)) {
                 $this->Flash->success(__('The document has been saved.'));
 
