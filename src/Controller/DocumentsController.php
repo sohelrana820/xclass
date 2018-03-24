@@ -186,6 +186,16 @@ class DocumentsController extends AppController
             $this->redirect($this->referer());
         }
 
+        try {
+            $this->loadModel('Downloads');
+            $downloadObj = $this->Downloads->newEntity();
+            $downloadObj->user_id = $this->userID;
+            $downloadObj->document_id = $document->id;
+            $this->Downloads->save($downloadObj);
+        } catch (\Exception $exception) {
+
+        }
+
         //header("Content-type: application/zip");
         header("Content-Disposition: attachment; filename = $document->title");
         header("Pragma: no-cache");
