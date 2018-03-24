@@ -19,19 +19,13 @@
                     <?php echo $this->Html->link('Add', ['controller' => 'users', 'action' => 'add'], ['escape' => false]); ?>
                 </li>
                 <li>
-                    <?php echo $this->Html->link('All User List', ['controller' => 'users', 'action' => 'index'], ['escape' => false]); ?>
+                    <?php echo $this->Html->link('All List', ['controller' => 'users', 'action' => 'index'], ['escape' => false]); ?>
                 </li>
                 <li>
-                    <?php echo $this->Html->link('User List (Active)', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '1']], ['escape' => false]); ?>
+                    <?php echo $this->Html->link('Active List', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '1']], ['escape' => false]); ?>
                 </li>
                 <li>
-                    <?php echo $this->Html->link('User List (Inactive)', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '0']], ['escape' => false]); ?>
-                </li>
-                <li>
-                    <?php echo $this->Html->link('Student List (Active)', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '1', 'role' => 2]], ['escape' => false]); ?>
-                </li>
-                <li>
-                    <?php echo $this->Html->link('Student List (Inactive)', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '0', 'role' => 2]], ['escape' => false]); ?>
+                    <?php echo $this->Html->link('Inactive List', ['controller' => 'users', 'action' => 'index', '?' => ['status' => '0']], ['escape' => false]); ?>
                 </li>
             </ul>
         </li>
@@ -48,7 +42,7 @@
         </li>
 
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#documents"><i class="fa fa-file"></i> Manage Documents <i class="fa fa-caret-down"></i></a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#documents"><i class="fa fa-book"></i> Manage Documents <i class="fa fa-caret-down"></i></a>
             <ul id="documents" class="submenu collapse">
                 <li>
                     <?php echo $this->Html->link('Add', ['controller' => 'documents', 'action' => 'add'], ['escape' => false]); ?>
@@ -66,18 +60,20 @@
         </li>
 
         <li>
-            <?php echo $this->Html->link('<i class="fa fa-download"></i>  Download Histories', ['controller' => 'documents', 'action' => 'download-histories'], ['escape' => false]); ?>
+            <?php echo $this->Html->link('<i class="fa fa-gears"></i>  Download Histories', ['controller' => 'documents', 'action' => 'download-histories'], ['escape' => false]); ?>
         </li>
 
         <li>
-            <?php echo $this->Html->link('<i class="fa fa-gears"></i>  General Settings', ['controller' => 'documents', 'action' => 'download-histories'], ['escape' => false]); ?>
+            <?php echo $this->Html->link('<i class="fa fa-gears"></i>  General Settings', ['controller' => 'settings', 'action' => 'index'], ['escape' => false]); ?>
         </li>
     </ul>
 
     <!-- Copyright area -->
     <footer class="copyright">
         <div class="container-fluid">
-            <p class="copy-text">Copyright <?php echo $appsName;?> © <?php echo date('Y')?></p>
+            <p class="copy-text">
+                <?php echo $settings['copyright'] ? $settings['copyright'] : 'Copyright ' . date('Y')?>
+            </p>
         </div>
     </footer>
     <!-- /#Copyright area -->

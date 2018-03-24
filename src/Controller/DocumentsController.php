@@ -67,10 +67,12 @@ class DocumentsController extends AppController
             $courses = $this->Documents->Courses->find('list', ['limit' => 200]);
         }
 
+        $limit = $this->settings['documents_per_page'] ? intval($this->settings['documents_per_page']) : 50;
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => ['Courses'],
-            'order' => ['Documents.id' => 'desc']
+            'order' => ['Documents.id' => 'desc'],
+            'limit' => $limit
         ];
         $documents = $this->paginate($this->Documents);
 
@@ -279,11 +281,12 @@ class DocumentsController extends AppController
                 ])
             ]);
 
+        $limit = $this->settings['history_per_page'] ? intval($this->settings['history_per_page']) : 50;
         $this->paginate = [
             'conditions' => $conditions,
             'contain' => ['Documents', 'Documents.Courses', 'Users', 'Users.Profiles'],
             'order' => ['Downloads.id' => 'desc'],
-            'limit' => 50
+            'limit' => $limit
         ];
         $this->loadModel('Downloads');
         $this->loadModel('Users');

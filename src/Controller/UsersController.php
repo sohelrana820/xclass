@@ -375,7 +375,7 @@ class UsersController extends AppController
     {
         $this->checkPermission($this->isAdmin());
         $this->loadComponent('Paginator');
-        $limit = $this->paginationLimit;
+        $limit = $this->settings['users_per_page'] ? intval($this->settings['users_per_page']) : 50;;
         $conditions = [];
 
         if (isset($this->request->query) && $this->request->query) {

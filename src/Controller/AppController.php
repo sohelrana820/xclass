@@ -71,6 +71,8 @@ class AppController extends Controller
     /**
      * @var null
      */
+    public $settings = [];
+
     public $baseUrl = null;
 
     /**
@@ -139,6 +141,16 @@ class AppController extends Controller
         $this->viewBuilder()
             ->setLayout('application')
             ->setTheme($this->currentTheme);
+
+        $this->loadModel('Settings');
+        $this->settings = $this->Settings->retrieveMetas();
+        if(array_key_exists('logo', $this->settings)) {
+            $this->appsLogo = $this->settings['logo'];
+        }
+
+        if(array_key_exists('name', $this->settings)) {
+            $this->appsName = $this->settings['name'];
+        }
     }
 
     /**
@@ -160,6 +172,7 @@ class AppController extends Controller
         $this->set('title', $this->appsName);
         $this->set('appsName', $this->appsName);
         $this->set('appsLogo', $this->appsLogo);
+        $this->set('settings', $this->settings);
     }
 
     /**
