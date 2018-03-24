@@ -51,7 +51,7 @@ Router::scope('/', function ($routes) {
     $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
     $routes->connect('/profile/courses', ['controller' => 'users', 'action' => 'userCourses']);
 
-    $routes->connect('/settings', ['controller' => 'homes', 'action' => 'setting']);
+    $routes->connect('/settings', ['controller' => 'general', 'action' => 'setting']);
 });
 
 /**

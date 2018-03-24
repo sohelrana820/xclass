@@ -2251,6 +2251,8 @@ Licensed under MIT
     margin-bottom: 25px;
 }
 
+
+
 .documents-details table{
     font-size: 13px;
 }
@@ -2337,6 +2339,17 @@ Licensed under MIT
 .material-switch > input[type="checkbox"]:checked + label::after {
     background: inherit;
     left: 20px;
+}
+
+
+.old_logo{
+    background: #273140;
+    text-align: center;
+    padding: 25px;
+}
+
+.old_logo img{
+    height: 70px;
 }
 
 @media (max-width: 768px) {
