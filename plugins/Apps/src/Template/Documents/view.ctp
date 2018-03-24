@@ -25,7 +25,7 @@
                 <table class="vertical-table">
                     <tr>
                         <th scope="row"><?php echo __('Course') ?></th>
-                        <td><?php echo $document->course->name; ?></td>
+                        <td><?php echo $document->course ? $document->course->name : 'N/A'; ?></td>
                     </tr>
                     <tr>
                         <th scope="row"><?php echo __('Title') ?></th>
