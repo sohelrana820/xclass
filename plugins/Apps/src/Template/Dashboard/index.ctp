@@ -51,3 +51,61 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="pull-left">
+                    <h2>Recent Student</h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-body">
+                <?php if (!$students->isEmpty()): ?>
+                    <table class="table theme-table">
+                        <thead>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($students as $student): ?>
+                            <tr>
+                                <td>
+                                    <?php echo $student->student_id ? $student->student_id : 'N/A'; ?>
+                                </td>
+                                <td>
+                                    <?php echo $this->Html->link($student->profile->name, ['controller' => 'users', 'action' => 'view', $student->uuid]); ?>
+                                </td>
+                                <td>
+                                    <?php if ($student->status == 1): ?>
+                                        <span class="status-text status-text-success">Active</span>
+                                    <?php elseif ($student->status == 0): ?>
+                                        <span class="status-text status-text-danger">Inactive</span>
+                                    <?php else: ?>
+                                        N/A
+                                    <?php endif; ?>
+                                </td>
+                                <td class="text-right">
+                                    <?php
+                                    echo $this->Html->link('<i class="fa fa-gear"></i>', ['controller' => 'users', 'action' => 'view', $student->uuid], ['escape' => false, 'class' => 'icons green']);
+                                    echo $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'users', 'action' => 'edit', $student->uuid], ['escape' => false, 'class' => 'icons']);
+                                    echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $student->uuid], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $student->profile->first_name . ' ' . $student->profile->last_name)]);
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <?php echo $this->element('not_found'); ?>
+                <?php endif; ?>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

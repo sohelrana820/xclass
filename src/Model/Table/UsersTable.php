@@ -391,4 +391,17 @@ class UsersTable extends Table
             ->count();
         return $count;
     }
+
+    /**
+     * @param int $limit
+     * @return int|null
+     */
+    public function recentStudents($limit = 5)
+    {
+        $students = $this->find()
+            ->where(['Users.role' => 2])
+            ->contain(['Profiles'])
+            ->limit($limit);
+        return $students;
+    }
 }

@@ -18,7 +18,9 @@ class DashboardController extends AppController
      */
     public function index()
     {
+        $this->loadModel('Users');
         $this->set('overview', $this->getAdminOverview());
+        $this->set('students', $this->Users->recentStudents());
     }
 
     /**
