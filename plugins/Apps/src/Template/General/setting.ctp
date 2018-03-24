@@ -16,12 +16,14 @@
         <?php echo $this->Form->create('', ['type' => 'file']);?>
         <div class="row">
             <div class="col-lg-8">
+                <?php if(isset($settings['logo'])):?>
                 <div class="form-group">
                     <label>Current Logo</label>
                     <div class="old_logo">
-                        <?php echo $this->Html->image($settings['logo'])?>
+                        <?php echo $this->Html->image($settings['logo']); ?>
                     </div>
                 </div>
+                <?php endif;?>
                 <div class="form-group">
                     <label>Application logo</label>
                     <div class="input text">
@@ -32,35 +34,35 @@
                 <div class="form-group">
                     <label>Application name</label>
                     <div class="input text">
-                        <input type="text" name="name" class="form-control" value="<?php echo $settings['name'];?>" placeholder="Application name">
+                        <input type="text" name="name" class="form-control" value="<?php echo isset($settings['name']) ? $settings['name'] : null;?>" placeholder="Application name">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Copyright text</label>
                     <div class="input text">
-                        <input type="text" name="copyright" class="form-control" value="<?php echo $settings['copyright'];?>" placeholder="Copyright text">
+                        <input type="text" name="copyright" class="form-control" value="<?php echo isset($settings['copyright']) ? $settings['copyright'] : null;?>" placeholder="Copyright text">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>How may users show per page</label>
                     <div class="input text">
-                        <input type="number" name="users_per_page" class="form-control" value="<?php echo $settings['users_per_page'];?>" placeholder="e.g 50">
+                        <input type="number" name="users_per_page" class="form-control" value="<?php echo isset($settings['users_per_page']) ? $settings['users_per_page'] : null;?>" placeholder="e.g 50">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>How may documents show per page</label>
                     <div class="input text">
-                        <input type="number" name="documents_per_page" class="form-control" value="<?php echo $settings['documents_per_page'];?>" placeholder="e.g 50">
+                        <input type="number" name="documents_per_page" class="form-control" value="<?php echo isset($settings['documents_per_page']) ? $settings['documents_per_page'] : null;?>" placeholder="e.g 50">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>How may histories show per page</label>
                     <div class="input text">
-                        <input type="number" name="history_per_page" class="form-control" value="<?php echo $settings['history_per_page'];?>" placeholder="e.g 50">
+                        <input type="number" name="history_per_page" class="form-control" value="<?php echo isset($settings['history_per_page']) ? $settings['history_per_page'] : null;?>" placeholder="e.g 50">
                     </div>
                 </div>
             </div>
