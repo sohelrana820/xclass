@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="page-header" style="margin-bottom: 0px !important;">
     <h2 class="title pull-left">
         <?php echo $this->Html->link('Manage Documents', ['controller' => 'documents', 'action' => 'index'], ['class' => 'link']);?>
     </h2>
@@ -6,7 +6,7 @@
 </div>
 
 
-<div class="widget">
+<div class="widget border-less-widget">
     <div class="widget-header">
         <div class="pull-left">
             <h2>List of documents</h2>
@@ -20,42 +20,46 @@
     </div>
     <div class="widget-body">
         <?php if(!$documents->isEmpty()):?>
-            <table class="table theme-table">
-            <thead>
-            <tr>
-                <th scope="col"><?php echo $this->Paginator->sort('created_by') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('course_id') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('title') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('image') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('path') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('status') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?php echo $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?php echo __('Actions') ?></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($documents as $document): ?>
-                <tr>
-                    <td><?php echo $this->Number->format($document->created_by) ?></td>
-                    <td><?php echo $document->has('course') ? $this->Html->link($document->course->name, ['controller' => 'Courses', 'action' => 'view', $document->course->id]) : '' ?></td>
-                    <td><?php echo h($document->title) ?></td>
-                    <td><?php echo h($document->image) ?></td>
-                    <td><?php echo h($document->name) ?></td>
-                    <td><?php echo h($document->path) ?></td>
-                    <td><?php echo $this->Number->format($document->status) ?></td>
-                    <td><?php echo h($document->created) ?></td>
-                    <td><?php echo h($document->modified) ?></td>
-                    <td class="actions">
-                        <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $document->id], ['escape' => false, 'class' => 'icons green']) ?>
-                        <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $document->id], ['escape' => false, 'class' => 'icons']) ?>
-                        <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $document->id], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $document->id)]) ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+            <div class="row">
+                <?php foreach ($documents as $document): ?>
+                    <div class="col-lg-6">
+                        <div class="media document-list">
+                            <div class="media-left">
+                                <?php
+                                $image = 'dummy.png';
+                                if($document->image != '') {
+                                    $image = $document->image;
+                                }
+                                echo $this->Html->image($image, ['class' => 'doc-list-img', 'alt' => $document->title]);
+                                ?>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">
+                                    <?php echo $this->Html->link($this->Text->truncate($document->title, 80), ['action' => $document->id])?>
+                                </h4>
+                                <p><?php echo $this->Text->truncate($document->description, 180)?></p>
+                                <div class="status">
+                                    <?php if ($document->status == 1): ?>
+                                        <strong>Status:</strong> <span class="status-text status-text-success">Active</span>
+                                    <?php elseif ($document->status == 0): ?>
+                                        <strong>Status:</strong> <span class="status-text status-text-danger">Inactive</span>
+                                    <?php else: ?>
+                                        <strong>Status:</strong> N/A
+                                    <?php endif; ?>
+                                </div>
+                                <div class="doc-buttons">
+                                    <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $document->id], ['escape' => false, 'class' => 'icons green']) ?>
+                                    <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $document->id], ['escape' => false, 'class' => 'icons']) ?>
+                                    <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $document->id], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $document->id)]) ?>
+                                </div>
+                            </div>
+                            <div class="media-right">
+                                <?php echo $this->Html->link('<i class="fa fa-download"></i>', ['action' => 'download', $document->id], ['class' => 'doc-download', 'escape' => false])?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         <?php else: ?>
             <?php echo $this->element('not_found'); ?>
         <?php endif; ?>

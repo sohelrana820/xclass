@@ -2175,6 +2175,64 @@ Licensed under MIT
     width: 100px;
 }
 
+.border-less-widget{
+    border: 0px;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.border-less-widget .widget-body{
+    padding: 50px 50px;
+}
+
+.document-list{
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 30px;
+    height: 120px;
+    position: relative;
+}
+
+
+.document-list .media-heading a,
+.document-list .media-heading a:hover
+{
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.doc-buttons {
+    position: absolute;
+    bottom: 7px;
+    left: 10px;
+}
+
+.document-list .media-body p{
+    font-size: 12px;
+    line-height: 25px;
+    color: #777;
+    height: 40px;
+}
+
+.document-list .media-body .status{
+    font-size: 13px;
+    color: #777;
+    font-weight: 600;
+}
+
+.doc-list-img {
+    width: 70px;
+    border-radius: 3px;
+    border: 1px solid #eee;
+}
+
+.doc-download {
+    font-size: 16px;
+    color: #6cd466;
+}
+
 .comments{
     position: relative;
 }

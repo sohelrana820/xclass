@@ -59,7 +59,7 @@ class DocumentsController extends AppController
             $data['uuid'] = $uuid;
             $data['created_by'] = $this->userID;
             // Upload image
-            if(isset($data['image'])) {
+            if(isset($data['image']) && $data['image']['size'] > 0) {
                 $uploadedImage = $this->Utilities->uploadFile(WWW_ROOT . 'img/attachments', $data['image'], Text::uuid() . '_img');
                 $data['image'] = 'attachments/' . $uploadedImage['name'];
             }
