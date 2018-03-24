@@ -33,6 +33,12 @@ class UsersController extends AppController
 
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
+
+            if(array_key_exists('status', $user) && $user['status'] == 0) {
+                $this->Flash->error(__('Your account is currently inactive. You can\'t login'));
+                return $this->redirect(['controller' => 'users', 'action' => 'login']);
+            }
+
             if ($user) {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
