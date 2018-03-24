@@ -54,6 +54,10 @@ class UtilitiesComponent extends Component
             }
         }
 
+        if (isset($query['student_id'])) {
+            $conditions = array_merge($conditions, ['Users.student_id' => $query['student_id']]);
+        }
+
         if (isset($query['status'])) {
             $conditions = array_merge($conditions, ['Users.status' => $query['status']]);
         }

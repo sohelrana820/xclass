@@ -127,6 +127,13 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <label>Student ID</label>
+                        <div class="input text">
+                            <input type="text" name="student_id" class="form-control" placeholder="Student ID" value="<?php echo $this->request->query('student_id') != '' ? $this->request->query('student_id') : '' ?>">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
                         <label>Name</label>
                         <div class="input text">
                             <input type="text" name="name" class="form-control" placeholder="Name" value="<?php echo $this->request->query('name') != '' ? $this->request->query('name') : '' ?>">
