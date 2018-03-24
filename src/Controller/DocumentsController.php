@@ -65,7 +65,7 @@ class DocumentsController extends AppController
     public function view($id = null)
     {
         $document = $this->Documents->get($id, [
-            'contain' => ['Courses', 'Download']
+            'contain' => ['Courses', 'Downloads', 'Downloads.Users', 'Downloads.Users.Profiles']
         ]);
 
         $this->set('document', $document);

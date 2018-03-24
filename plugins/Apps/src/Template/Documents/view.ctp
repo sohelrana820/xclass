@@ -59,7 +59,7 @@
     </div>
     <div class="related">
         <h4><?= __('Related Download') ?></h4>
-        <?php if (!empty($document->download)): ?>
+        <?php if (!empty($document->downloads)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -69,11 +69,11 @@
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($document->download as $download): ?>
+            <?php foreach ($document->downloads as $download): ?>
             <tr>
                 <td><?= h($download->id) ?></td>
                 <td><?= h($download->document_id) ?></td>
-                <td><?= h($download->user_id) ?></td>
+                <td><?= h($download->user_id); var_dump($download->user) ?></td>
                 <td><?= h($download->created) ?></td>
                 <td><?= h($download->modified) ?></td>
                 <td class="actions">

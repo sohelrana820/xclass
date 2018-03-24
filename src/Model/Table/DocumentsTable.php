@@ -44,7 +44,7 @@ class DocumentsTable extends Table
         $this->belongsTo('Courses', [
             'foreignKey' => 'course_id'
         ]);
-        $this->hasMany('Download', [
+        $this->hasMany('Downloads', [
             'foreignKey' => 'document_id'
         ]);
     }
