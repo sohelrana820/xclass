@@ -80,4 +80,14 @@ class CoursesTable extends Table
 
         return $validator;
     }
+
+    /**
+     * @return int|null
+     */
+    public function countCourses()
+    {
+        $count = $this->find()
+            ->count();
+        return $count;
+    }
 }

@@ -80,4 +80,14 @@ class DownloadsTable extends Table
 
         return $rules;
     }
+
+    /**
+     * @return int|null
+     */
+    public function countDownloads()
+    {
+        $count = $this->find()
+            ->count();
+        return $count;
+    }
 }

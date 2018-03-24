@@ -18,6 +18,24 @@ class DashboardController extends AppController
      */
     public function index()
     {
+        $this->set('overview', $this->getAdminOverview());
+    }
 
+    /**
+     * @return array
+     */
+    protected function getAdminOverview()
+    {
+        $this->loadModel('Users');
+        $this->loadModel('Documents');
+        $this->loadModel('Courses');
+        $this->loadModel('Downloads');
+        $overview = [
+            'total_students' => $this->Users->countStudent(),
+            'total_documents' => $this->Documents->countDocuments(),
+            'total_courses' => $this->Courses->countCourses(),
+            'total_downloads' => $this->Downloads->countDownloads()
+        ];
+        return $overview;
     }
 }

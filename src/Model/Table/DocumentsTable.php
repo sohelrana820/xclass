@@ -108,4 +108,14 @@ class DocumentsTable extends Table
 
         return $rules;
     }
+
+    /**
+     * @return int|null
+     */
+    public function countDocuments()
+    {
+        $count = $this->find()
+            ->count();
+        return $count;
+    }
 }

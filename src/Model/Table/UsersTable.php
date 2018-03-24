@@ -380,4 +380,15 @@ class UsersTable extends Table
 
         return $user->courses;
     }
+
+    /**
+     * @return mixed
+     */
+    public function countStudent()
+    {
+        $count = $this->find()
+            ->where(['Users.role' => 2])
+            ->count();
+        return $count;
+    }
 }
