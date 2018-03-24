@@ -130,4 +130,15 @@ class DocumentsTable extends Table
             ->limit($limit);
         return $documents;
     }
+
+    /**
+     * @return int|null
+     */
+    public function countDocumentsByCoursesIds($coursesIds)
+    {
+        $count = $this->find()
+            ->where(['Documents.course_id IN' => $coursesIds])
+            ->count();
+        return $count;
+    }
 }

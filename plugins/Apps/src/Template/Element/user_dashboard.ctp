@@ -11,8 +11,8 @@
             <div>
                 <i class="fa fa-users"></i>
                 <h3 class="app-stats-title">
-                    <span class="count-to"><?php echo $overview['total_students']?></span>
-                    <small>Total Students</small>
+                    <span class="count-to">#<?php echo $userInfo->student_id?></span>
+                    <small>Student ID</small>
                 </h3>
             </div>
         </div>
@@ -23,7 +23,7 @@
                 <i class="fa fa-book"></i>
                 <h3 class="app-stats-title">
                     <span class="count-to"><?php echo $overview['total_courses']?></span>
-                    <small>Total Task</small>
+                    <small>Total Courses</small>
                 </h3>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <i class="fa fa-file"></i>
                 <h3 class="app-stats-title">
                     <span class="count-to"><?php echo $overview['total_documents']?></span>
-                    <small>Closed Task</small>
+                    <small>Total Documents</small>
                 </h3>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <i class="fa fa-download"></i>
                 <h3 class="app-stats-title">
                     <span class="count-to"><?php echo $overview['total_downloads']?></span>
-                    <small>Opened Task</small>
+                    <small>Total Downloads</small>
                 </h3>
             </div>
         </div>

@@ -94,4 +94,15 @@ class CoursesUsersTable extends Table
 
         return [];
     }
+
+    /**
+     * @return int|null
+     */
+    public function countStudentCourses($studentId)
+    {
+        $count = $this->find()
+            ->where(['CoursesUsers.user_id' => $studentId])
+            ->count();
+        return $count;
+    }
 }

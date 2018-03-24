@@ -102,4 +102,16 @@ class DownloadsTable extends Table
             ->limit($limit);
         return $downloads;
     }
+
+    /**
+     * @param int $limit
+     * @return $this
+     */
+    public function countDownloadByUserId($userId)
+    {
+        $count = $this->find()
+            ->where(['Downloads.user_id' => $userId])
+            ->count();
+        return $count;
+    }
 }

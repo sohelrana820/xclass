@@ -21,10 +21,14 @@ class DashboardController extends AppController
         $this->loadModel('Users');
         $this->loadModel('Documents');
         $this->loadModel('Downloads');
-        $this->set('overview', $this->getAdminOverview());
-        $this->set('students', $this->Users->recentStudents());
-        $this->set('documents', $this->Documents->recentDocuments());
-        $this->set('downloads', $this->Downloads->recentDocuments(10));
+        if($this->isAdmin()) {
+            $this->set('overview', $this->getAdminOverview());
+            $this->set('students', $this->Users->recentStudents());
+            $this->set('documents', $this->Documents->recentDocuments());
+            $this->set('downloads', $this->Downloads->recentDocuments(10));
+        } else {
+            $this->set('overview', $this->getStudentOverview());
+        }
     }
 
     /**
@@ -41,6 +45,25 @@ class DashboardController extends AppController
             'total_documents' => $this->Documents->countDocuments(),
             'total_courses' => $this->Courses->countCourses(),
             'total_downloads' => $this->Downloads->countDownloads()
+        ];
+        return $overview;
+    }
+
+
+    /**
+     * @return array
+     */
+    protected function getStudentOverview()
+    {
+        $this->loadModel('Documents');
+        $this->loadModel('CoursesUsers');
+        $this->loadModel('Downloads');
+
+        $courseIds = $this->CoursesUsers->getCourseIdsByUserId($this->userID);
+        $overview = [
+            'total_documents' => $this->Documents->countDocumentsByCoursesIds($courseIds),
+            'total_courses' => count($courseIds),
+            'total_downloads' => $this->Downloads->countDownloadByUserId($this->userID)
         ];
         return $overview;
     }
