@@ -108,4 +108,57 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="widget">
+            <div class="widget-header">
+                <div class="pull-left">
+                    <h2>Recent Documents</h2>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="widget-body">
+                <?php if (!$documents->isEmpty()): ?>
+                    <table class="table theme-table">
+                        <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Course</th>
+                            <th>Status</th>
+                            <th class="text-right">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($documents as $document): ?>
+                            <tr>
+                                <td>
+                                    <?php echo $this->Html->link($this->Text->truncate($document->title, 50), ['action' => 'view', $document->id])?>
+                                </td>
+                                <td>
+                                    <?php echo $document->course ? $document->course->name : 'N/A';?>
+                                </td>
+                                <td>
+                                    <?php if ($document->status == 1): ?>
+                                        <span class="status-text status-text-success">Active</span>
+                                    <?php elseif ($document->status == 0): ?>
+                                        <span class="status-text status-text-danger">Inactive</span>
+                                    <?php else: ?>
+                                        </strong> N/A
+                                    <?php endif; ?>
+                                </td>
+                                <td class="text-right">
+                                    <?php echo $this->Html->link(__('<i class="fa fa-gear"></i>'), ['action' => 'view', $document->id], ['escape' => false, 'class' => 'icons green']) ?>
+                                    <?php echo $this->Html->link(__('<i class="fa fa-pencil"></i>'), ['action' => 'edit', $document->id], ['escape' => false, 'class' => 'icons']) ?>
+                                    <?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i>'), ['action' => 'delete', $document->id], ['escape' => false, 'class' => 'icons red', 'confirm' => __('Are you sure you want to delete # {0}?', $document->id)]) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                <?php else: ?>
+                    <?php echo $this->element('not_found'); ?>
+                <?php endif; ?>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
 </div>

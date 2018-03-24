@@ -118,4 +118,16 @@ class DocumentsTable extends Table
             ->count();
         return $count;
     }
+
+    /**
+     * @param int $limit
+     * @return $this
+     */
+    public function recentDocuments($limit = 5)
+    {
+        $documents = $this->find()
+            ->contain(['Courses'])
+            ->limit($limit);
+        return $documents;
+    }
 }
