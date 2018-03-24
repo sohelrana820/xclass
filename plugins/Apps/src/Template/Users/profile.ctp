@@ -30,6 +30,16 @@
             </div>
             <!-- edit form column -->
             <div class="col-md-10 col-sm-8 col-xs-12 personal-info">
+                <?php  if($profile->role == 2):?>
+                    <span class="status-button status-gray">ID: <?php echo $profile->student_id;?></span>
+                <?php endif;?>
+
+                <?php  if($profile->status == 0):?>
+                    <span class="status-button status-danger">Status: Inactive</span>
+                <?php elseif($profile->status == 1):?>
+                    <span class="status-button status-success">Status: Active</span>
+                <?php endif;?>
+                <br/><br/>
                 <ul class="data-list data-list-stripe">
                     <li><strong>Name: </strong> <?php echo $profile->profile->name ? $profile->profile->name : 'N/A';?></li>
                     <li><strong>Email: </strong> <?php echo $profile->username;?></li>

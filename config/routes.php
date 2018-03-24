@@ -43,6 +43,14 @@ Router::defaultRouteClass('DashedRoute');
 
 Router::scope('/', function ($routes) {
     $routes->fallbacks('DashedRoute');
+
+    $routes->connect('/', ['controller' => 'dashboard', 'action' => 'index', 'home']);
+
+    $routes->connect('/profile', ['controller' => 'users', 'action' => 'profile']);
+    $routes->connect('/profile/update', ['controller' => 'users', 'action' => 'updateProfile']);
+    $routes->connect('/profile/change-password', ['controller' => 'users', 'action' => 'changeProfilePassword']);
+    $routes->connect('/projects/create', ['controller' => 'projects', 'action' => 'create']);
+    $routes->connect('/projects/:slug', ['controller' => 'projects', 'action' => 'view'], ['pass' => ['slug']]);
 });
 
 /**
