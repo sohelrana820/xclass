@@ -20,6 +20,8 @@
 
             echo $this->Html->link('View User', ['controller' => 'users', 'action' => 'view', $user->uuid], ['class' => 'btn btn-info']);
 
+            echo $this->Html->link('Change Password', ['controller' => 'users', 'action' => 'change_password', $user->uuid], ['class' => 'btn btn-info']);
+
             echo $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->uuid], ['escape' => false, 'class' => 'btn btn-info', 'confirm' => __('Are you sure you want to delete # {0}?', $user->profile->first_name . ' ' . $user->profile->last_name)]);
 
             echo $this->Html->link('Users List', ['controller' => 'users', 'action' => 'index'], ['class' => 'btn btn-info']);

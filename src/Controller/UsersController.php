@@ -604,4 +604,9 @@ class UsersController extends AppController
 
         return false;
     }
+
+    public function changePassword($uuid)
+    {
+
+    }
 }
