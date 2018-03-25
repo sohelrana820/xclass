@@ -131,7 +131,7 @@
                         <?php foreach ($documents as $document): ?>
                             <tr>
                                 <td>
-                                    <?php echo $this->Html->link($this->Text->truncate($document->title, 50), ['action' => 'view', $document->id])?>
+                                    <?php echo $this->Html->link($this->Text->truncate($document->title, 50), ['controller' => 'documents', 'action' => 'view', $document->id])?>
                                 </td>
                                 <td>
                                     <?php echo $document->course ? $document->course->name : 'N/A';?>

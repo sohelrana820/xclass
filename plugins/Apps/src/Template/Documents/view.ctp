@@ -14,6 +14,11 @@
         </div>
         <div class="pull-right btn-areas">
             <?php echo $this->Html->link('New Document', ['controller' => 'documents', 'action' => 'add'], ['class' => 'btn btn-info'])?>
+            <?php
+            if($userInfo->role == 1){
+                echo $this->Html->link('Edit Document', ['controller' => 'documents', 'action' => 'edit', $document->id], ['class' => 'btn btn-info']);
+            }
+            ?>
             <?php echo $this->Html->link('Back to List', ['controller' => 'documents', 'action' => 'index'], ['class' => 'btn btn-info'])?>
         </div>
         <div class="clearfix"></div>
