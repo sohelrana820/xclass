@@ -13,7 +13,11 @@ SET time_zone = "+00:00";
 --
 -- Database: `xclass`
 --
-
+INSERT INTO `users` (`id`, `uuid`, `username`, `student_id`, `password`, `role`, `status`, `email_verifying_code`, `forgot_pass_code`, `email_verify`, `created`, `modified`) VALUES
+(1, '6dad6afc-0c08-4e5b-a410-9a41eaff698a', 'admin@example.com', NULL, '$2y$10$6LBg9OBs.8/lHB9/iJXpzuscp4BSIV1j3OUeVyq8xgmo63v.6tQFW', 1, 1, 'f6d7e2a7-8b9d-46e7-9b37-8adf5cc7', NULL, 0, '2018-03-24 23:10:06', '2018-03-24 23:10:06'),
+(2, '6d509e0d-674d-4b33-9bc0-2b233cfa2389', 'student01@example.com', '101', '$2y$10$ZwTtRzDTT5Uts09b5V81OOvHeEvtDfoA7d/1MTOBBcM7JU3Cv0J6y', 2, 0, '92437e88-acdc-4fe9-9b4f-92ff8c41', NULL, 0, '2018-03-24 23:36:15', '2018-03-24 23:36:15'),
+(3, 'ee6b2ba0-2f29-4cd8-b60a-df7796dd3961', 'student02@example.com', '102', '$2y$10$UI9D15UgX6yaKWCmdys5oe/9SEmMnMwlZNE6HsN1gcwhwbrbtI05q', 2, 1, '90881a53-4510-43ad-9b68-48075aec', NULL, 0, '2018-03-24 23:37:34', '2018-03-24 23:37:34'),
+(4, '54a80e11-b2a1-4e1c-852e-b989b61df389', 'student03@example.com', '103', '$2y$10$xCYHmYD890BZheIf9ZeozO5oqL3OVkc/DEBPmAA9ox.uN5l.B4zWW', 2, 1, '7a667117-ea67-45fa-ab01-6a5b3e67', NULL, 0, '2018-03-24 23:38:16', '2018-03-24 23:38:16');
 --
 -- Dumping data for table `courses`
 --
@@ -68,8 +72,4 @@ INSERT INTO `settings` (`id`, `meta`, `value`, `created`, `modified`) VALUES
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `uuid`, `username`, `student_id`, `password`, `role`, `status`, `email_verifying_code`, `forgot_pass_code`, `email_verify`, `created`, `modified`) VALUES
-(1, '6dad6afc-0c08-4e5b-a410-9a41eaff698a', 'admin@example.com', NULL, '$2y$10$6LBg9OBs.8/lHB9/iJXpzuscp4BSIV1j3OUeVyq8xgmo63v.6tQFW', 1, 1, 'f6d7e2a7-8b9d-46e7-9b37-8adf5cc7', NULL, 0, '2018-03-24 23:10:06', '2018-03-24 23:10:06'),
-(2, '6d509e0d-674d-4b33-9bc0-2b233cfa2389', 'student01@example.com', '101', '$2y$10$ZwTtRzDTT5Uts09b5V81OOvHeEvtDfoA7d/1MTOBBcM7JU3Cv0J6y', 2, 0, '92437e88-acdc-4fe9-9b4f-92ff8c41', NULL, 0, '2018-03-24 23:36:15', '2018-03-24 23:36:15'),
-(3, 'ee6b2ba0-2f29-4cd8-b60a-df7796dd3961', 'student02@example.com', '102', '$2y$10$UI9D15UgX6yaKWCmdys5oe/9SEmMnMwlZNE6HsN1gcwhwbrbtI05q', 2, 1, '90881a53-4510-43ad-9b68-48075aec', NULL, 0, '2018-03-24 23:37:34', '2018-03-24 23:37:34'),
-(4, '54a80e11-b2a1-4e1c-852e-b989b61df389', 'student03@example.com', '103', '$2y$10$xCYHmYD890BZheIf9ZeozO5oqL3OVkc/DEBPmAA9ox.uN5l.B4zWW', 2, 1, '7a667117-ea67-45fa-ab01-6a5b3e67', NULL, 0, '2018-03-24 23:38:16', '2018-03-24 23:38:16');
+
