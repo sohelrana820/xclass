@@ -66,6 +66,7 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <?php echo $this->element('pagination');?>
             </div>
         <?php else: ?>
             <?php echo $this->element('not_found'); ?>

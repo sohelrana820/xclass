@@ -74,7 +74,7 @@
                     </tr>
                 </table>
             </div>
-
+            <?php if($userInfo->role == 1):?>
             <div class="related">
                 <div class="widget">
                     <div class="widget-header">Recent  Download Histories</div>
@@ -107,6 +107,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </div>
