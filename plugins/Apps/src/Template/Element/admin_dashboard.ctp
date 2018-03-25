@@ -185,8 +185,8 @@
                         </thead>
                         <?php foreach ($downloads as $download): ?>
                             <tr>
-                                <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->first_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
-                                <td><?php echo $this->Html->link($download->document->title, ['controller' => 'documents', 'action' => 'view', $download->document->uuid] ) ; ?></td>
+                                <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->last_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
+                                <td><?php echo $this->Html->link($download->document->title, ['controller' => 'documents', 'action' => 'view', $download->document->id] ) ; ?></td>
                                 <td><?php echo $download->document->course ? $download->document->course->name : 'N/A' ?></td>
                                 <td>
                                     <?php echo $this->Time->format($download->created, 'MMM d, Y') ?>

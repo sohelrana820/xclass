@@ -85,7 +85,7 @@
                                 </thead>
                                 <?php foreach ($document->downloads as $download): ?>
                                     <tr>
-                                        <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->first_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
+                                        <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->last_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
                                         <td>
                                             <?php echo $this->Time->format($download->created, 'MMM d, Y') ?>
                                             <span class="sm-time">(<?php echo date('H:i A', strtotime($download->created)) ?>)</span>
