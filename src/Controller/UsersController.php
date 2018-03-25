@@ -605,8 +605,34 @@ class UsersController extends AppController
         return false;
     }
 
-    public function changePassword($uuid)
+    public function cPassword($uuid)
     {
+        $this->checkPermission($this->isAdmin());
+        if (empty($uuid)) {
+            throw new NotFoundException;
+        }
 
+        if (!is_numeric($uuid)) {
+            $userID = $this->Users->getIDbyUUID($uuid);
+        } else {
+            $userID = $uuid;
+        }
+
+        $user = $this->Users->get($userID, [
+            'contain' => ['Profiles', 'Courses']
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->data);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('User has been updated successfully'));
+                return $this->redirect(['action' => 'view', $uuid]);
+            } else {
+                $this->Flash->error(__('Sorry, something went wrong'));
+            }
+        }
+        $courses = $this->Users->Courses->find('list', ['limit' => 200]);
+        $this->set(compact('user', 'courses'));
+        $this->set('_serialize', ['user']);
     }
 }
