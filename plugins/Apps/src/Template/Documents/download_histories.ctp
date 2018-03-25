@@ -32,7 +32,7 @@
                 </thead>
                 <?php foreach ($downloads as $download): ?>
                     <tr>
-                        <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->first_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
+                        <td><?php echo $this->Html->link($download->user->profile->first_name .' ' . $download->user->profile->last_name, ['controller' => 'users', 'action' => 'view', $download->user->uuid] ) ; ?></td>
                         <td><?php echo $this->Html->link($download->document->title, ['controller' => 'documents', 'action' => 'view', $download->document->uuid] ) ; ?></td>
                         <td><?php echo $download->document->course ? $download->document->course->name : 'N/A' ?></td>
                         <td>
@@ -82,7 +82,7 @@
                         <select type="text" name="course_id" class="form-control">
                             <option value="">Choose Course</option>
                             <?php foreach ($courses as $key => $value): ?>
-                                <option value="<?php echo $key;?>" <?php if($this->request->query('course_id') == $key) {echo 'selected="selected';}?>><?php echo $value;?></option>
+                                <option value="<?php echo $key;?>" <?php if($this->request->query('course_id') == $key) {echo 'selected="selected"';}?>><?php echo $value;?></option>
                             <?php endforeach;; ?>
                         </select>
                     </div>
@@ -95,7 +95,7 @@
                         <select type="text" name="user_id" class="form-control">
                             <option value="">Choose User</option>
                             <?php foreach ($users as $key => $value): ?>
-                                <option value="<?php echo $key;?>" <?php if($this->request->query('user_id') == $key) {echo 'selected="selected';}?>><?php echo $value;?></option>
+                                <option value="<?php echo $key;?>" <?php if($this->request->query('user_id') == $key) {echo 'selected="selected"';}?>><?php echo $value;?></option>
                             <?php endforeach;; ?>
                         </select>
                     </div>

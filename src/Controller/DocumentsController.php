@@ -272,7 +272,8 @@ class DocumentsController extends AppController
                 'valueField' => 'concatenated',
                 'contain' => ['Profiles']
             ]);
-        $users->select([
+        $users->where(['Users.role' => 2])
+            ->select([
                 'id',
                 'concatenated' => $users->func()->concat([
                     'Profiles.first_name' => 'literal',

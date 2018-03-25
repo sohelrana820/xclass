@@ -125,7 +125,7 @@
                         <select type="text" name="course_id" class="form-control">
                             <option value="">Choose Course</option>
                             <?php foreach ($courses as $key => $value): ?>
-                                <option value="<?php echo $key;?>" <?php if($this->request->query('course_id') == $key) {echo 'selected="selected';}?>><?php echo $value;?></option>
+                                <option value="<?php echo $key;?>" <?php if($this->request->query('course_id') == $key) {echo 'selected="selected"';}?>><?php echo $value;?></option>
                             <?php endforeach;; ?>
                         </select>
                     </div>
